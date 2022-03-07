@@ -18,6 +18,7 @@ import configuration.ConfigXML;
 import configuration.UtilDate;
 import domain.Event;
 import domain.Question;
+import domain.User;
 import exceptions.QuestionAlreadyExist;
 
 /**
@@ -263,5 +264,22 @@ public class DataAccess  {
 	public void close(){
 		db.close();
 		System.out.println("DataBase is closed");
+	}
+	
+	
+	public void registerUser(User user) {
+		db.getTransaction().begin();
+		db.persist(user);
+		db.getTransaction().commit();
+	}
+	
+	
+	public boolean existUser(User user) {
+		TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + user.getUsername() + "\"", User.class);
+		if (q.getSingleResult() != null)
+			return true;
+		return false;
+		
+		
 	}
 }

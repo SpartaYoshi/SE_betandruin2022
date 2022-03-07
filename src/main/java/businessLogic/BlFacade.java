@@ -8,8 +8,11 @@ import javax.jws.WebService;
 
 import domain.Event;
 import domain.Question;
+import domain.User;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
+import exceptions.UserIsTakenException;
+import exceptions.UserIsUnderageException;
 
 /**
  * Interface that specifies the business logic.
@@ -46,4 +49,7 @@ public interface BlFacade  {
 	 * @return collection of dates
 	 */
 	@WebMethod public Vector<Date> getEventsMonth(Date date);
+	
+	
+	@WebMethod public void registerUser(User user) throws UserIsTakenException, UserIsUnderageException;
 }

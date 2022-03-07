@@ -1,5 +1,8 @@
 package businessLogic;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -11,8 +14,11 @@ import configuration.ConfigXML;
 import dataAccess.DataAccess;
 import domain.Event;
 import domain.Question;
+import domain.User;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
+import exceptions.UserIsTakenException;
+import exceptions.UserIsUnderageException;
 
 
 /**
@@ -115,5 +121,31 @@ public class BlFacadeImplementation implements BlFacade {
 		dbManager.open(false);
 		dbManager.initializeDB();
 		dbManager.close();
+	}
+	
+	
+	@WebMethod
+	public void registerUser(User user) throws UserIsTakenException, UserIsUnderageException {
+		dbManager.open(false);
+		try {
+			if (dbManager.existUser(user))
+				throw new UserIsTakenException();
+			
+			LocalDate today = new Date(System.currentTimeMillis()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			LocalDate birthdate = user.getBirthdate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			
+			if (Period.between(birthdate, today).getYears() < 18)
+				throw new UserIsUnderageException();
+
+			
+			dbManager.registerUser(user);
+			
+		} catch (UserIsTakenException e) {
+			e.printStackTrace();
+		} catch (UserIsUnderageException e) {
+			e.printStackTrace();
+		} finally {
+			dbManager.close();
+		}
 	}
 }
