@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class LoginPortalGUI extends JFrame {
+public class PrincipalPortalGUI extends JFrame {
 
 	private JPanel contentPane;
 	
@@ -19,7 +19,7 @@ public class LoginPortalGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginPortalGUI frame = new LoginPortalGUI();
+					PrincipalPortalGUI frame = new PrincipalPortalGUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -31,7 +31,7 @@ public class LoginPortalGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LoginPortalGUI() {
+	public PrincipalPortalGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
