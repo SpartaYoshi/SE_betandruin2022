@@ -21,7 +21,7 @@ import businessLogic.BlFacade;
 import domain.Event;
 
 
-public class MainGUI extends JFrame {
+public class MainAdminGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
@@ -37,7 +37,7 @@ public class MainGUI extends JFrame {
 
 	private BlFacade businessLogic;
 
-	public BlFacade getBusinessLogic(){
+	public BlFacade getBusinessLogic() {
 		return businessLogic;
 	}
 
@@ -46,7 +46,7 @@ public class MainGUI extends JFrame {
 	}
 
 
-	public MainGUI() {
+	public MainAdminGUI() {
 		super();
 
 		addWindowListener(new WindowAdapter() {
