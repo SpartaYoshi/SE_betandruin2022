@@ -20,7 +20,7 @@ public class ApplicationLauncher {
 
 		Locale.setDefault(new Locale(config.getLocale()));
 		System.out.println("Locale: " + Locale.getDefault());
-		MainGUI initWindow = new MainGUI();
+		MainAdminGUI initWindow = new MainAdminGUI();
 		BlFacade businessLogic;
 
 		try {
@@ -46,7 +46,7 @@ public class ApplicationLauncher {
 				Service service = Service.create(url, qname);
 				businessLogic = service.getPort(BlFacade.class);
 			} 
-			initWindow.setBussinessLogic(businessLogic);
+			initWindow.setBusinessLogic(businessLogic);
 			initWindow.setVisible(true);
 		}
 		catch (Exception e) {
