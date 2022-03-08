@@ -21,7 +21,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
-public class UserLogInGUI extends JFrame {
+public class UserLoginGUI extends JFrame {
 
 	
 	private JPanel contentPane;
@@ -35,7 +35,7 @@ public class UserLogInGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UserLogInGUI frame = new UserLogInGUI();
+					UserLoginGUI frame = new UserLoginGUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +47,7 @@ public class UserLogInGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserLogInGUI() {
+	public UserLoginGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
