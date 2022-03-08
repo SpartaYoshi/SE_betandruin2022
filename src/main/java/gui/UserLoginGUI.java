@@ -27,6 +27,7 @@ public class UserLoginGUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
+	private MainAdminGUI initWindow;
 
 	/**
 	 * Launch the application.
@@ -75,9 +76,40 @@ public class UserLoginGUI extends JFrame {
 		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+<<<<<<< HEAD
 				MainGUI mg = new MainGUI();
 				BlFacade businesslogic = mg.getBusinessLogic();
 				
+=======
+				initWindow = new MainAdminGUI();	// CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
+				BlFacade bizlog = initWindow.getBusinessLogic();
+				
+				// Nota: siempre que hagas tratado de errores, haz try y catch.
+				//       crea getters que falten si no están en la clase domain.User
+				// 		 FailedLoginException: imprime en un rectangulito algo estilo "Login credentials were incorrect. Please try again"
+				
+				//1. pillar nombre de usuario del Textfield y mirar si existe en la DB
+					// si no existe, lanzar y catch: crea FailedLoginException
+					// si existe, guardalo en una variable
+				
+				//2. pillar contraseña del passwordfield y mirar si la contraseña es correcta (usando el usuario que acabas de guardar)
+					// si la contraseña no coincide, lanzar y catch: FailedLoginException
+				
+				//3. mirar si usuario es admin (ya existe un booleano como atributo pero falta el getter)
+					// if (user.isAdmin()) {
+					//				initWindow = new MainAdminGUI();
+					//				bizlog = initWindow.getBusinessLogic();
+					// }
+				
+				
+				//4. ahora si que sí
+				// initWindow.setVisible(true); 	
+				
+				
+				////////////////////////////////
+				// vinculación:		UserLoginGUI > MainUserGUI > businesslogic (BlFacade) > DataAccess
+				
+>>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
 			}
 		});
 		
