@@ -29,6 +29,7 @@ import businessLogic.BlFacade;
 import configuration.UtilDate;
 import domain.Event;
 import domain.Question;
+import exceptions.FeeAlreadyExists;
 
 
 public class SetFeeGUI extends JFrame {
@@ -88,7 +89,7 @@ public class SetFeeGUI extends JFrame {
 
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(604, 370));
-		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("CreateQuestion"));
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("SetFee"));
 		eventComboBox.setModel(eventModel);
 		eventComboBox.setBounds(new Rectangle(275, 47, 250, 20));
 		listOfEventsLbl.setBounds(new Rectangle(290, 18, 277, 20));
@@ -104,14 +105,14 @@ public class SetFeeGUI extends JFrame {
 		setfeeBtn.setEnabled(false);
 
 		setfeeBtn.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent e) {
 				jButtonSet_actionPerformed(e);
 			}
 		});
+		
 		closeBtn.setBounds(new Rectangle(275, 275, 130, 30));
+		
 		closeBtn.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent e) {
 				jButtonClose_actionPerformed(e);
 			}
@@ -196,8 +197,9 @@ public class SetFeeGUI extends JFrame {
 					Date firstDay = UtilDate.trim(previousCalendar.getTime());
 
 					try {
+						errorLbl.setText(" ");//clear labels
+						msgLbl.setText(" ");
 						Vector<domain.Event> events = businessLogic.getEvents(firstDay);
-
 						if (events.isEmpty())
 							listOfEventsLbl.setText(ResourceBundle.getBundle("Etiquetas").
 									getString("NoEvents") + ": " + dateformat1.
@@ -229,7 +231,9 @@ public class SetFeeGUI extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				try {
-					questionsComboBox.removeAllItems();
+						errorLbl.setText(" ");//clear labels
+						msgLbl.setText(" ");
+						questionsComboBox.removeAllItems();
 						domain.Event event = ((domain.Event) eventComboBox.getSelectedItem());
 						Vector<Question> eventquestions=event.getQuestions();
 						System.out.println("QUESTIONS FOR THIS EVENT:"+eventquestions);
@@ -246,28 +250,25 @@ public class SetFeeGUI extends JFrame {
 						questionsComboBox.repaint();
 
 						
-						/*domain.Question quest = ((domain.Question) questionsComboBox.getSelectedItem());
-						System.out.println("PRUEBA SELECTED QUESTION Isss S"+quest);
-						if(quest!=null) {
-							setfeeBtn.setEnabled(true);
-						}else {
-							setfeeBtn.setEnabled(false);
-						}	*/
+					
 					}catch(Exception e2) {
 						errorLbl.setText(e2.getMessage());
 					}
 			}
 		});
 	}
-	
+	/**
+	 * Method to enable/disable the "setfee" button. Will enable when a question is selected
+	 */
 	
 	private void enableFeeButton() {
 		questionsComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
+					errorLbl.setText(" ");//clear labels
+					msgLbl.setText(" ");
 					domain.Question quest = ((domain.Question) questionsComboBox.getSelectedItem());
-					System.out.println("SELECTED QUESTION IS"+quest);
+					
 					if(quest!=null) {
 						setfeeBtn.setEnabled(true);
 					}else {
@@ -325,14 +326,36 @@ public class SetFeeGUI extends JFrame {
 		calendar.set(Calendar.YEAR, year);
 	}
 
-	
+	/**
+	 * ActionListener to set the fee when clicking into the "setFee" button.
+	 * @param e
+	 */
 	private void jButtonSet_actionPerformed(ActionEvent e) {
+		msgLbl.setText(" ");
+		errorLbl.setText(" ");
 		domain.Question quest = ((domain.Question) questionsComboBox.getSelectedItem());
 		try {
-			float fee=Float.parseFloat(feeText.getText());
-			quest.setaFee(fee);
-		}catch(Exception e4) {
-			errorLbl.setText("Fee must be a numeric value!");
+			errorLbl.setText(" ");//clear labels
+			msgLbl.setText(" ");
+			String result=resultText.getText();
+			float feeAmount=Float.parseFloat(feeText.getText());
+			
+			if(feeAmount<=0) {
+				errorLbl.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorNumber"));
+
+			}else {
+					businessLogic.createFee(quest, result, feeAmount);
+					msgLbl.setText(ResourceBundle.getBundle("Etiquetas").getString("FeeHasBeenSet"));
+				 
+			}
+			
+		}
+		catch (FeeAlreadyExists e1) {
+				errorLbl.setText("Sorry, the fee for that result already exists");
+			}	
+		catch (java.lang.NumberFormatException e1) {
+			errorLbl.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorNumber"));	
+			
 		}
 		
 	}

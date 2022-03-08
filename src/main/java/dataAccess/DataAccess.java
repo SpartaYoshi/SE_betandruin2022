@@ -17,6 +17,7 @@ import javax.persistence.TypedQuery;
 import configuration.ConfigXML;
 import configuration.UtilDate;
 import domain.Event;
+import domain.Fee;
 import domain.Question;
 import domain.User;
 import exceptions.QuestionAlreadyExist;
@@ -279,7 +280,38 @@ public class DataAccess  {
 		if (q.getSingleResult() != null)
 			return true;
 		return false;
-		
-		
 	}
+	
+	/**
+	 * Method to create different fees
+	 * @param quest
+	 * @param result
+	 * @param fee
+	 * @return 0 if everything has updated correctly, -1 if the fee is already stored
+	 */
+	public int createFee(Question quest,String result,float fee) {
+		db.getTransaction().begin();
+		TypedQuery<Question> q = db.createQuery("SELECT p FROM Question " +"p WHERE p.questionNumber = ?1", Question.class);
+		q.setParameter(1, quest.getQuestionNumber());
+		Question ourquestion=q.getSingleResult();
+		
+		if(ourquestion!=null) {
+			if(ourquestion.feeisAlreadyStored(result)) {// check if that fee is not used yet
+				return -1;
+			}else {
+				Fee f=ourquestion.addFee(result,fee);
+				db.persist(f);
+				db.persist(ourquestion);
+			}
+			
+			
+		}else {//the question doesn't exist
+			System.out.println("That question doesn't exist");
+		}
+		db.getTransaction().commit();
+		return 0;
+	}
+	
+
+	
 }

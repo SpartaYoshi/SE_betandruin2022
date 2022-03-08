@@ -10,6 +10,7 @@ import domain.Event;
 import domain.Question;
 import domain.User;
 import exceptions.EventFinished;
+import exceptions.FeeAlreadyExists;
 import exceptions.QuestionAlreadyExist;
 import exceptions.UserIsTakenException;
 import exceptions.UserIsUnderageException;
@@ -52,4 +53,6 @@ public interface BlFacade  {
 	
 	
 	@WebMethod public void registerUser(User user) throws UserIsTakenException, UserIsUnderageException;
+	
+	@WebMethod public void createFee(Question q,String pResult,float pFee) throws FeeAlreadyExists;
 }

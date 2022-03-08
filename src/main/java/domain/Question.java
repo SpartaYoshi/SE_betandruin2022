@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -24,7 +26,7 @@ public class Question implements Serializable {
 	private String question; 
 	private float betMinimum;
 	private String result;  
-	private float fee;
+	private ArrayList<Fee> feeList=new ArrayList<Fee>();
 
 	@XmlIDREF
 	private Event event;
@@ -33,19 +35,21 @@ public class Question implements Serializable {
 		super();
 	}
 
-	public Question(Integer queryNumber, String query, float betMinimum, Event event, float fee) {
+	public Question(Integer queryNumber, String query, float betMinimum, Event event) {
 		super();
 		this.questionNumber = queryNumber;
 		this.question = query;
 		this.betMinimum=betMinimum;
 		this.event = event;
-		this.fee=fee;
+		
+		
 	}
 
 	public Question(String query, float betMinimum,  Event event) {
 		super();
 		this.question = query;
 		this.betMinimum=betMinimum;
+		
 	}
 
 	/**
@@ -144,21 +148,39 @@ public class Question implements Serializable {
 	}
 	
 	/**
-	 * Sets the fee associated with the question
+	 * Adds the fee to the list
 	 */
-	public void setaFee(float fee) {
-		this.fee = fee;
+	public Fee addFee(String res,float fee) {
+		Fee f=new Fee(res,fee);
+		
+		if(f!=null) {
+			System.out.println("our object of fee is "+ f);
+			System.out.println("our list is" +this.feeList);
+			feeList.add(f);
+		}
+		return f;
+		
 	}
 	
 	/**
 	 * Sets the fee associated with the question
 	 */
-	public float getaFee(float fee) {
-		return this.fee;
+	public List<Fee> getFees() {
+		return this.feeList;
 	}
 
+	
+	public boolean feeisAlreadyStored(String result) {
+		for (Fee f:this.feeList) {
+			if (f.getResult().equals(result))
+				return true;
+		}
+		return false;
+	}
+	
 	@Override
 	public String toString(){
-		return questionNumber + ";" + question + ";" + Float.toString(betMinimum);
+		//return questionNumber + ";" + question + ";" + Float.toString(betMinimum);
+		return question;
 	}	
 }

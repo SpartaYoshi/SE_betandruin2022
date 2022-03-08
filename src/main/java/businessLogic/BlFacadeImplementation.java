@@ -16,6 +16,7 @@ import domain.Event;
 import domain.Question;
 import domain.User;
 import exceptions.EventFinished;
+import exceptions.FeeAlreadyExists;
 import exceptions.QuestionAlreadyExist;
 import exceptions.UserIsTakenException;
 import exceptions.UserIsUnderageException;
@@ -147,5 +148,15 @@ public class BlFacadeImplementation implements BlFacade {
 		} finally {
 			dbManager.close();
 		}
+	}
+
+	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExists{
+		dbManager.open(true);
+		int n=dbManager.createFee(q,pResult,pFee);
+		if (n==-1) {
+			throw new FeeAlreadyExists();
+		}
+		dbManager.close();
+		
 	}
 }
