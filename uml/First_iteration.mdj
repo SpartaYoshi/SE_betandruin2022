@@ -603,7 +603,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -96,
-											"top": -298,
+											"top": -314,
 											"height": 13
 										},
 										{
@@ -614,7 +614,7 @@
 											},
 											"font": "Arial;13;1",
 											"left": 356,
-											"top": 171.5,
+											"top": 163.5,
 											"width": 100,
 											"height": 13,
 											"text": "Create Question"
@@ -628,7 +628,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -96,
-											"top": -298,
+											"top": -314,
 											"width": 134.3671875,
 											"height": 13,
 											"text": "(from Use Case Model)"
@@ -642,14 +642,14 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -96,
-											"top": -298,
+											"top": -314,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 351,
-									"top": 164.5,
+									"top": 156.5,
 									"width": 110.41357421875,
 									"height": 25,
 									"stereotypeLabel": {
@@ -677,7 +677,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -48,
-									"top": -149,
+									"top": -157,
 									"width": 10,
 									"height": 10
 								},
@@ -693,7 +693,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -48,
-									"top": -149,
+									"top": -157,
 									"width": 10,
 									"height": 10
 								},
@@ -709,7 +709,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -48,
-									"top": -149,
+									"top": -157,
 									"width": 10,
 									"height": 10
 								},
@@ -725,7 +725,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -48,
-									"top": -149,
+									"top": -157,
 									"width": 10,
 									"height": 10
 								},
@@ -741,7 +741,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -48,
-									"top": -149,
+									"top": -157,
 									"width": 10,
 									"height": 10
 								}
@@ -749,7 +749,7 @@
 							"font": "Arial;13;0",
 							"containerChangeable": true,
 							"left": 328,
-							"top": 160,
+							"top": 152,
 							"width": 156,
 							"height": 35,
 							"nameCompartment": {
@@ -3810,7 +3810,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
-					"name": "Query questions"
+					"name": "Query questions",
+					"documentation": "# Event flow\n\n## Main flow\n1. *Logged-in-user* selects a **date**\n2. *System* displays the **events** of this **date**\n3. *Logged-in-user* selects an **event**\n4. *System* shows the **questions** from the selected **event**\n4. *Logged-in-user* selects a **question**\n5. *System* shows the **fee** of the selected **question**\n\n## Alternative flow\nA2. There are no events on this date.\n\nB4. There are no questions on this event.\n\nC5. There is no fee on this question."
 				},
 				{
 					"_type": "UMLActor",
@@ -3917,7 +3918,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
-					"name": "Log-in"
+					"name": "Log-in",
+					"documentation": "# Event flow\n\n## Main flow\n1. *Anonymous* writes his/her **username**\n2. *Anonymous* writes his/her **password**\n4. *Anonymous* selects the **log in button**\n5. *System* enters the existing **logged-in user**\n\n## Alternative flow\nA2. The **username** does not exist, then *Anonymous* cannot log-in.\n\nB5. One of the gaps: **username**, **password** is not filled, then *Anonymous* cannot log in.\n\nC5. The **password** does not match with the registered one, then *Anonymous* cannot log in.\n"
 				},
 				{
 					"_type": "UMLUseCase",
@@ -3925,7 +3927,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
-					"name": "Sign up"
+					"name": "Sign up",
+					"documentation": "# Event flow\n\n## Main flow\n1. *Anonymous* writes his/her **name**\n2. *Anonymous* writes his/her **surname**\n3. *Anonymous* writes his/her **username**\n4. *Anonymous* writes his/her **password**\n5. *Anonymous* selects his/her **birth date**\n6. *Anonymous* selects the **sign up button**\n7. *System* adds a new **user**\n\n## Alternative flow\nA4. The **username** already exists, then user cannot be added.\n\nB5. The **password** is too short or simple, then user cannot be added.\n\nC6. The **birth date** must be of an adult (legal age), then user cannot be added.\n\nD7. One of the gaps: **name**, **surname**, **username**, **password** or **birth date** is not filled, then user cannot be added."
 				},
 				{
 					"_type": "UMLUseCase",
@@ -3943,7 +3946,7 @@
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
 					"name": "Set a fee for a question",
-					"documentation": "# Event flow\n\n## Main flow\n1. *Admin* selects a **date**\n2. *System* displays the **events** of this **date**\n3. *Admin* selects an **event**\n4. *System* displays the **questions** of this **event**\n5. *Admin* selects a **question**\n6. *Admin* sets a **fee** for the **question**\n5. *System* adds the **fee** to the selected **question**\n\n## Alternative flow\nA2. There are no events on this date. Question cannot be selected.\n\nB4. There are no **questions** for this **event**\n\nB5. If *Admin* doesn't provide a **question** or a valid number for **minimum bet**, then question cannot be added.\n\nC5. If the event **date** is before current day, then question cannot be added."
+					"documentation": "# Event flow\n\n## Main flow\n1. *Admin* selects a **date**\n2. *System* displays the **events** of this **date**\n3. *Admin* selects an **event**\n4. *System* displays the **questions** of this **event**\n5. *Admin* selects a **question**\n6. *Admin* sets a **fee** for the **question**\n7. *System* adds the **fee** to the selected **question**\n\n## Alternative flow\nA2. There are no events on this date. Question cannot be selected.\n\nB4. There are no **questions** for this **event**\n\nC7. If *Admin* doesn't provide a **fee**, then fee cannot be set.\n\nD7. If the event **date** is before current day, then fee cannot be set."
 				}
 			]
 		},

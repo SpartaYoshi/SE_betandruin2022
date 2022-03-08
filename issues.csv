@@ -1,8 +1,0 @@
-number,title,state,labels,milestone,user,assignee,assignees,created_at,updated_at,closed_at,body
-7,Set fees for a question,open,enhancement,First Release,nagorebravo,iosuAbal,iosuAbal,2022-02-22T10:27:51Z,2022-02-22T10:27:51Z,,As an Admin user I want to be able to set a fee for a question so I can establish the prices of the service
-6,Create a new event,open,enhancement,First Release,iosuAbal,nagorebravo,nagorebravo,2022-02-22T10:26:00Z,2022-02-22T10:26:00Z,,"As an admin user, I want to be able to create different events, so all the matches are in registered"
-5,Log-in,closed,enhancement,First Release,nagorebravo,AinhizeLegarreta,AinhizeLegarreta,2022-02-22T10:24:39Z,2022-02-22T10:33:02Z,2022-02-22T10:33:02Z,As an Anonymous user I want to be able to log-in so I can access my account
-4,Complete UML models,open,incomplete,,SpartaYoshi,SpartaYoshi,"SpartaYoshi,AinhizeLegarreta,iosuAbal,nagorebravo",2022-02-22T10:23:05Z,2022-02-22T10:23:06Z,,UML models are still not finished.
-3,Query questions,open,enhancement,First Release,nagorebravo,iosuAbal,iosuAbal,2022-02-22T10:22:34Z,2022-02-22T10:22:34Z,,As a Logged-in User I want to be able to query a question so I can bet in Bet&Ruin
-2,Create new question,closed,enhancement,First Release,iosuAbal,SpartaYoshi,"SpartaYoshi,AinhizeLegarreta,iosuAbal,nagorebravo",2022-02-22T10:19:29Z,2022-02-22T10:34:00Z,2022-02-22T10:34:00Z,"As an admin user, I want to be able to create questions for events, so I can manage the questions of all events"
-1,Sign Up / Register,open,enhancement,First Release,iosuAbal,SpartaYoshi,SpartaYoshi,2022-02-22T10:11:05Z,2022-02-22T10:14:43Z,,"As an anonymous user I want to be able to register, so I can use all the member features of Bet&Ruin"
