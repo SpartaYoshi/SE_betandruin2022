@@ -48,7 +48,13 @@ public class PortalGUI extends JFrame {
 		JButton signupButton = new JButton("Sign up");
 		signupButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// entrar a registerGUI
+				// registerGUI
+				try {
+					UserRegisterGUI registerGui = new UserRegisterGUI();
+					registerGui.setVisible(true);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		signupButton.setBounds(79, 115, 85, 21);
@@ -58,6 +64,12 @@ public class PortalGUI extends JFrame {
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// entrar a loginGUI
+				try {
+					UserLoginGUI loginGui = new UserLoginGUI();
+					loginGui.setVisible(true);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
 			}
 		});
 		loginButton.setBounds(254, 115, 85, 21);
