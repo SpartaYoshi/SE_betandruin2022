@@ -75,7 +75,8 @@ public class UserLoginGUI extends JFrame {
 		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BlFacade businesslogic = MainGUI.getBusinessLogic();
+				MainGUI mg = new MainGUI();
+				BlFacade businesslogic = mg.getBusinessLogic();
 			}
 		});
 		
