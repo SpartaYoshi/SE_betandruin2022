@@ -41,7 +41,7 @@ public class MainGUI extends JFrame {
 		return businessLogic;
 	}
 
-	public void setBussinessLogic (BlFacade afi){
+	public void setBusinessLogic (BlFacade afi){
 		businessLogic = afi;
 	}
 
