@@ -27,6 +27,7 @@ public class UserLoginGUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
+	private MainAdminGUI initWindow;
 
 	/**
 	 * Launch the application.
@@ -75,8 +76,9 @@ public class UserLoginGUI extends JFrame {
 		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				MainGUI mg = new MainGUI();
-				BlFacade businesslogic = mg.getBusinessLogic();
+				initWindow = new MainAdminGUI();
+				initWindow.setVisible(true);
+				BlFacade businesslogic = initWindow.getBusinessLogic();
 			}
 		});
 		
