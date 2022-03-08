@@ -76,11 +76,7 @@ public class UserLoginGUI extends JFrame {
 		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-<<<<<<< HEAD
-				MainGUI mg = new MainGUI();
-				BlFacade businesslogic = mg.getBusinessLogic();
 				
-=======
 				initWindow = new MainAdminGUI();	// CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
 				BlFacade bizlog = initWindow.getBusinessLogic();
 				
@@ -109,7 +105,6 @@ public class UserLoginGUI extends JFrame {
 				////////////////////////////////
 				// vinculación:		UserLoginGUI > MainUserGUI > businesslogic (BlFacade) > DataAccess
 				
->>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
 			}
 		});
 		
