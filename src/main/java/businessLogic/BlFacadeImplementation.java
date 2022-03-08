@@ -17,6 +17,7 @@ import domain.Event;
 import domain.Question;
 import domain.User;
 import exceptions.EventFinished;
+import exceptions.FeeAlreadyExists;
 import exceptions.QuestionAlreadyExist;
 import exceptions.UserIsTakenException;
 import exceptions.UserIsUnderageException;
@@ -150,6 +151,7 @@ public class BlFacadeImplementation implements BlFacade {
 		}
 	}
 
+<<<<<<< HEAD
 	public List<User> getUsers() {
 		dbManager.open(false);
 		try {
@@ -161,5 +163,15 @@ public class BlFacadeImplementation implements BlFacade {
 			dbManager.close();
 		}
 		return null;
+=======
+	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExists{
+		dbManager.open(true);
+		int n=dbManager.createFee(q,pResult,pFee);
+		if (n==-1) {
+			throw new FeeAlreadyExists();
+		}
+		dbManager.close();
+		
+>>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
 	}
 }

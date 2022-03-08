@@ -11,6 +11,7 @@ import domain.Event;
 import domain.Question;
 import domain.User;
 import exceptions.EventFinished;
+import exceptions.FeeAlreadyExists;
 import exceptions.QuestionAlreadyExist;
 import exceptions.UserIsTakenException;
 import exceptions.UserIsUnderageException;
@@ -54,7 +55,11 @@ public interface BlFacade  {
 	
 	@WebMethod public void registerUser(User user) throws UserIsTakenException, UserIsUnderageException;
 	
+<<<<<<< HEAD
 	@WebMethod public List<User> getUsers();
 
 	
+=======
+	@WebMethod public void createFee(Question q,String pResult,float pFee) throws FeeAlreadyExists;
+>>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
 }
