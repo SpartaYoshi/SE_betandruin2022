@@ -282,4 +282,13 @@ public class DataAccess  {
 		
 		
 	}
+
+	//No se si está bien
+	public List<User> getUsers() {
+		TypedQuery<User> q = db.createQuery("SELECT ALL FROM User  = \"" + "", User.class);
+		if (q.getSingleResult() != null)
+			return q.getResultList();
+		return null;
+		
+	}
 }

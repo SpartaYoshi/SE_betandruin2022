@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -147,5 +148,18 @@ public class BlFacadeImplementation implements BlFacade {
 		} finally {
 			dbManager.close();
 		}
+	}
+
+	public List<User> getUsers() {
+		dbManager.open(false);
+		try {
+			return dbManager.getUsers();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbManager.close();
+		}
+		return null;
 	}
 }

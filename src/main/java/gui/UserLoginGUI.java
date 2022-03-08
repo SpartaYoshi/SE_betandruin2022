@@ -28,6 +28,14 @@ public class UserLoginGUI extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private MainAdminGUI initWindow;
+	
+	private JButton btnLogin;
+	
+	private JLabel lblLoginUser;
+	private JLabel lbUsername;
+	private JLabel lbPasswd;
+	
+	private BlFacade businesslogic;
 
 	/**
 	 * Launch the application.
@@ -62,7 +70,7 @@ public class UserLoginGUI extends JFrame {
 		lblLoginUser.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLoginUser.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		JLabel lbUsername = new JLabel("Username:");
+		final JLabel lbUsername = new JLabel("Username:");
 		lbUsername.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lbPasswd = new JLabel("Password:");
@@ -87,10 +95,14 @@ public class UserLoginGUI extends JFrame {
 				//1. pillar nombre de usuario del Textfield y mirar si existe en la DB
 					// si no existe, lanzar y catch: crea FailedLoginException
 					// si existe, guardalo en una variable
+				String username = lbUsername.getText();
+				if (businesslogic.getUsers())
 				
 				//2. pillar contraseña del passwordfield y mirar si la contraseña es correcta (usando el usuario que acabas de guardar)
 					// si la contraseña no coincide, lanzar y catch: FailedLoginException
+				char[] password = passwordField.getPassword();
 				
+
 				//3. mirar si usuario es admin (ya existe un booleano como atributo pero falta el getter)
 					// if (user.isAdmin()) {
 					//				initWindow = new MainAdminGUI();
