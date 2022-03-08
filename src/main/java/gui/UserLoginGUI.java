@@ -77,6 +77,7 @@ public class UserLoginGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				MainGUI mg = new MainGUI();
 				BlFacade businesslogic = mg.getBusinessLogic();
+				
 			}
 		});
 		
