@@ -24,6 +24,7 @@ public class Question implements Serializable {
 	private String question; 
 	private float betMinimum;
 	private String result;  
+	private float fee;
 
 	@XmlIDREF
 	private Event event;
@@ -32,12 +33,13 @@ public class Question implements Serializable {
 		super();
 	}
 
-	public Question(Integer queryNumber, String query, float betMinimum, Event event) {
+	public Question(Integer queryNumber, String query, float betMinimum, Event event, float fee) {
 		super();
 		this.questionNumber = queryNumber;
 		this.question = query;
 		this.betMinimum=betMinimum;
 		this.event = event;
+		this.fee=fee;
 	}
 
 	public Question(String query, float betMinimum,  Event event) {
@@ -139,6 +141,20 @@ public class Question implements Serializable {
 	 */
 	public void setEvent(Event event) {
 		this.event = event;
+	}
+	
+	/**
+	 * Sets the fee associated with the question
+	 */
+	public void setaFee(float fee) {
+		this.fee = fee;
+	}
+	
+	/**
+	 * Sets the fee associated with the question
+	 */
+	public float getaFee(float fee) {
+		return this.fee;
 	}
 
 	@Override
