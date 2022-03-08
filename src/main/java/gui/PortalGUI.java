@@ -25,7 +25,7 @@ public class PortalGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PrincipalPortalGUI frame = new PrincipalPortalGUI();
+					PortalGUI frame = new PortalGUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
