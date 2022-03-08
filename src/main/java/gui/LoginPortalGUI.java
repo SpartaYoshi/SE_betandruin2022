@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 public class LoginPortalGUI extends JFrame {
 
 	private JPanel contentPane;
+	
 
 	/**
 	 * Launch the application.
