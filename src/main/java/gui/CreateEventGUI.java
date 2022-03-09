@@ -61,7 +61,7 @@ public class CreateEventGUI extends JFrame {
 	/**
 	 * Launch the application.
 	*/
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -74,7 +74,7 @@ public class CreateEventGUI extends JFrame {
 		});
 	}
 
-	
+*/	
 	public void setBusinessLogic(BlFacade bl) {
 		businessLogic = bl;		
 	}
@@ -246,7 +246,7 @@ public class CreateEventGUI extends JFrame {
 					eventcomboBox.addItem(newEvent);
 					
 				} catch (EventFinished e1) {
-					// TODO Auto-generated catch block
+					
 					messageLabel.setText("The event could not be created");
 					e1.printStackTrace();
 				}

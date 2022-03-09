@@ -86,13 +86,17 @@ public class BlFacadeImplementation implements BlFacade {
 		//The minimum bid must be greater than 0
 		dbManager.open(false);
 		Event ev = null;
-		
-		if (new Date().compareTo(date) > 0)
+		System.out.println("Current date is: "+new Date());
+		if (new Date().compareTo(date) > 0) {
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
 					getString("ErrorEventHasFinished"));
+		}else {
+			ev = dbManager.createEvent(team1, team2, date);		
+			dbManager.close();
+		}
+			
 
-		ev = dbManager.createEvent(team1, team2, date);		
-		dbManager.close();
+		
 		return ev;
 	}
 

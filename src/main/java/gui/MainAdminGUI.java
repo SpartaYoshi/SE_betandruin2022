@@ -111,8 +111,7 @@ public class MainAdminGUI extends JFrame {
 		createQuestionBtn.addActionListener(new java.awt.event.ActionListener() {
 			
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				CreateQuestionGUI createQuestionWindow = new CreateQuestionGUI(businessLogic,
-						new Vector<Event>());
+				CreateQuestionGUI createQuestionWindow = new CreateQuestionGUI(businessLogic, new Vector<Event>());
 				createQuestionWindow.setBusinessLogic(businessLogic);
 				createQuestionWindow.setVisible(true);
 			}

@@ -185,13 +185,13 @@ public class DataAccess  {
 	
 	
 		public Event createEvent(String team1, String team2, Date date){
-		System.out.println(">> DataAccess: createEvent=> First team = " + team1 + ", Second team = " +
-				team2);
+		System.out.println(">> DataAccess: createEvent=> First team = " + team1 + ", Second team = " +team2);
 
 
 		db.getTransaction().begin();
 		String descr = team1 + " - " + team2;
 		Event ev = new Event(descr, date);
+		System.out.println("The new event is"+ ev);
 		db.persist(ev); // db.persist(q) not required when CascadeType.PERSIST is added 
 		db.getTransaction().commit();
 		return ev;
