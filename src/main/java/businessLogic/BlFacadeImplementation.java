@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -16,6 +17,7 @@ import domain.Event;
 import domain.Question;
 import domain.User;
 import exceptions.EventFinished;
+import exceptions.FeeAlreadyExists;
 import exceptions.QuestionAlreadyExist;
 import exceptions.UserIsTakenException;
 import exceptions.UserIsUnderageException;
@@ -165,4 +167,45 @@ public class BlFacadeImplementation implements BlFacade {
 			dbManager.close();
 		}
 	}
+
+	
+	public User getUser(String username, String password) {
+		dbManager.open(false);
+		try {
+			return dbManager.getUser(username, password);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbManager.close();
+		}
+		return null;
+	}
+	
+	
+	public boolean isAdmin(String password) {
+		dbManager.open(false);
+		try {
+			return dbManager.isPasswordCorrect(password);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbManager.close();
+		}
+		return false;
+	}
+
+	
+	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExists{
+		dbManager.open(true);
+		int n=dbManager.createFee(q,pResult,pFee);
+		if (n==-1) {
+			throw new FeeAlreadyExists();
+		}
+		dbManager.close();
+
+	}
+
+	
 }

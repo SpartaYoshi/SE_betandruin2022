@@ -1,6 +1,7 @@
 package businessLogic;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 import javax.jws.WebMethod;
@@ -10,6 +11,7 @@ import domain.Event;
 import domain.Question;
 import domain.User;
 import exceptions.EventFinished;
+import exceptions.FeeAlreadyExists;
 import exceptions.QuestionAlreadyExist;
 import exceptions.UserIsTakenException;
 import exceptions.UserIsUnderageException;
@@ -54,4 +56,11 @@ public interface BlFacade  {
 	
 	
 	@WebMethod public void registerUser(User user) throws UserIsTakenException, UserIsUnderageException;
+	
+	@WebMethod public User getUser(String username, String password);
+	
+	@WebMethod public boolean isAdmin(String password);
+
+
+	@WebMethod public void createFee(Question q,String pResult,float pFee) throws FeeAlreadyExists;
 }
