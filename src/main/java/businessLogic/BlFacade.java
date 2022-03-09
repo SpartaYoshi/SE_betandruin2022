@@ -33,8 +33,7 @@ public interface BlFacade  {
  	 * @throws QuestionAlreadyExist if the same question already exists for the event
 	 */
 	@WebMethod
-	Question createQuestion(Event event, String question, float betMinimum) 
-			throws EventFinished, QuestionAlreadyExist;
+	Question createQuestion(Event event, String question, float betMinimum) throws EventFinished, QuestionAlreadyExist;
 	
 	public Event createEvent(String team1, String team2, Date date) throws EventFinished;
 		

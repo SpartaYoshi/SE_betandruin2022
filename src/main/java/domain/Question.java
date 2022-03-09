@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @SuppressWarnings("serial")
@@ -152,7 +153,6 @@ public class Question implements Serializable {
 	 */
 	public Fee addFee(String res,float fee) {
 		Fee f=new Fee(res,fee);
-		
 		if(f!=null) {
 			System.out.println("our object of fee is "+ f);
 			System.out.println("our list is" +this.feeList);

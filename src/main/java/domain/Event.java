@@ -3,7 +3,6 @@ package domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Vector;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,15 +14,18 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+@SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Event implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@XmlID
+	@Id
 	@XmlJavaTypeAdapter(IntegerAdapter.class)
-	@Id @GeneratedValue
-	private Integer eventNumber;
+	@GeneratedValue
+	private int eventNumber;
+	
 	private String description; 
 	private Date eventDate;
 	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
@@ -50,6 +52,8 @@ public class Event implements Serializable {
 	public Event(String description,Date eventDate) {
 		this.description = description;
 		this.eventDate=eventDate;
+		this.eventNumber=2;
+		
 	}
 
 	public Integer getEventNumber() {
