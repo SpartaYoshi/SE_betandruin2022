@@ -180,6 +180,22 @@ public class DataAccess  {
 		db.getTransaction().commit();
 		return q;
 	}
+	
+	
+		public Event createEvent(String team1, String team2, Date date){
+		System.out.println(">> DataAccess: createEvent=> First team = " + team1 + ", Second team = " +
+				team2);
+
+
+		db.getTransaction().begin();
+		String descr = team1 + " - " + team2;
+		Event ev = new Event(descr, date);
+		db.persist(ev); // db.persist(q) not required when CascadeType.PERSIST is added 
+		db.getTransaction().commit();
+		return ev;
+	}
+	
+	
 
 	/**
 	 * This method retrieves from the database the events of a given date 

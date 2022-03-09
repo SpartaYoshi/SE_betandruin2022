@@ -24,6 +24,8 @@ import java.util.Vector;
 
 import javax.swing.JComboBox;
 import domain.Event;
+import exceptions.EventFinished;
+
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -42,7 +44,7 @@ public class CreateEventGUI extends JFrame {
 
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField eventtextField;
 	private JCalendar calendar = new JCalendar();
 	private Calendar previousCalendar = null;
 	private Calendar currentCalendar = null;
@@ -54,7 +56,7 @@ public class CreateEventGUI extends JFrame {
 	private JComboBox<Event> eventcomboBox = new JComboBox<Event>();
 	DefaultComboBoxModel<Event> eventModel = new DefaultComboBoxModel<Event>();
 	private Vector<Date> datesWithEventsInCurrentMonth = new Vector<Date>();
-	private final JLabel errorMessageLabel = new JLabel();
+	private final JLabel messageLabel = new JLabel();
 
 	/**
 	 * Launch the application.
@@ -113,10 +115,10 @@ public class CreateEventGUI extends JFrame {
 		writeEventText.setBounds(56, 218, 94, 20);
 		contentPane.add(writeEventText);
 		
-		textField = new JTextField();
-		textField.setBounds(new Rectangle(100, 211, 429, 20));
-		textField.setBounds(134, 219, 312, 20);
-		contentPane.add(textField);
+		eventtextField = new JTextField();
+		eventtextField.setBounds(new Rectangle(100, 211, 429, 20));
+		eventtextField.setBounds(134, 219, 312, 20);
+		contentPane.add(eventtextField);
 		
 		createEventButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		createEventButton.setBounds(143, 282, 111, 21);
@@ -124,7 +126,7 @@ public class CreateEventGUI extends JFrame {
 		createEventButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				jButtonCreate_actionPerformed(e);
+				jButtonCreateEvent_actionPerformed(e);
 			}
 		});
 		contentPane.add(createEventButton);
@@ -203,7 +205,7 @@ public class CreateEventGUI extends JFrame {
 
 					} catch (Exception e1) {
 
-						errorMessageLabel.setText(e1.getMessage());
+						messageLabel.setText(e1.getMessage());
 					}
 				}
 			}
@@ -214,11 +216,11 @@ public class CreateEventGUI extends JFrame {
 		
 		datesWithEventsInCurrentMonth = businessLogic.getEventsMonth(calendar.getDate());
 		paintDaysWithEvents(calendar,datesWithEventsInCurrentMonth);
-		errorMessageLabel.setForeground(Color.RED);
-		errorMessageLabel.setBounds(new Rectangle(175, 240, 305, 20));
-		errorMessageLabel.setBounds(111, 252, 305, 20);
+		messageLabel.setForeground(Color.RED);
+		messageLabel.setBounds(new Rectangle(175, 240, 305, 20));
+		messageLabel.setBounds(111, 252, 305, 20);
 		
-		contentPane.add(errorMessageLabel);
+		contentPane.add(messageLabel);
 		
 		
 	}
@@ -227,9 +229,37 @@ public class CreateEventGUI extends JFrame {
 		this.setVisible(false);
 	}
 	
-	private void jButtonCreate_actionPerformed(ActionEvent e) {
+	private void jButtonCreateEvent_actionPerformed(ActionEvent e) {
+		//try {
+			messageLabel.setText("");
 		
+			String[] description = eventtextField.getText().split("-");
+		
+			String team1 = description[0];
+			String team2 = description[1];
+			Date date = calendar.getDate();
+		
+			if (description.length>0) {
+				try {
+					Event newEvent = businessLogic.createEvent(team1, team2, date);
+					messageLabel.setText("An event has been created");
+					eventcomboBox.addItem(newEvent);
+					
+				} catch (EventFinished e1) {
+					// TODO Auto-generated catch block
+					messageLabel.setText("The event could not be created");
+					e1.printStackTrace();
+				}
+			} else messageLabel.setText("Must be written as: team1's name - team2's name");
+			
+	
+		//} catch (EventFinished e1) {
+		//	messageLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorEventHasFinished") + team1;
+		//}
 	}
+		
+		
+	
 	
 	public static void paintDaysWithEvents(JCalendar jCalendar, 
 			Vector<Date> datesWithEventsCurrentMonth) {

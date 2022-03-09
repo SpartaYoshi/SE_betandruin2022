@@ -33,6 +33,8 @@ public interface BlFacade  {
 	@WebMethod
 	Question createQuestion(Event event, String question, float betMinimum) 
 			throws EventFinished, QuestionAlreadyExist;
+	
+	public Event createEvent(String team1, String team2, Date date) throws EventFinished;
 		
 	/**
 	 * This method retrieves all the events of a given date 

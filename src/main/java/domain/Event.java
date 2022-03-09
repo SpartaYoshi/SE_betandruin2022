@@ -47,7 +47,7 @@ public class Event implements Serializable {
 		this.eventDate = eventDate;
 	}
 
-	public Event( String description,Date eventDate) {
+	public Event(String description,Date eventDate) {
 		this.description = description;
 		this.eventDate=eventDate;
 	}

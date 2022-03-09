@@ -76,6 +76,23 @@ public class BlFacadeImplementation implements BlFacade {
 		dbManager.close();
 		return qry;
 	}
+	
+	
+	
+	public Event createEvent(String team1, String team2, Date date) throws EventFinished {
+
+		//The minimum bid must be greater than 0
+		dbManager.open(false);
+		Event ev = null;
+		
+		if (new Date().compareTo(date) > 0)
+			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
+					getString("ErrorEventHasFinished"));
+
+		ev = dbManager.createEvent(team1, team2, date);		
+		dbManager.close();
+		return ev;
+	}
 
 	/**
 	 * This method invokes the data access to retrieve the events of a given date 
