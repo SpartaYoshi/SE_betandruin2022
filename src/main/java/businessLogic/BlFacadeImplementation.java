@@ -151,11 +151,11 @@ public class BlFacadeImplementation implements BlFacade {
 		}
 	}
 
-<<<<<<< HEAD
-	public List<User> getUsers() {
+	
+	public User getUser(String username, String password) {
 		dbManager.open(false);
 		try {
-			return dbManager.getUsers();
+			return dbManager.getUser(username, password);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -163,7 +163,23 @@ public class BlFacadeImplementation implements BlFacade {
 			dbManager.close();
 		}
 		return null;
-=======
+	}
+	
+	
+	public boolean isAdmin(String password) {
+		dbManager.open(false);
+		try {
+			return dbManager.isPasswordCorrect(password);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbManager.close();
+		}
+		return false;
+	}
+
+	
 	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExists{
 		dbManager.open(true);
 		int n=dbManager.createFee(q,pResult,pFee);
@@ -171,7 +187,8 @@ public class BlFacadeImplementation implements BlFacade {
 			throw new FeeAlreadyExists();
 		}
 		dbManager.close();
-		
->>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
+
 	}
+
+	
 }

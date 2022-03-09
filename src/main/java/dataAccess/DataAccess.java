@@ -268,6 +268,19 @@ public class DataAccess  {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void registerUser(User user) {
 		db.getTransaction().begin();
 		db.persist(user);
@@ -281,17 +294,28 @@ public class DataAccess  {
 			return true;
 		return false;
 	}
-<<<<<<< HEAD
 
-	//No se si está bien
-	public List<User> getUsers() {
-		TypedQuery<User> q = db.createQuery("SELECT ALL FROM User  = \"" + "", User.class);
+	/**
+	 * Method to get an existing user
+	 * @return user if exists, null if not
+	 */
+	public User getUser(String username, String password) {
+		TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + username + "\"", User.class);
 		if (q.getSingleResult() != null)
-			return q.getResultList();
+			return (User) q;
 		return null;
-		
 	}
-=======
+	
+	/**
+	 * Method to verify if the password is written correctly
+	 * @return user if exists, null if not
+	 */
+	public boolean isPasswordCorrect(String password) {
+		TypedQuery<User> q = db.createQuery("SELECT u FROM User u \"", User.class);
+		if (q.getSingleResult() != null)
+			return q.getSingleResult().isPasswordCorrect(password);
+		return false;
+	}
 	
 	/**
 	 * Method to create different fees
@@ -325,5 +349,4 @@ public class DataAccess  {
 	
 
 	
->>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
 }

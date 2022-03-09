@@ -96,7 +96,8 @@ public class UserLoginGUI extends JFrame {
 					// si no existe, lanzar y catch: crea FailedLoginException
 					// si existe, guardalo en una variable
 				String username = lbUsername.getText();
-				if (businesslogic.getUsers())
+				String pasword = passwordField.getText();
+				businesslogic.getUser(username, pasword);
 				
 				//2. pillar contraseña del passwordfield y mirar si la contraseña es correcta (usando el usuario que acabas de guardar)
 					// si la contraseña no coincide, lanzar y catch: FailedLoginException
@@ -108,6 +109,7 @@ public class UserLoginGUI extends JFrame {
 					//				initWindow = new MainAdminGUI();
 					//				bizlog = initWindow.getBusinessLogic();
 					// }
+				
 				
 				
 				//4. ahora si que sí
