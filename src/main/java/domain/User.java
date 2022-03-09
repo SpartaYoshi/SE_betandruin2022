@@ -95,7 +95,7 @@ public class User {
 	
 	
 	public boolean isPasswordCorrect(String password) {
-		if (passwd.equals(password)){
+		if (this.getPasswd().equals(password)){
 			return true;
 		}
 		return false;

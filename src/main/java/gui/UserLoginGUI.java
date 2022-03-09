@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import businessLogic.BlFacade;
+import domain.User;
 
 import javax.swing.JButton;
 import java.awt.Font;
@@ -34,6 +35,7 @@ public class UserLoginGUI extends JFrame {
 	private JLabel lblLoginUser;
 	private JLabel lbUsername;
 	private JLabel lbPasswd;
+	private JLabel errorMessage;
 	
 	private BlFacade businesslogic;
 
@@ -81,12 +83,27 @@ public class UserLoginGUI extends JFrame {
 		
 		passwordField = new JPasswordField();
 		
+		errorMessage = new JLabel("New label");
 		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				String username = lbUsername.getText();
+				String password = passwordField.getText();
+				
 				initWindow = new MainAdminGUI();	// CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
 				BlFacade bizlog = initWindow.getBusinessLogic();
+				User u = bizlog.getUser(username, password);
+				if(u != null) {
+					if(u.isAdmin()) {
+						JFrame a = new MainAdminGUI();
+						a.setVisible(true);
+					}
+					System.out.print("Logged in");
+				}
+				else {
+					errorMessage.setText("Invalid login");
+				}
 				
 				// Nota: siempre que hagas tratado de errores, haz try y catch.
 				//       crea getters que falten si no están en la clase domain.User
@@ -95,13 +112,10 @@ public class UserLoginGUI extends JFrame {
 				//1. pillar nombre de usuario del Textfield y mirar si existe en la DB
 					// si no existe, lanzar y catch: crea FailedLoginException
 					// si existe, guardalo en una variable
-				String username = lbUsername.getText();
-				String pasword = passwordField.getText();
-				businesslogic.getUser(username, pasword);
+				
 				
 				//2. pillar contraseña del passwordfield y mirar si la contraseña es correcta (usando el usuario que acabas de guardar)
 					// si la contraseña no coincide, lanzar y catch: FailedLoginException
-				char[] password = passwordField.getPassword();
 				
 
 				//3. mirar si usuario es admin (ya existe un booleano como atributo pero falta el getter)
@@ -127,31 +141,35 @@ public class UserLoginGUI extends JFrame {
 		
 		
 		
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(165)
-							.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblLoginUser, GroupLayout.PREFERRED_SIZE, 406, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(52)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lbPasswd, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lbUsername, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)))))
+									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lbPasswd, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(errorMessage, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+										.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)))))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(165)
+							.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(20, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblLoginUser, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 					.addGap(52)
@@ -162,7 +180,9 @@ public class UserLoginGUI extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lbPasswd, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
 						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+					.addComponent(errorMessage)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
 		);
 		contentPane.setLayout(gl_contentPane);

@@ -91,6 +91,7 @@ public class DataAccess  {
 			Question q4;
 			Question q5;
 			Question q6;
+		
 
 			if (Locale.getDefault().equals(new Locale("es"))) {
 				q1 = ev1.addQuestion("¿Quién ganará el partido?", 1);
@@ -317,7 +318,7 @@ public class DataAccess  {
 	 */
 	public User getUser(String username, String password) {
 		TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + username + "\"", User.class);
-		if (q.getSingleResult() != null)
+		if (q.getSingleResult() != null && q.getSingleResult().isPasswordCorrect(password))
 			return (User) q;
 		return null;
 	}
