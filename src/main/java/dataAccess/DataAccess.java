@@ -11,6 +11,7 @@ import java.util.Vector;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
@@ -304,8 +305,12 @@ public class DataAccess  {
 	 * @return user if exists, null if not
 	 */
 	public User getUser(String username) {
-		TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + username + "\"", User.class);
-		return q.getSingleResult();
+		try {
+			TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + username + "\"", User.class);
+			return q.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 	

@@ -38,7 +38,7 @@ public class UserLoginGUI extends JFrame {
 	private JLabel lbPasswd;
 	private JLabel errorMessage;
 	
-	private BlFacade businesslogic;
+	private BlFacade bizlog;
 
 	/**
 	 * Launch the application.
@@ -95,7 +95,7 @@ public class UserLoginGUI extends JFrame {
 				
 				try {
 					initWindow = new MainAdminGUI();	// TODO CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
-					BlFacade bizlog = initWindow.getBusinessLogic();
+					bizlog = initWindow.getBusinessLogic();
 					
 					User user = bizlog.loginUser(username, password);
 				
