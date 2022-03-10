@@ -80,14 +80,21 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 	
 	
-	
+	/**
+	 * This method creates an event which includes two teams
+	 * @param first team 
+	 * @param second team
+	 * @param date in which the event will be done
+	 * @return the created event
+	 * @throws EventFinished if current data is after data of the event
+	 */
 	public Event createEvent(String team1, String team2, Date date) throws EventFinished {
 
-		//The minimum bid must be greater than 0
 		dbManager.open(false);
 		Event ev = null;
-		System.out.println("Current date is: "+new Date());
-		if (new Date().compareTo(date) > 0) {
+		Date currentdate = new Date();
+		System.out.println("Current date is: "+ currentdate);
+		if (currentdate.compareTo(date) > 0) {
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
 					getString("ErrorEventHasFinished"));
 		}else {
@@ -95,8 +102,6 @@ public class BlFacadeImplementation implements BlFacade {
 			dbManager.close();
 		}
 			
-
-		
 		return ev;
 	}
 

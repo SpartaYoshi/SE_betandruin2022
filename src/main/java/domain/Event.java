@@ -52,7 +52,6 @@ public class Event implements Serializable {
 	public Event(String description,Date eventDate) {
 		this.description = description;
 		this.eventDate=eventDate;
-		this.eventNumber=2;
 		
 	}
 

@@ -35,6 +35,14 @@ public interface BlFacade  {
 	@WebMethod
 	Question createQuestion(Event event, String question, float betMinimum) throws EventFinished, QuestionAlreadyExist;
 	
+	/**
+	 * This method creates an event which includes two teams
+	 * @param first team 
+	 * @param second team
+	 * @param date in which the event will be done
+	 * @return the created event
+	 * @throws EventFinished if current data is after data of the event
+	 */
 	public Event createEvent(String team1, String team2, Date date) throws EventFinished;
 		
 	/**
