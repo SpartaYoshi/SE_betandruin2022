@@ -11,6 +11,7 @@ import domain.Event;
 import domain.Question;
 import domain.User;
 import exceptions.EventFinished;
+import exceptions.FailedLoginException;
 import exceptions.FeeAlreadyExists;
 import exceptions.QuestionAlreadyExist;
 import exceptions.UserIsTakenException;
@@ -64,10 +65,7 @@ public interface BlFacade  {
 	
 	@WebMethod public void registerUser(User user) throws UserIsTakenException, UserIsUnderageException;
 	
-	@WebMethod public User getUser(String username, String password);
-	
-	@WebMethod public boolean isAdmin(String password);
-
+	@WebMethod public User loginUser(String username, String password) throws FailedLoginException;
 
 	@WebMethod public void createFee(Question q,String pResult,float pFee) throws FeeAlreadyExists;
 }

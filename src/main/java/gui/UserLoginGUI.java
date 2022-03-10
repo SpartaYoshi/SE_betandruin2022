@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import businessLogic.BlFacade;
 import domain.User;
+import exceptions.FailedLoginException;
 
 import javax.swing.JButton;
 import java.awt.Font;
@@ -85,33 +86,29 @@ public class UserLoginGUI extends JFrame {
 		
 		errorMessage = new JLabel("New label");
 		
+		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String username = lbUsername.getText();
 				String password = new String (passwordField.getPassword());
 				
-				initWindow = new MainAdminGUI();	// CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
-				BlFacade bizlog = initWindow.getBusinessLogic();
-				User u = bizlog.getUser(username, password);
-				if(u != null) {
-					if(u.isAdmin()) {
-						JFrame a = new MainAdminGUI();
-						a.setVisible(true);
-					}
-					System.out.print("Logged in");
-				}
-				else {
-					errorMessage.setText("Invalid login");
-				}
+				try {
+					initWindow = new MainAdminGUI();	// TODO CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
+					BlFacade bizlog = initWindow.getBusinessLogic();
+					
+					User user = bizlog.loginUser(username, password);
 				
-				// Nota: siempre que hagas tratado de errores, haz try y catch.
-				//       crea getters que falten si no están en la clase domain.User
-				// 		 FailedLoginException: imprime en un rectangulito algo estilo "Login credentials were incorrect. Please try again"
+					if (user.isAdmin())
+						initWindow = new MainAdminGUI();
 				
-				//1. pillar nombre de usuario del Textfield y mirar si existe en la DB
-					// si no existe, lanzar y catch: crea FailedLoginException
-					// si existe, guardalo en una variable
+					initWindow.setVisible(true);
+					
+				} catch (FailedLoginException e) {
+					errorMessage.setText("Login credentials were incorrect. Please try again");
+				}
+					
+				
 				
 				
 				//2. pillar contraseña del passwordfield y mirar si la contraseña es correcta (usando el usuario que acabas de guardar)

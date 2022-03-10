@@ -303,23 +303,11 @@ public class DataAccess  {
 	 * Method to get an existing user
 	 * @return user if exists, null if not
 	 */
-	public User getUser(String username, String password) {
+	public User getUser(String username) {
 		TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + username + "\"", User.class);
-		if (q.getSingleResult() != null && q.getSingleResult().isPasswordCorrect(password))
-			return (User) q;
-		return null;
+		return q.getSingleResult();
 	}
-	
-	/**
-	 * Method to verify if the password is written correctly
-	 * @return user if exists, null if not
-	 */
-	public boolean isPasswordCorrect(String password) {
-		TypedQuery<User> q = db.createQuery("SELECT u FROM User u \"", User.class);
-		if (q.getSingleResult() != null)
-			return q.getSingleResult().isPasswordCorrect(password);
-		return false;
-	}
+
 	
 	/**
 	 * Method to create different fees
