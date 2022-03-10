@@ -61,29 +61,29 @@ public class DataAccess  {
 			int year = today.get(Calendar.YEAR);
 			if (month == 12) { month = 0; year += 1;}  
 
-			Event ev1 = new Event(1, "Atlético-Athletic", UtilDate.newDate(year, month, 17));
-			Event ev2 = new Event(2, "Eibar-Barcelona", UtilDate.newDate(year, month, 17));
-			Event ev3 = new Event(3, "Getafe-Celta", UtilDate.newDate(year, month, 17));
-			Event ev4 = new Event(4, "Alavés-Deportivo", UtilDate.newDate(year, month, 17));
-			Event ev5 = new Event(5, "Español-Villareal", UtilDate.newDate(year, month, 17));
-			Event ev6 = new Event(6, "Las Palmas-Sevilla", UtilDate.newDate(year, month, 17));
-			Event ev7 = new Event(7, "Malaga-Valencia", UtilDate.newDate(year, month, 17));
-			Event ev8 = new Event(8, "Girona-Leganés", UtilDate.newDate(year, month, 17));
-			Event ev9 = new Event(9, "Real Sociedad-Levante", UtilDate.newDate(year, month, 17));
-			Event ev10 = new Event(10, "Betis-Real Madrid", UtilDate.newDate(year, month, 17));
+			Event ev1 = new Event( "Atlético-Athletic", UtilDate.newDate(year, month, 17));
+			Event ev2 = new Event( "Eibar-Barcelona", UtilDate.newDate(year, month, 17));
+			Event ev3 = new Event( "Getafe-Celta", UtilDate.newDate(year, month, 17));
+			Event ev4 = new Event( "Alavés-Deportivo", UtilDate.newDate(year, month, 17));
+			Event ev5 = new Event( "Español-Villareal", UtilDate.newDate(year, month, 17));
+			Event ev6 = new Event( "Las Palmas-Sevilla", UtilDate.newDate(year, month, 17));
+			Event ev7 = new Event( "Malaga-Valencia", UtilDate.newDate(year, month, 17));
+			Event ev8 = new Event( "Girona-Leganés", UtilDate.newDate(year, month, 17));
+			Event ev9 = new Event( "Real Sociedad-Levante", UtilDate.newDate(year, month, 17));
+			Event ev10 = new Event( "Betis-Real Madrid", UtilDate.newDate(year, month, 17));
 
-			Event ev11 = new Event(11, "Atletico-Athletic", UtilDate.newDate(year, month, 1));
-			Event ev12 = new Event(12, "Eibar-Barcelona", UtilDate.newDate(year, month, 1));
-			Event ev13 = new Event(13, "Getafe-Celta", UtilDate.newDate(year, month, 1));
-			Event ev14 = new Event(14, "Alavés-Deportivo", UtilDate.newDate(year, month, 1));
-			Event ev15 = new Event(15, "Español-Villareal", UtilDate.newDate(year, month, 1));
-			Event ev16 = new Event(16, "Las Palmas-Sevilla", UtilDate.newDate(year, month, 1));
+			Event ev11 = new Event( "Atletico-Athletic", UtilDate.newDate(year, month, 1));
+			Event ev12 = new Event( "Eibar-Barcelona", UtilDate.newDate(year, month, 1));
+			Event ev13 = new Event( "Getafe-Celta", UtilDate.newDate(year, month, 1));
+			Event ev14 = new Event( "Alavés-Deportivo", UtilDate.newDate(year, month, 1));
+			Event ev15 = new Event( "Español-Villareal", UtilDate.newDate(year, month, 1));
+			Event ev16 = new Event( "Las Palmas-Sevilla", UtilDate.newDate(year, month, 1));
 
 
-			Event ev17 = new Event(17, "Málaga-Valencia", UtilDate.newDate(year, month + 1, 28));
-			Event ev18 = new Event(18, "Girona-Leganés", UtilDate.newDate(year, month + 1, 28));
-			Event ev19 = new Event(19, "Real Sociedad-Levante", UtilDate.newDate(year, month + 1, 28));
-			Event ev20 = new Event(20, "Betis-Real Madrid", UtilDate.newDate(year, month + 1, 28));
+			Event ev17 = new Event( "Málaga-Valencia", UtilDate.newDate(year, month + 1, 28));
+			Event ev18 = new Event( "Girona-Leganés", UtilDate.newDate(year, month + 1, 28));
+			Event ev19 = new Event( "Real Sociedad-Levante", UtilDate.newDate(year, month + 1, 28));
+			Event ev20 = new Event( "Betis-Real Madrid", UtilDate.newDate(year, month + 1, 28));
 
 			Question q1;
 			Question q2;

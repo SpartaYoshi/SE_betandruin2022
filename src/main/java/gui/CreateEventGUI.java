@@ -184,24 +184,21 @@ public class CreateEventGUI extends JFrame {
 					try {
 						Vector<domain.Event> events = businessLogic.getEvents(firstDay);
 
-						if (events.isEmpty())
-							listOfEventsLabel.setText("NoEvents" + ": " + dateformat1.
-									format(previousCalendar.getTime()));
-						else
-							listOfEventsLabel.setText(ResourceBundle.getBundle("Etiquetas").
-									getString("Events") + " : " + dateformat1.
-									format(previousCalendar.getTime()));
+						//if (events.isEmpty())
+						//	listOfEventsLabel.setText("NoEvents" + ": " + dateformat1.
+						//			format(previousCalendar.getTime()));
+						//else
+						//	listOfEventsLabel.setText(ResourceBundle.getBundle("Etiquetas").
+						//			getString("Events") + " : " + dateformat1.
+						//			format(previousCalendar.getTime()));
 						eventcomboBox.removeAllItems();
-						System.out.println("Events " + events);
+						System.out.println("Events: " + events);
 
 						for (domain.Event ev : events)
 							eventModel.addElement(ev);
 						eventcomboBox.repaint();
 
-						if (events.size() == 0)
-							createEventButton.setEnabled(false);
-						else
-							createEventButton.setEnabled(true);
+						createEventButton.setEnabled(true);
 
 					} catch (Exception e1) {
 
@@ -242,8 +239,10 @@ public class CreateEventGUI extends JFrame {
 			if (description.length>0) {
 				try {
 					Event newEvent = businessLogic.createEvent(team1, team2, date);
+					newEvent.setEventNumber(null);
 					messageLabel.setText("An event has been created");
 					eventcomboBox.addItem(newEvent);
+					eventcomboBox.repaint();
 					
 				} catch (EventFinished e1) {
 					
