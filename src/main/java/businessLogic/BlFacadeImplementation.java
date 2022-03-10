@@ -145,7 +145,7 @@ public class BlFacadeImplementation implements BlFacade {
 	 * It is invoked only when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
 	 */	
 	@WebMethod	
-	public void initializeBD(){
+	public void initializeBD() {
 		dbManager.open(false);
 		dbManager.initializeDB();
 		dbManager.close();

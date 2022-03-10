@@ -279,23 +279,10 @@ public class DataAccess  {
 		return ev.doesQuestionExist(question);
 	}
 
-	public void close(){
+	public void close() {
 		db.close();
 		System.out.println("DataBase is closed");
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	public void registerUser(User user) {
