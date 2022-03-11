@@ -146,7 +146,7 @@ public class BrowseQuestionsGUI extends JFrame {
 						datesWithEventsInCurrentMonth = businessLogic.getEventsMonth(calendar.
 								getDate());
 					}
-
+					System.out.println(datesWithEventsInCurrentMonth);
 					CreateQuestionGUI.paintDaysWithEvents(calendar,datesWithEventsInCurrentMonth);
 
 					try {

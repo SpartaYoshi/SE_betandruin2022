@@ -1,71 +1,126 @@
 package gui;
 
-import java.awt.EventQueue;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
+
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
 
 import businessLogic.BlFacade;
 import businessLogic.BlFacadeImplementation;
 
-import javax.swing.JLabel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+
 
 public class PortalGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+
+	private JPanel mainPane;
+	private JButton browseQuestionsBtn;
+	private JPanel localePane;
+	private JRadioButton euskaraRbtn;
+	private JRadioButton castellanoRbtn;
+	private JRadioButton englishRbtn;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private BlFacade businessLogic;
+	protected JLabel welcomeLbl;
+	private JButton btnLogin;
+	private JButton btnRegister;
+
 	
-	private JPanel contentPane;
-    private BlFacade businessLogic;
 
-    private JButton browseQBtn;
-    
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    PortalGUI frame = new PortalGUI();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+	public PortalGUI() {
+		super();
+		businessLogic = new BlFacadeImplementation();
 
-    
-    
-    public BlFacade getBusinessLogic() {
-        return businessLogic;
-    }
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				try {
+					//if (ConfigXML.getInstance().isBusinessLogicLocal()) facade.close();
+				}
+				catch (Exception e1) {
+					System.out.println("Error: " + e1.toString() + " , likely problems "
+							+ "with Business Logic or Data Accesse");
+				}
+				System.exit(1);
+			}
+		});
 
-    public void setBusinessLogic (BlFacade afi){
-        businessLogic = afi;
-    }
-    
-    /**
-     * Create the frame.
-     */
-    public PortalGUI() {
-    	businessLogic = new BlFacadeImplementation();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
-        
-        JButton signupButton = new JButton("Sign up");
-        signupButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // registerGUI
+		
+		this.setPreferredSize(new Dimension(400, 300));
+
+		this.initializeMainPane();
+		this.setContentPane(mainPane);
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
+		this.pack();
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+
+	public BlFacade getBusinessLogic() {
+		return businessLogic;
+	}
+
+	public void setBusinessLogic (BlFacade afi){
+		businessLogic = afi;
+	}
+	
+	
+
+	private void initializeMainPane() {
+		mainPane = new JPanel();
+		mainPane.setLayout(new GridLayout(5, 1, 0, 0));
+		
+		welcomeLbl = new JLabel();
+		welcomeLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		welcomeLbl.setFont(new Font("Source Serif Pro", Font.BOLD, 19));
+		welcomeLbl.setText("Welcome to Bet&Ruin 22!");
+		mainPane.add(welcomeLbl);
+
+		initializeRegister();
+		mainPane.add(btnRegister);
+		
+		initializeLogin();
+		mainPane.add(btnLogin);
+
+		initializeBrowseQuestionsBtn();
+		mainPane.add(browseQuestionsBtn);
+		
+		
+
+		
+		initializeLocalePane();
+		mainPane.add(localePane);
+	}
+
+	private void initializeRegister() {
+		btnRegister = new JButton();
+		btnRegister.setText(ResourceBundle.getBundle("Etiquetas").
+				getString("Register"));
+		btnRegister.addActionListener(new java.awt.event.ActionListener() {
+			
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				 // registerGUI
                 try {
                     UserRegisterGUI registerGui = new UserRegisterGUI();
                     registerGui.setVisible(true);
@@ -73,14 +128,18 @@ public class PortalGUI extends JFrame {
                     e1.printStackTrace();
                 }
             }
-        });
-        signupButton.setBounds(137, 55, 139, 52);
-        contentPane.add(signupButton);
-        
-        JButton loginButton = new JButton("Log in");
-        loginButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // entrar a loginGUI
+		});
+		
+	}
+	
+	private void initializeLogin() {
+		btnLogin = new JButton();
+		btnLogin.setText(ResourceBundle.getBundle("Etiquetas").
+				getString("Login"));
+		btnLogin.addActionListener(new java.awt.event.ActionListener() {
+			
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				// enter to loginGUI
                 try {
                     UserLoginGUI loginGui = new UserLoginGUI();
                     loginGui.setVisible(true);
@@ -88,26 +147,87 @@ public class PortalGUI extends JFrame {
                     e2.printStackTrace();
                 }
             }
-        });
-        loginButton.setBounds(137, 118, 139, 52);
-        contentPane.add(loginButton);
-        
-        JLabel lblNewLabel = new JLabel("Please, select an option");
-        lblNewLabel.setBounds(137, 11, 139, 33);
-        contentPane.add(lblNewLabel);
-        
-        browseQBtn = new JButton("Browse Questions");
-        browseQBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-        browseQBtn.setBounds(137, 181, 139, 52);
-        contentPane.add(browseQBtn);
-        
-        
-        
-    }
-    
+		});
+		
+	}
+		
 
+	private void initializeBrowseQuestionsBtn() {
+		browseQuestionsBtn = new JButton();
+		browseQuestionsBtn.setText(ResourceBundle.getBundle("Etiquetas").
+				getString("BrowseQuestions"));
+		browseQuestionsBtn.addActionListener(new java.awt.event.ActionListener() {
+			
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				BrowseQuestionsGUI findQuestionsWindow = new BrowseQuestionsGUI(businessLogic);
+				findQuestionsWindow.setVisible(true);
+			}
+		});
+	}
+
+	
+
+	private void initializeLocalePane() {
+		localePane = new JPanel();
+
+		initializeEuskaraRbtn();
+		localePane.add(euskaraRbtn);
+
+		initializeCastellanoRbtn();
+		localePane.add(castellanoRbtn);
+
+		initializeEnglishRbtn();
+		localePane.add(englishRbtn);
+	}
+
+	private void initializeEuskaraRbtn() {
+		euskaraRbtn = new JRadioButton("Euskara");
+		euskaraRbtn.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				Locale.setDefault(new Locale("eus"));
+				System.out.println("Locale: " + Locale.getDefault());
+				redraw();
+			}
+		});
+		buttonGroup.add(euskaraRbtn);
+	}
+
+	private void initializeCastellanoRbtn() {
+		castellanoRbtn = new JRadioButton("Castellano");
+		castellanoRbtn.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				Locale.setDefault(new Locale("es"));
+				System.out.println("Locale: " + Locale.getDefault());
+				redraw();
+			}
+		});
+		buttonGroup.add(castellanoRbtn);
+	}
+
+	private void initializeEnglishRbtn() {
+		englishRbtn = new JRadioButton("English");
+		englishRbtn.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				Locale.setDefault(new Locale("en"));
+				System.out.println("Locale: " + Locale.getDefault());
+				redraw();				}
+		});
+		buttonGroup.add(englishRbtn);
+	}
+
+	private void redraw() {
+		welcomeLbl.setText(ResourceBundle.getBundle("Etiquetas").
+				getString("Welcome"));
+		browseQuestionsBtn.setText(ResourceBundle.getBundle("Etiquetas").
+				getString("BrowseQuestions"));
+		btnLogin.setText(ResourceBundle.getBundle("Etiquetas").
+				getString("Login"));
+		btnRegister.setText(ResourceBundle.getBundle("Etiquetas").
+				getString("Register"));
+		
+		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
+	}
 }
