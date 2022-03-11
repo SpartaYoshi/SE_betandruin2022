@@ -1,11 +1,7 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -15,11 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.Vector;
 
 import javax.swing.JComboBox;
@@ -159,7 +153,6 @@ public class CreateEventGUI extends JFrame {
 					previousCalendar = (Calendar) propertychangeevent.getNewValue();
 					System.out.println("calendarAnt: "+currentCalendar.getTime());
 					System.out.println("calendarAct: "+previousCalendar.getTime());
-					DateFormat dateformat1 = DateFormat.getDateInstance(1, calendar.getLocale());
 
 					int monthAnt = currentCalendar.get(Calendar.MONTH);
 					int monthAct = previousCalendar.get(Calendar.MONTH);
