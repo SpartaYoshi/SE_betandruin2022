@@ -3937,7 +3937,7 @@
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
 					"name": "Create a new event",
-					"documentation": "# Event flow\n\n## Main flow\n1. *Admin* selects a **date**\n2. *Admin* introduces two **teams**\n3. *System* adds new **event** for those **date** and **teams**\n\n## Alternative flow\nA3. The written teams are already playing another match on the same day. Event cannot be added.\n\nB3. If the event **date** is before current day, then the event cannot be added."
+					"documentation": "# Event flow\n\n## Main flow\n1. *Admin* selects a **date**\n2. *Admin* introduces two **teams**\n3. *System* adds new **event** for those **date** and **teams**\n\n## Alternative flow\nA3. The written **teams** are already playing another match on that **date**. Event cannot be added.\n\nB3. If the event **date** is before current day, then the event cannot be added."
 				},
 				{
 					"_type": "UMLUseCase",
