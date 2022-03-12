@@ -37,6 +37,7 @@ public class UserLoginGUI extends JFrame {
 	private JLabel lbUsername;
 	private JLabel lbPasswd;
 	private JLabel errorMessage;
+	private JButton btnClose;
 	
 	private BlFacade bizlog;
 
@@ -86,6 +87,8 @@ public class UserLoginGUI extends JFrame {
 		
 		errorMessage = new JLabel("");
 		
+		btnClose = new JButton("Close");
+		
 		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -107,31 +110,17 @@ public class UserLoginGUI extends JFrame {
 				} catch (FailedLoginException e) {
 					errorMessage.setText("Login credentials were incorrect. Please try again");
 				}
-					
-				
-				
-				
-				//2. pillar contraseña del passwordfield y mirar si la contraseña es correcta (usando el usuario que acabas de guardar)
-					// si la contraseña no coincide, lanzar y catch: FailedLoginException
-				
-
-				//3. mirar si usuario es admin (ya existe un booleano como atributo pero falta el getter)
-					// if (user.isAdmin()) {
-					//				initWindow = new MainAdminGUI();
-					//				bizlog = initWindow.getBusinessLogic();
-					// }
-				
-				
-				
-				//4. ahora si que sí
-				// initWindow.setVisible(true); 	
-				
-				
-				////////////////////////////////
-				// vinculación:		UserLoginGUI > MainUserGUI > businesslogic (BlFacade) > DataAccess
-				
 			}
 		});
+		
+		
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+			}
+		});
+		
+		
 		
 		
 		
@@ -143,26 +132,25 @@ public class UserLoginGUI extends JFrame {
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addComponent(lblLoginUser, GroupLayout.PREFERRED_SIZE, 406, GroupLayout.PREFERRED_SIZE)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(52)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblLoginUser, GroupLayout.PREFERRED_SIZE, 406, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(52)
+							.addComponent(lbUsername, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lbPasswd, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lbUsername, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lbPasswd, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(errorMessage, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
-										.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)))))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(165)
-							.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(20, Short.MAX_VALUE))
+								.addComponent(errorMessage, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
+								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)))))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(165)
+					.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+					.addComponent(btnClose))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -180,7 +168,9 @@ public class UserLoginGUI extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(errorMessage, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnClose)))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
