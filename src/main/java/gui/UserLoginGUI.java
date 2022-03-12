@@ -30,7 +30,8 @@ public class UserLoginGUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
-	private MainAdminGUI initWindow;
+	private MainAdminGUI initWindow1;
+	private BrowseQuestionsGUI initWindow2;
 	
 	private JButton btnLogin;
 	
@@ -98,15 +99,18 @@ public class UserLoginGUI extends JFrame {
 				String password = new String (passwordField.getPassword());
 
 				try {
-					initWindow = new MainAdminGUI();	// TODO CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
-					bizlog = initWindow.getBusinessLogic();
-					
+					initWindow1 = new MainAdminGUI();	// TODO CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
+					bizlog = initWindow1.getBusinessLogic();
 					User user = bizlog.loginUser(username, password);
 				
-					if (user.isAdmin())
-						initWindow = new MainAdminGUI();
-				
-					initWindow.setVisible(true);
+					if (user.isAdmin()) {
+						initWindow1 = new MainAdminGUI();
+						initWindow1.setVisible(true);
+					}
+						
+					else {
+						initWindow2 = new BrowseQuestionsGUI(bizlog);
+					}
 					
 				} catch (FailedLoginException e) {
 					errorMessage.setForeground(Color.red);
