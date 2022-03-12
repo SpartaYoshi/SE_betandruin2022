@@ -193,26 +193,9 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 	
 	
-<<<<<<< HEAD
-	public boolean isAdmin(String username, String password) {
-		dbManager.open(false);
-		try {
-			return dbManager.isPasswordCorrect(username, password);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			dbManager.close();
-		}
-		return false;
-	}
 
-	
-	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExists{
-=======
 	@WebMethod
 	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExists {
->>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
 		dbManager.open(true);
 		int n=dbManager.createFee(q,pResult,pFee);
 		if (n == -1) {

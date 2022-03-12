@@ -91,27 +91,8 @@ public class UserLoginGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String username = lbUsername.getText();
-<<<<<<< HEAD
-				char[] p = passwordField.getPassword();
-				String password = new String(p);
-				
-				initWindow = new MainAdminGUI();	// CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
-				BlFacade bizlog = initWindow.getBusinessLogic();
-				User u = bizlog.getUser(username, password);
-				if(u != null) {
-					if(u.isAdmin()) {
-						JFrame a = new MainAdminGUI();
-						a.setVisible(true);
-					}
-					System.out.print("Logged in");
-				}
-				else {
-					errorMessage.setText("Invalid login");
-				}
-=======
 				String password = new String (passwordField.getPassword());
->>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
-				
+
 				try {
 					initWindow = new MainAdminGUI();	// TODO CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
 					bizlog = initWindow.getBusinessLogic();

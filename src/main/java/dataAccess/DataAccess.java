@@ -1,4 +1,4 @@
-	package dataAccess;
+package dataAccess;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -118,14 +118,6 @@ public class DataAccess  {
 				q5 = ev17.addQuestion("Zeinek irabaziko du partidua?", 1);
 				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
 			}
-			
-			User u1 = new User("ainhi", "1234", "Ainhi", "Legarreta", new Date(2002,04,11));
-			u1.setAdmin(true);
-			db.persist(u1);
-			
-			
-			User u2 = new User("josu", "1234", "Josu", "Abal", new Date(2002,04,11));
-			db.persist(u2);
 
 			
 			
@@ -314,13 +306,6 @@ public class DataAccess  {
 	 * Method to get an existing user
 	 * @return user if exists, null if not
 	 */
-<<<<<<< HEAD
-	public User getUser(String username, String password) {
-		TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + username + "\"", User.class);
-		if (q.getSingleResult() != null && isPasswordCorrect(username, password))
-			return (User) q;
-		return null;
-=======
 	public User getUser(String username) {
 		try {
 			TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + username + "\"", User.class);
@@ -328,26 +313,10 @@ public class DataAccess  {
 		} catch (NoResultException e) {
 			return null;
 		}
->>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
 	}
-<<<<<<< HEAD
 	
-	/**
-	 * Method to verify if the password is written correctly
-	 * @return user if exists, null if not
-	 */
-	public boolean isPasswordCorrect(String username, String password) {
-		TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username=?1 && u.password=?2", User.class);
-		q.setParameter(1, username);
-		q.setParameter(2, password);
-		if (q.getSingleResult() != null)
-			return true;
-		return false;
-	}
-=======
+	
 
->>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
-	
 	/**
 	 * Method to create different fees
 	 * @param quest

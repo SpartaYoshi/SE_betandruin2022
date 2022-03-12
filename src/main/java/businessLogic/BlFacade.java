@@ -65,14 +65,9 @@ public interface BlFacade  {
 	
 	@WebMethod public void registerUser(User user) throws UserIsTakenException, UserIsUnderageException;
 	
-<<<<<<< HEAD
-	@WebMethod public User getUser(String username, String password);
-	
-	@WebMethod public boolean isAdmin(String username, String password);
 
-=======
 	@WebMethod public User loginUser(String username, String password) throws FailedLoginException;
->>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
 
+	
 	@WebMethod public void createFee(Question q,String pResult,float pFee) throws FeeAlreadyExists;
 }
