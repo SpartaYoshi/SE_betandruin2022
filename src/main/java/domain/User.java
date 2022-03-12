@@ -86,20 +86,15 @@ public class User {
 		return admin;
 	}
 
-
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
+	public void grantAdmin() {
+		admin = true;
+	}
+	
+	public void revokeAdmin() {
+		admin = false;
 	}
 	
 	
-	
-	
-	public boolean isPasswordCorrect(String password) {
-		if (this.getPasswd().equals(password)){
-			return true;
-		}
-		return false;
-	}
 
 	
 	

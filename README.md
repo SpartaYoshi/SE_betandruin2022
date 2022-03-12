@@ -1,7 +1,7 @@
 # SE_betandruin2022
  Software Engineering project for the creation of a Bet &amp; Ruin interface program (2022).
 
- Editors: Josu Abal, Nagore Bravo, Asier Setién, Ainhize Legarreta.
+ Editors: Iosu Abal, Nagore Bravo, Asier SeptiÃ©n, Ainhize Legarreta.
  Name of the team: 
  
  

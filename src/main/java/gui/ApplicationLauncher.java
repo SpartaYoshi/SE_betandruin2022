@@ -20,7 +20,7 @@ public class ApplicationLauncher {
 
 		Locale.setDefault(new Locale(config.getLocale()));
 		System.out.println("Locale: " + Locale.getDefault());
-		MainAdminGUI initWindow = new MainAdminGUI();
+		PortalGUI initWindow = new PortalGUI();
 		BlFacade businessLogic;
 
 		try {
@@ -50,8 +50,9 @@ public class ApplicationLauncher {
 			initWindow.setVisible(true);
 		}
 		catch (Exception e) {
-			initWindow.selectOptionLbl.setText("Error: " + e.toString());
-			initWindow.selectOptionLbl.setForeground(Color.RED);		
+			
+			initWindow.welcomeLbl.setText("Error: " + e.toString());
+			initWindow.welcomeLbl.setForeground(Color.RED);		
 			System.out.println("Error in ApplicationLauncher: " + e.toString());
 		}
 	}

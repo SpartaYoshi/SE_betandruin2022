@@ -11,6 +11,7 @@ import java.util.Vector;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
@@ -289,23 +290,10 @@ public class DataAccess  {
 		return ev.doesQuestionExist(question);
 	}
 
-	public void close(){
+	public void close() {
 		db.close();
 		System.out.println("DataBase is closed");
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	public void registerUser(User user) {
@@ -326,12 +314,23 @@ public class DataAccess  {
 	 * Method to get an existing user
 	 * @return user if exists, null if not
 	 */
+<<<<<<< HEAD
 	public User getUser(String username, String password) {
 		TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + username + "\"", User.class);
 		if (q.getSingleResult() != null && isPasswordCorrect(username, password))
 			return (User) q;
 		return null;
+=======
+	public User getUser(String username) {
+		try {
+			TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + username + "\"", User.class);
+			return q.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+>>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * Method to verify if the password is written correctly
@@ -345,6 +344,9 @@ public class DataAccess  {
 			return true;
 		return false;
 	}
+=======
+
+>>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
 	
 	/**
 	 * Method to create different fees

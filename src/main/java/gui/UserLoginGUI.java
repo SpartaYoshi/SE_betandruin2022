@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import businessLogic.BlFacade;
 import domain.User;
+import exceptions.FailedLoginException;
 
 import javax.swing.JButton;
 import java.awt.Font;
@@ -37,7 +38,7 @@ public class UserLoginGUI extends JFrame {
 	private JLabel lbPasswd;
 	private JLabel errorMessage;
 	
-	private BlFacade businesslogic;
+	private BlFacade bizlog;
 
 	/**
 	 * Launch the application.
@@ -85,10 +86,12 @@ public class UserLoginGUI extends JFrame {
 		
 		errorMessage = new JLabel("");
 		
+		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String username = lbUsername.getText();
+<<<<<<< HEAD
 				char[] p = passwordField.getPassword();
 				String password = new String(p);
 				
@@ -105,14 +108,26 @@ public class UserLoginGUI extends JFrame {
 				else {
 					errorMessage.setText("Invalid login");
 				}
+=======
+				String password = new String (passwordField.getPassword());
+>>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
 				
-				// Nota: siempre que hagas tratado de errores, haz try y catch.
-				//       crea getters que falten si no están en la clase domain.User
-				// 		 FailedLoginException: imprime en un rectangulito algo estilo "Login credentials were incorrect. Please try again"
+				try {
+					initWindow = new MainAdminGUI();	// TODO CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
+					bizlog = initWindow.getBusinessLogic();
+					
+					User user = bizlog.loginUser(username, password);
 				
-				//1. pillar nombre de usuario del Textfield y mirar si existe en la DB
-					// si no existe, lanzar y catch: crea FailedLoginException
-					// si existe, guardalo en una variable
+					if (user.isAdmin())
+						initWindow = new MainAdminGUI();
+				
+					initWindow.setVisible(true);
+					
+				} catch (FailedLoginException e) {
+					errorMessage.setText("Login credentials were incorrect. Please try again");
+				}
+					
+				
 				
 				
 				//2. pillar contraseña del passwordfield y mirar si la contraseña es correcta (usando el usuario que acabas de guardar)

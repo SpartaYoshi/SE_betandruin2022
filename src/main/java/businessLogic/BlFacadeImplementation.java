@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -17,6 +16,7 @@ import domain.Event;
 import domain.Question;
 import domain.User;
 import exceptions.EventFinished;
+import exceptions.FailedLoginException;
 import exceptions.FeeAlreadyExists;
 import exceptions.QuestionAlreadyExist;
 import exceptions.UserIsTakenException;
@@ -145,7 +145,7 @@ public class BlFacadeImplementation implements BlFacade {
 	 * It is invoked only when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
 	 */	
 	@WebMethod	
-	public void initializeBD(){
+	public void initializeBD() {
 		dbManager.open(false);
 		dbManager.initializeDB();
 		dbManager.close();
@@ -176,22 +176,24 @@ public class BlFacadeImplementation implements BlFacade {
 			dbManager.close();
 		}
 	}
-
 	
-	public User getUser(String username, String password) {
+	
+	
+	@WebMethod
+	public User loginUser(String username, String password) throws FailedLoginException {
 		dbManager.open(false);
-		try {
-			return dbManager.getUser(username, password);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			dbManager.close();
-		}
-		return null;
+
+		User user = dbManager.getUser(username);
+		dbManager.close();
+
+		if (user == null || password.equals(user.getPasswd()))
+			throw new FailedLoginException();
+		
+		return user;
 	}
 	
 	
+<<<<<<< HEAD
 	public boolean isAdmin(String username, String password) {
 		dbManager.open(false);
 		try {
@@ -207,9 +209,13 @@ public class BlFacadeImplementation implements BlFacade {
 
 	
 	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExists{
+=======
+	@WebMethod
+	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExists {
+>>>>>>> branch 'main' of git@github.com:SpartaYoshi/SE_betandruin2022.git
 		dbManager.open(true);
 		int n=dbManager.createFee(q,pResult,pFee);
-		if (n==-1) {
+		if (n == -1) {
 			throw new FeeAlreadyExists();
 		}
 		dbManager.close();

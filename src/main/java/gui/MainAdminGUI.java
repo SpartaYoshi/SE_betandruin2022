@@ -18,6 +18,7 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
 import businessLogic.BlFacade;
+import businessLogic.BlFacadeImplementation;
 import domain.Event;
 
 
@@ -34,20 +35,14 @@ public class MainAdminGUI extends JFrame {
 	private JRadioButton castellanoRbtn;
 	private JRadioButton englishRbtn;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-
 	private BlFacade businessLogic;
 
-	public BlFacade getBusinessLogic() {
-		return businessLogic;
-	}
-
-	public void setBusinessLogic (BlFacade afi){
-		businessLogic = afi;
-	}
+	
 
 
 	public MainAdminGUI() {
 		super();
+		businessLogic = new BlFacadeImplementation();
 
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -72,6 +67,17 @@ public class MainAdminGUI extends JFrame {
 		this.pack();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+
+	public BlFacade getBusinessLogic() {
+		return businessLogic;
+	}
+
+	public void setBusinessLogic (BlFacade afi){
+		businessLogic = afi;
+	}
+	
+	
 
 	private void initializeMainPane() {
 		mainPane = new JPanel();
