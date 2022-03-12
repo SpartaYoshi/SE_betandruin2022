@@ -73,6 +73,14 @@ public class UserRegisterGUI extends JFrame {
 			}
 		});
 		
+		
+		JButton btnClose = new JButton("Close");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+			}
+		});
+		
 		JLabel lbName = new JLabel("Name:");
 		lbName.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
@@ -91,6 +99,7 @@ public class UserRegisterGUI extends JFrame {
 		
 		JLabel lblBirthday = new JLabel("Birthday:");
 		lblBirthday.setFont(new Font("Tahoma", Font.BOLD, 12));
+		
 		
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -123,6 +132,9 @@ public class UserRegisterGUI extends JFrame {
 							.addContainerGap()
 							.addComponent(lblBirthday, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(337, Short.MAX_VALUE)
+					.addComponent(btnClose))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -147,9 +159,11 @@ public class UserRegisterGUI extends JFrame {
 						.addComponent(lbPasswd, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
 					.addGap(26)
 					.addComponent(lblBirthday, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
 					.addComponent(btRegister)
-					.addGap(28))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnClose)
+					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

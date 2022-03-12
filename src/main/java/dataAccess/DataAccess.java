@@ -1,4 +1,4 @@
-	package dataAccess;
+package dataAccess;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -119,6 +119,8 @@ public class DataAccess  {
 				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
 			}
 
+			
+			
 			db.persist(q1);
 			db.persist(q2);
 			db.persist(q3);
@@ -312,8 +314,9 @@ public class DataAccess  {
 			return null;
 		}
 	}
-
 	
+	
+
 	/**
 	 * Method to create different fees
 	 * @param quest

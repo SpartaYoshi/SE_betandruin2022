@@ -65,7 +65,9 @@ public interface BlFacade  {
 	
 	@WebMethod public void registerUser(User user) throws UserIsTakenException, UserIsUnderageException;
 	
+
 	@WebMethod public User loginUser(String username, String password) throws FailedLoginException;
 
+	
 	@WebMethod public void createFee(Question q,String pResult,float pFee) throws FeeAlreadyExists;
 }

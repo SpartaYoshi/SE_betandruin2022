@@ -193,6 +193,7 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 	
 	
+
 	@WebMethod
 	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExists {
 		dbManager.open(true);
