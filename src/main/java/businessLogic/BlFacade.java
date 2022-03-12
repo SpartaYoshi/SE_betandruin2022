@@ -63,7 +63,7 @@ public interface BlFacade  {
 	@WebMethod public Vector<Date> getEventsMonth(Date date);
 	
 	
-	@WebMethod public void registerUser(User user) throws UserIsTakenException, UserIsUnderageException;
+	@WebMethod public String registerUser(User user);
 	
 
 	@WebMethod public User loginUser(String username, String password) throws FailedLoginException;

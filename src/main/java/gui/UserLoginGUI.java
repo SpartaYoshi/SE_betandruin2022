@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -29,7 +30,8 @@ public class UserLoginGUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
-	private MainAdminGUI initWindow;
+	private MainAdminGUI initWindow1;
+	private BrowseQuestionsGUI initWindow2;
 	
 	private JButton btnLogin;
 	
@@ -97,17 +99,21 @@ public class UserLoginGUI extends JFrame {
 				String password = new String (passwordField.getPassword());
 
 				try {
-					initWindow = new MainAdminGUI();	// TODO CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
-					bizlog = initWindow.getBusinessLogic();
-					
+					initWindow1 = new MainAdminGUI();	// TODO CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
+					bizlog = initWindow1.getBusinessLogic();
 					User user = bizlog.loginUser(username, password);
 				
-					if (user.isAdmin())
-						initWindow = new MainAdminGUI();
-				
-					initWindow.setVisible(true);
+					if (user.isAdmin()) {
+						initWindow1 = new MainAdminGUI();
+						initWindow1.setVisible(true);
+					}
+						
+					else {
+						initWindow2 = new BrowseQuestionsGUI(bizlog);
+					}
 					
 				} catch (FailedLoginException e) {
+					errorMessage.setForeground(Color.red);
 					errorMessage.setText("Login credentials were incorrect. Please try again");
 				}
 			}
@@ -141,33 +147,37 @@ public class UserLoginGUI extends JFrame {
 							.addGap(18)
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lbPasswd, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(errorMessage, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
-								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)))))
+							.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)))
+					.addGap(28))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(165)
 					.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
 					.addComponent(btnClose))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(61)
+					.addComponent(errorMessage, GroupLayout.PREFERRED_SIZE, 332, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(33, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblLoginUser, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-					.addGap(52)
+					.addGap(37)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbUsername, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-					.addGap(46)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lbUsername, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lbPasswd, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
 						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(26)
 					.addComponent(errorMessage, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnClose)))

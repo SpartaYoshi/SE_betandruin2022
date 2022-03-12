@@ -22,6 +22,7 @@ import domain.Fee;
 import domain.Question;
 import domain.User;
 import exceptions.QuestionAlreadyExist;
+import exceptions.TeamPlayingException;
 
 /**
  * Implements the Data Access utility to the objectDb database
@@ -187,8 +188,13 @@ public class DataAccess  {
 	}
 	
 	
-	public Event createEvent(String team1, String team2, Date date){
+	public Event createEvent(String team1, String team2, Date date) throws TeamPlayingException{
 		System.out.println(">> DataAccess: createEvent=> First team = " + team1 + ", Second team = " +team2);
+		if (this.isAnyTeamPLaying(team1, team2, date)) {
+			throw new TeamPlayingException(
+				ResourceBundle.getBundle("Etiquetas").getString("ErrorTeamPlayingException"));
+
+		}
 
 
 		db.getTransaction().begin();
@@ -281,6 +287,20 @@ public class DataAccess  {
 		Event ev = db.find(Event.class, event.getEventNumber());
 		return ev.doesQuestionExist(question);
 	}
+	
+	
+	public boolean isAnyTeamPLaying(String team1, String team2, Date date)  {	
+		for (Event ev : this.getEvents(date)) {
+			String[] descr = ev.getDescription().split("-");
+			for (int i = 0; i<2 ; i++) {
+				if (team1.compareTo(descr[i])==0 || team2.compareTo(descr[i])==0) {
+					return true;
+				}
+			}
+		}
+		return false;	
+	}
+
 
 	public void close() {
 		db.close();
@@ -296,10 +316,13 @@ public class DataAccess  {
 	
 	
 	public boolean existUser(User user) {
-		TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + user.getUsername() + "\"", User.class);
-		if (q.getSingleResult() != null)
+		try {
+			TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + user.getUsername() + "\"", User.class);
+			q.getSingleResult();
 			return true;
-		return false;
+		} catch (NoResultException e) {
+			return false;
+		}
 	}
 
 	/**

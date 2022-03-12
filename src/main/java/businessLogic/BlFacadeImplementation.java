@@ -19,6 +19,7 @@ import exceptions.EventFinished;
 import exceptions.FailedLoginException;
 import exceptions.FeeAlreadyExists;
 import exceptions.QuestionAlreadyExist;
+import exceptions.TeamPlayingException;
 import exceptions.UserIsTakenException;
 import exceptions.UserIsUnderageException;
 
@@ -97,8 +98,15 @@ public class BlFacadeImplementation implements BlFacade {
 		if (currentdate.compareTo(date) > 0) {
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
 					getString("ErrorEventHasFinished"));
+				
 		}else {
-			ev = dbManager.createEvent(team1, team2, date);		
+			
+			try {
+				ev = dbManager.createEvent(team1, team2, date);
+			} catch (TeamPlayingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 			dbManager.close();
 		}
 			
@@ -153,7 +161,7 @@ public class BlFacadeImplementation implements BlFacade {
 	
 	
 	@WebMethod
-	public void registerUser(User user) throws UserIsTakenException, UserIsUnderageException {
+	public String registerUser(User user) {
 		dbManager.open(false);
 		try {
 			if (dbManager.existUser(user))
@@ -165,15 +173,17 @@ public class BlFacadeImplementation implements BlFacade {
 			if (Period.between(birthdate, today).getYears() < 18)
 				throw new UserIsUnderageException();
 
-			
 			dbManager.registerUser(user);
+			dbManager.close();
+			return "";
 			
 		} catch (UserIsTakenException e) {
-			e.printStackTrace();
-		} catch (UserIsUnderageException e) {
-			e.printStackTrace();
-		} finally {
 			dbManager.close();
+			return "The username is already taken. Please try a different one.";
+		} catch (UserIsUnderageException e) {
+			dbManager.close();
+			return "Bet&Ruin services are not available for users under 18 years.";
+	
 		}
 	}
 	
