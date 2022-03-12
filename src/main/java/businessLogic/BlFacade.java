@@ -66,7 +66,7 @@ public interface BlFacade  {
 	
 	@WebMethod public User getUser(String username, String password);
 	
-	@WebMethod public boolean isAdmin(String password);
+	@WebMethod public boolean isAdmin(String username, String password);
 
 
 	@WebMethod public void createFee(Question q,String pResult,float pFee) throws FeeAlreadyExists;

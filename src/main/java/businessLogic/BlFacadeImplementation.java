@@ -192,10 +192,10 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 	
 	
-	public boolean isAdmin(String password) {
+	public boolean isAdmin(String username, String password) {
 		dbManager.open(false);
 		try {
-			return dbManager.isPasswordCorrect(password);
+			return dbManager.isPasswordCorrect(username, password);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

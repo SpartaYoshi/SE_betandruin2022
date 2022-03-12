@@ -89,7 +89,8 @@ public class UserLoginGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String username = lbUsername.getText();
-				String password = passwordField.getText();
+				char[] p = passwordField.getPassword();
+				String password = new String(p);
 				
 				initWindow = new MainAdminGUI();	// CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
 				BlFacade bizlog = initWindow.getBusinessLogic();

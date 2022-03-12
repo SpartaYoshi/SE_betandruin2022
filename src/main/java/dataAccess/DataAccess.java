@@ -117,7 +117,17 @@ public class DataAccess  {
 				q5 = ev17.addQuestion("Zeinek irabaziko du partidua?", 1);
 				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
 			}
+			
+			User u1 = new User("ainhi", "1234", "Ainhi", "Legarreta", new Date(2002,04,11));
+			u1.setAdmin(true);
+			db.persist(u1);
+			
+			
+			User u2 = new User("josu", "1234", "Josu", "Abal", new Date(2002,04,11));
+			db.persist(u2);
 
+			
+			
 			db.persist(q1);
 			db.persist(q2);
 			db.persist(q3);
@@ -318,7 +328,7 @@ public class DataAccess  {
 	 */
 	public User getUser(String username, String password) {
 		TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + username + "\"", User.class);
-		if (q.getSingleResult() != null && q.getSingleResult().isPasswordCorrect(password))
+		if (q.getSingleResult() != null && isPasswordCorrect(username, password))
 			return (User) q;
 		return null;
 	}
@@ -327,10 +337,12 @@ public class DataAccess  {
 	 * Method to verify if the password is written correctly
 	 * @return user if exists, null if not
 	 */
-	public boolean isPasswordCorrect(String password) {
-		TypedQuery<User> q = db.createQuery("SELECT u FROM User u \"", User.class);
+	public boolean isPasswordCorrect(String username, String password) {
+		TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username=?1 && u.password=?2", User.class);
+		q.setParameter(1, username);
+		q.setParameter(2, password);
 		if (q.getSingleResult() != null)
-			return q.getSingleResult().isPasswordCorrect(password);
+			return true;
 		return false;
 	}
 	
