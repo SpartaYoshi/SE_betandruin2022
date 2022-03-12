@@ -603,7 +603,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -96,
-											"top": -314,
+											"top": -298,
 											"height": 13
 										},
 										{
@@ -614,7 +614,7 @@
 											},
 											"font": "Arial;13;1",
 											"left": 356,
-											"top": 163.5,
+											"top": 171.5,
 											"width": 100,
 											"height": 13,
 											"text": "Create Question"
@@ -628,7 +628,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -96,
-											"top": -314,
+											"top": -298,
 											"width": 134.3671875,
 											"height": 13,
 											"text": "(from Use Case Model)"
@@ -642,14 +642,14 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -96,
-											"top": -314,
+											"top": -298,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 351,
-									"top": 156.5,
+									"top": 164.5,
 									"width": 110.41357421875,
 									"height": 25,
 									"stereotypeLabel": {
@@ -677,7 +677,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -48,
-									"top": -157,
+									"top": -149,
 									"width": 10,
 									"height": 10
 								},
@@ -693,7 +693,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -48,
-									"top": -157,
+									"top": -149,
 									"width": 10,
 									"height": 10
 								},
@@ -709,7 +709,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -48,
-									"top": -157,
+									"top": -149,
 									"width": 10,
 									"height": 10
 								},
@@ -725,7 +725,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -48,
-									"top": -157,
+									"top": -149,
 									"width": 10,
 									"height": 10
 								},
@@ -741,7 +741,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -48,
-									"top": -157,
+									"top": -149,
 									"width": 10,
 									"height": 10
 								}
@@ -749,7 +749,7 @@
 							"font": "Arial;13;0",
 							"containerChangeable": true,
 							"left": 328,
-							"top": 152,
+							"top": 160,
 							"width": 156,
 							"height": 35,
 							"nameCompartment": {
@@ -3937,7 +3937,7 @@
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
 					"name": "Create a new event",
-					"documentation": "# Event flow\n\n## Main flow\n1. *Admin* selects a **date**\n2. *Admin* introduces two **teams**\n3. *System* adds new **event** for those **date** and **teams**\n\n## Alternative flow\nA3. The written teams are already playing another match on the same day. Event cannot be added.\n\nB3. If *Admin* doesn't provide a valid **date**, the event cannot be added.\n\nC3. If the event **date** is before current day, then the event cannot be added."
+					"documentation": "# Event flow\n\n## Main flow\n1. *Admin* selects a **date**\n2. *Admin* introduces two **teams**\n3. *System* adds new **event** for those **date** and **teams**\n\n## Alternative flow\nA3. The written teams are already playing another match on the same day. Event cannot be added.\n\nB3. If the event **date** is before current day, then the event cannot be added."
 				},
 				{
 					"_type": "UMLUseCase",

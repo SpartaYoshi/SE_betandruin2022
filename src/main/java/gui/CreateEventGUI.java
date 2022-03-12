@@ -232,10 +232,9 @@ public class CreateEventGUI extends JFrame {
 			if (description.length>0) {
 				try {
 					Event newEvent = businessLogic.createEvent(team1, team2, date);
-					newEvent.setEventNumber(null);
 					messageLabel.setText("An event has been created");
 					eventcomboBox.addItem(newEvent);
-					eventcomboBox.repaint();
+					paintDaysWithEvents(calendar,datesWithEventsInCurrentMonth);
 					
 				} catch (EventFinished e1) {
 					
