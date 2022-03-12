@@ -88,11 +88,13 @@ public class UserRegisterGUI extends JFrame {
 		btRegister.setFont(new Font("Segoe UI", Font.BOLD, 16));
 		btRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				errorMessage.setText(" ");//clear the label
 				String name = tfName.getText();
 				String surname = tfSurname.getText();
 				String username = tfUsername.getText();
 				String password = new String (passwd.getPassword());
 				Date birthday = calendar.getDate();
+				
 				
 				User user = new User(username, password, name, surname, birthday);
 				
@@ -105,6 +107,8 @@ public class UserRegisterGUI extends JFrame {
 					errorMessage.setText(errordet);
 				} else {
 					initWindow = new BrowseQuestionsGUI(bizlog);
+					errorMessage.setForeground(Color.blue);
+					errorMessage.setText("Register was succesful. Now you can login");
 				}
 					
 				

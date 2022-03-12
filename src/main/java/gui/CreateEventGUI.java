@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -19,6 +21,7 @@ import java.util.Vector;
 import javax.swing.JComboBox;
 import domain.Event;
 import exceptions.EventFinished;
+import exceptions.TeamPlayingException;
 
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
@@ -208,7 +211,7 @@ public class CreateEventGUI extends JFrame {
 		paintDaysWithEvents(calendar,datesWithEventsInCurrentMonth);
 		messageLabel.setForeground(Color.RED);
 		messageLabel.setBounds(new Rectangle(175, 240, 305, 20));
-		messageLabel.setBounds(111, 252, 305, 20);
+		messageLabel.setBounds(111, 252, 385, 20);
 		
 		contentPane.add(messageLabel);
 		
@@ -220,7 +223,7 @@ public class CreateEventGUI extends JFrame {
 	}
 	
 	private void jButtonCreateEvent_actionPerformed(ActionEvent e) {
-		//try {
+		try {
 			messageLabel.setText("");
 		
 			String[] description = eventtextField.getText().split("-");
@@ -228,26 +231,42 @@ public class CreateEventGUI extends JFrame {
 			String team1 = description[0];
 			String team2 = description[1];
 			Date date = calendar.getDate();
-		
-			if (description.length>0) {
-				try {
-					Event newEvent = businessLogic.createEvent(team1, team2, date);
-					
-					messageLabel.setText("An event has been created");
-					eventcomboBox.addItem(newEvent);
-					paintDaysWithEvents(calendar,datesWithEventsInCurrentMonth);
-					
-				} catch (EventFinished e1) {
-					
-					messageLabel.setText("The event could not be created");
-					e1.printStackTrace();
-				}
-			} else messageLabel.setText("Must be written as: team1's name - team2's name");
 			
+			//parse the date to day month and year, without having into account the hour.
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		
+				date = formatter.parse(formatter.format(calendar.getDate()));
+				
+				if (description.length>0) {
+					
+						Event newEvent = businessLogic.createEvent(team1, team2, date);
+						
+						messageLabel.setText("An event has been created");
+						eventcomboBox.addItem(newEvent);
+						paintDaysWithEvents(calendar,datesWithEventsInCurrentMonth);
+				}
+		}catch (ParseException e1) {
+				e1.printStackTrace();
+		}
+		catch (EventFinished e2) {
+			
+			messageLabel.setText("The event could not be created");
+			e2.printStackTrace();
+		}
+		catch (TeamPlayingException e3) {
+			
+			messageLabel.setText("Error! One of those teams is already playing a match that day");
+			
+		}
+		catch(Exception e4) {
+		messageLabel.setText("Must be written as: team1's name - team2's name");
+		}
+		
+			 
+		
+		
 	
-		//} catch (EventFinished e1) {
-		//	messageLabel.setText(ResourceBundle.getBundle("Etiquetas").getString("ErrorEventHasFinished") + team1;
-		//}
+	
 	}
 		
 		

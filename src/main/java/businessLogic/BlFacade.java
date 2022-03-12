@@ -14,6 +14,7 @@ import exceptions.EventFinished;
 import exceptions.FailedLoginException;
 import exceptions.FeeAlreadyExists;
 import exceptions.QuestionAlreadyExist;
+import exceptions.TeamPlayingException;
 import exceptions.UserIsTakenException;
 import exceptions.UserIsUnderageException;
 
@@ -44,7 +45,7 @@ public interface BlFacade  {
 	 * @return the created event
 	 * @throws EventFinished if current data is after data of the event
 	 */
-	public Event createEvent(String team1, String team2, Date date) throws EventFinished;
+	public Event createEvent(String team1, String team2, Date date) throws EventFinished,TeamPlayingException;
 		
 	/**
 	 * This method retrieves all the events of a given date 

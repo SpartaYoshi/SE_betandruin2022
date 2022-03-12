@@ -188,21 +188,20 @@ public class DataAccess  {
 	}
 	
 	
-	public Event createEvent(String team1, String team2, Date date) throws TeamPlayingException{
+	public Event createEvent(String team1, String team2, Date date){
 		System.out.println(">> DataAccess: createEvent=> First team = " + team1 + ", Second team = " +team2);
-		if (this.isAnyTeamPLaying(team1, team2, date)) {
-			throw new TeamPlayingException(
-				ResourceBundle.getBundle("Etiquetas").getString("ErrorTeamPlayingException"));
-
+		Event ev=null;
+		if (!this.isAnyTeamPLaying(team1, team2, date)) {
+			db.getTransaction().begin();
+			String descr = team1 + " - " + team2;
+			ev = new Event(descr, date);
+			System.out.println("The new event is "+ ev);
+			db.persist(ev);  
+			db.getTransaction().commit();
 		}
 
 
-		db.getTransaction().begin();
-		String descr = team1 + " - " + team2;
-		Event ev = new Event(descr, date);
-		System.out.println("The new event is "+ ev);
-		db.persist(ev);  
-		db.getTransaction().commit();
+		
 		return ev;
 	}
 	
@@ -215,6 +214,7 @@ public class DataAccess  {
 	 * @return collection of events
 	 */
 	public Vector<Event> getEvents(Date date) {
+		System.out.println("Date is "+ date);
 		System.out.println(">> DataAccess: getEvents");
 		Vector<Event> res = new Vector<Event>();	
 		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev WHERE ev.eventDate=?1", 
@@ -294,7 +294,9 @@ public class DataAccess  {
 			String[] descr = ev.getDescription().split("-");
 			for (int i = 0; i<2 ; i++) {
 				if (team1.compareTo(descr[i])==0 || team2.compareTo(descr[i])==0) {
+					
 					return true;
+					
 				}
 			}
 		}

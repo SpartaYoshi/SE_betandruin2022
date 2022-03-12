@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,7 @@ import javax.swing.SwingConstants;
 import businessLogic.BlFacade;
 import businessLogic.BlFacadeImplementation;
 import domain.Event;
+import java.awt.Font;
 
 
 public class MainAdminGUI extends JFrame {
@@ -27,15 +29,15 @@ public class MainAdminGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel mainPane;
-	protected JLabel selectOptionLbl;
-	private JButton browseQuestionsBtn;
-	private JButton createQuestionBtn;
-	private JPanel localePane;
-	private JRadioButton euskaraRbtn;
-	private JRadioButton castellanoRbtn;
-	private JRadioButton englishRbtn;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
+	
+	
+
 	private BlFacade businessLogic;
+	private JButton browseQuestionsBtn;
+	private JButton createEventBtn;
+	private JButton createQuestionBtn;
+	private JButton setFeeBtn;
+	private JLabel headerLbl;
 
 	
 
@@ -58,10 +60,12 @@ public class MainAdminGUI extends JFrame {
 			}
 		});
 
-		this.setBounds(100, 100, 500, 300);
+		this.setPreferredSize(new Dimension(400, 300));
+
 
 		this.initializeMainPane();
 		this.setContentPane(mainPane);
+		
 
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
 		this.pack();
@@ -81,20 +85,27 @@ public class MainAdminGUI extends JFrame {
 
 	private void initializeMainPane() {
 		mainPane = new JPanel();
-		mainPane.setLayout(new GridLayout(4, 1, 0, 0));
-
-		selectOptionLbl = new JLabel(ResourceBundle.getBundle("Etiquetas").
-				getString("SelectUseCase"));
-		selectOptionLbl.setHorizontalAlignment(SwingConstants.CENTER);
-		mainPane.add(selectOptionLbl);
+		mainPane.setLayout(new GridLayout(5, 1, 0, 0));
 
 		initializeBrowseQuestionsBtn();
+		{
+			headerLbl = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainAdminGUI.lblNewLabel.text")); //$NON-NLS-1$ //$NON-NLS-2$
+			headerLbl.setHorizontalAlignment(SwingConstants.CENTER);
+			headerLbl.setFont(new Font("Segoe UI", Font.BOLD, 18));
+			mainPane.add(headerLbl);
+		}
 		mainPane.add(browseQuestionsBtn);
+		
 		initializeCreateQuestionBtn();
 		mainPane.add(createQuestionBtn);
+		
+		initializecreateEventBtn();
+		mainPane.add(createEventBtn);
+		
+		initializeFeeBtn();
+		mainPane.add(setFeeBtn);
 
-		initializeLocalePane();
-		mainPane.add(localePane);
+		
 	}
 
 	private void initializeBrowseQuestionsBtn() {
@@ -117,71 +128,39 @@ public class MainAdminGUI extends JFrame {
 		createQuestionBtn.addActionListener(new java.awt.event.ActionListener() {
 			
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				CreateEventGUI createQuestionWindow = new CreateEventGUI(businessLogic, new Vector<Event>());
+				CreateQuestionGUI createQuestionWindow = new CreateQuestionGUI(businessLogic, new Vector<Event>());
 				createQuestionWindow.setBusinessLogic(businessLogic);
 				createQuestionWindow.setVisible(true);
 			}
 		});
 	}
 
-	private void initializeLocalePane() {
-		localePane = new JPanel();
-
-		initializeEuskaraRbtn();
-		localePane.add(euskaraRbtn);
-
-		initializeCastellanoRbtn();
-		localePane.add(castellanoRbtn);
-
-		initializeEnglishRbtn();
-		localePane.add(englishRbtn);
-	}
-
-	private void initializeEuskaraRbtn() {
-		euskaraRbtn = new JRadioButton("Euskara");
-		euskaraRbtn.addActionListener(new ActionListener() {
+	private void initializecreateEventBtn() {
+		createEventBtn = new JButton();
+		createEventBtn.setText("Create Event");
+		createEventBtn.addActionListener(new java.awt.event.ActionListener() {
 			
-			public void actionPerformed(ActionEvent arg0) {
-				Locale.setDefault(new Locale("eus"));
-				System.out.println("Locale: " + Locale.getDefault());
-				redraw();
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				CreateEventGUI createQuestionWindow = new CreateEventGUI(businessLogic, new Vector<Event>());
+				createQuestionWindow.setBusinessLogic(businessLogic);
+				createQuestionWindow.setVisible(true);
 			}
 		});
-		buttonGroup.add(euskaraRbtn);
 	}
-
-	private void initializeCastellanoRbtn() {
-		castellanoRbtn = new JRadioButton("Castellano");
-		castellanoRbtn.addActionListener(new ActionListener() {
+	
+	private void initializeFeeBtn() {
+		setFeeBtn = new JButton();
+		setFeeBtn.setText("Set new Fee");
+		setFeeBtn.addActionListener(new java.awt.event.ActionListener() {
 			
-			public void actionPerformed(ActionEvent e) {
-				Locale.setDefault(new Locale("es"));
-				System.out.println("Locale: " + Locale.getDefault());
-				redraw();
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				SetFeeGUI createQuestionWindow = new SetFeeGUI(businessLogic, new Vector<Event>());
+				createQuestionWindow.setBusinessLogic(businessLogic);
+				createQuestionWindow.setVisible(true);
 			}
 		});
-		buttonGroup.add(castellanoRbtn);
 	}
-
-	private void initializeEnglishRbtn() {
-		englishRbtn = new JRadioButton("English");
-		englishRbtn.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				Locale.setDefault(new Locale("en"));
-				System.out.println("Locale: " + Locale.getDefault());
-				redraw();				}
-		});
-		buttonGroup.add(englishRbtn);
-	}
-
-	private void redraw() {
-		selectOptionLbl.setText(ResourceBundle.getBundle("Etiquetas").
-				getString("SelectUseCase"));
-		browseQuestionsBtn.setText(ResourceBundle.getBundle("Etiquetas").
-				getString("BrowseQuestions"));
-		createQuestionBtn.setText(ResourceBundle.getBundle("Etiquetas").
-				getString("CreateQuestion"));
-		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
-	}
+	
+	
+	
 }

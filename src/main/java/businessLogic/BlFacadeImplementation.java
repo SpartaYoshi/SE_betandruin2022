@@ -89,7 +89,7 @@ public class BlFacadeImplementation implements BlFacade {
 	 * @return the created event
 	 * @throws EventFinished if current data is after data of the event
 	 */
-	public Event createEvent(String team1, String team2, Date date) throws EventFinished {
+	public Event createEvent(String team1, String team2, Date date) throws EventFinished,TeamPlayingException {
 
 		dbManager.open(false);
 		Event ev = null;
@@ -100,13 +100,12 @@ public class BlFacadeImplementation implements BlFacade {
 					getString("ErrorEventHasFinished"));
 				
 		}else {
+			ev = dbManager.createEvent(team1, team2, date);
+			if(ev==null) {
+				
+				throw new TeamPlayingException();
+			}
 			
-			try {
-				ev = dbManager.createEvent(team1, team2, date);
-			} catch (TeamPlayingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
 			dbManager.close();
 		}
 			
