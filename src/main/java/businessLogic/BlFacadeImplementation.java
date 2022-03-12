@@ -153,7 +153,7 @@ public class BlFacadeImplementation implements BlFacade {
 	
 	
 	@WebMethod
-	public void registerUser(User user) throws UserIsTakenException, UserIsUnderageException {
+	public String registerUser(User user) {
 		dbManager.open(false);
 		try {
 			if (dbManager.existUser(user))
@@ -165,15 +165,17 @@ public class BlFacadeImplementation implements BlFacade {
 			if (Period.between(birthdate, today).getYears() < 18)
 				throw new UserIsUnderageException();
 
-			
 			dbManager.registerUser(user);
+			dbManager.close();
+			return "";
 			
 		} catch (UserIsTakenException e) {
-			e.printStackTrace();
-		} catch (UserIsUnderageException e) {
-			e.printStackTrace();
-		} finally {
 			dbManager.close();
+			return "The username is already taken. Please try a different one.";
+		} catch (UserIsUnderageException e) {
+			dbManager.close();
+			return "Bet&Ruin services are not available for users under 18 years.";
+	
 		}
 	}
 	

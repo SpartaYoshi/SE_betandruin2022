@@ -96,19 +96,18 @@ public class UserRegisterGUI extends JFrame {
 				
 				User user = new User(username, password, name, surname, birthday);
 				
-				try {
-					bizlog = new MainAdminGUI().getBusinessLogic();
-					bizlog.registerUser(user);
-					
+
+				bizlog = new MainAdminGUI().getBusinessLogic();
+				String errordet = bizlog.registerUser(user);
+				
+				if (!errordet.equals("")) {
+					errorMessage.setForeground(Color.red);
+					errorMessage.setText(errordet);
+				} else {
 					initWindow = new BrowseQuestionsGUI(bizlog);
-					
-				} catch (UserIsTakenException e) {
-					errorMessage.setForeground(Color.red);
-					errorMessage.setText("The username is already taken. Please try a different one.");
-				} catch (UserIsUnderageException e) {
-					errorMessage.setForeground(Color.red);
-					errorMessage.setText("Bet&Ruin services are not available for users under 18 years.");
 				}
+					
+				
 			}
 		});
 		
@@ -149,39 +148,39 @@ public class UserRegisterGUI extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lbTitle, GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lbTitle, GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(btRegister)
-									.addGap(109)
-									.addComponent(btnClose)))
-							.addContainerGap())
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(errorMessage, GroupLayout.PREFERRED_SIZE, 332, GroupLayout.PREFERRED_SIZE)
-							.addGap(59))))
+							.addComponent(btRegister)
+							.addGap(109)
+							.addComponent(btnClose)))
+					.addContainerGap())
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(52)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lbName, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lbSurname, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lbUsername, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lbPasswd, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblBirthday, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(errorMessage, GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+							.addGap(59))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(50)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(passwd, 217, 217, 217)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(tfUsername, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-									.addComponent(tfSurname, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-									.addComponent(tfName, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(49)
-							.addComponent(calendar, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(65, Short.MAX_VALUE))
+								.addComponent(lbName, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lbSurname, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lbUsername, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lbPasswd, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblBirthday, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(50)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(passwd, 217, 217, 217)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+											.addComponent(tfUsername, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+											.addComponent(tfSurname, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+											.addComponent(tfName, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(49)
+									.addComponent(calendar, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)))
+							.addContainerGap(66, Short.MAX_VALUE))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
