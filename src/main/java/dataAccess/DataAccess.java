@@ -296,10 +296,13 @@ public class DataAccess  {
 	
 	
 	public boolean existUser(User user) {
-		TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + user.getUsername() + "\"", User.class);
-		if (q.getSingleResult() != null)
+		try {
+			TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + user.getUsername() + "\"", User.class);
+			q.getSingleResult();
 			return true;
-		return false;
+		} catch (NoResultException e) {
+			return false;
+		}
 	}
 
 	/**
