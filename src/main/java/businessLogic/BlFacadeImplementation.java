@@ -190,13 +190,13 @@ public class BlFacadeImplementation implements BlFacade {
 	
 	@WebMethod
 	public User loginUser(String username, String password) throws FailedLoginException {
-		dbManager.open(false);
+		dbManager.open(true);
 
 		User user = dbManager.getUser(username);
 		dbManager.close();
 		
 
-		if (user == null || password.equals(user.getPasswd()))
+		if (user == null || !password.equals(user.getPasswd()))
 			throw new FailedLoginException();
 		
 		return user;

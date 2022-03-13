@@ -38,6 +38,7 @@ public class MainAdminGUI extends JFrame {
 	private JButton createQuestionBtn;
 	private JButton setFeeBtn;
 	private JLabel headerLbl;
+	private  JButton btnClose;
 
 	
 
@@ -66,10 +67,18 @@ public class MainAdminGUI extends JFrame {
 		this.initializeMainPane();
 		this.setContentPane(mainPane);
 		
+		
 
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
 		this.pack();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JButton btnClose = new JButton("Close");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+			}
+		});
+		mainPane.add(btnClose);
 	}
 	
 
@@ -85,7 +94,7 @@ public class MainAdminGUI extends JFrame {
 
 	private void initializeMainPane() {
 		mainPane = new JPanel();
-		mainPane.setLayout(new GridLayout(5, 1, 0, 0));
+		mainPane.setLayout(new GridLayout(6, 1, 0, 0));
 
 		initializeBrowseQuestionsBtn();
 		{
