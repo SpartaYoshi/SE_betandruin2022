@@ -241,9 +241,15 @@ public class CreateEventGUI extends JFrame {
 					
 						Event newEvent = businessLogic.createEvent(team1, team2, date);
 						
-						messageLabel.setText("An event has been created");
-						eventcomboBox.addItem(newEvent);
-						paintDaysWithEvents(calendar,datesWithEventsInCurrentMonth);
+						if (newEvent!= null) {
+							messageLabel.setText("The event has been succesfully created.");
+							eventcomboBox.addItem(newEvent);
+							paintDaysWithEvents(calendar,datesWithEventsInCurrentMonth);
+						}
+						else {
+							messageLabel.setText("Error. The event could not be created.");
+						}
+						
 				}
 		}catch (ParseException e1) {
 				e1.printStackTrace();
