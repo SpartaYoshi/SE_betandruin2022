@@ -108,7 +108,7 @@ public class UserRegisterGUI extends JFrame {
 				} else {
 					initWindow = new BrowseQuestionsGUI(bizlog);
 					errorMessage.setForeground(Color.blue);
-					errorMessage.setText("Register was succesful. Now you can login");
+					errorMessage.setText("Register was successful. Now you can login");
 				}
 					
 				

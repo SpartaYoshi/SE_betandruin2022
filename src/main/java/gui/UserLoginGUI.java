@@ -108,7 +108,7 @@ public class UserLoginGUI extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				String username = lbUsername.getText();
+				String username = textField.getText();
 				String password = new String (passwordField.getPassword());
 
 				try {
