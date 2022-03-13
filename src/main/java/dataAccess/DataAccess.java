@@ -333,11 +333,14 @@ public class DataAccess  {
 	 */
 	public User getUser(String username) {
 		try {
-			TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + username + "\"", User.class);
-			return q.getSingleResult();
+			System.out.println(">> DataAccess: getUser=> username = " + username);
+			User us = db.find(User.class, username);
+			return us;
+			
 		} catch (NoResultException e) {
 			return null;
 		}
+		
 	}
 	
 	

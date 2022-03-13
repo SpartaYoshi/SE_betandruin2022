@@ -118,7 +118,6 @@ public class UserLoginGUI extends JFrame {
 						initWindow1 = new MainAdminGUI();
 						initWindow1.setVisible(true);
 					}
-						
 					else {
 						initWindow2 = new BrowseQuestionsGUI(bizlog);
 						initWindow2.setVisible(true);
