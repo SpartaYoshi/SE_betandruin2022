@@ -2,7 +2,8 @@
  Software Engineering project for the creation of a Bet &amp; Ruin interface program (2022).
 
  Editors: Iosu Abal, Nagore Bravo, Asier Septién, Ainhize Legarreta.
- Name of the team: 
+ 
+ Name of the team: Ainhoa Corporation Ltd.
  
  
  
@@ -19,6 +20,12 @@
  
  
  
+ + Account login and registration use case:
+ This section corresponds to the creation of identifiable user accounts that are required to use the service Bet&Ruin provides. For the correct implementation of registration
+ guidelines and requirements, a few new Exceptions have been made in order to check that the data given by the new user follows the criteria to be elligible to use the platform,
+ such as the minimum legal age for betting and choosing available usernames to avoid accidental duplication.
+ Furthermore, a login screen's objective is to prevent users to enter accounts where they do not have access to. For that, a Failed Login system check has been implemented to
+ ensure that the credentials given are the correct ones registered in the database.
  
  
  + Set a Fee Use Case:
@@ -26,7 +33,8 @@
  The first one is just an identifier, the second one is the result of a question (for example, the result for who is going to win question, could 
  be 'Real Sociedad'). The last attribute is the actual fee, how big is the benefit you get if your answer is correct.
  Now, every question has a list of Fees, since a question can have more than one answer and more than one fee.
- Speaking about the GUI, I created a new JFrame, which will be only available for the admin user. I had to check that there were events and questions for the selected date, and that a fee was not set.(For that I created an Exception). I had some issues when loading the calendar (since it was empty), and that was because
+ Speaking about the GUI, I created a new JFrame, which will be only available for the admin user. I had to check that there were events and questions for the selected date, 
+ and that a fee was not set.(For that I created an Exception). I had some issues when loading the calendar (since it was empty), and that was because
  the businessLogic was not properly instantiazed, so the GUI couldn't load it properly.
  
  
