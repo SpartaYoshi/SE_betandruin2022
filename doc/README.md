@@ -6,26 +6,16 @@
  Name of the team: Ainhoa Corporation Ltd.
  
  
- 
- + a brief explanation of what you did for this sprint (including the main problems -technical or not - you faced  and how they were solved)
- 
- + any other explanation worth mentioning (for example, any extra work done that you would like to hightlight or a justification of not-implemented work)
- 
+ + Account login use case:
+ The login screen's objective is to prevent users to enter accounts where they do not have access to. For that, a Failed Login system check has been implemented to
+ ensure that the credentials given are the correct ones registered in the database (username and password). So, when they log-in they can use the service Bet&Ruin.
  
  
  
- 
- 
- 
- 
- 
- 
- + Account login and registration use case:
+ + Account registration use case:
  This section corresponds to the creation of identifiable user accounts that are required to use the service Bet&Ruin provides. For the correct implementation of registration
  guidelines and requirements, a few new Exceptions have been made in order to check that the data given by the new user follows the criteria to be elligible to use the platform,
  such as the minimum legal age for betting and choosing available usernames to avoid accidental duplication.
- Furthermore, a login screen's objective is to prevent users to enter accounts where they do not have access to. For that, a Failed Login system check has been implemented to
- ensure that the credentials given are the correct ones registered in the database.
  
  
  + Set a Fee Use Case:
