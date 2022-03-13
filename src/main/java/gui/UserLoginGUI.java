@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import businessLogic.BlFacade;
+import businessLogic.BlFacadeImplementation;
 import domain.User;
 import exceptions.FailedLoginException;
 
@@ -26,7 +27,8 @@ import javax.swing.JPasswordField;
 
 public class UserLoginGUI extends JFrame {
 
-	
+	private BlFacade businessLogic;
+
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
@@ -58,11 +60,22 @@ public class UserLoginGUI extends JFrame {
 			}
 		});
 	}
+	
+	public BlFacade getBusinessLogic() {
+		return businessLogic;
+	}
+	
+	public void setBusinessLogic (BlFacade afi){
+		businessLogic = afi;
+	}
 
 	/**
 	 * Create the frame.
 	 */
 	public UserLoginGUI() {
+		
+		businessLogic = new BlFacadeImplementation();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -99,9 +112,7 @@ public class UserLoginGUI extends JFrame {
 				String password = new String (passwordField.getPassword());
 
 				try {
-					initWindow1 = new MainAdminGUI();	// TODO CAMBIAR POR "new MainUserGUI();" CUANDO HAGAIS LA CLASE
-					bizlog = initWindow1.getBusinessLogic();
-					User user = bizlog.loginUser(username, password);
+					User user = businessLogic.loginUser(username, password);
 				
 					if (user.isAdmin()) {
 						initWindow1 = new MainAdminGUI();
@@ -110,6 +121,8 @@ public class UserLoginGUI extends JFrame {
 						
 					else {
 						initWindow2 = new BrowseQuestionsGUI(bizlog);
+						initWindow2.setVisible(true);
+
 					}
 					
 				} catch (FailedLoginException e) {
@@ -184,4 +197,5 @@ public class UserLoginGUI extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
 }
