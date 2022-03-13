@@ -96,7 +96,7 @@ public class UserLoginGUI extends JFrame {
 		lbPasswd.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		textField = new JTextField();
-		textField.setColumns(10);
+		//textField.setColumns(10);
 		
 		passwordField = new JPasswordField();
 		
