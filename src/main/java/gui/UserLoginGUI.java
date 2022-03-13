@@ -43,7 +43,7 @@ public class UserLoginGUI extends JFrame {
 	private JLabel errorMessage;
 	private JButton btnClose;
 	
-	private BlFacade bizlog;
+	
 
 	/**
 	 * Launch the application.
@@ -118,9 +118,10 @@ public class UserLoginGUI extends JFrame {
 						initWindow1 = new MainAdminGUI();
 						initWindow1.setVisible(true);
 					}
-						
 					else {
-						initWindow2 = new BrowseQuestionsGUI(bizlog);
+						errorMessage.setForeground(Color.blue);
+						errorMessage.setText("Login was succesful!");
+						initWindow2 = new BrowseQuestionsGUI(businessLogic);
 						initWindow2.setVisible(true);
 
 					}

@@ -31,6 +31,10 @@ import exceptions.UserIsUnderageException;
 
 public class UserRegisterGUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tfName;
 	private JTextField tfSurname;
@@ -95,21 +99,26 @@ public class UserRegisterGUI extends JFrame {
 				String password = new String (passwd.getPassword());
 				Date birthday = calendar.getDate();
 				
-				
-				User user = new User(username, password, name, surname, birthday);
-				
-
-				bizlog = new MainAdminGUI().getBusinessLogic();
-				String errordet = bizlog.registerUser(user);
-				
-				if (!errordet.equals("")) {
+				if(username.length()==0||password.length()==0) {
 					errorMessage.setForeground(Color.red);
-					errorMessage.setText(errordet);
-				} else {
-					initWindow = new BrowseQuestionsGUI(bizlog);
-					errorMessage.setForeground(Color.blue);
-					errorMessage.setText("Register was successful. Now you can login");
+					errorMessage.setText("Please, fill in all the fields");
+				}else {
+					User user = new User(username, password, name, surname, birthday);
+					
+
+					bizlog = new MainAdminGUI().getBusinessLogic();
+					String errordet = bizlog.registerUser(user);
+					
+					if (!errordet.equals("")) {
+						errorMessage.setForeground(Color.red);
+						errorMessage.setText(errordet);
+					} else {
+						initWindow = new BrowseQuestionsGUI(bizlog);
+						errorMessage.setForeground(Color.blue);
+						errorMessage.setText("Register was successful. Now you can login");
+					}
 				}
+				
 					
 				
 			}

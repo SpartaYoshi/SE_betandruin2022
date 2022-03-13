@@ -1,5 +1,6 @@
 package dataAccess;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -119,8 +120,21 @@ public class DataAccess  {
 				q5 = ev17.addQuestion("Zeinek irabaziko du partidua?", 1);
 				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
 			}
-
 			
+			//Admin user:
+			String sDate1="01/01/1980";  
+		    Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1); 
+			User u= new User("juanan", "hello", "Juan Antonio", "Pereira", date1);
+			u.grantAdmin();
+			
+			
+			if(!existUser(u)) {
+				db.persist(u);
+				System.out.println(u+"persisted");
+				//admin user persisted
+			}
+			
+		
 			
 			db.persist(q1);
 			db.persist(q2);
@@ -333,11 +347,14 @@ public class DataAccess  {
 	 */
 	public User getUser(String username) {
 		try {
-			TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + username + "\"", User.class);
-			return q.getSingleResult();
+			System.out.println(">> DataAccess: getUser=> username = " + username);
+			User us = db.find(User.class, username);
+			return us;
+			
 		} catch (NoResultException e) {
 			return null;
 		}
+		
 	}
 	
 	
