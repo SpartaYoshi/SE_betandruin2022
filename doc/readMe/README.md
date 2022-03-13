@@ -1,5 +1,5 @@
 # SE_betandruin2022
- Software Engineering project for the creation of a Bet &amp; Ruin interface program (2022).
+ Software Engineering project for the creation of a Bet &amp; Ruin interface program (2022).(1st Iteration)
 
  Editors: Iosu Abal, Nagore Bravo, Asier Septién, Ainhize Legarreta.
  
@@ -31,4 +31,11 @@
  
  + Create Event Use Case: 
 Our task in this section is to add a new event, so that we can create a question or set a fee on that event later. It has been necessary to create a new GUI called CreateEventGUI, as well as several new methods in some of the classes: firstly, in the Business Logic, a “createEvent” method, and secondly, in the database, the general "createEvent" method. To ensure its correct operation, it has been essential to implement a method called "isAnyTeamPlaying", which checks if one of the teams is assigned to another event on the same date (they must be written correctly, that is, with the first letter capitalized, since they belong to proper names). Having selected a date, (not before the current one), when clicking on the button to create an Event, it is requested to write the name of each team. As mentioned above, should any of those teams not have another event on that date, the event will be successfully created and added to our database and thus the event combo box. Finally, the calendar will indicate that there is an event on that specific date, painting it.
+
+
+
+
++ **Final Note**:
+To login as an administrator, we have created a new User.[*username*: **"juanan"**, *password*: **"hello"**]
+	Because of that, the databaseMode at the beginning is as *initialize*. Once that user has been created, the mode can be changed to *open* again.
  

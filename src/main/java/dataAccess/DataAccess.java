@@ -130,7 +130,7 @@ public class DataAccess  {
 			
 			if(!existUser(u)) {
 				db.persist(u);
-				System.out.println(u+"persisted");
+				System.out.println("Admin user created and persisted");
 				//admin user persisted
 			}
 			
