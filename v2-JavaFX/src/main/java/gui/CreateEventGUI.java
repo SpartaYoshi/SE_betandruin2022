@@ -209,7 +209,6 @@ public class CreateEventGUI extends JFrame {
 		
 		datesWithEventsInCurrentMonth = businessLogic.getEventsMonth(calendar.getDate());
 		paintDaysWithEvents(calendar,datesWithEventsInCurrentMonth);
-		messageLabel.setForeground(Color.RED);
 		messageLabel.setBounds(new Rectangle(175, 240, 305, 20));
 		messageLabel.setBounds(111, 252, 385, 20);
 		
@@ -242,11 +241,13 @@ public class CreateEventGUI extends JFrame {
 						Event newEvent = businessLogic.createEvent(team1, team2, date);
 						
 						if (newEvent!= null) {
+							messageLabel.setForeground(Color.BLUE);
 							messageLabel.setText("The event has been succesfully created.");
 							eventcomboBox.addItem(newEvent);
 							paintDaysWithEvents(calendar,datesWithEventsInCurrentMonth);
 						}
 						else {
+							messageLabel.setForeground(Color.RED);
 							messageLabel.setText("Error. The event could not be created.");
 						}
 						
@@ -265,7 +266,7 @@ public class CreateEventGUI extends JFrame {
 			
 		}
 		catch(Exception e4) {
-		messageLabel.setText("Must be written as: team1's name - team2's name");
+		messageLabel.setText("Must be written as: Local team's name - Visitor team's name");
 		}
 		
 			 
