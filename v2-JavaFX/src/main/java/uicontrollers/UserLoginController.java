@@ -75,14 +75,16 @@ public class UserLoginController implements Controller{
             User user = businessLogic.loginUser(username, password);
 
             if (user.isAdmin()) {
-                initWindow1 = new MainGUIController();
-                initWindow1.showMain();
+                //initWindow1 = new MainGUIController();
+                //initWindow1.setMainApp();
+                mainGUI.showMain();
             }
             else {
                 messageLabel.setText("Login was succesful!");
                 messageLabel.getStyleClass().setAll("lbl","lbl-success");
-                initWindow2 = new BrowseQuestionsController(businessLogic);
-                initWindow2.setVisible(true);
+                //initWindow2 = new BrowseQuestionsController(businessLogic);
+                //initWindow2.setVisible(true);
+                mainGUI.showBrowseQuestions();
 
             }
 
@@ -94,6 +96,7 @@ public class UserLoginController implements Controller{
 
     @FXML
     void initialize() {
+
 
 
     }
