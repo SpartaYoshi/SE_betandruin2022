@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="JavaFx added to the project and setFee done">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/CreateNewEventController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/CreateNewEvent.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/UserLoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/UserLogin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/bets.temp" beforeDir="false" afterPath="$PROJECT_DIR$/db/bets.temp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/bets.temp$" beforeDir="false" afterPath="$PROJECT_DIR$/db/bets.temp$" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/gui/CreateEventGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/gui/CreateEventGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/ui/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/ui/MainGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,13 +19,26 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
+        <option value="JavaFXApplication" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -57,6 +68,9 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Iosu\IdeaProjects\SE_betandruin2022\v2-JavaFX\src\main\resources" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="uicontrollers" />
     </key>
   </component>
   <component name="RunManager">
