@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-  private Window mainLag, createQuestionLag, browseQuestionsLag,setFeeLag;
+  private Window mainLag, createQuestionLag, browseQuestionsLag,setFeeLag, UserLoginLag;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -60,6 +60,9 @@ public class MainGUI {
       }
       if(controllerClass== SetFeeController.class){
         return new SetFeeController(businessLogic);
+      }
+      if(controllerClass== UserLoginController.class){
+        return new UserLoginController(businessLogic);
       }
 
 

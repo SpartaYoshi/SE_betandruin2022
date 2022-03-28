@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="CreateNewEventGUI almost done">
+    <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="JavaFx added to the project and setFee done">
+      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/UserLoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/UserLogin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/ui/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/ui/MainGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,13 +19,26 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
+        <option value="JavaFXApplication" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -51,6 +68,9 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Iosu\IdeaProjects\SE_betandruin2022\v2-JavaFX\src\main\resources" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="uicontrollers" />
     </key>
   </component>
   <component name="RunManager">
@@ -105,7 +125,6 @@
       <workItem from="1648244085145" duration="923000" />
       <workItem from="1648245030734" duration="1003000" />
       <workItem from="1648391449887" duration="4392000" />
-      <workItem from="1648396964649" duration="747000" />
     </task>
     <task id="LOCAL-00001" summary="JavaFx added to the project and setFee done">
       <created>1648245991505</created>
@@ -114,14 +133,7 @@
       <option name="project" value="LOCAL" />
       <updated>1648245991505</updated>
     </task>
-    <task id="LOCAL-00002" summary="CreateNewEventGUI almost done">
-      <created>1648397207990</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1648397207990</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,8 +152,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="JavaFx added to the project and setFee done" />
-    <MESSAGE value="CreateNewEventGUI almost done" />
-    <option name="LAST_COMMIT_MESSAGE" value="CreateNewEventGUI almost done" />
+    <option name="LAST_COMMIT_MESSAGE" value="JavaFx added to the project and setFee done" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
