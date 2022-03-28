@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="JavaFx added to the project and setFee done">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/CreateNewEventController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/CreateNewEvent.fxml" afterDir="false" />
+    <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="CreateNewEventGUI almost done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/bets.temp" beforeDir="false" afterPath="$PROJECT_DIR$/db/bets.temp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/bets.temp$" beforeDir="false" afterPath="$PROJECT_DIR$/db/bets.temp$" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/gui/CreateEventGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/gui/CreateEventGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +105,7 @@
       <workItem from="1648244085145" duration="923000" />
       <workItem from="1648245030734" duration="1003000" />
       <workItem from="1648391449887" duration="4392000" />
+      <workItem from="1648396964649" duration="747000" />
     </task>
     <task id="LOCAL-00001" summary="JavaFx added to the project and setFee done">
       <created>1648245991505</created>
@@ -119,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648245991505</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="CreateNewEventGUI almost done">
+      <created>1648397207990</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1648397207990</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,7 +140,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="JavaFx added to the project and setFee done" />
-    <option name="LAST_COMMIT_MESSAGE" value="JavaFx added to the project and setFee done" />
+    <MESSAGE value="CreateNewEventGUI almost done" />
+    <option name="LAST_COMMIT_MESSAGE" value="CreateNewEventGUI almost done" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
