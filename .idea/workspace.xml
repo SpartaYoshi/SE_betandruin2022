@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="JavaFx added to the project and setFee done">
+    <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="doing create event">
+      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/PlaceBetController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/ui/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/ui/MainGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/CreateNewEventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/CreateNewEventController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/CreateNewEvent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/CreateNewEvent.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/Etiquetas.properties" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/Etiquetas.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/Etiquetas_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/Etiquetas_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/Etiquetas_es.properties" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/Etiquetas_es.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/Etiquetas_eus.properties" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/Etiquetas_eus.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,6 +150,7 @@
       <workItem from="1648244085145" duration="923000" />
       <workItem from="1648245030734" duration="1003000" />
       <workItem from="1648391449887" duration="4392000" />
+      <workItem from="1648482790858" duration="2818000" />
     </task>
     <task id="LOCAL-00001" summary="JavaFx added to the project and setFee done">
       <created>1648245991505</created>
@@ -162,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648245991505</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="doing create event">
+      <created>1648468853591</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1648468853591</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,7 +185,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="JavaFx added to the project and setFee done" />
-    <option name="LAST_COMMIT_MESSAGE" value="JavaFx added to the project and setFee done" />
+    <MESSAGE value="doing create event" />
+    <option name="LAST_COMMIT_MESSAGE" value="doing create event" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
