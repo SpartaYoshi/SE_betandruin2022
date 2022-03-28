@@ -1,19 +1,26 @@
 package uicontrollers;
+import java.awt.*;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Vector;
 
 import businessLogic.BlFacade;
+import com.toedter.calendar.JCalendar;
 import domain.Event;
 import domain.Question;
+import exceptions.EventFinished;
+import exceptions.TeamPlayingException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.util.Callback;
@@ -49,6 +56,15 @@ public class CreateNewEventController implements Controller{
     @FXML
     private Label writeEventText;
 
+    @FXML
+    private TableView<Event> tblEvents;
+
+    @FXML
+    private TableColumn<Event, Integer> ec1;
+
+    @FXML
+    private TableColumn<Event, String> ec2;
+
 
     private final BlFacade businessLogic;
     private MainGUI mainGUI;
@@ -57,27 +73,68 @@ public class CreateNewEventController implements Controller{
         this.businessLogic = bl;
     }
 
+
+
+
     @FXML
     void jButtonClose_actionPerformed(ActionEvent event) {
-
+        closeButton.setVisible(false);
     }
 
     @FXML
     void jButtonCreateEvent_actionPerformed(ActionEvent event) {
+        try {
+            messageLabel.setText("");
+
+            String[] description = eventtextField.getText().split("-");
+
+            String team1 = description[0];
+            String team2 = description[1];
+            LocalDate locDate = calendar.getValue();
+
+            //parse the date to day month and year, without having into account the hour.
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = formatter.parse(formatter.format(calendar.getValue()));
+            //date = formatter.parse(formatter.format(calendar.getValue()));
+
+
+            if (description.length>0) {
+
+                Event newEvent = businessLogic.createEvent(team1, team2, date);
+
+                if (newEvent!= null) {
+                    //messageLabel.setForeground(Color.BLUE);
+                    messageLabel.setText("The event has been succesfully created.");
+                    tblEvents.getItems().add(newEvent);
+                    //paintDaysWithEvents(calendar,datesWithEventsInCurrentMonth);
+                }
+                else {
+                    //messageLabel.setForeground(Color.RED);
+                    messageLabel.setText("Error. The event could not be created.");
+                }
+
+            }
+        }catch (ParseException e1) {
+            e1.printStackTrace();
+        }
+        catch (EventFinished e2) {
+            //messageLabel.setForeground(Color.RED);
+            messageLabel.setText("The event could not be created");
+            e2.printStackTrace();
+        }
+        catch (TeamPlayingException e3) {
+            //messageLabel.setForeground(Color.RED);
+            messageLabel.setText("Error! One of those teams is already playing a match that day");
+
+        }
+        catch(Exception e4) {
+            //messageLabel.setForeground(Color.RED);
+            messageLabel.setText("Must be written as: Local team's name - Visitor team's name");
+        }
+
 
     }
 
-    @FXML
-    void initialize() {
-        assert calendar != null : "fx:id=\"calendar\" was not injected: check your FXML file 'CreateNewEvent.fxml'.";
-        assert closeButton != null : "fx:id=\"closeButton\" was not injected: check your FXML file 'CreateNewEvent.fxml'.";
-        assert createEventButton != null : "fx:id=\"createEventButton\" was not injected: check your FXML file 'CreateNewEvent.fxml'.";
-        assert eventtextField != null : "fx:id=\"eventtextField\" was not injected: check your FXML file 'CreateNewEvent.fxml'.";
-        assert listOfEventsLabel != null : "fx:id=\"listOfEventsLabel\" was not injected: check your FXML file 'CreateNewEvent.fxml'.";
-        assert messageLabel != null : "fx:id=\"messageLabel\" was not injected: check your FXML file 'CreateNewEvent.fxml'.";
-        assert writeEventText != null : "fx:id=\"writeEventText\" was not injected: check your FXML file 'CreateNewEvent.fxml'.";
-
-    }
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
@@ -85,6 +142,7 @@ public class CreateNewEventController implements Controller{
     }
 
 
+    private List<LocalDate> holidays = new ArrayList<>();
 
 
     private void setEvents(int year, int month) {
@@ -105,15 +163,13 @@ public class CreateNewEventController implements Controller{
     @FXML
     void initialize() {
 
-        setupEventSelection();
-
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
 
-        datepicker.setOnMouseClicked(e -> {
+        calendar.setOnMouseClicked(e -> {
             // get a reference to datepicker inner content
             // attach a listener to the  << and >> buttons
             // mark events for the (prev, current, next) month and year shown
-            DatePickerSkin skin = (DatePickerSkin) datepicker.getSkin();
+            DatePickerSkin skin = (DatePickerSkin) calendar.getSkin();
             skin.getPopupContent().lookupAll(".button").forEach(node -> {
                 node.setOnMouseClicked(event -> {
                     List<Node> labels = skin.getPopupContent().lookupAll(".label").stream().toList();
@@ -127,7 +183,7 @@ public class CreateNewEventController implements Controller{
 
         });
 
-        datepicker.setDayCellFactory(new Callback<DatePicker, DateCell>() {
+        calendar.setDayCellFactory(new Callback<DatePicker, DateCell>() {
             @Override
             public DateCell call(DatePicker param) {
                 return new DateCell() {
@@ -146,9 +202,9 @@ public class CreateNewEventController implements Controller{
         });
 
         // a date has been chosen, update the combobox of Events
-        datepicker.setOnAction(actionEvent -> {
+        calendar.setOnAction(actionEvent -> {
             tblEvents.getItems().clear();
-            Vector<Event> events = businessLogic.getEvents(Dates.convertToDate(datepicker.getValue()));
+            Vector<Event> events = businessLogic.getEvents(Dates.convertToDate(calendar.getValue()));
             for (domain.Event ev : events) {
                 tblEvents.getItems().add(ev);
             }
@@ -157,22 +213,8 @@ public class CreateNewEventController implements Controller{
         // Bind columns to Event attributes
         ec1.setCellValueFactory(new PropertyValueFactory<>("eventNumber"));
         ec2.setCellValueFactory(new PropertyValueFactory<>("description"));
-        // Bind columns to Question attributes
-        qc1.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
-        qc2.setCellValueFactory(new PropertyValueFactory<>("question"));
 
-    }
 
-    private void setupEventSelection() {
-        tblEvents.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-
-                tblQuestions.getItems().clear();
-                for (Question q : tblEvents.getSelectionModel().getSelectedItem().getQuestions()) {
-                    tblQuestions.getItems().add(q);
-                }
-            }
-        });
     }
 
 
