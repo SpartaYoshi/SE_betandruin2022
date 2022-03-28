@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-  private Window mainLag, createQuestionLag, browseQuestionsLag,setFeeLag, UserLoginLag;
+  private Window mainLag, createQuestionLag, browseQuestionsLag,setFeeLag, UserLoginLag, createEventLag;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -64,6 +64,9 @@ public class MainGUI {
       if(controllerClass== UserLoginController.class){
         return new UserLoginController(businessLogic);
       }
+      if (controllerClass == CreateNewEventController.class) {
+        return new CreateNewEventController(businessLogic);
+      }
 
 
 
@@ -93,8 +96,9 @@ public class MainGUI {
     browseQuestionsLag = load("/BrowseQuestions.fxml");
     createQuestionLag = load("/CreateQuestion.fxml");
     setFeeLag=load("/SetFee.fxml");
+    createEventLag = load("/CreateNewEvent.fxml");
 
-    showSetFee();
+    showCreateNewEvent();
 
   }
 
@@ -117,6 +121,10 @@ public class MainGUI {
 
   public void showSetFee() {
     setupScene(setFeeLag.ui, "SetFee", 1050, 480);
+  }
+
+  public void showCreateNewEvent() {
+    setupScene(createEventLag.ui, "CreateEvent", 650, 520);
   }
 
   private void setupScene(Parent ui, String title, int width, int height) {
