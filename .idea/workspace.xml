@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="doing create event and created place a bet controller class">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/BetAndRuin22.iml" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/BetAndRuin22.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/businessLogic/BlFacadeImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/businessLogic/BlFacadeImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/dataAccess/DataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/dataAccess/DataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/CreateNewEventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/CreateNewEventController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/CreateNewEvent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/CreateNewEvent.fxml" afterDir="false" />
+    <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="finished createEvent">
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/db/bets.temp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/db/bets.temp$" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +66,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../bum01_NagoreBravo" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -153,7 +150,7 @@
       <workItem from="1648245030734" duration="1003000" />
       <workItem from="1648391449887" duration="4392000" />
       <workItem from="1648482790858" duration="3074000" />
-      <workItem from="1648543805486" duration="4986000" />
+      <workItem from="1648543805486" duration="5294000" />
     </task>
     <task id="LOCAL-00001" summary="JavaFx added to the project and setFee done">
       <created>1648245991505</created>
@@ -176,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648485706160</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="finished createEvent">
+      <created>1648548891365</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1648548891365</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,18 +201,8 @@
     <MESSAGE value="JavaFx added to the project and setFee done" />
     <MESSAGE value="doing create event" />
     <MESSAGE value="doing create event and created place a bet controller class" />
-    <option name="LAST_COMMIT_MESSAGE" value="doing create event and created place a bet controller class" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/v2-JavaFX/src/main/java/dataAccess/DataAccess.java</url>
-          <line>307</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="finished createEvent" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished createEvent" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
