@@ -1,5 +1,6 @@
 package businessLogic;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -83,8 +84,8 @@ public class BlFacadeImplementation implements BlFacade {
 	
 	/**
 	 * This method creates an event which includes two teams
-	 * @param first team 
-	 * @param second team
+	 * @param team1 team
+	 * @param team2 team
 	 * @param date in which the event will be done
 	 * @return the created event
 	 * @throws EventFinished if current data is after data of the event
@@ -94,6 +95,9 @@ public class BlFacadeImplementation implements BlFacade {
 		dbManager.open(false);
 		Event ev = null;
 		Date currentdate = new Date();
+		System.out.println("AAAAAAAAAAAAAAAAAAA");
+		System.out.println(currentdate);
+
 		System.out.println("Current date is: "+ currentdate);
 		if (currentdate.compareTo(date) > 0) {
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").

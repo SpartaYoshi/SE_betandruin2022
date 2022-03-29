@@ -3,8 +3,10 @@ import java.awt.*;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.List;
 
@@ -90,46 +92,52 @@ public class CreateNewEventController implements Controller{
 
             String team1 = description[0];
             String team2 = description[1];
-            LocalDate locDate = calendar.getValue();
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            System.out.println(description[0]);
+            System.out.println(description[1]);
+            //LocalDate locDate = calendar.getValue();
 
             //parse the date to day month and year, without having into account the hour.
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = formatter.parse(formatter.format(calendar.getValue()));
+            //SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            //Date date = formatter.parse(formatter.format(calendar.getValue()));
             //date = formatter.parse(formatter.format(calendar.getValue()));
 
 
-            if (description.length>0) {
+            ///////////////
+            LocalDate localDate = calendar.getValue();
+            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            Date date = Date.from(instant);
 
+            if (description.length>0) {
+                System.out.println(description.length);
                 Event newEvent = businessLogic.createEvent(team1, team2, date);
 
                 if (newEvent!= null) {
-                    //messageLabel.setForeground(Color.BLUE);
+                    messageLabel.getStyleClass().setAll("lbl","lbl-success");
                     messageLabel.setText("The event has been succesfully created.");
                     tblEvents.getItems().add(newEvent);
-                    //paintDaysWithEvents(calendar,datesWithEventsInCurrentMonth);
+                    holidays.add(Dates.convertToLocalDateViaInstant(date));
                 }
                 else {
-                    //messageLabel.setForeground(Color.RED);
+                    messageLabel.getStyleClass().setAll("lbl","lbl-danger");
                     messageLabel.setText("Error. The event could not be created.");
                 }
 
             }
-        }catch (ParseException e1) {
-            e1.printStackTrace();
         }
         catch (EventFinished e2) {
-            //messageLabel.setForeground(Color.RED);
-            messageLabel.setText("The event could not be created");
+            messageLabel.getStyleClass().setAll("lbl","lbl-danger");
+            messageLabel.setText("The event could not be created. Try again selecting another date");
             e2.printStackTrace();
         }
         catch (TeamPlayingException e3) {
-            //messageLabel.setForeground(Color.RED);
+            messageLabel.getStyleClass().setAll("lbl","lbl-danger");
             messageLabel.setText("Error! One of those teams is already playing a match that day");
 
         }
         catch(Exception e4) {
-            //messageLabel.setForeground(Color.RED);
-            messageLabel.setText("Must be written as: Local team's name - Visitor team's name");
+            messageLabel.getStyleClass().setAll("lbl","lbl-danger");
+            messageLabel.setText("Error! It must be written as: Local team's name - Visitor team's name");
         }
 
 
