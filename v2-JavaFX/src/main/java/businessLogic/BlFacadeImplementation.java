@@ -195,7 +195,9 @@ public class BlFacadeImplementation implements BlFacade {
 		User user = dbManager.getUser(username);
 		dbManager.close();
 		
-
+		System.out.println(user);
+		System.out.println(user.getUsername());
+		System.out.println(user.getPasswd());
 		if (user == null || !password.equals(user.getPasswd()))
 			throw new FailedLoginException();
 		

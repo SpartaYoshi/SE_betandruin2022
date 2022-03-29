@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.UserLoginController">
    <children>
       <TextField fx:id="usernameTextField" layoutX="195.0" layoutY="136.0" prefHeight="25.0" prefWidth="301.0" />
@@ -27,7 +26,6 @@
             <Font name="Britannic Bold" size="28.0" />
          </font>
       </Label>
-      <Label layoutX="209.0" layoutY="255.0" text="  " />
       <Label fx:id="messageLabel" layoutX="280.0" layoutY="263.0" text="  " />
       <Button fx:id="loginButton" layoutX="355.0" layoutY="336.0" mnemonicParsing="false" onAction="#loginClick" text="Log-in">
          <font>

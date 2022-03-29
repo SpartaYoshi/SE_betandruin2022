@@ -1,8 +1,6 @@
 package uicontrollers;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import businessLogic.BlFacade;
@@ -10,12 +8,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
-import javafx.stage.Stage;
 import ui.MainGUI;
 
-public class MainGUIController implements Controller{
+public class MainAdminController implements Controller{
 
     @FXML
     private Label selectOptionLbl;
@@ -33,7 +28,17 @@ public class MainGUIController implements Controller{
     @FXML
     private URL location;
 
+
+
+
     private MainGUI mainGUI;
+    private BlFacade businessLogic;
+
+    public MainAdminController(BlFacade bl) {
+        this.businessLogic = bl;
+    }
+
+
 
     @FXML
     void browseQuestions(ActionEvent event) {

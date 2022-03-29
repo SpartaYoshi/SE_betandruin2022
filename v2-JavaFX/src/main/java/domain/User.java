@@ -18,7 +18,10 @@ public class User {
 	
 	// private double balance;
 	private boolean admin;
-	
+
+
+	public User() {
+	}
 
 	public User(String username, String passwd, String name, String surname, Date birthdate) {
 

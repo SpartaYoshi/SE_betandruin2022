@@ -4,15 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="Some changer in the uesrLoginController">
-      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/bEtiquetas.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/bEtiquetas_en.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/bEtiquetas_es.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/bEtiquetas_eus.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/resourceBundles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/resourceBundles.xml" afterDir="false" />
+    <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="Some changes in the etiquetas resource boundle">
+      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/PortalController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/MainAdmin.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/bets.temp" beforeDir="false" afterPath="$PROJECT_DIR$/db/bets.temp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/bets.temp$" beforeDir="false" afterPath="$PROJECT_DIR$/db/bets.temp$" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/businessLogic/BlFacadeImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/businessLogic/BlFacadeImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/domain/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/ui/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/ui/MainGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/BrowseQuestionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/BrowseQuestionsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/CreateQuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/CreateQuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/MainGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/MainAdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/SetFeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/SetFeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/UserLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/UserLoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/MainGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/Portal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/UserLogin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/UserLogin.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +30,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaFXApplication" />
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -193,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648488187962</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Some changes in the etiquetas resource boundle">
+      <created>1648544409030</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1648544409030</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,7 +230,8 @@
     <MESSAGE value="Constructing the UserLoginController." />
     <MESSAGE value="Added the RemoveBetController class" />
     <MESSAGE value="Some changer in the uesrLoginController" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some changer in the uesrLoginController" />
+    <MESSAGE value="Some changes in the etiquetas resource boundle" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some changes in the etiquetas resource boundle" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

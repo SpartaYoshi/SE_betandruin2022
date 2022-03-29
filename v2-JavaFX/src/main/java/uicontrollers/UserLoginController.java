@@ -13,24 +13,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import businessLogic.BlFacade;
-import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.skin.DatePickerSkin;
 import ui.MainGUI;
-import utils.Dates;
-
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserLoginController implements Controller{
     private MainGUI mainGUI;
 
     private BlFacade businessLogic;
-    private MainGUIController initWindow1;
+    private MainAdminController initWindow1;
     private BrowseQuestionsController initWindow2;
 
 
@@ -41,20 +30,16 @@ public class UserLoginController implements Controller{
     @FXML
     private URL location;
 
-    @FXML
-    private Button btnClose;
 
-    @FXML
-    private Button btnLogin;
 
     @FXML
     private Label messageLabel;
 
     @FXML
-    private PasswordField passwordField;
+    private PasswordField passwordTextField;
 
     @FXML
-    private TextField textField;
+    private TextField usernameTextField;
 
     public UserLoginController(BlFacade bl) {
         this.businessLogic = bl;
@@ -63,34 +48,32 @@ public class UserLoginController implements Controller{
 
     @FXML
     void closeClick(ActionEvent event) {
-        mainGUI.showMain();
+        mainGUI.showPortal();
     }
 
     @FXML
     void loginClick(ActionEvent event) {
-        String username = textField.getText();
-        String password = new String (passwordField.getText());
+
+        String username = usernameTextField.getText();
+        String password = passwordTextField.getText();
+
 
         try {
             User user = businessLogic.loginUser(username, password);
 
             if (user.isAdmin()) {
-                //initWindow1 = new MainGUIController();
-                //initWindow1.setMainApp();
-                mainGUI.showMain();
+                mainGUI.showMainAdmin();
             }
             else {
                 messageLabel.setText("Login was succesful!");
                 messageLabel.getStyleClass().setAll("lbl","lbl-success");
-                //initWindow2 = new BrowseQuestionsController(businessLogic);
-                //initWindow2.setVisible(true);
                 mainGUI.showBrowseQuestions();
 
             }
 
         } catch (FailedLoginException e) {
-            messageLabel.setText("Try again :)");
-            messageLabel.getStyleClass().setAll("alert", "alert-danger");
+            messageLabel.setText("The credentials are incorrect");
+            messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
         }
     }
 
