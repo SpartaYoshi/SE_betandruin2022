@@ -4,9 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="finished createEvent">
       <change beforePath="$PROJECT_DIR$/v2-JavaFX/db/bets.temp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/v2-JavaFX/db/bets.temp$" beforeDir="false" />
+=======
+    <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="Some changes in the etiquetas resource boundle">
+      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/PortalController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/MainAdmin.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/bets.temp" beforeDir="false" afterPath="$PROJECT_DIR$/db/bets.temp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/bets.temp$" beforeDir="false" afterPath="$PROJECT_DIR$/db/bets.temp$" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/businessLogic/BlFacadeImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/businessLogic/BlFacadeImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/domain/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/ui/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/ui/MainGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/BrowseQuestionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/BrowseQuestionsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/CreateQuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/CreateQuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/MainGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/MainAdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/SetFeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/SetFeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/UserLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/UserLoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/MainGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/Portal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/UserLogin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/UserLogin.fxml" afterDir="false" />
+>>>>>>> 9cca18c15485c4e3908351760d1c4d60ff98f284
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +36,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaFXApplication" />
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -36,12 +55,16 @@
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
       <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
         <entry key="com.haulmont.jpb.jpaStructure" value="true" />
       </map>
     </option>
     <option name="myId2Visible">
       <map>
-        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
   </component>
@@ -56,11 +79,15 @@
     </option>
   </component>
   <component name="ProjectId" id="26FB4sH4DJ7iJvrNQUm5jU92fWj" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -73,6 +100,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ainhi\eclipse-workspace\SE_betandruin2022\v2-JavaFX\resources" />
+      <recent name="C:\Users\ainhi\eclipse-workspace\SE_betandruin2022\v2-JavaFX\resources\log" />
       <recent name="C:\Users\Iosu\IdeaProjects\SE_betandruin2022\v2-JavaFX\src\main\resources" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -149,8 +178,11 @@
       <workItem from="1648244085145" duration="923000" />
       <workItem from="1648245030734" duration="1003000" />
       <workItem from="1648391449887" duration="4392000" />
+<<<<<<< HEAD
       <workItem from="1648482790858" duration="3074000" />
       <workItem from="1648543805486" duration="5294000" />
+=======
+>>>>>>> 9cca18c15485c4e3908351760d1c4d60ff98f284
     </task>
     <task id="LOCAL-00001" summary="JavaFx added to the project and setFee done">
       <created>1648245991505</created>
@@ -159,13 +191,35 @@
       <option name="project" value="LOCAL" />
       <updated>1648245991505</updated>
     </task>
-    <task id="LOCAL-00002" summary="doing create event">
-      <created>1648468853591</created>
+    <task id="LOCAL-00002" summary="Constructing the UserLoginController.">
+      <created>1648486418058</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1648468853591</updated>
+      <updated>1648486418058</updated>
     </task>
+    <task id="LOCAL-00003" summary="Added the RemoveBetController class">
+      <created>1648486621112</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1648486621112</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Some changer in the uesrLoginController">
+      <created>1648488187962</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1648488187962</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Some changes in the etiquetas resource boundle">
+      <created>1648544409030</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1648544409030</updated>
+    </task>
+<<<<<<< HEAD
     <task id="LOCAL-00003" summary="doing create event and created place a bet controller class">
       <created>1648485706160</created>
       <option name="number" value="00003" />
@@ -181,6 +235,9 @@
       <updated>1648548891365</updated>
     </task>
     <option name="localTasksCounter" value="5" />
+=======
+    <option name="localTasksCounter" value="6" />
+>>>>>>> 9cca18c15485c4e3908351760d1c4d60ff98f284
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,11 +255,20 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="JavaFx added to the project and setFee done" />
+<<<<<<< HEAD
     <MESSAGE value="doing create event" />
     <MESSAGE value="doing create event and created place a bet controller class" />
     <MESSAGE value="finished createEvent" />
     <option name="LAST_COMMIT_MESSAGE" value="finished createEvent" />
+=======
+    <MESSAGE value="Constructing the UserLoginController." />
+    <MESSAGE value="Added the RemoveBetController class" />
+    <MESSAGE value="Some changer in the uesrLoginController" />
+    <MESSAGE value="Some changes in the etiquetas resource boundle" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some changes in the etiquetas resource boundle" />
+>>>>>>> 9cca18c15485c4e3908351760d1c4d60ff98f284
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

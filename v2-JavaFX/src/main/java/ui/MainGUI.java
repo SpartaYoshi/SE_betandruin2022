@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-  private Window mainLag, createQuestionLag, browseQuestionsLag,setFeeLag, UserLoginLag, createEventLag;
+  private Window portalLag, mainAdminLag, createQuestionLag, browseQuestionsLag,setFeeLag, UserLoginLag, createEventLag, userLoginLag;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -52,6 +52,12 @@ public class MainGUI {
     FXMLLoader loader = new FXMLLoader(MainGUI.class.getResource(fxmlfile), ResourceBundle.getBundle("Etiquetas", Locale.getDefault()));
     loader.setControllerFactory(controllerClass -> {
 
+      if (controllerClass == MainAdminController.class) {
+        return new MainAdminController(businessLogic);
+      }
+      if (controllerClass == PortalController.class) {
+        return new PortalController(businessLogic);
+      }
       if (controllerClass == BrowseQuestionsController.class) {
         return new BrowseQuestionsController(businessLogic);
       }
@@ -92,13 +98,16 @@ public class MainGUI {
 
     this.stage = stage;
 
-    mainLag = load("/MainGUI.fxml");
+    mainAdminLag = load("/MainAdmin.fxml");
+    portalLag = load("/Portal.fxml");
     browseQuestionsLag = load("/BrowseQuestions.fxml");
     createQuestionLag = load("/CreateQuestion.fxml");
     setFeeLag=load("/SetFee.fxml");
     createEventLag = load("/CreateNewEvent.fxml");
+    userLoginLag = load("/UserLogin.fxml");
 
-    showCreateNewEvent();
+
+    showUserLogin();
 
   }
 
@@ -106,10 +115,9 @@ public class MainGUI {
 //      init(stage);
 //  }
 
+  public void showMainAdmin(){setupScene(userLoginLag.ui, "MainAdmin", 320, 250);}
 
-  public void showMain(){
-    setupScene(mainLag.ui, "MainTitle", 320, 250);
-  }
+  public void showPortal(){setupScene(portalLag.ui, "Portal", 320, 250);}
 
   public void showBrowseQuestions() {
     setupScene(browseQuestionsLag.ui, "BrowseQuestions", 1000, 500);
@@ -126,6 +134,11 @@ public class MainGUI {
   public void showCreateNewEvent() {
     setupScene(createEventLag.ui, "CreateEvent", 650, 520);
   }
+
+  public void showUserLogin() {
+    setupScene(userLoginLag.ui, "Login", 650, 450);
+  }
+
 
   private void setupScene(Parent ui, String title, int width, int height) {
     if (scene == null){

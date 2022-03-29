@@ -65,7 +65,7 @@ public class BrowseQuestionsController implements Controller {
 
   @FXML
   void closeClick(ActionEvent event) {
-    mainGUI.showMain();
+    mainGUI.showPortal();
   }
 
   private void setEvents(int year, int month) {

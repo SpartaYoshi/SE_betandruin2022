@@ -70,7 +70,7 @@ public class SetFeeController implements Controller {
 
     @FXML
     void closeClick(ActionEvent event) {
-        mainGUI.showMain();
+        mainGUI.showPortal();
     }
 
     @FXML
