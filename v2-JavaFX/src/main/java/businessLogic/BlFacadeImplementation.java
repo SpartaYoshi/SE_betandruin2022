@@ -194,7 +194,7 @@ public class BlFacadeImplementation implements BlFacade {
 	
 	@WebMethod
 	public User loginUser(String username, String password) throws FailedLoginException {
-		dbManager.open(true);
+		dbManager.open(false);
 
 		User user = dbManager.getUser(username);
 		dbManager.close();
@@ -212,7 +212,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 	@WebMethod
 	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExists {
-		dbManager.open(true);
+		dbManager.open(false);
 		int n=dbManager.createFee(q,pResult,pFee);
 		if (n == -1) {
 			throw new FeeAlreadyExists();
@@ -221,5 +221,13 @@ public class BlFacadeImplementation implements BlFacade {
 
 	}
 
-	
+	@WebMethod
+	public boolean insertMoney(double am) {
+		dbManager.open(false);
+		boolean status=dbManager.insertMoney(am);
+		dbManager.close();
+		return status;
+	}
+
+
 }

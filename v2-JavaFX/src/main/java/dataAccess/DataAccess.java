@@ -389,6 +389,13 @@ public class DataAccess  {
 		db.getTransaction().commit();
 		return 0;
 	}
+
+	public boolean insertMoney(double am){
+		//user.setamount(am)
+		//which user?
+		System.out.println(">> DataAccess: money updated");
+		return true;
+	}
 	
 
 	
