@@ -4,21 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="Some changes in the etiquetas resource boundle">
-      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/PortalController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/MainAdmin.fxml" afterDir="false" />
+    <list default="true" id="a75bd826-3a8c-46c5-bb6e-3e2bbf313573" name="Changes" comment="Added the PortalController, MainAdminController, Portal.fxml, MainAdmin.fxml and sone changes in the MainGUI to fix the errors.&#10;Alse some changes in the loginController">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/bets.temp" beforeDir="false" afterPath="$PROJECT_DIR$/db/bets.temp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/bets.temp$" beforeDir="false" afterPath="$PROJECT_DIR$/db/bets.temp$" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/resources/imageUser.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/imageUser.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/businessLogic/BlFacadeImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/businessLogic/BlFacadeImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/ui/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/ui/MainGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/BrowseQuestionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/BrowseQuestionsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/CreateQuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/CreateQuestionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/MainGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/MainAdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/SetFeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/SetFeeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/UserLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/java/uicontrollers/UserLoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/MainGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/Portal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/Etiquetas.properties" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/Etiquetas.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/UserLogin.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/v2-JavaFX/src/main/resources/UserLogin.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,6 +86,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ainhi\eclipse-workspace\SE_betandruin2022\v2-JavaFX\src\main\resources" />
       <recent name="C:\Users\ainhi\eclipse-workspace\SE_betandruin2022\v2-JavaFX\resources" />
       <recent name="C:\Users\ainhi\eclipse-workspace\SE_betandruin2022\v2-JavaFX\resources\log" />
       <recent name="C:\Users\Iosu\IdeaProjects\SE_betandruin2022\v2-JavaFX\src\main\resources" />
@@ -207,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648544409030</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added the PortalController, MainAdminController, Portal.fxml, MainAdmin.fxml and sone changes in the MainGUI to fix the errors.&#10;Alse some changes in the loginController">
+      <created>1648548447338</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1648548447338</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +232,8 @@
     <MESSAGE value="Added the RemoveBetController class" />
     <MESSAGE value="Some changer in the uesrLoginController" />
     <MESSAGE value="Some changes in the etiquetas resource boundle" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some changes in the etiquetas resource boundle" />
+    <MESSAGE value="Added the PortalController, MainAdminController, Portal.fxml, MainAdmin.fxml and sone changes in the MainGUI to fix the errors.&#10;Alse some changes in the loginController" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the PortalController, MainAdminController, Portal.fxml, MainAdmin.fxml and sone changes in the MainGUI to fix the errors.&#10;Alse some changes in the loginController" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
