@@ -16,6 +16,7 @@ import domain.Event;
 import domain.Question;
 import exceptions.EventFinished;
 import exceptions.TeamPlayingException;
+import exceptions.TeamRepeatedException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -132,7 +133,12 @@ public class CreateNewEventController implements Controller{
         }
         catch (TeamPlayingException e3) {
             messageLabel.getStyleClass().setAll("lbl","lbl-danger");
-            messageLabel.setText("Error! One of those teams is already playing a match that day");
+            messageLabel.setText("Error! Try it again changing the teams. One of those teams is already playing a match that day");
+
+        }
+        catch (TeamRepeatedException e5){
+            messageLabel.getStyleClass().setAll("lbl","lbl-danger");
+            messageLabel.setText("Error! Both teams are the same");
 
         }
         catch(Exception e4) {

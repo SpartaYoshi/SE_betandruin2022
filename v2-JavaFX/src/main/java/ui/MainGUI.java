@@ -107,7 +107,7 @@ public class MainGUI {
     userLoginLag = load("/UserLogin.fxml");
 
 
-    showUserLogin();
+    showCreateNewEvent();
 
   }
 

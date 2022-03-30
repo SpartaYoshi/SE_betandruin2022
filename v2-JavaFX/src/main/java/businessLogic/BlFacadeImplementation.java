@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -16,13 +17,7 @@ import dataAccess.DataAccess;
 import domain.Event;
 import domain.Question;
 import domain.User;
-import exceptions.EventFinished;
-import exceptions.FailedLoginException;
-import exceptions.FeeAlreadyExists;
-import exceptions.QuestionAlreadyExist;
-import exceptions.TeamPlayingException;
-import exceptions.UserIsTakenException;
-import exceptions.UserIsUnderageException;
+import exceptions.*;
 
 
 /**
@@ -90,13 +85,11 @@ public class BlFacadeImplementation implements BlFacade {
 	 * @return the created event
 	 * @throws EventFinished if current data is after data of the event
 	 */
-	public Event createEvent(String team1, String team2, Date date) throws EventFinished,TeamPlayingException {
+	public Event createEvent(String team1, String team2, Date date) throws EventFinished, TeamPlayingException, TeamRepeatedException {
 
 		dbManager.open(false);
 		Event ev = null;
 		Date currentdate = new Date();
-		System.out.println("AAAAAAAAAAAAAAAAAAA");
-		System.out.println(currentdate);
 
 		System.out.println("Current date is: "+ currentdate);
 		if (currentdate.compareTo(date) > 0) {
@@ -104,6 +97,9 @@ public class BlFacadeImplementation implements BlFacade {
 					getString("ErrorEventHasFinished"));
 				
 		}else {
+			if (team1.toLowerCase().trim().equals(team2.toLowerCase().trim())){
+				throw new TeamRepeatedException();
+			}
 			ev = dbManager.createEvent(team1, team2, date);
 			if(ev==null) {
 				

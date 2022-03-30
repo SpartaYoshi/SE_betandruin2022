@@ -10,13 +10,7 @@ import javax.jws.WebService;
 import domain.Event;
 import domain.Question;
 import domain.User;
-import exceptions.EventFinished;
-import exceptions.FailedLoginException;
-import exceptions.FeeAlreadyExists;
-import exceptions.QuestionAlreadyExist;
-import exceptions.TeamPlayingException;
-import exceptions.UserIsTakenException;
-import exceptions.UserIsUnderageException;
+import exceptions.*;
 
 /**
  * Interface that specifies the business logic.
@@ -45,7 +39,7 @@ public interface BlFacade  {
 	 * @return the created event
 	 * @throws EventFinished if current data is after data of the event
 	 */
-	public Event createEvent(String team1, String team2, Date date) throws EventFinished,TeamPlayingException;
+	public Event createEvent(String team1, String team2, Date date) throws EventFinished, TeamPlayingException, TeamRepeatedException;
 		
 	/**
 	 * This method retrieves all the events of a given date 

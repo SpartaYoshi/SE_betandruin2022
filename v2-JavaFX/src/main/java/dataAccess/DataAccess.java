@@ -304,7 +304,6 @@ public class DataAccess  {
 	
 	
 	public boolean isAnyTeamPLaying(String team1, String team2, Date date)  {
-
 		for (Event ev : this.getEvents(date)) {
 
 			String[] descr = ev.getDescription().split("-");

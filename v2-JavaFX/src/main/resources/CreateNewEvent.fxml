@@ -17,7 +17,7 @@
       <Button fx:id="closeButton" layoutX="524.0" layoutY="438.0" mnemonicParsing="false" onAction="#jButtonClose_actionPerformed" text="Close" />
       <TextField fx:id="eventtextField" layoutX="139.0" layoutY="358.0" prefHeight="26.0" prefWidth="360.0" />
       <Label fx:id="writeEventText" layoutX="87.0" layoutY="362.0" prefHeight="18.0" prefWidth="52.0" text="Event:" />
-      <Label fx:id="messageLabel" layoutX="139.0" layoutY="392.0" prefHeight="18.0" prefWidth="360.0" />
+      <Label fx:id="messageLabel" layoutX="139.0" layoutY="392.0" prefHeight="26.0" prefWidth="360.0" />
       <Label layoutX="87.0" layoutY="331.0" prefHeight="18.0" prefWidth="137.0" text="Create a new Event" />
       <TableView fx:id="tblEvents" layoutX="189.0" layoutY="98.0" prefHeight="200.0" prefWidth="254.0">
         <columns>
