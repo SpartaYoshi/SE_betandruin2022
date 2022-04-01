@@ -33,8 +33,8 @@ public interface BlFacade  {
 	
 	/**
 	 * This method creates an event which includes two teams
-	 * @param first team 
-	 * @param second team
+	 * @param team1 first team
+	 * @param team2 second team
 	 * @param date in which the event will be done
 	 * @return the created event
 	 * @throws EventFinished if current data is after data of the event
@@ -65,4 +65,11 @@ public interface BlFacade  {
 
 	
 	@WebMethod public void createFee(Question q,String pResult,float pFee) throws FeeAlreadyExists;
+
+	/**
+	 * method to insert the money wanted into the user's account
+	 * @param am double
+	 * @return boolean True if the operation was succesful
+	 */
+	@WebMethod public boolean insertMoney(double am);
 }

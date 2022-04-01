@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-  private Window portalLag, mainAdminLag, createQuestionLag, browseQuestionsLag,setFeeLag, UserLoginLag, createEventLag, userLoginLag;
+  private Window portalLag, mainAdminLag, createQuestionLag, browseQuestionsLag,setFeeLag, UserLoginLag, createEventLag, userLoginLag,depositMoneyLag;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -73,6 +73,9 @@ public class MainGUI {
       if (controllerClass == CreateNewEventController.class) {
         return new CreateNewEventController(businessLogic);
       }
+      if (controllerClass == DepositMoneyController.class) {
+        return new DepositMoneyController(businessLogic);
+      }
 
 
 
@@ -105,9 +108,10 @@ public class MainGUI {
     setFeeLag=load("/SetFee.fxml");
     createEventLag = load("/CreateNewEvent.fxml");
     userLoginLag = load("/UserLogin.fxml");
+    depositMoneyLag=load("/DepositMoney.fxml");
 
 
-    showCreateNewEvent();
+    showDepositMoney();
 
   }
 
@@ -137,6 +141,9 @@ public class MainGUI {
 
   public void showUserLogin() {
     setupScene(userLoginLag.ui, "Login", 650, 450);
+  }
+
+  public void showDepositMoney() { setupScene(depositMoneyLag.ui,  "Deposit", 600, 450);
   }
 
 
