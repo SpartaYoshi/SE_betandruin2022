@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -27,11 +29,16 @@
          </font>
       </Label>
       <Label fx:id="messageLabel" layoutX="280.0" layoutY="263.0" text="  " />
-      <Button fx:id="loginButton" layoutX="355.0" layoutY="336.0" mnemonicParsing="false" onAction="#loginClick" text="Log-in">
+      <Button fx:id="loginButton" layoutX="259.0" layoutY="314.0" mnemonicParsing="false" onAction="#loginClick" prefHeight="39.0" prefWidth="81.0" text="Log-in">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="closeButton" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeClick" text="Close" />
+      <Button fx:id="closeButton" layoutX="554.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeClick" text="Close" />
+      <ImageView fx:id="userImage" fitHeight="55.0" fitWidth="68.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imageUser.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
