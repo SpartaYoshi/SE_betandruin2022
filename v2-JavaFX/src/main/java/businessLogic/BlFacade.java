@@ -10,13 +10,7 @@ import javax.jws.WebService;
 import domain.Event;
 import domain.Question;
 import domain.User;
-import exceptions.EventFinished;
-import exceptions.FailedLoginException;
-import exceptions.FeeAlreadyExists;
-import exceptions.QuestionAlreadyExist;
-import exceptions.TeamPlayingException;
-import exceptions.UserIsTakenException;
-import exceptions.UserIsUnderageException;
+import exceptions.*;
 
 /**
  * Interface that specifies the business logic.
@@ -39,13 +33,13 @@ public interface BlFacade  {
 	
 	/**
 	 * This method creates an event which includes two teams
-	 * @param first team 
-	 * @param second team
+	 * @param team1 first team
+	 * @param team2 second team
 	 * @param date in which the event will be done
 	 * @return the created event
 	 * @throws EventFinished if current data is after data of the event
 	 */
-	public Event createEvent(String team1, String team2, Date date) throws EventFinished,TeamPlayingException;
+	public Event createEvent(String team1, String team2, Date date) throws EventFinished, TeamPlayingException, TeamRepeatedException;
 		
 	/**
 	 * This method retrieves all the events of a given date 
@@ -71,4 +65,11 @@ public interface BlFacade  {
 
 	
 	@WebMethod public void createFee(Question q,String pResult,float pFee) throws FeeAlreadyExists;
+
+	/**
+	 * method to insert the money wanted into the user's account
+	 * @param am double
+	 * @return boolean True if the operation was succesful
+	 */
+	@WebMethod public boolean insertMoney(double am);
 }

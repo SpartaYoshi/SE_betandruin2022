@@ -1,9 +1,11 @@
 package businessLogic;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -15,13 +17,7 @@ import dataAccess.DataAccess;
 import domain.Event;
 import domain.Question;
 import domain.User;
-import exceptions.EventFinished;
-import exceptions.FailedLoginException;
-import exceptions.FeeAlreadyExists;
-import exceptions.QuestionAlreadyExist;
-import exceptions.TeamPlayingException;
-import exceptions.UserIsTakenException;
-import exceptions.UserIsUnderageException;
+import exceptions.*;
 
 
 /**
@@ -83,23 +79,27 @@ public class BlFacadeImplementation implements BlFacade {
 	
 	/**
 	 * This method creates an event which includes two teams
-	 * @param first team 
-	 * @param second team
+	 * @param team1 team
+	 * @param team2 team
 	 * @param date in which the event will be done
 	 * @return the created event
 	 * @throws EventFinished if current data is after data of the event
 	 */
-	public Event createEvent(String team1, String team2, Date date) throws EventFinished,TeamPlayingException {
+	public Event createEvent(String team1, String team2, Date date) throws EventFinished, TeamPlayingException, TeamRepeatedException {
 
 		dbManager.open(false);
 		Event ev = null;
 		Date currentdate = new Date();
+
 		System.out.println("Current date is: "+ currentdate);
 		if (currentdate.compareTo(date) > 0) {
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
 					getString("ErrorEventHasFinished"));
 				
 		}else {
+			if (team1.toLowerCase().trim().equals(team2.toLowerCase().trim())){
+				throw new TeamRepeatedException();
+			}
 			ev = dbManager.createEvent(team1, team2, date);
 			if(ev==null) {
 				
@@ -190,7 +190,7 @@ public class BlFacadeImplementation implements BlFacade {
 	
 	@WebMethod
 	public User loginUser(String username, String password) throws FailedLoginException {
-		dbManager.open(true);
+		dbManager.open(false);
 
 		User user = dbManager.getUser(username);
 		dbManager.close();
@@ -205,7 +205,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 	@WebMethod
 	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExists {
-		dbManager.open(true);
+		dbManager.open(false);
 		int n=dbManager.createFee(q,pResult,pFee);
 		if (n == -1) {
 			throw new FeeAlreadyExists();
@@ -214,5 +214,13 @@ public class BlFacadeImplementation implements BlFacade {
 
 	}
 
-	
+	@WebMethod
+	public boolean insertMoney(double am) {
+		dbManager.open(false);
+		boolean status=dbManager.insertMoney(am);
+		dbManager.close();
+		return status;
+	}
+
+
 }

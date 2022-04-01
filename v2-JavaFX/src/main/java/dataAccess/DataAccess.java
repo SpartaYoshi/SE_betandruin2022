@@ -303,14 +303,14 @@ public class DataAccess  {
 	}
 	
 	
-	public boolean isAnyTeamPLaying(String team1, String team2, Date date)  {	
+	public boolean isAnyTeamPLaying(String team1, String team2, Date date)  {
 		for (Event ev : this.getEvents(date)) {
+
 			String[] descr = ev.getDescription().split("-");
+
 			for (int i = 0; i<2 ; i++) {
-				if (team1.compareTo(descr[i])==0 || team2.compareTo(descr[i])==0) {
-					
+				if (team1.toLowerCase().trim().equals(descr[i].toLowerCase().trim()) || team2.toLowerCase().trim().equals(descr[i].toLowerCase().trim())) {
 					return true;
-					
 				}
 			}
 		}
@@ -387,6 +387,13 @@ public class DataAccess  {
 		}
 		db.getTransaction().commit();
 		return 0;
+	}
+
+	public boolean insertMoney(double am){
+		//user.setamount(am)
+		//which user?
+		System.out.println(">> DataAccess: money updated");
+		return true;
 	}
 	
 

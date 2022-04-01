@@ -15,6 +15,7 @@ public class User {
 	private String name;
 	private String surname;
 	private Date birthdate;
+	private double moneyAvailable;
 	
 	// private double balance;
 	private boolean admin;
@@ -30,6 +31,7 @@ public class User {
 		this.name = name;
 		this.surname = surname;
 		this.birthdate = birthdate;
+		moneyAvailable=0;
 		
 		admin = false;
 	}
@@ -82,6 +84,12 @@ public class User {
 
 	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
+	}
+
+
+	public double getMoneyAvailable() {return moneyAvailable;}
+	public void setMoneyAvailable(double amount) {
+		this.moneyAvailable = amount;
 	}
 
 
