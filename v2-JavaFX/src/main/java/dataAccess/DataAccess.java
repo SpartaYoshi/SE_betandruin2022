@@ -10,11 +10,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 
 import configuration.ConfigXML;
 import configuration.UtilDate;
@@ -22,8 +18,9 @@ import domain.Event;
 import domain.Fee;
 import domain.Question;
 import domain.User;
+import exceptions.FailedLoginException;
+import exceptions.FailedMoneyUpdateException;
 import exceptions.QuestionAlreadyExist;
-import exceptions.TeamPlayingException;
 
 /**
  * Implements the Data Access utility to the objectDb database
@@ -126,7 +123,7 @@ public class DataAccess  {
 		    Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1); 
 			User u= new User("juanan", "hello", "Juan Antonio", "Pereira", date1);
 			u.grantAdmin();
-			
+
 			
 			if(!existUser(u)) {
 				db.persist(u);
@@ -389,11 +386,29 @@ public class DataAccess  {
 		return 0;
 	}
 
-	public boolean insertMoney(double am){
-		//user.setamount(am)
-		//which user?
+	public double insertMoney(User who, double am)  {
+
+		db.getTransaction().begin();
+
+		double total=who.getMoneyAvailable()+ am; //the money he had + the deposited money
+		Query query = db.createQuery("UPDATE User SET moneyAvailable = ?1"+ " WHERE username =?2");
+		query.setParameter(1, total);
+		query.setParameter(2, who.getUsername());
+		int updateCount = query.executeUpdate();
+
+
 		System.out.println(">> DataAccess: money updated");
-		return true;
+		db.getTransaction().commit();
+
+		if (updateCount==0){
+			return -1;
+
+		}else{
+			who.setMoneyAvailable(total);
+			return who.getMoneyAvailable();
+		}
+
+
 	}
 	
 

@@ -15,6 +15,7 @@ public class User {
 	private String name;
 	private String surname;
 	private Date birthdate;
+
 	private double moneyAvailable;
 	
 	// private double balance;
@@ -88,6 +89,7 @@ public class User {
 
 
 	public double getMoneyAvailable() {return moneyAvailable;}
+
 	public void setMoneyAvailable(double amount) {
 		this.moneyAvailable = amount;
 	}
