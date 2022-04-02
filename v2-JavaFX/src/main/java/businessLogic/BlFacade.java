@@ -1,7 +1,6 @@
 package businessLogic;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Vector;
 
 import javax.jws.WebMethod;
@@ -69,7 +68,19 @@ public interface BlFacade  {
 	/**
 	 * method to insert the money wanted into the user's account
 	 * @param am double
-	 * @return boolean True if the operation was succesful
+	 * @return double the amount of money available the user has. (-1 if it has failed)
 	 */
-	@WebMethod public boolean insertMoney(double am);
+	@WebMethod public double insertMoney(double am) throws FailedMoneyUpdateException;
+
+	/**
+	 * method to get the actual user logged
+ 	 * @return User
+	 */
+	@WebMethod public User getUser();
+
+	/**
+	 * method to set who is the current user
+	 * @param current a User
+	 */
+	@WebMethod public void setUser(User current);
 }

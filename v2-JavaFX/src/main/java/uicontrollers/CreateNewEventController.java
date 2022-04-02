@@ -93,10 +93,6 @@ public class CreateNewEventController implements Controller{
 
             String team1 = description[0];
             String team2 = description[1];
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            System.out.println(description[0]);
-            System.out.println(description[1]);
-            //LocalDate locDate = calendar.getValue();
 
             //parse the date to day month and year, without having into account the hour.
             //SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -110,7 +106,6 @@ public class CreateNewEventController implements Controller{
             Date date = Date.from(instant);
 
             if (description.length>0) {
-                System.out.println(description.length);
                 Event newEvent = businessLogic.createEvent(team1, team2, date);
 
                 if (newEvent!= null) {
