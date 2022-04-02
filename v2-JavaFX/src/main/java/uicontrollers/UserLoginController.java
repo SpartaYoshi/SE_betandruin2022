@@ -60,12 +60,12 @@ public class UserLoginController implements Controller{
 
         try {
             User user = businessLogic.loginUser(username, password);
-
+            //businessLogic.setUser(user);
             if (user.isAdmin()) {
                 //mainGUI.showMainAdmin();
             }
             else {
-                messageLabel.setText("Login was succesful!");
+                messageLabel.setText("Login was successful!");
                 messageLabel.getStyleClass().setAll("lbl","lbl-success");
                 mainGUI.showBrowseQuestions();
 

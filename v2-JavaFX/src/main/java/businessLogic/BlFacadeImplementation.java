@@ -1,11 +1,9 @@
 package businessLogic;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -28,6 +26,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 	DataAccess dbManager;
 	ConfigXML config = ConfigXML.getInstance();
+	User currentUser;
 
 	public BlFacadeImplementation()  {		
 		System.out.println("Creating BlFacadeImplementation instance");
@@ -215,11 +214,34 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 	@WebMethod
-	public boolean insertMoney(double am) {
+	public double insertMoney(double amount) throws FailedMoneyUpdateException{
+		User who=this.getUser();
+		System.out.println(">> user tenia "+who.getMoneyAvailable());
+
 		dbManager.open(false);
-		boolean status=dbManager.insertMoney(am);
+		//dbManager.registerUser(who);
+		double totalmoney= 0;
+
+		totalmoney = dbManager.insertMoney(who,amount);
+
 		dbManager.close();
-		return status;
+
+		if(totalmoney==-1){
+			throw new FailedMoneyUpdateException("Error. No user was updated");
+		}
+
+
+		return totalmoney;
+	}
+
+	@Override
+	public User getUser() {
+		return this.currentUser;
+	}
+
+	@Override
+	public void setUser(User current) {
+		this.currentUser=current;
 	}
 
 
