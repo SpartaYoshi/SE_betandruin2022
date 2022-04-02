@@ -92,7 +92,7 @@ import javafx.scene.control.TextField;
         @FXML
         void initialize() {
             amountMoneySlider.setMin(0);
-            amountMoneySlider.setMax(1000);
+            amountMoneySlider.setMax(businessLogic.getCurrentUser().getMoney);
             amountMoneySlider.setValue(0);
             amountMoneySlider.setBlockIncrement(1);
 
