@@ -30,6 +30,9 @@ import javafx.scene.control.TextField;
         private TextField amountMoneyTextField;
 
         @FXML
+        private Label availableMoneyLabel;
+
+        @FXML
         private Button closeButton;
 
         @FXML
@@ -91,8 +94,10 @@ import javafx.scene.control.TextField;
 
         @FXML
         void initialize() {
+            availableMoneyLabel.getStyleClass().setAll("lbl","lbl-info");
+            availableMoneyLabel.setText("Your actual available amount of money: " + businessLogic.getUser().getMoneyAvailable());
             amountMoneySlider.setMin(0);
-            amountMoneySlider.setMax(businessLogic.getCurrentUser().getMoney);
+            amountMoneySlider.setMax(businessLogic.getUser().getMoneyAvailable());
             amountMoneySlider.setValue(0);
             amountMoneySlider.setBlockIncrement(1);
 
