@@ -3,6 +3,8 @@ package uicontrollers;
 import businessLogic.BlFacade;
 import domain.Event;
 import domain.Question;
+import exceptions.EventFinished;
+import exceptions.QuestionAlreadyExist;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,7 +58,7 @@ public class RemoveBetController implements Controller{
     private ComboBox<Question> comboQuestions;
 
     @FXML
-    private Label lblErrorMinBet;
+    private Label lblMessage;
 
     @FXML
     private Label listOfEventsLabel;
@@ -75,6 +77,27 @@ public class RemoveBetController implements Controller{
         LocalDate localDate = calendar.getValue();
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date date = Date.from(instant);
+
+
+        Event event1 = comboEvents.getSelectionModel().getSelectedItem();
+
+        try {
+            if (event1 != null) {
+                //businessLogic.remove(event);
+                lblMessage.getStyleClass().clear();
+                lblMessage.getStyleClass().setAll("lbl", "lbl-success");
+                lblMessage.setText("Question correctly created");
+                lblMessage.getStyleClass().clear();
+            } else {
+            lblMessage.setText("You must select an event.");
+            }
+
+            //if la fecha ya ha pasado
+
+        } catch (Exception e1) {
+            lblMessage.setText("Couldn't remove bet.");
+            lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
+        }
 
     }
 
