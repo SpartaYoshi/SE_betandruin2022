@@ -27,6 +27,7 @@ public class BlFacadeImplementation implements BlFacade {
 	DataAccess dbManager;
 	ConfigXML config = ConfigXML.getInstance();
 	User currentUser;
+	Question currentQuestion;
 
 	public BlFacadeImplementation()  {		
 		System.out.println("Creating BlFacadeImplementation instance");
@@ -214,6 +215,29 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 	@WebMethod
+	public double placeBet(double amount) throws NotEnoughMoneyException, MinimumBetException, FailedMoneyUpdateException {
+		User who = this.getUser();
+		Question question = this.getCurrentQuestion();
+		dbManager.open(false);
+		double totalMoneyToBet = 0;
+		double remainingTotalmoney = 0;
+		remainingTotalmoney = dbManager.restMoney(who, amount); //update the remaining money of the user
+		if (amount>=question.getBetMinimum()){
+			totalMoneyToBet = dbManager.placeBetToQuestion(question, amount);
+
+		}else{
+			throw new MinimumBetException();
+		}
+
+		dbManager.close();
+		////////
+		return totalMoneyToBet;
+	}
+
+
+
+
+	@WebMethod
 	public double insertMoney(double amount) throws FailedMoneyUpdateException{
 		User who=this.getUser();
 		System.out.println(">> user tenia "+who.getMoneyAvailable());
@@ -230,7 +254,6 @@ public class BlFacadeImplementation implements BlFacade {
 			throw new FailedMoneyUpdateException("Error. No user was updated");
 		}
 
-
 		return totalmoney;
 	}
 
@@ -242,6 +265,15 @@ public class BlFacadeImplementation implements BlFacade {
 	@Override
 	public void setUser(User current) {
 		this.currentUser=current;
+	}
+
+
+	public Question getCurrentQuestion() {
+		return this.currentQuestion;
+	}
+
+	public void setCurrentQuestion(Question currentQuestion){
+		this.currentQuestion=currentQuestion;
 	}
 
 

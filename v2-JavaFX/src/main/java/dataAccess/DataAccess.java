@@ -18,6 +18,7 @@ import domain.Event;
 import domain.Fee;
 import domain.Question;
 import domain.User;
+import domain.Bet;
 import exceptions.FailedLoginException;
 import exceptions.FailedMoneyUpdateException;
 import exceptions.QuestionAlreadyExist;
@@ -410,6 +411,45 @@ public class DataAccess  {
 
 
 	}
+
+	public double placeBetToQuestion(Question q, Double amountBet){
+		db.getTransaction().begin();
+		Query query = db.createQuery("UPDATE Bet SET amount = ?1 WHERE Question =?2");
+		query.setParameter(1, amountBet);
+		query.setParameter(2, q);
+
+
+		db.getTransaction().commit();
+
+	}
+
+
+	public double restMoney(User who, double bet)  {
+
+		db.getTransaction().begin();
+
+		double total = who.getMoneyAvailable()- bet; //the money he had - the deposited money
+		Query query = db.createQuery("UPDATE User SET moneyAvailable = ?1"+ " WHERE username =?2");
+		query.setParameter(1, total);
+		query.setParameter(2, who.getUsername());
+		int updateCount = query.executeUpdate();
+
+
+		System.out.println(">> DataAccess: money updated");
+		db.getTransaction().commit();
+
+		if (updateCount==0){
+			return -1;
+
+		}else{
+			who.setMoneyAvailable(total);
+			return who.getMoneyAvailable();
+		}
+
+
+	}
+
+
 	
 
 	

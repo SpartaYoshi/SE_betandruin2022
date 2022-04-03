@@ -2,6 +2,9 @@
     package uicontrollers;
 
 import businessLogic.BlFacade;
+import domain.Bet;
+import domain.Event;
+import domain.Question;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -14,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import utils.Dates;
 
     public class PlaceABetController implements Controller{
 
@@ -22,9 +26,6 @@ import javafx.scene.control.TextField;
 
         @FXML
         private URL location;
-
-        @FXML
-        private Slider amountMoneySlider;
 
         @FXML
         private TextField amountMoneyTextField;
@@ -54,14 +55,37 @@ import javafx.scene.control.TextField;
             closeButton.setVisible(false);
         }
 
+
+
+        if (description.length>0) {
+            Event newEvent = businessLogic.createEvent(team1, team2, date);
+
+            if (newEvent!= null) {
+                messageLabel.getStyleClass().setAll("lbl","lbl-success");
+                messageLabel.setText("The event has been succesfully created.");
+                tblEvents.getItems().add(newEvent);
+                holidays.add(Dates.convertToLocalDateViaInstant(date));
+            }
+            else {
+                messageLabel.getStyleClass().setAll("lbl","lbl-danger");
+                messageLabel.setText("Error. The event could not be created.");
+            }
+
+        }
+
+
+
+
         @FXML
-        void jButtonCreateEvent_actionPerformed(ActionEvent event) {
+        void jButtonPlaceABet_actionPerformed(ActionEvent event) {
             //try {
 
                 messageLabel.setText("");
                 String stringAmount = amountMoneyTextField.getText();
                 if (stringAmount!= null){
-                    Integer amount = Integer.parseInt(stringAmount);
+                    Double amount = Double.parseDouble(stringAmount);
+                    Bet newBet = new Bet(amount, new Question()); ///// new Question
+                    businessLogic.placeBet(amount, );
 
                 }else{
                     amountMoneySlider.valueProperty().addListener(new ChangeListener<Number>() {
