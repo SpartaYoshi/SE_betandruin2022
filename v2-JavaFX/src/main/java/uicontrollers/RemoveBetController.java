@@ -33,6 +33,7 @@ public class RemoveBetController implements Controller{
     private BlFacade businessLogic;
 
     private ObservableList<Event> oListEvents;
+    private ObservableList<Question> oListQuestions;
 
 
 
@@ -56,6 +57,9 @@ public class RemoveBetController implements Controller{
 
     @FXML
     private ComboBox<Question> comboQuestions;
+
+    @FXML
+    private Label lblError;
 
     @FXML
     private Label lblMessage;
@@ -111,9 +115,6 @@ public class RemoveBetController implements Controller{
 
 
 
-
-
-
     private List<LocalDate> holidays = new ArrayList<>();
 
 
@@ -137,6 +138,22 @@ public class RemoveBetController implements Controller{
 
     @FXML
     void initialize() {
+
+        // only show the text of the event in the combobox (without the id)
+        Callback<ListView<Event>, ListCell<Event>> factory = lv -> new ListCell<>() {
+            @Override
+            protected void updateItem(Event item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : item.getDescription());
+            }
+        };
+
+        comboEvents.setCellFactory(factory);
+        comboEvents.setButtonCell(factory.call(null));
+
+
+        setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
+
 
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
 
@@ -186,11 +203,32 @@ public class RemoveBetController implements Controller{
             comboEvents.setItems(oListEvents);
 
             if (comboEvents.getItems().size() == 0)
+                comboQuestions.setDisable(true);
+            else {
+                comboQuestions.setDisable(false);
+                // select first option
+                comboEvents.getSelectionModel().select(0);
+            }
+
+        });
+
+
+
+        // when an event is selected...
+        comboEvents.setOnAction(actionEvent -> {
+            comboQuestions.getItems().clear();
+
+            oListQuestions = FXCollections.observableArrayList(new ArrayList<>());
+            oListQuestions.setAll(businessLogic.getQuestions(comboEvents.getValue()));
+
+            comboQuestions.setItems(oListQuestions);
+
+            if (comboQuestions.getItems().size() == 0)
                 btnRemove.setDisable(true);
             else {
                 btnRemove.setDisable(false);
                 // select first option
-                comboEvents.getSelectionModel().select(0);
+                comboQuestions.getSelectionModel().select(0);
             }
 
         });
@@ -202,6 +240,6 @@ public class RemoveBetController implements Controller{
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
-
+        this.mainGUI = mainGUI;
     }
 }

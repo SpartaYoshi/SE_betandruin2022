@@ -84,6 +84,7 @@ public interface BlFacade  {
 	 */
 	@WebMethod public void setUser(User current);
 
-	@WebMethod  public double placeBet(double amount) throws NotEnoughMoneyException, MinimumBetException, FailedMoneyUpdateException
+	@WebMethod  public double placeBet(double amount) throws NotEnoughMoneyException, MinimumBetException, FailedMoneyUpdateException;
 
+	@WebMethod public Vector<Question> getQuestions(Event value);
 }

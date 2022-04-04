@@ -29,6 +29,8 @@ public class Question implements Serializable {
 	private String result;  
 	private ArrayList<Fee> feeList=new ArrayList<Fee>();
 
+	@ManyToOne
+	@JoinColumn(name = "event_event_number")
 	@XmlIDREF
 	private Event event;
 

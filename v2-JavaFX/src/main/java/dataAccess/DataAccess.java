@@ -240,6 +240,23 @@ public class DataAccess  {
 		return res;
 	}
 
+
+	public Vector<Question> getQuestions(Event event) {
+		System.out.println("Event is "+ event);
+		System.out.println(">> DataAccess: getQuestions");
+		Vector<Question> res = new Vector<Question>();
+		TypedQuery<Question> query = db.createQuery("SELECT qu FROM Question qu WHERE qu.event=?1",
+				Question.class);
+		query.setParameter(1, event);
+		List<Question> questions = query.getResultList();
+		for (Question q:questions){
+			System.out.println(q.toString());
+			res.add(q);
+		}
+		return res;
+	}
+
+
 	/**
 	 * This method retrieves from the database the dates in a month for which there are events
 	 * 
@@ -421,6 +438,7 @@ public class DataAccess  {
 
 		db.getTransaction().commit();
 
+		return 0;
 	}
 
 
