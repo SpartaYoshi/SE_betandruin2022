@@ -1,16 +1,22 @@
 package uicontrollers;
 
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import businessLogic.BlFacade;
+import domain.Bet;
 import domain.Event;
 import domain.Question;
+import exceptions.EventFinished;
+import exceptions.TeamPlayingException;
+import exceptions.TeamRepeatedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -106,21 +112,27 @@ public class PlaceABetController implements Controller{
         void jButtonPlaceABet_actionPerformed(ActionEvent event) {
             //try {
 
-                messageLabel.setText("");
-                String stringAmount = amountMoneyTextField.getText();
-                if (stringAmount!= null){
-                    Double amount = Double.parseDouble(stringAmount);
-                    //Bet newBet = new Bet(amount, new Question()); ///// new Question
-                    //businessLogic.placeBet(amount, );
 
-                }else{
+            messageLabel.setText("");
+            String stringAmount = amountMoneyTextField.getText();
 
-                }
+            LocalDate localDate = calendar.getValue();
+            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            Date date = Date.from(instant);
+
+            if (stringAmount != null) {
+                Double amount = Double.parseDouble(stringAmount);
+                // Bet newBet = businessLogic.placeBet();
+
+            } else {
+
+            }
 
             //} catch {
 
             //}
         }
+
 
 
 
@@ -242,9 +254,6 @@ public class PlaceABetController implements Controller{
                 }
 
             });
-
-
-
 
 
             availableMoneyLabel.getStyleClass().setAll("lbl","lbl-info");

@@ -12,6 +12,7 @@ import javax.jws.WebService;
 
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
+import domain.Bet;
 import domain.Event;
 import domain.Question;
 import domain.User;
@@ -224,9 +225,9 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 	@WebMethod
-	public double placeBet(double amount) throws NotEnoughMoneyException, MinimumBetException, FailedMoneyUpdateException {
+	public Bet placeBet(double amount, Question question) throws NotEnoughMoneyException, MinimumBetException, FailedMoneyUpdateException {
+		Bet newBet = null;
 		User who = this.getUser();
-		Question question = this.getCurrentQuestion();
 		dbManager.open(false);
 		double totalMoneyToBet = 0;
 		double remainingTotalmoney = 0;
