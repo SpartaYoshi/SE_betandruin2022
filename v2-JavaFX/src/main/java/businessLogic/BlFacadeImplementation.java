@@ -241,7 +241,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 		dbManager.close();
 		////////
-		return totalMoneyToBet;
+		return newBet;
 	}
 
 
