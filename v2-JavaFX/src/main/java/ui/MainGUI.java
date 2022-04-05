@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-  private Window portalLag, mainAdminLag, createQuestionLag, browseQuestionsLag,setFeeLag, UserLoginLag, createEventLag, userLoginLag,depositMoneyLag;
+  private Window portalLag, mainAdminLag, createQuestionLag, browseQuestionsLag,setFeeLag, removebetLag, UserLoginLag, createEventLag, placeAbetLag, userLoginLag,depositMoneyLag;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -81,6 +81,10 @@ public class MainGUI {
         return new PlaceABetController(businessLogic);
       }
 
+      if (controllerClass == RemoveBetController.class) {
+        return new PlaceABetController(businessLogic);
+      }
+
 
 
       else {
@@ -113,6 +117,9 @@ public class MainGUI {
     createEventLag = load("/CreateNewEvent.fxml");
     userLoginLag = load("/UserLogin.fxml");
     depositMoneyLag=load("/DepositMoney.fxml");
+    placeAbetLag=load("/PlaceABetv2.fxml");
+    removebetLag=load("/RemoveABet.fxml");
+
 
 
     showDepositMoney();
@@ -147,8 +154,9 @@ public class MainGUI {
     setupScene(userLoginLag.ui, "Login", 650, 450);
   }
 
-  public void showDepositMoney() { setupScene(depositMoneyLag.ui,  "Deposit", 600, 450);
-  }
+  public void showDepositMoney() { setupScene(depositMoneyLag.ui,  "Deposit", 600, 450);}
+
+  public void showPlaceABet(){setupScene(placeAbetLag.ui, "PlaceABet", 320, 250);}
 
 
   private void setupScene(Parent ui, String title, int width, int height) {
