@@ -18,6 +18,5 @@
       <Label fx:id="listOfEventsLabel" layoutX="307.0" layoutY="69.0" prefHeight="18.0" prefWidth="150.0" text="List of events:" />
       <ComboBox fx:id="comboEvents" layoutX="300.0" layoutY="101.0" prefHeight="25.0" prefWidth="218.0" />
       <Label fx:id="lblMessage" layoutX="286.0" layoutY="243.0" text="   " />
-      <Button fx:id="btnAdd" layoutX="182.0" layoutY="305.0" mnemonicParsing="false" onAction="#addClick" prefHeight="26.0" prefWidth="88.0" text="%Add" />
    </children>
 </AnchorPane>
