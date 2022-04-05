@@ -12,11 +12,12 @@
       <Label layoutX="69.0" layoutY="69.0" text="%EventDate" />
       <Label layoutX="72.0" layoutY="184.0" text="%Question" />
       <ComboBox fx:id="comboQuestions" layoutX="159.0" layoutY="182.0" prefHeight="25.0" prefWidth="323.0" />
-      <Button fx:id="btnRemove" layoutX="171.0" layoutY="304.0" mnemonicParsing="false" onAction="#removeClick" prefHeight="26.0" prefWidth="88.0" text="%Remove" />
-      <Button fx:id="btnBack" layoutX="338.0" layoutY="305.0" mnemonicParsing="false" onAction="#closeClick" prefHeight="26.0" prefWidth="88.0" text="%Back" />
+      <Button fx:id="btnRemove" layoutX="348.0" layoutY="305.0" mnemonicParsing="false" onAction="#removeClick" prefHeight="26.0" prefWidth="88.0" text="%Remove" />
+      <Button fx:id="btnBack" layoutX="498.0" layoutY="20.0" mnemonicParsing="false" onAction="#closeClick" prefHeight="26.0" prefWidth="88.0" text="%Back" />
       <Label fx:id="lblError" layoutX="288.0" layoutY="362.0" prefHeight="17.0" prefWidth="24.0" />
       <Label fx:id="listOfEventsLabel" layoutX="307.0" layoutY="69.0" prefHeight="18.0" prefWidth="150.0" text="List of events:" />
       <ComboBox fx:id="comboEvents" layoutX="300.0" layoutY="101.0" prefHeight="25.0" prefWidth="218.0" />
       <Label fx:id="lblMessage" layoutX="286.0" layoutY="243.0" text="   " />
+      <Button fx:id="btnAdd" layoutX="182.0" layoutY="305.0" mnemonicParsing="false" onAction="#addClick" prefHeight="26.0" prefWidth="88.0" text="%Add" />
    </children>
 </AnchorPane>

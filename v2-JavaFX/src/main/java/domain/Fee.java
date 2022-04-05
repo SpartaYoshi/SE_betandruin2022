@@ -22,13 +22,17 @@ public class Fee implements Serializable{
 	
 	private String result;
 	private float fee;
-	
-	
-	public Fee(String r,float f) {
+
+
+	public Fee() {
+	}
+
+	public Fee(String r, float f) {
 		this.fee=f;
 		this.result=r;
 		
 	}
+
 	public String toString() {
 		return " result: "+ result+ " feeAmount "+fee;
 	}
