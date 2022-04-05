@@ -77,6 +77,10 @@ public class MainGUI {
         return new DepositMoneyController(businessLogic);
       }
 
+      if (controllerClass == PlaceABetController.class) {
+        return new PlaceABetController(businessLogic);
+      }
+
 
 
       else {
