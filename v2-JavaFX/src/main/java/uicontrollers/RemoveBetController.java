@@ -47,9 +47,6 @@ public class RemoveBetController implements Controller{
     private Button btnBack;
 
     @FXML
-    private Button btnAdd;
-
-    @FXML
     private Button btnRemove;
 
     @FXML
@@ -108,10 +105,8 @@ public class RemoveBetController implements Controller{
 
     }
 
-    @FXML
-    void addClick(ActionEvent event) {
-        //mainGUI.showPlaceABet();
-    }
+
+
 
     @FXML
     public void closeClick(MouseEvent mouseEvent) {mainGUI.showPortal();}
@@ -230,8 +225,9 @@ public class RemoveBetController implements Controller{
 
             comboQuestions.setItems(oListQuestions);
 
-            if (comboQuestions.getItems().size() == 0)
+            if (comboQuestions.getItems().size() == 0){
                 btnRemove.setDisable(true);
+            }
             else {
                 btnRemove.setDisable(false);
                 // select first option
