@@ -1,10 +1,9 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Vector;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -19,6 +18,9 @@ public class Fee implements Serializable{
 	@XmlJavaTypeAdapter(IntegerAdapter.class)
 	@GeneratedValue
 	private int id;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private Vector<Bet> bets = new Vector<Bet>();
 	
 	private String result;
 	private float fee;

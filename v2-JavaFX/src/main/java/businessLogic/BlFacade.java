@@ -6,10 +6,7 @@ import java.util.Vector;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-import domain.Bet;
-import domain.Event;
-import domain.Question;
-import domain.User;
+import domain.*;
 import exceptions.*;
 
 /**
@@ -85,7 +82,7 @@ public interface BlFacade  {
 	 */
 	@WebMethod public void setUser(User current);
 
-	@WebMethod  public Bet placeBet(double amount,Question question) throws NotEnoughMoneyException, MinimumBetException, FailedMoneyUpdateException;
+	@WebMethod public Bet placeBet(double amount, Question question, Fee fee) throws NotEnoughMoneyException, MinimumBetException;
 
 	@WebMethod public Vector<Question> getQuestions(Event value);
 }

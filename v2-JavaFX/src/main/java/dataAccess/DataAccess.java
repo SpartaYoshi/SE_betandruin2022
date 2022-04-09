@@ -429,42 +429,39 @@ public class DataAccess  {
 
 	}
 
-	public double placeBetToQuestion(Question q, Double amountBet){
+	public Bet placeBetToQuestion(Question q, Fee f, int numId, Double amountBet, User who){
+		System.out.println(">> DataAccess: placeAbet=> On question = " + q + ", amount = " +amountBet + " by " + who);
+		Question question = db.find(Question.class, q.getQuestionNumber());
+		Fee fee = db.find(Fee.class, f.getFee());
+		Bet bet = new Bet(amountBet);
+
+		//bet = fee.setBet(); !!!!!!!!!!!!!!! setBet in question or in user and question? or how?
 		db.getTransaction().begin();
-		Query query = db.createQuery("UPDATE Bet SET amount = ?1 WHERE Question =?2");
-		query.setParameter(1, amountBet);
-		query.setParameter(2, q);
-
-
+		db.persist(bet);
 		db.getTransaction().commit();
 
-		return 0;
+		this.restMoney(who, amountBet);
+
+		return bet;
+
 	}
 
 
 	public double restMoney(User who, double bet)  {
-
 		db.getTransaction().begin();
-
 		double total = who.getMoneyAvailable()- bet; //the money he had - the deposited money
 		Query query = db.createQuery("UPDATE User SET moneyAvailable = ?1"+ " WHERE username =?2");
 		query.setParameter(1, total);
 		query.setParameter(2, who.getUsername());
 		int updateCount = query.executeUpdate();
-
-
 		System.out.println(">> DataAccess: money updated");
 		db.getTransaction().commit();
-
 		if (updateCount==0){
 			return -1;
-
 		}else{
 			who.setMoneyAvailable(total);
 			return who.getMoneyAvailable();
 		}
-
-
 	}
 
 

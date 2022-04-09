@@ -1,10 +1,8 @@
 package domain;
 
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
@@ -21,6 +19,9 @@ public class User {
 	// private double balance;
 	private boolean admin;
 
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private Vector<Bet> bets = new Vector<Bet>();
+
 
 	public User() {
 	}
@@ -33,6 +34,7 @@ public class User {
 		this.surname = surname;
 		this.birthdate = birthdate;
 		moneyAvailable=0;
+
 		
 		admin = false;
 	}

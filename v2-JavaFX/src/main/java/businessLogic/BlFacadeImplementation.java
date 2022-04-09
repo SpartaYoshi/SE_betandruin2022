@@ -12,10 +12,7 @@ import javax.jws.WebService;
 
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
-import domain.Bet;
-import domain.Event;
-import domain.Question;
-import domain.User;
+import domain.*;
 import exceptions.*;
 
 
@@ -96,7 +93,7 @@ public class BlFacadeImplementation implements BlFacade {
 		if (currentdate.compareTo(date) > 0) {
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
 					getString("ErrorEventHasFinished"));
-				
+
 		}else {
 			if (team1.toLowerCase().trim().equals(team2.toLowerCase().trim())){
 				throw new TeamRepeatedException();
@@ -225,23 +222,32 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 	@WebMethod
-	public Bet placeBet(double amount, Question question) throws NotEnoughMoneyException, MinimumBetException, FailedMoneyUpdateException {
+	public Bet placeBet(double amount, Question question, Fee fee) throws NotEnoughMoneyException, MinimumBetException {
 		Bet newBet = null;
 		User who = this.getUser();
+
 		dbManager.open(false);
-		double totalMoneyToBet = 0;
-		double remainingTotalmoney = 0;
-		remainingTotalmoney = dbManager.restMoney(who, amount); //update the remaining money of the user
-		if (amount>=question.getBetMinimum()){
-			totalMoneyToBet = dbManager.placeBetToQuestion(question, amount);
+			if (amount>this.currentUser.getMoneyAvailable()){
+				throw new NotEnoughMoneyException();
+			}
+			else if (amount<question.getBetMinimum()){
+				throw new MinimumBetException();
+			}
+			else{
+				newBet = dbManager.placeBetToQuestion(question, fee, newBet.getBetNum(), amount, who);
+			}
 
-		}else{
-			throw new MinimumBetException();
-		}
 
-		dbManager.close();
-		////////
+
+			dbManager.close();
+
+
 		return newBet;
+
+
+
+
+
 	}
 
 

@@ -118,11 +118,11 @@ public class MainGUI {
     userLoginLag = load("/UserLogin.fxml");
     depositMoneyLag=load("/DepositMoney.fxml");
     placeAbetLag=load("/PlaceABetv2.fxml");
-    removebetLag=load("/RemoveABet.fxml");
+    //removebetLag=load("/RemoveABet.fxml");
 
 
 
-    showDepositMoney();
+    showPlaceABet();
 
   }
 
