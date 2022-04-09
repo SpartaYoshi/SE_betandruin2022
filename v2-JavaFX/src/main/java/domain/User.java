@@ -2,9 +2,9 @@ package domain;
 
 import java.util.Date;
 import java.util.Locale;
+import java.util.Vector;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
@@ -21,6 +21,9 @@ public class User {
 	// private double balance;
 	private boolean admin;
 
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private Vector<Bet> bets;
+
 
 	public User() {
 	}
@@ -35,6 +38,9 @@ public class User {
 		moneyAvailable=0;
 		
 		admin = false;
+		bets = new Vector<Bet>();
+
+
 	}
 
 
@@ -106,9 +112,15 @@ public class User {
 	public void revokeAdmin() {
 		admin = false;
 	}
-	
-	
 
+
+	public Vector<Bet> getBets() {
+		return bets;
+	}
+
+	public void setBets(Vector<Bet> bets) {
+		this.bets = bets;
+	}
 	
 	
 }

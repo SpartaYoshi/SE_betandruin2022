@@ -1,6 +1,7 @@
 package uicontrollers;
 
 import businessLogic.BlFacade;
+import domain.Bet;
 import domain.Event;
 import domain.Question;
 import exceptions.EventFinished;
@@ -34,6 +35,7 @@ public class RemoveBetController implements Controller{
 
     private ObservableList<Event> oListEvents;
     private ObservableList<Question> oListQuestions;
+    private ObservableList<Bet> oListBets;
 
 
 
@@ -44,7 +46,7 @@ public class RemoveBetController implements Controller{
     private URL location;
 
     @FXML
-    private Button btnBack;
+    private Button btnClose;
 
     @FXML
     private Button btnRemove;
@@ -57,6 +59,9 @@ public class RemoveBetController implements Controller{
 
     @FXML
     private ComboBox<Question> comboQuestions;
+
+    @FXML
+    private ComboBox<Bet> comboBets;
 
     @FXML
     private Label lblError;
@@ -83,11 +88,13 @@ public class RemoveBetController implements Controller{
         Date date = Date.from(instant);
 
 
-        Event event1 = comboEvents.getSelectionModel().getSelectedItem();
+        //Event event1 = comboEvents.getSelectionModel().getSelectedItem();
+        Bet bet1 = comboBets.getSelectionModel().getSelectedItem();
 
         try {
-            if (event1 != null) {
+            if (bet1 != null) {
                 //businessLogic.remove(event);
+                businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), bet1);
                 lblMessage.getStyleClass().clear();
                 lblMessage.getStyleClass().setAll("lbl", "lbl-success");
                 lblMessage.setText("Question correctly created");
@@ -204,8 +211,11 @@ public class RemoveBetController implements Controller{
 
             comboEvents.setItems(oListEvents);
 
-            if (comboEvents.getItems().size() == 0)
+            if (comboEvents.getItems().size() == 0){
                 comboQuestions.setDisable(true);
+                lblMessage.setText("There are no Events in the selected date.");
+                lblMessage.getStyleClass().setAll("lbl", "lbl-alert");
+            }
             else {
                 comboQuestions.setDisable(false);
                 // select first option
@@ -226,12 +236,38 @@ public class RemoveBetController implements Controller{
             comboQuestions.setItems(oListQuestions);
 
             if (comboQuestions.getItems().size() == 0){
+                comboBets.setDisable(true);
+                lblMessage.setText("There are no Questions in the selected event.");
+                lblMessage.getStyleClass().setAll("lbl", "lbl-alert");
+            }
+            else {
+                comboBets.setDisable(false);
+                // select first option
+                comboQuestions.getSelectionModel().select(0);
+            }
+
+        });
+
+
+
+        // when a Question is selected...
+        comboQuestions.setOnAction(actionEvent -> {
+            comboBets.getItems().clear();
+
+            oListBets = FXCollections.observableArrayList(new ArrayList<>());
+            oListBets.setAll(businessLogic.getUserBets(comboQuestions.getValue(), businessLogic.getCurrentUser()));
+
+            comboBets.setItems(oListBets);
+
+            if (comboBets.getItems().size() == 0){
                 btnRemove.setDisable(true);
+                lblMessage.setText("You haven't placed any bet in the selected question.");
+                lblMessage.getStyleClass().setAll("lbl", "lbl-alert");
             }
             else {
                 btnRemove.setDisable(false);
                 // select first option
-                comboQuestions.getSelectionModel().select(0);
+                comboBets.getSelectionModel().select(0);
             }
 
         });

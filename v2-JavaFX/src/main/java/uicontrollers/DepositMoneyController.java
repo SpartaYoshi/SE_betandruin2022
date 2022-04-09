@@ -48,7 +48,7 @@ public class DepositMoneyController implements Controller {
             e.printStackTrace();
         }
         User u= new User("prueba", "123", "Iosu", "Abal", date1);
-        businessLogic.setUser(u);
+        businessLogic.setCurrentUser(u);
     }
 
     @Override

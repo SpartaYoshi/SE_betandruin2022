@@ -136,6 +136,21 @@ public class BlFacadeImplementation implements BlFacade {
 		return questions;
 	}
 
+	@WebMethod
+	public Vector<Bet> getUserBets(Question question, User user){
+		dbManager.open(false);
+		Vector<Bet>  bets = dbManager.getUserBets(question, user);
+		dbManager.close();
+		return bets;
+	}
+
+	@Override
+	public Bet removeCurrentUserBet(User currentUser, Bet bet1) {
+		dbManager.open(false);
+		Bet bet = dbManager.removeCurrentUserBet(currentUser, bet1);
+		dbManager.close();
+		return bet;
+	}
 
 
 	/**
@@ -227,7 +242,7 @@ public class BlFacadeImplementation implements BlFacade {
 	@WebMethod
 	public Bet placeBet(double amount, Question question) throws NotEnoughMoneyException, MinimumBetException, FailedMoneyUpdateException {
 		Bet newBet = null;
-		User who = this.getUser();
+		User who = this.getCurrentUser();
 		dbManager.open(false);
 		double totalMoneyToBet = 0;
 		double remainingTotalmoney = 0;
@@ -249,7 +264,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 	@WebMethod
 	public double insertMoney(double amount) throws FailedMoneyUpdateException{
-		User who=this.getUser();
+		User who=this.getCurrentUser();
 		System.out.println(">> user tenia "+who.getMoneyAvailable());
 
 		dbManager.open(false);
@@ -268,12 +283,12 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 	@Override
-	public User getUser() {
+	public User getCurrentUser() {
 		return this.currentUser;
 	}
 
 	@Override
-	public void setUser(User current) {
+	public void setCurrentUser(User current) {
 		this.currentUser=current;
 	}
 

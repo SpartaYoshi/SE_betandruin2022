@@ -257,6 +257,27 @@ public class DataAccess  {
 	}
 
 
+	public Vector<Bet> getUserBets(Question question, User user) {
+		System.out.println("Question is "+ question);
+		System.out.println(">> DataAccess: getBets");
+		Vector<Bet> res = new Vector<Bet>();
+
+		// Aqui lo que hago es consegir todas las bets que tiene un user, pero lo que quiero es:
+		// Conseguir solo las bets que tengan fecha, evento y question tal, de tal user.
+		TypedQuery<Bet> query = db.createQuery("SELECT us FROM User us WHERE us.bets=?1",
+				Bet.class);
+		query.setParameter(1, question);
+		List<Bet> bets = query.getResultList();
+		for (Bet b1:bets){
+			System.out.println(b1.toString());
+			res.add(b1);
+		}
+		return res;
+	}
+
+
+
+
 	/**
 	 * This method retrieves from the database the dates in a month for which there are events
 	 * 
@@ -467,8 +488,16 @@ public class DataAccess  {
 
 	}
 
+	public Bet removeCurrentUserBet(User currentUser, Bet bet1) {
+		db.getTransaction().begin();
 
-	
+		// ESTA MAL !!
+		// Quiero borrar un bet de la lista de bets de un user
+		Query query = db.createQuery("REMOVE bet FROM User us WHERE us.bets=?1",
+				User.class);
 
-	
+		query.setParameter(1, bet1);
+		db.getTransaction().commit();
+		return bet1;
+	}
 }

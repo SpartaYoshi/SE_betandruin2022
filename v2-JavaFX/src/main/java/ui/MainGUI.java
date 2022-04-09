@@ -82,7 +82,7 @@ public class MainGUI {
       }
 
       if (controllerClass == RemoveBetController.class) {
-        return new PlaceABetController(businessLogic);
+        return new RemoveBetController(businessLogic);
       }
 
 
@@ -122,7 +122,7 @@ public class MainGUI {
 
 
 
-    showDepositMoney();
+    showRemoveABet();
 
   }
 
@@ -157,6 +157,9 @@ public class MainGUI {
   public void showDepositMoney() { setupScene(depositMoneyLag.ui,  "Deposit", 600, 450);}
 
   public void showPlaceABet(){setupScene(placeAbetLag.ui, "PlaceABet", 320, 250);}
+
+  public void showRemoveABet(){setupScene(removebetLag.ui, "RemoveABet", 320, 250);}
+
 
 
   private void setupScene(Parent ui, String title, int width, int height) {

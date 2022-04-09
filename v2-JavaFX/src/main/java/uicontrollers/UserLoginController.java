@@ -41,6 +41,12 @@ public class UserLoginController implements Controller{
     @FXML
     private TextField usernameTextField;
 
+    @FXML
+    private Button closeButton;
+
+    @FXML
+    private Button loginButton;
+
     public UserLoginController(BlFacade bl) {
         this.businessLogic = bl;
     }
@@ -57,18 +63,18 @@ public class UserLoginController implements Controller{
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
 
-
         try {
             User user = businessLogic.loginUser(username, password);
-            businessLogic.setUser(user);
+            businessLogic.setCurrentUser(user);
             if (user.isAdmin()) {
+                //messageLabel.setText("Login was successful!");
+                //messageLabel.getStyleClass().setAll("lbl","lbl-success");
                 mainGUI.showMainAdmin();
             }
             else {
-                messageLabel.setText("Login was successful!");
-                messageLabel.getStyleClass().setAll("lbl","lbl-success");
+                //messageLabel.setText("Login was successful!");
+                //messageLabel.getStyleClass().setAll("lbl","lbl-success");
                 mainGUI.showBrowseQuestions();
-
             }
 
         } catch (FailedLoginException e) {
@@ -79,15 +85,9 @@ public class UserLoginController implements Controller{
 
     @FXML
     void initialize() {
-
-
-
+        closeButton.setDisable(false);
+        loginButton.setDisable(false);
     }
-
-
-
-
-
 
 
     @Override

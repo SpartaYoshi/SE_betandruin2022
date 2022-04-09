@@ -257,7 +257,7 @@ public class PlaceABetController implements Controller{
 
 
             availableMoneyLabel.getStyleClass().setAll("lbl","lbl-info");
-            availableMoneyLabel.setText("Your actual available amount of money: " + businessLogic.getUser().getMoneyAvailable());
+            availableMoneyLabel.setText("Your actual available amount of money: " + businessLogic.getCurrentUser().getMoneyAvailable());
 
 
         }

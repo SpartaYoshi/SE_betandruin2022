@@ -77,15 +77,19 @@ public interface BlFacade  {
 	 * method to get the actual user logged
  	 * @return User
 	 */
-	@WebMethod public User getUser();
+	@WebMethod public User getCurrentUser();
 
 	/**
 	 * method to set who is the current user
 	 * @param current a User
 	 */
-	@WebMethod public void setUser(User current);
+	@WebMethod public void setCurrentUser(User current);
 
 	@WebMethod  public Bet placeBet(double amount,Question question) throws NotEnoughMoneyException, MinimumBetException, FailedMoneyUpdateException;
 
 	@WebMethod public Vector<Question> getQuestions(Event value);
+
+	@WebMethod public Vector<Bet> getUserBets(Question question, User user);
+
+	@WebMethod public Bet removeCurrentUserBet(User currentUser, Bet bet1);
 }
