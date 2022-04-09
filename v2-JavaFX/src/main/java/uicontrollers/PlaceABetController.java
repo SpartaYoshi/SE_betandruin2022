@@ -5,24 +5,21 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import businessLogic.BlFacade;
 import domain.Bet;
 import domain.Event;
+import domain.Fee;
 import domain.Question;
-import exceptions.EventFinished;
-import exceptions.TeamPlayingException;
-import exceptions.TeamRepeatedException;
+import exceptions.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.util.Callback;
 import ui.MainGUI;
@@ -50,19 +47,15 @@ public class PlaceABetController implements Controller{
     private Button closeButton;
 
     @FXML
-    private ComboBox<Event> comboEvents;
+    private TableView<Event> tblEvents;
+
 
     @FXML
-    private ComboBox<Question> comboQuestions;
+    private TableView<Question> tblQuestions;
 
     @FXML
-    private Label lblError;
+    private TableView<Fee> tblFees;
 
-    @FXML
-    private Label lblMessage;
-
-    @FXML
-    private Label listOfEventsLabel;
 
     @FXML
     private Label messageLabel;
@@ -73,31 +66,32 @@ public class PlaceABetController implements Controller{
     @FXML
     private Label availableMoneyLabel;
 
+    @FXML
+    private TableColumn<Event, Integer> ec1;
+
+    @FXML
+    private TableColumn<Event, String> ec2;
+
+    @FXML
+    private TableColumn<Question, Integer> qc1;
+
+    @FXML
+    private TableColumn<Question, String> qc2;
 
 
+    @FXML
+    private TableColumn<Fee, Float> fc1;
+
+    @FXML
+    private TableColumn<Fee, String> fc2;
 
 
+    private final BlFacade businessLogic;
+    private MainGUI mainGUI;
 
-
-
-
-
-
-
-        private final BlFacade businessLogic;
-        private MainGUI mainGUI;
-
-        public PlaceABetController(BlFacade bl)  {
+    public PlaceABetController(BlFacade bl)  {
             this.businessLogic = bl;
         }
-
-
-
-
-
-
-
-
 
 
         @FXML
@@ -106,15 +100,14 @@ public class PlaceABetController implements Controller{
         }
 
 
-
-
         @FXML
-        void jButtonPlaceABet_actionPerformed(ActionEvent event) {
+        void jButtonPlaceABet_actionPerformed(ActionEvent event) throws NotEnoughMoneyException, MinimumBetException, FailedMoneyUpdateException, EventFinished {
             //try {
-
 
             messageLabel.setText("");
             String stringAmount = amountMoneyTextField.getText();
+            Question question = tblQuestions.getSelectionModel().getSelectedItem();
+            Fee fee = tblFees.getSelectionModel().getSelectedItem();
 
             LocalDate localDate = calendar.getValue();
             Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
@@ -122,15 +115,22 @@ public class PlaceABetController implements Controller{
 
             if (stringAmount != null) {
                 Double amount = Double.parseDouble(stringAmount);
-                // Bet newBet = businessLogic.placeBet();
+
+                Bet newBet = null;
+                newBet = businessLogic.placeBet(amount, question, fee);
+                if (newBet != null) {
+                    messageLabel.getStyleClass().setAll("lbl", "lbl-success");
+                    messageLabel.setText("The bet has been succesfully added.");
+                    //tblEvents.getItems().add(newEvent);
+                    holidays.add(Dates.convertToLocalDateViaInstant(date));
+                } else {
+                    messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                    messageLabel.setText("Error. The bet could not be added.");
+                }
 
             } else {
 
             }
-
-            //} catch {
-
-            //}
         }
 
 
@@ -157,107 +157,100 @@ public class PlaceABetController implements Controller{
 
 
 
+    private void setupEventSelection() {
+        tblEvents.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+
+                tblQuestions.getItems().clear();
+                for (Question q : tblEvents.getSelectionModel().getSelectedItem().getQuestions()) {
+                    tblQuestions.getItems().add(q);
+                }
+            }
+        });
+    }
+
+
+
+    private void setupQuestionSelection() {
+        tblQuestions.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+
+                tblFees.getItems().clear();
+                for (Fee f : tblQuestions.getSelectionModel().getSelectedItem().getFees()) {
+                    tblFees.getItems().add(f);
+                }
+            }
+        });
+    }
+
+
+
+
+
     @FXML
         void initialize() {
+        setupEventSelection();
+        setupQuestionSelection();
 
+        setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
 
-            // only show the text of the event in the combobox (without the id)
-            Callback<ListView<Event>, ListCell<Event>> factory = lv -> new ListCell<>() {
-                @Override
-                protected void updateItem(Event item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setText(empty ? "" : item.getDescription());
-                }
-            };
-
-            comboEvents.setCellFactory(factory);
-            comboEvents.setButtonCell(factory.call(null));
-
-
-            setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
-
-
-            setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
-
-            calendar.setOnMouseClicked(e -> {
-                // get a reference to datepicker inner content
-                // attach a listener to the  << and >> buttons
-                // mark events for the (prev, current, next) month and year shown
-                DatePickerSkin skin = (DatePickerSkin) calendar.getSkin();
-                skin.getPopupContent().lookupAll(".button").forEach(node -> {
-                    node.setOnMouseClicked(event -> {
-                        List<Node> labels = skin.getPopupContent().lookupAll(".label").stream().toList();
-                        String month = ((Label) (labels.get(0))).getText();
-                        String year =  ((Label) (labels.get(1))).getText();
-                        YearMonth ym = Dates.getYearMonth(month + " " + year);
-                        setEventsPrePost(ym.getYear(), ym.getMonthValue());
-                    });
+        calendar.setOnMouseClicked(e -> {
+            // get a reference to datepicker inner content
+            // attach a listener to the  << and >> buttons
+            // mark events for the (prev, current, next) month and year shown
+            DatePickerSkin skin = (DatePickerSkin) calendar.getSkin();
+            skin.getPopupContent().lookupAll(".button").forEach(node -> {
+                node.setOnMouseClicked(event -> {
+                    List<Node> labels = skin.getPopupContent().lookupAll(".label").stream().toList();
+                    String month = ((Label) (labels.get(0))).getText();
+                    String year =  ((Label) (labels.get(1))).getText();
+                    YearMonth ym = Dates.getYearMonth(month + " " + year);
+                    setEventsPrePost(ym.getYear(), ym.getMonthValue());
                 });
-
-
             });
 
-            calendar.setDayCellFactory(new Callback<DatePicker, DateCell>() {
-                @Override
-                public DateCell call(DatePicker param) {
-                    return new DateCell() {
-                        @Override
-                        public void updateItem(LocalDate item, boolean empty) {
-                            super.updateItem(item, empty);
 
-                            if (!empty && item != null) {
-                                if (holidays.contains(item)) {
-                                    this.setStyle("-fx-background-color: pink");
-                                }
+        });
+
+        calendar.setDayCellFactory(new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(DatePicker param) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (!empty && item != null) {
+                            if (holidays.contains(item)) {
+                                this.setStyle("-fx-background-color: pink");
                             }
                         }
-                    };
-                }
-            });
+                    }
+                };
+            }
+        });
 
-            // when a date is selected...
-            calendar.setOnAction(actionEvent -> {
-                comboEvents.getItems().clear();
+        // a date has been chosen, update the combobox of Events
+        calendar.setOnAction(actionEvent -> {
+            tblEvents.getItems().clear();
+            Vector<domain.Event> events = businessLogic.getEvents(Dates.convertToDate(calendar.getValue()));
+            for (domain.Event ev : events) {
+                tblEvents.getItems().add(ev);
+            }
+        });
 
-                oListEvents = FXCollections.observableArrayList(new ArrayList<>());
-                oListEvents.setAll(businessLogic.getEvents(Dates.convertToDate(calendar.getValue())));
+        // Bind columns to Event attributes
+        ec1.setCellValueFactory(new PropertyValueFactory<>("eventNumber"));
+        ec2.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-                comboEvents.setItems(oListEvents);
-
-                if (comboEvents.getItems().size() == 0)
-                    comboQuestions.setDisable(true);
-                else {
-                    comboQuestions.setDisable(false);
-                    // select first option
-                    comboEvents.getSelectionModel().select(0);
-                }
-
-            });
+        qc1.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
+        qc2.setCellValueFactory(new PropertyValueFactory<>("question"));
 
 
-
-            // when an event is selected...
-            comboEvents.setOnAction(actionEvent -> {
-                comboQuestions.getItems().clear();
-
-                oListQuestions = FXCollections.observableArrayList(new ArrayList<>());
-                oListQuestions.setAll(businessLogic.getQuestions(comboEvents.getValue()));
-
-                comboQuestions.setItems(oListQuestions);
-
-                if (comboQuestions.getItems().size() == 0)
-                    placeBetButton.setDisable(true);
-                else {
-                    placeBetButton.setDisable(false);
-                    // select first option
-                    comboQuestions.getSelectionModel().select(0);
-                }
-
-            });
+        fc1.setCellValueFactory(new PropertyValueFactory<>("fee"));
+        fc2.setCellValueFactory(new PropertyValueFactory<>("result"));
 
 
-            availableMoneyLabel.getStyleClass().setAll("lbl","lbl-info");
-            availableMoneyLabel.setText("Your actual available amount of money: " + businessLogic.getCurrentUser().getMoneyAvailable());
 
 
         }

@@ -240,22 +240,26 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 	@WebMethod
-	public Bet placeBet(double amount, Question question) throws NotEnoughMoneyException, MinimumBetException, FailedMoneyUpdateException {
+	public Bet placeBet(double amount, Question question, Fee fee) throws NotEnoughMoneyException, MinimumBetException {
 		Bet newBet = null;
 		User who = this.getCurrentUser();
+
 		dbManager.open(false);
-		double totalMoneyToBet = 0;
-		double remainingTotalmoney = 0;
-		remainingTotalmoney = dbManager.restMoney(who, amount); //update the remaining money of the user
-		if (amount>=question.getBetMinimum()){
-			totalMoneyToBet = dbManager.placeBetToQuestion(question, amount);
+			if (amount>this.currentUser.getMoneyAvailable()){
+				throw new NotEnoughMoneyException();
+			}
+			else if (amount<question.getBetMinimum()){
+				throw new MinimumBetException();
+			}
+			else{
+				newBet = dbManager.placeBetToQuestion(question, fee, newBet.getBetNum(), amount, who);
+			}
 
-		}else{
-			throw new MinimumBetException();
-		}
 
-		dbManager.close();
-		////////
+
+			dbManager.close();
+
+
 		return newBet;
 	}
 

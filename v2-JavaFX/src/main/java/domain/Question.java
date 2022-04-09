@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 @SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -26,8 +27,11 @@ public class Question implements Serializable {
 
 	private String question; 
 	private float betMinimum;
-	private String result;  
-	private ArrayList<Fee> feeList=new ArrayList<Fee>();
+	private String result;
+	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private Vector<Fee> feeList = new Vector<Fee>();
+
+	//private ArrayList<Fee> feeList=new ArrayList<Fee>();
 
 	@ManyToOne
 	@JoinColumn(name = "event_event_number")
@@ -107,7 +111,7 @@ public class Question implements Serializable {
 	/**
 	 * Gets the minimum amount allowed for the bet
 	 * 
-	 * @param  minimum amount to be set
+	 * @param  betMinimum amount to be set
 	 */
 	public void setBetMinimum(float betMinimum) {
 		this.betMinimum = betMinimum;
@@ -126,7 +130,7 @@ public class Question implements Serializable {
 	/**
 	 * Sets the correct result of the  query
 	 * 
-	 * @param correct result of the query
+	 * @param result is the correct result of the query
 	 */
 	public void setResult(String result) {
 		this.result = result;

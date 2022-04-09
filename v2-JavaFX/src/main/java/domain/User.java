@@ -3,6 +3,7 @@ package domain;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Vector;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -121,6 +122,6 @@ public class User {
 	public void setBets(Vector<Bet> bets) {
 		this.bets = bets;
 	}
-	
+
 	
 }
