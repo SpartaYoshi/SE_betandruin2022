@@ -85,6 +85,15 @@ public class PlaceABetController implements Controller{
     @FXML
     private TableColumn<Fee, String> fc2;
 
+    @FXML
+    private Label eventDescriptionLabel;
+
+    @FXML
+    private Label questionLabel;
+
+    @FXML
+    private Label resultLabel;
+
 
     private final BlFacade businessLogic;
     private MainGUI mainGUI;
@@ -160,6 +169,9 @@ public class PlaceABetController implements Controller{
     private void setupEventSelection() {
         tblEvents.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
+                eventDescriptionLabel.setText(tblEvents.getSelectionModel().getSelectedItem().getDescription());
+                questionLabel.setText("");
+                resultLabel.setText("");
 
                 tblQuestions.getItems().clear();
                 for (Question q : tblEvents.getSelectionModel().getSelectedItem().getQuestions()) {
@@ -174,6 +186,8 @@ public class PlaceABetController implements Controller{
     private void setupQuestionSelection() {
         tblQuestions.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
+                questionLabel.setText(tblQuestions.getSelectionModel().getSelectedItem().getQuestion());
+                resultLabel.setText("");
 
                 tblFees.getItems().clear();
                 for (Fee f : tblQuestions.getSelectionModel().getSelectedItem().getFees()) {
@@ -185,12 +199,24 @@ public class PlaceABetController implements Controller{
 
 
 
+    private void setupResultSelection() {
+        tblFees.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                resultLabel.setText(tblFees.getSelectionModel().getSelectedItem().getResult());
+            }
+        });
+    }
+
+
+
+
 
 
     @FXML
         void initialize() {
         setupEventSelection();
         setupQuestionSelection();
+        setupResultSelection();
 
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
 
@@ -243,10 +269,11 @@ public class PlaceABetController implements Controller{
         ec1.setCellValueFactory(new PropertyValueFactory<>("eventNumber"));
         ec2.setCellValueFactory(new PropertyValueFactory<>("description"));
 
+        // Bind columns to Question attributes
         qc1.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
         qc2.setCellValueFactory(new PropertyValueFactory<>("question"));
 
-
+        // Bind columns to Fee (result) attributes
         fc1.setCellValueFactory(new PropertyValueFactory<>("fee"));
         fc2.setCellValueFactory(new PropertyValueFactory<>("result"));
 

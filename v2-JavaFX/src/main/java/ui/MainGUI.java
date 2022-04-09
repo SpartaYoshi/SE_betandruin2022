@@ -122,7 +122,7 @@ public class MainGUI {
 
 
 
-    showRemoveABet();
+    showPlaceABet();
 
   }
 
