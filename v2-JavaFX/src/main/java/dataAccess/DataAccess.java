@@ -426,26 +426,16 @@ public class DataAccess  {
 	}
 
 	public double insertMoney(User who, double am)  {
-
-		db.getTransaction().begin();
-
 		double total=who.getMoneyAvailable()+ am; //the money he had + the deposited money
-		Query query = db.createQuery("UPDATE User SET moneyAvailable = ?1"+ " WHERE username =?2");
-		query.setParameter(1, total);
-		query.setParameter(2, who.getUsername());
-		int updateCount = query.executeUpdate();
-
-
-		System.out.println(">> DataAccess: money updated");
+		//this.registerUser(who);
+		db.getTransaction().begin();
+		who.setMoneyAvailable(total);
 		db.getTransaction().commit();
 
-		if (updateCount==0){
-			return -1;
+		System.out.println(">> DataAccess: money updated");
 
-		}else{
-			who.setMoneyAvailable(total);
-			return who.getMoneyAvailable();
-		}
+		return who.getMoneyAvailable();
+
 
 
 	}

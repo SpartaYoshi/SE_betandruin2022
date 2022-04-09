@@ -40,6 +40,7 @@ public class DepositMoneyController implements Controller {
 
     public DepositMoneyController(BlFacade bl){
         this.businessLogic=bl;
+        //needs to be removed when login and register are done from here
         String sDate1="01/01/1980";
         Date date1= null;
         try {
@@ -49,6 +50,9 @@ public class DepositMoneyController implements Controller {
         }
         User u= new User("prueba", "123", "Iosu", "Abal", date1);
         businessLogic.setCurrentUser(u);
+        //to here
+
+
     }
 
     @Override
@@ -75,6 +79,7 @@ public class DepositMoneyController implements Controller {
             warningLbl.getStyleClass().setAll("lbl","lbl-danger");
             warningLbl.setText("Sorry, introduce a positive amount");
         }
+        amountField.setText("");
 
     }
 
