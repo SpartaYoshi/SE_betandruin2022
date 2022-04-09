@@ -12,10 +12,7 @@ import javax.jws.WebService;
 
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
-import domain.Bet;
-import domain.Event;
-import domain.Question;
-import domain.User;
+import domain.*;
 import exceptions.*;
 
 
@@ -245,22 +242,27 @@ public class BlFacadeImplementation implements BlFacade {
 		User who = this.getCurrentUser();
 
 		dbManager.open(false);
-			if (amount>this.currentUser.getMoneyAvailable()){
-				throw new NotEnoughMoneyException();
-			}
-			else if (amount<question.getBetMinimum()){
-				throw new MinimumBetException();
-			}
-			else{
-				newBet = dbManager.placeBetToQuestion(question, fee, newBet.getBetNum(), amount, who);
-			}
+		if (amount>this.currentUser.getMoneyAvailable()){
+			throw new NotEnoughMoneyException();
+		}
+		else if (amount<question.getBetMinimum()){
+			throw new MinimumBetException();
+		}
+		else{
+			newBet = dbManager.placeBetToQuestion(question, fee, newBet.getBetNum(), amount, who);
+		}
 
 
 
-			dbManager.close();
+		dbManager.close();
 
 
 		return newBet;
+
+
+
+
+
 	}
 
 
