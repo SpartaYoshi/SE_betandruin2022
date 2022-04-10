@@ -27,7 +27,7 @@
       </Label>
       <Label alignment="CENTER" layoutX="185.0" layoutY="14.0" prefHeight="66.0" prefWidth="229.0" text="%Register" textAlignment="CENTER" textOverrun="CLIP">
          <font>
-            <Font name="Tw Cen MT" size="35.0" />
+            <Font name="Trebuchet MS Bold" size="35.0" />
          </font>
       </Label>
       <Button fx:id="registerBtn" layoutX="242.0" layoutY="275.0" mnemonicParsing="false" onAction="#registerClick" prefHeight="32.0" prefWidth="114.0" styleClass="btn-info" text="%Register">
@@ -35,7 +35,7 @@
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="closeBtn" layoutX="23.0" layoutY="349.0" mnemonicParsing="false" onAction="#closeClick" styleClass="btn-default" text="%Back" />
+      <Button fx:id="closeBtn" layoutX="23.0" layoutY="349.0" mnemonicParsing="false" onAction="#selectBack" styleClass="btn-default" text="%Back" />
       <ImageView fx:id="avatarIcon" fitHeight="55.0" fitWidth="68.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/img/imageUser.jpg" />

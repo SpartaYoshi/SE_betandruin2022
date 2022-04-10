@@ -1,7 +1,6 @@
 package ui;
 
 import businessLogic.BlFacade;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-  private Window portalLag, mainAdminLag, createQuestionLag, browseQuestionsLag,setFeeLag, removebetLag, UserLoginLag, createEventLag, placeAbetLag, userLoginLag,depositMoneyLag;
+  private Window portal, adminPortal, createQuestion, browseQuestions, setFee, removebet, userLogin, userRegister, createEvent, placeAbet, depositMoney;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -52,38 +51,36 @@ public class MainGUI {
     FXMLLoader loader = new FXMLLoader(MainGUI.class.getResource(fxmlfile), ResourceBundle.getBundle("Etiquetas", Locale.getDefault()));
     loader.setControllerFactory(controllerClass -> {
 
-      if (controllerClass == MainAdminController.class) {
-        return new MainAdminController(businessLogic);
-      }
-      if (controllerClass == PortalController.class) {
+      if (controllerClass == PortalController.class)    // For both Portal and AdminPortal
         return new PortalController(businessLogic);
-      }
-      if (controllerClass == BrowseQuestionsController.class) {
+
+      if (controllerClass == BrowseQuestionsController.class)
         return new BrowseQuestionsController(businessLogic);
-      }
-      if (controllerClass == CreateQuestionController.class) {
+
+      if (controllerClass == CreateQuestionController.class)
         return new CreateQuestionController(businessLogic);
-      }
-      if(controllerClass== SetFeeController.class){
+
+      if(controllerClass== SetFeeController.class)
         return new SetFeeController(businessLogic);
-      }
-      if(controllerClass== UserLoginController.class){
+
+      if(controllerClass== UserLoginController.class)
         return new UserLoginController(businessLogic);
-      }
-      if (controllerClass == CreateNewEventController.class) {
+
+      if(controllerClass== UserRegisterController.class)
+        return new UserRegisterController(businessLogic);
+
+      if (controllerClass == CreateNewEventController.class)
         return new CreateNewEventController(businessLogic);
-      }
-      if (controllerClass == DepositMoneyController.class) {
+
+      if (controllerClass == DepositMoneyController.class)
         return new DepositMoneyController(businessLogic);
-      }
 
-      if (controllerClass == PlaceABetController.class) {
+      if (controllerClass == PlaceABetController.class)
         return new PlaceABetController(businessLogic);
-      }
 
-      if (controllerClass == RemoveBetController.class) {
+      if (controllerClass == RemoveBetController.class)
         return new RemoveBetController(businessLogic);
-      }
+
 
 
 
@@ -109,20 +106,21 @@ public class MainGUI {
 
     this.stage = stage;
 
-    mainAdminLag = load("/MainAdmin.fxml");
-    portalLag = load("/Portal.fxml");
-    browseQuestionsLag = load("/BrowseQuestions.fxml");
-    createQuestionLag = load("/CreateQuestion.fxml");
-    setFeeLag=load("/SetFee.fxml");
-    createEventLag = load("/CreateNewEvent.fxml");
-    userLoginLag = load("/UserLogin.fxml");
-    depositMoneyLag=load("/DepositMoney.fxml");
-    placeAbetLag=load("/PlaceABetv2.fxml");
-    removebetLag=load("/RemoveABet.fxml");
+    adminPortal = load("/AdminPortal.fxml");
+    portal = load("/Portal.fxml");
+    browseQuestions = load("/BrowseQuestions.fxml");
+    createQuestion = load("/CreateQuestion.fxml");
+    setFee = load("/SetFee.fxml");
+    createEvent = load("/CreateNewEvent.fxml");
+    userLogin = load("/UserLogin.fxml");
+    userRegister = load("/UserRegister.fxml");
+    depositMoney = load("/DepositMoney.fxml");
+    placeAbet = load("/PlaceABetv2.fxml");
+    removebet = load("/RemoveABet.fxml");
 
 
 
-    showPortal();
+    showUserRegister();//showPortal();
 
   }
 
@@ -130,35 +128,40 @@ public class MainGUI {
 //      init(stage);
 //  }
 
-  public void showMainAdmin(){setupScene(userLoginLag.ui, "MainAdmin", 320, 250);}
+  public void showMainAdmin(){setupScene(adminPortal.ui, "MainAdmin", 320, 250);}
 
-  public void showPortal(){setupScene(portalLag.ui, "Portal", 320, 250);}
+  public void showPortal(){setupScene(portal.ui, "Portal", 320, 250);}
 
   public void showBrowseQuestions() {
-    setupScene(browseQuestionsLag.ui, "BrowseQuestions", 1000, 500);
+    setupScene(browseQuestions.ui, "BrowseQuestions", 1000, 500);
   }
 
   public void showCreateQuestion() {
-    setupScene(createQuestionLag.ui, "CreateQuestion", 550, 400);
+    setupScene(createQuestion.ui, "CreateQuestion", 550, 400);
   }
 
   public void showSetFee() {
-    setupScene(setFeeLag.ui, "SetFee", 1050, 480);
+    setupScene(setFee.ui, "SetFee", 1050, 480);
   }
 
   public void showCreateNewEvent() {
-    setupScene(createEventLag.ui, "CreateEvent", 650, 520);
+    setupScene(createEvent.ui, "CreateEvent", 650, 520);
   }
 
   public void showUserLogin() {
-    setupScene(userLoginLag.ui, "Login", 650, 450);
+    setupScene(userLogin.ui, "Login", 650, 450);
   }
 
-  public void showDepositMoney() { setupScene(depositMoneyLag.ui,  "Deposit", 600, 450);}
+  public void showUserRegister() {
+    setupScene(userRegister.ui, "Login", 600, 420);
+  }
 
-  public void showPlaceABet(){setupScene(placeAbetLag.ui, "PlaceABet", 320, 250);}
 
-  public void showRemoveABet(){setupScene(removebetLag.ui, "RemoveABet", 320, 250);}
+  public void showDepositMoney() { setupScene(depositMoney.ui,  "Deposit", 600, 450);}
+
+  public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceABet", 320, 250);}
+
+  public void showRemoveABet(){setupScene(removebet.ui, "RemoveABet", 320, 250);}
 
 
 
