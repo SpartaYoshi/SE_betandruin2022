@@ -2,9 +2,6 @@ package uicontrollers;
 
 import businessLogic.BlFacade;
 import domain.User;
-import exceptions.FailedLoginException;
-import gui.BrowseQuestionsGUI;
-import gui.MainAdminGUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -12,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import ui.MainGUI;
 
-import java.awt.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -37,12 +33,12 @@ public class UserRegisterController implements Controller{
 
 
     @FXML
-    void selectBack(ActionEvent event) {
+    void backClick(ActionEvent event) {
         mainGUI.showPortal();
     }
 
     @FXML
-    void selectRegister(ActionEvent event) {
+    void registerClick(ActionEvent event) {
         errorMessage.setText(" "); //clear the label
 
         try {

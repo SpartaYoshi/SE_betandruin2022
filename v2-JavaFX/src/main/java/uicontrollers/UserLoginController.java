@@ -1,8 +1,5 @@
 package uicontrollers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import domain.User;
 import exceptions.FailedLoginException;
 import javafx.event.ActionEvent;
@@ -19,33 +16,12 @@ public class UserLoginController implements Controller{
     private MainGUI mainGUI;
 
     private BlFacade businessLogic;
-    private PortalController initWindow1;
-    private BrowseQuestionsController initWindow2;
 
-
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-
-
-    @FXML
-    private Label messageLabel;
-
-    @FXML
-    private PasswordField passwordTextField;
-
-    @FXML
-    private TextField usernameTextField;
-
-    @FXML
-    private Button closeButton;
-
-    @FXML
-    private Button loginButton;
+    @FXML private Label messageLabel;
+    @FXML private PasswordField passwordTextField;
+    @FXML private TextField usernameTextField;
+    @FXML private Button closeButton;
+    @FXML private Button loginButton;
 
     public UserLoginController(BlFacade bl) {
         this.businessLogic = bl;
@@ -53,7 +29,7 @@ public class UserLoginController implements Controller{
 
 
     @FXML
-    void closeClick(ActionEvent event) {
+    void backClick(ActionEvent event) {
         mainGUI.showPortal();
     }
 
@@ -69,7 +45,7 @@ public class UserLoginController implements Controller{
             if (user.isAdmin()) {
                 //messageLabel.setText("Login was successful!");
                 //messageLabel.getStyleClass().setAll("lbl","lbl-success");
-                mainGUI.showMainAdmin();
+                mainGUI.showAdminPortal();
             }
             else {
                 //messageLabel.setText("Login was successful!");

@@ -10,26 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import ui.MainGUI;
 
-public class PortalController implements Controller{
-
-    @FXML
-    private Label selectOptionLbl;
-
-    @FXML
-    private Button browseQuestionsBtn;
-
-    @FXML
-    private Button createQuestionBtn;
-
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-
-
+public class PortalController implements Controller {
 
     private MainGUI mainGUI;
     private BlFacade businessLogic;
@@ -38,20 +19,20 @@ public class PortalController implements Controller{
         this.businessLogic = bl;
     }
 
-    @FXML
-    void browseQuestions(ActionEvent event) {
+    @FXML void selectBrowse(ActionEvent event) {
         mainGUI.showBrowseQuestions();
     }
-
-    @FXML
-    void createQuestion(ActionEvent event) {
+    @FXML void selectCreate(ActionEvent event) {
         mainGUI.showCreateQuestion();
     }
+    @FXML void selectLogin(ActionEvent event) {
+        mainGUI.showUserLogin();
+    }
+    @FXML void selectRegister(ActionEvent event) {
+        mainGUI.showUserRegister();
+    }
 
-
-
-    @Override
-    public void setMainApp(MainGUI mainGUI) {
+    @Override public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
     }
 }
