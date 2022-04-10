@@ -20,7 +20,7 @@
       <Label layoutX="473.0" layoutY="287.0" text="€" />
       <ImageView fitHeight="154.0" fitWidth="241.0" layoutX="187.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/money.jpg" />
+            <Image url="@/img/money.jpg" />
          </image>
       </ImageView>
       <Button fx:id="insertBtn" layoutX="344.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#insertMoney" prefHeight="25.0" prefWidth="82.0" styleClass="btn-success" text="Deposit" />
