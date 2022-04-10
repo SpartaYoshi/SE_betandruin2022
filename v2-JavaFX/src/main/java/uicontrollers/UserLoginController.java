@@ -50,7 +50,7 @@ public class UserLoginController implements Controller{
             else {
                 //messageLabel.setText("Login was successful!");
                 //messageLabel.getStyleClass().setAll("lbl","lbl-success");
-                mainGUI.showBrowseQuestions();
+                mainGUI.showUserPortal();
             }
 
         } catch (FailedLoginException e) {

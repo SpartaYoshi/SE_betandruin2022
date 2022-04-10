@@ -133,7 +133,7 @@ public class MainGUI {
 
   public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 320, 250);}
 
-  public void showUserPortal(){setupScene(userPortal.ui, "UserPortal", 395, 285);}
+  public void showUserPortal(){setupScene(userPortal.ui, "UserPortal", 600, 450);}
 
   public void showBrowseQuestions() {
     setupScene(browseQuestions.ui, "BrowseQuestions", 1000, 500);
@@ -163,7 +163,7 @@ public class MainGUI {
 
   public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceABet", 320, 250);}
 
-  public void showRemoveABet(){setupScene(removebet.ui, "RemoveABet", 320, 250);}
+  public void showRemoveABet(){setupScene(removebet.ui, "RemoveABet", 940, 600);}
 
 
 
