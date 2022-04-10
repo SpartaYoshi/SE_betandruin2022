@@ -75,5 +75,21 @@ public class Fee implements Serializable{
 		this.fee = fee;
 	}
 
-	
+	public void setBets(Vector<Bet> bets) {
+		this.bets = bets;
+	}
+
+	/**
+	 * This method adds a bet to a user
+	 *
+	 * @param bet to be added to the list of bets
+	 * @return Bet
+	 */
+	public Bet addBet(Bet bet)  {
+		bets.add(bet);
+		return bet;
+	}
+
+
+
 }

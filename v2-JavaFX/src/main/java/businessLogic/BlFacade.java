@@ -82,11 +82,15 @@ public interface BlFacade  {
 	 */
 	@WebMethod public void setCurrentUser(User current);
 
-	@WebMethod public Bet placeBet(double amount, Question question, Fee fee) throws NotEnoughMoneyException, MinimumBetException;
-
+	@WebMethod 	public Bet placeBet(double amount, Question question, Fee fee, Date date) throws NotEnoughMoneyException, MinimumBetException, EventFinished;
 	@WebMethod public Vector<Question> getQuestions(Event value);
 
 	@WebMethod public Vector<Bet> getUserBets(Question question, User user);
 
 	@WebMethod public Bet removeCurrentUserBet(User currentUser, Bet bet1);
-}
+
+	@WebMethod public double getMoneyAvailable();
+
+	@WebMethod public double getMoneyMinimumBet(Question q);
+
+	}
