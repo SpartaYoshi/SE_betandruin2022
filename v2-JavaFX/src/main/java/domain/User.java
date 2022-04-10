@@ -18,7 +18,6 @@ public class User {
 	@Id
 	private String username;
 	private String passwd;
-	
 	private String name;
 	private String surname;
 	private Date birthdate;
