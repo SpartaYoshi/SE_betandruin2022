@@ -8,10 +8,7 @@ import java.time.ZoneId;
 import java.util.*;
 
 import businessLogic.BlFacade;
-import domain.Bet;
-import domain.Event;
-import domain.Fee;
-import domain.Question;
+import domain.*;
 import exceptions.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,6 +46,8 @@ public class PlaceABetController implements Controller{
     @FXML
     private TableView<Event> tblEvents;
 
+    @FXML
+    private Label minimumBetlabel;
 
     @FXML
     private TableView<Question> tblQuestions;
@@ -99,8 +98,11 @@ public class PlaceABetController implements Controller{
     private MainGUI mainGUI;
 
     public PlaceABetController(BlFacade bl)  {
-            this.businessLogic = bl;
-        }
+
+        this.businessLogic = bl;
+        User u= new User("test8", "test8", "Nagore", "Bravo", new Date(), 200.0);
+        businessLogic.setCurrentUser(u);
+    }
 
 
         @FXML
@@ -110,10 +112,12 @@ public class PlaceABetController implements Controller{
 
 
         @FXML
-        void jButtonPlaceABet_actionPerformed(ActionEvent event) throws NotEnoughMoneyException, MinimumBetException, FailedMoneyUpdateException, EventFinished {
-            //try {
+        void jButtonPlaceABet_actionPerformed(ActionEvent event) throws NotEnoughMoneyException, MinimumBetException {
+            try {
 
             messageLabel.setText("");
+            messageLabel.getStyleClass().clear();
+
             String stringAmount = amountMoneyTextField.getText();
             Question question = tblQuestions.getSelectionModel().getSelectedItem();
             Fee fee = tblFees.getSelectionModel().getSelectedItem();
@@ -125,21 +129,34 @@ public class PlaceABetController implements Controller{
             if (stringAmount != null) {
                 Double amount = Double.parseDouble(stringAmount);
 
-                Bet newBet = null;
-                newBet = businessLogic.placeBet(amount, question, fee);
+                Bet newBet = businessLogic.placeBet(amount, question, fee, date);
+
                 if (newBet != null) {
+                    usersMoney();
                     messageLabel.getStyleClass().setAll("lbl", "lbl-success");
                     messageLabel.setText("The bet has been succesfully added.");
-                    //tblEvents.getItems().add(newEvent);
-                    holidays.add(Dates.convertToLocalDateViaInstant(date));
                 } else {
                     messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
                     messageLabel.setText("Error. The bet could not be added.");
                 }
-
-            } else {
-
+            }else{
+                messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                messageLabel.setText("Error. The amount field shouldn't be empty.");
             }
+
+            } catch (NotEnoughMoneyException e1){
+                messageLabel.getStyleClass().setAll("lbl","lbl-danger");
+                messageLabel.setText("Not enough money for the selected amount.");
+
+            } catch(MinimumBetException e2){
+                messageLabel.getStyleClass().setAll("lbl","lbl-danger");
+                messageLabel.setText("A larger amount must be selected. Check the minimum amount.");
+
+            } catch (EventFinished e) {
+                messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                messageLabel.setText("The event could not be created. Try again selecting another date");
+            }
+
         }
 
 
@@ -193,6 +210,9 @@ public class PlaceABetController implements Controller{
                 for (Fee f : tblQuestions.getSelectionModel().getSelectedItem().getFees()) {
                     tblFees.getItems().add(f);
                 }
+                Double min = businessLogic.getMoneyMinimumBet(tblQuestions.getSelectionModel().getSelectedItem());
+                minimumBetlabel.getStyleClass().setAll("lbl","lbl-info");
+                minimumBetlabel.setText("Minimum bet for this question: "+ min + "€");
             }
         });
     }
@@ -205,15 +225,29 @@ public class PlaceABetController implements Controller{
                 resultLabel.setText(tblFees.getSelectionModel().getSelectedItem().getResult());
             }
         });
+
+
     }
 
 
+    public void usersMoney(){
+        if(businessLogic.getMoneyAvailable()==0){
+            availableMoneyLabel.getStyleClass().setAll("lbl","lbl-danger");
+        }else{
+            availableMoneyLabel.getStyleClass().setAll("lbl", "lbl-success");
+        }
+        availableMoneyLabel.setText("Available money: "+ businessLogic.getMoneyAvailable() + "€");
+    }
 
 
 
 
     @FXML
         void initialize() {
+        placeBetButton.getStyleClass().setAll("btn", "btn-primary");
+
+        usersMoney();
+
         setupEventSelection();
         setupQuestionSelection();
         setupResultSelection();
@@ -276,7 +310,6 @@ public class PlaceABetController implements Controller{
         // Bind columns to Fee (result) attributes
         fc1.setCellValueFactory(new PropertyValueFactory<>("fee"));
         fc2.setCellValueFactory(new PropertyValueFactory<>("result"));
-
 
 
 

@@ -124,7 +124,6 @@ public class CreateNewEventController implements Controller{
         catch (EventFinished e2) {
             messageLabel.getStyleClass().setAll("lbl","lbl-danger");
             messageLabel.setText("The event could not be created. Try again selecting another date");
-            e2.printStackTrace();
         }
         catch (TeamPlayingException e3) {
             messageLabel.getStyleClass().setAll("lbl","lbl-danger");
@@ -171,6 +170,7 @@ public class CreateNewEventController implements Controller{
 
     @FXML
     void initialize() {
+        createEventButton.getStyleClass().setAll("btn", "btn-primary");
 
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
 
