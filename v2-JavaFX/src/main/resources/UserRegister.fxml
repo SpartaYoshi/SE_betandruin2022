@@ -30,15 +30,15 @@
             <Font name="Trebuchet MS Bold" size="35.0" />
          </font>
       </Label>
-      <Button fx:id="registerBtn" layoutX="242.0" layoutY="275.0" mnemonicParsing="false" onAction="#registerClick" prefHeight="32.0" prefWidth="114.0" styleClass="btn-info" text="%Register">
+      <Button layoutX="242.0" layoutY="275.0" mnemonicParsing="false" onAction="#selectRegister" prefHeight="32.0" prefWidth="114.0" styleClass="btn-info" text="%Register">
          <font>
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="closeBtn" layoutX="23.0" layoutY="349.0" mnemonicParsing="false" onAction="#selectBack" styleClass="btn-default" text="%Back" />
-      <ImageView fx:id="avatarIcon" fitHeight="55.0" fitWidth="68.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="23.0" layoutY="349.0" mnemonicParsing="false" onAction="#selectBack" styleClass="btn-default" text="%Back" />
+      <ImageView fitHeight="55.0" fitWidth="68.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/img/imageUser.jpg" />
+            <Image url="@img/imageUser.jpg" />
          </image>
       </ImageView>
       <TextField fx:id="nameField" layoutX="194.0" layoutY="80.0" prefHeight="25.0" prefWidth="301.0" />
@@ -59,9 +59,9 @@
          </font>
       </Label>
       <DatePicker fx:id="birthdatePck" layoutX="321.0" layoutY="232.0" />
-      <HBox alignment="CENTER" layoutX="65.0" layoutY="307.0" prefHeight="42.0" prefWidth="425.0">
+      <HBox alignment="CENTER" layoutX="87.0" layoutY="307.0" prefHeight="42.0" prefWidth="425.0">
          <children>
-            <Label fx:id="attemptInfo" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" text="  " textAlignment="CENTER" />
+            <Label fx:id="errorMessage" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" text="  " textAlignment="CENTER" />
          </children>
       </HBox>
    </children>

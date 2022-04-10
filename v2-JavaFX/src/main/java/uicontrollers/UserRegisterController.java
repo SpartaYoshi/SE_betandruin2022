@@ -43,18 +43,21 @@ public class UserRegisterController implements Controller{
 
     @FXML
     void selectRegister(ActionEvent event) {
-        errorMessage.setText(" ");//clear the label
-        String name = nameField.getText();
-        String surname = surnameField.getText();
-        String username = usernameField.getText();
-        String password = passwdField.getText();
-        LocalDate tempDate = birthdatePck.getValue();
-        Date birthdate = Date.from(tempDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        errorMessage.setText(" "); //clear the label
 
-        if(username.length() == 0 || password.length() == 0) {
-            errorMessage.getStyleClass().setAll("lbl-warning");
-            errorMessage.setText("Please, fill in all the fields");
-        } else {
+        try {
+            String name = nameField.getText();
+            String surname = surnameField.getText();
+            String username = usernameField.getText();
+            String password = passwdField.getText();
+            LocalDate tempDate = birthdatePck.getValue();
+            System.out.println(tempDate.toString());
+
+            if(name.length() == 0 || surname.length() == 0 || username.length() == 0 || password.length() == 0)
+                throw new NullPointerException();
+
+            Date birthdate = Date.from(tempDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
             User user = new User(username, password, name, surname, birthdate);
 
             String errorDet = businessLogic.registerUser(user);
@@ -66,6 +69,9 @@ public class UserRegisterController implements Controller{
                 errorMessage.getStyleClass().setAll("lbl-primary");
                 errorMessage.setText("Register was successful. Now you can login.");
             }
+        } catch (NullPointerException e) {
+            errorMessage.getStyleClass().setAll("lbl-warning");
+            errorMessage.setText("Please, fill in all the fields.");
         }
     }
 
