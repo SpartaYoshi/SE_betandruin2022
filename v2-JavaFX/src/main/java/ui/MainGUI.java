@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-  private Window portal, adminPortal, createQuestion, browseQuestions, setFee, removebet, userLogin, userRegister, createEvent, placeAbet, depositMoney;
+  private Window portal, adminPortal, userPortal, createQuestion, browseQuestions, setFee, removebet, userLogin, userRegister, createEvent, placeAbet, depositMoney;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -81,6 +81,8 @@ public class MainGUI {
       if (controllerClass == RemoveBetController.class)
         return new RemoveBetController(businessLogic);
 
+      if (controllerClass == UserPortalController.class)
+        return new UserPortalController(businessLogic);
 
 
 
@@ -117,6 +119,7 @@ public class MainGUI {
     depositMoney = load("/DepositMoney.fxml");
     placeAbet = load("/PlaceABetv2.fxml");
     removebet = load("/RemoveABet.fxml");
+    userPortal = load("/UserPortal.fxml");
 
     showPortal();
 
@@ -124,6 +127,8 @@ public class MainGUI {
 
 
   public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 320, 250);}
+
+  public void showUserPortal(){setupScene(userPortal.ui, "UserPortal", 395, 285);}
 
   public void showPortal(){setupScene(portal.ui, "Portal", 395, 285);}
 
