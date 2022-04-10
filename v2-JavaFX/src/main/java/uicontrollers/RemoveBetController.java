@@ -160,6 +160,10 @@ public class RemoveBetController implements Controller{
         comboEvents.setCellFactory(factory);
         comboEvents.setButtonCell(factory.call(null));
 
+        comboEvents.setDisable(true);
+        comboQuestions.setDisable(true);
+        comboBets.setDisable(true);
+
 
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
 
@@ -205,6 +209,7 @@ public class RemoveBetController implements Controller{
         // when a date is selected...
         calendar.setOnAction(actionEvent -> {
             comboEvents.getItems().clear();
+            comboEvents.setDisable(false);
 
             oListEvents = FXCollections.observableArrayList(new ArrayList<>());
             oListEvents.setAll(businessLogic.getEvents(Dates.convertToDate(calendar.getValue())));

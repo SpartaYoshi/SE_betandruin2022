@@ -158,7 +158,7 @@ public class MainGUI {
 
   public void showPlaceABet(){setupScene(placeAbetLag.ui, "PlaceABet", 320, 250);}
 
-  public void showRemoveABet(){setupScene(removebetLag.ui, "RemoveABet", 320, 250);}
+  public void showRemoveABet(){setupScene(removebetLag.ui, "RemoveABet", 630, 450);}
 
 
 
