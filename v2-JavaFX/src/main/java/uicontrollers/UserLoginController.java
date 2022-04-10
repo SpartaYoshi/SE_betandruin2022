@@ -63,6 +63,7 @@ public class UserLoginController implements Controller{
     void initialize() {
         closeButton.setDisable(false);
         loginButton.setDisable(false);
+        messageLabel.setVisible(true);
     }
 
 
