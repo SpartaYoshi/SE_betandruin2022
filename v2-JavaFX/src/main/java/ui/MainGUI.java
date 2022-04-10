@@ -54,6 +54,12 @@ public class MainGUI {
       if (controllerClass == PortalController.class)    // For both Portal and AdminPortal
         return new PortalController(businessLogic);
 
+      if (controllerClass == UserPortalController.class)
+        return new UserPortalController(businessLogic);
+
+      if (controllerClass == AdminPortalController.class)
+        return new AdminPortalController(businessLogic);
+
       if (controllerClass == BrowseQuestionsController.class)
         return new BrowseQuestionsController(businessLogic);
 
@@ -81,9 +87,6 @@ public class MainGUI {
       if (controllerClass == RemoveBetController.class)
         return new RemoveBetController(businessLogic);
 
-      if (controllerClass == UserPortalController.class)
-        return new UserPortalController(businessLogic);
-
 
 
       else {
@@ -108,8 +111,10 @@ public class MainGUI {
 
     this.stage = stage;
 
-    adminPortal = load("/AdminPortal.fxml");
+
     portal = load("/Portal.fxml");
+    adminPortal = load("/AdminPortal.fxml");
+    userPortal = load("/UserPortal.fxml");
     browseQuestions = load("/BrowseQuestions.fxml");
     createQuestion = load("/CreateQuestion.fxml");
     setFee = load("/SetFee.fxml");
@@ -119,18 +124,16 @@ public class MainGUI {
     depositMoney = load("/DepositMoney.fxml");
     placeAbet = load("/PlaceABetv2.fxml");
     removebet = load("/RemoveABet.fxml");
-    userPortal = load("/UserPortal.fxml");
 
     showPortal();
 
   }
 
+  public void showPortal(){setupScene(portal.ui, "Portal", 600, 400);}
 
   public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 320, 250);}
 
   public void showUserPortal(){setupScene(userPortal.ui, "UserPortal", 395, 285);}
-
-  public void showPortal(){setupScene(portal.ui, "Portal", 395, 285);}
 
   public void showBrowseQuestions() {
     setupScene(browseQuestions.ui, "BrowseQuestions", 1000, 500);
