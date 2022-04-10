@@ -41,7 +41,7 @@ public class MainGUI {
   }
 
 
-  class Window {
+  static class Window {
     Controller c;
     Parent ui;
   }
@@ -118,19 +118,14 @@ public class MainGUI {
     placeAbet = load("/PlaceABetv2.fxml");
     removebet = load("/RemoveABet.fxml");
 
-
-
-    showUserRegister();//showPortal();
+    showPortal();
 
   }
 
-//  public void start(Stage stage) throws IOException {
-//      init(stage);
-//  }
 
-  public void showMainAdmin(){setupScene(adminPortal.ui, "MainAdmin", 320, 250);}
+  public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 320, 250);}
 
-  public void showPortal(){setupScene(portal.ui, "Portal", 320, 250);}
+  public void showPortal(){setupScene(portal.ui, "Portal", 395, 285);}
 
   public void showBrowseQuestions() {
     setupScene(browseQuestions.ui, "BrowseQuestions", 1000, 500);
@@ -156,7 +151,6 @@ public class MainGUI {
     setupScene(userRegister.ui, "Login", 600, 420);
   }
 
-
   public void showDepositMoney() { setupScene(depositMoney.ui,  "Deposit", 600, 450);}
 
   public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceABet", 320, 250);}
@@ -177,8 +171,4 @@ public class MainGUI {
     scene.setRoot(ui);
     stage.show();
   }
-
-//  public static void main(String[] args) {
-//    launch();
-//  }
 }
