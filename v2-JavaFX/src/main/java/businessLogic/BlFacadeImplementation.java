@@ -98,10 +98,12 @@ public class BlFacadeImplementation implements BlFacade {
 			if (team1.toLowerCase().trim().equals(team2.toLowerCase().trim())){
 				throw new TeamRepeatedException();
 			}
-			ev = dbManager.createEvent(team1, team2, date);
-			if(ev==null) {
-				
-				throw new TeamPlayingException();
+			else {
+				ev = dbManager.createEvent(team1, team2, date);
+				if (ev == null) {
+
+					throw new TeamPlayingException();
+				}
 			}
 			
 			dbManager.close();
@@ -237,9 +239,13 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 	@WebMethod
-	public Bet placeBet(double amount, Question question, Fee fee) throws NotEnoughMoneyException, MinimumBetException {
+	public Bet placeBet(double amount, Question question, Fee fee, Date date) throws NotEnoughMoneyException, MinimumBetException, EventFinished {
 		Bet newBet = null;
 		User who = this.getCurrentUser();
+		Date currentdate = new Date();
+
+		System.out.println("Current date is: "+ currentdate);
+
 
 		dbManager.open(false);
 		if (amount>this.currentUser.getMoneyAvailable()){
@@ -248,8 +254,12 @@ public class BlFacadeImplementation implements BlFacade {
 		else if (amount<question.getBetMinimum()){
 			throw new MinimumBetException();
 		}
+		else if (currentdate.compareTo(date) > 0) {
+			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
+					getString("ErrorEventHasFinished"));
+		}
 		else{
-			newBet = dbManager.placeBetToQuestion(question, fee, newBet.getBetNum(), amount, who);
+			newBet = dbManager.placeBetToQuestion(fee, amount, who);
 		}
 
 
@@ -263,6 +273,18 @@ public class BlFacadeImplementation implements BlFacade {
 
 
 
+	}
+
+
+	@WebMethod
+	public double getMoneyAvailable(){
+		User who=this.getCurrentUser();
+		return who.getMoneyAvailable();
+	}
+
+	@WebMethod
+	public double getMoneyMinimumBet(Question q){
+		return q.getBetMinimum();
 	}
 
 

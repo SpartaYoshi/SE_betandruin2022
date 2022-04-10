@@ -438,22 +438,25 @@ public class DataAccess {
 
 	}
 
-	public Bet placeBetToQuestion(Question q, Fee f, int numId, Double amountBet, User who){
-		System.out.println(">> DataAccess: placeAbet=> On question = " + q + ", amount = " +amountBet + " by " + who);
-		Question question = db.find(Question.class, q.getQuestionNumber());
-		Fee fee = db.find(Fee.class, f.getFee());
+	public Bet placeBetToQuestion(Fee f, Double amountBet, User who){
+		System.out.println(">> DataAccess: placeAbet=> On result = " + f.getResult() + ", amount = " +amountBet + " by " + who.getName() + " " + who.getSurname());
+		Fee fee = db.find(Fee.class, f.getId());
 		Bet bet = new Bet(amountBet);
 
-		//bet = fee.setBet(); !!!!!!!!!!!!!!! setBet in question or in user and question? or how?
 		db.getTransaction().begin();
+		fee.addBet(bet);
+		who.addBet(bet);
+		db.persist(fee);
+		db.persist(who);
 		db.persist(bet);
+
 		db.getTransaction().commit();
-
-		this.restMoney(who, amountBet);
-
+		if (bet!= null){
+			this.restMoney(who, amountBet);
+		}
 		return bet;
-
 	}
+
 
 
 	public double restMoney(User who, double bet)  {
