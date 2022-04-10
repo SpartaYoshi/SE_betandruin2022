@@ -19,7 +19,7 @@ public class UserLoginController implements Controller{
     private MainGUI mainGUI;
 
     private BlFacade businessLogic;
-    private MainAdminController initWindow1;
+    private PortalController initWindow1;
     private BrowseQuestionsController initWindow2;
 
 

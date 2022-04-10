@@ -274,15 +274,15 @@ public class BlFacadeImplementation implements BlFacade {
 		System.out.println(">> user tenia "+who.getMoneyAvailable());
 
 		dbManager.open(false);
-		//dbManager.registerUser(who);
+
 		double totalmoney= 0;
 
 		totalmoney = dbManager.insertMoney(who,amount);
 
 		dbManager.close();
 
-		if(totalmoney==-1){
-			throw new FailedMoneyUpdateException("Error. No user was updated");
+		if(totalmoney==0){
+			throw new FailedMoneyUpdateException("User has still 0€");
 		}
 
 		return totalmoney;
