@@ -19,14 +19,12 @@ import domain.Fee;
 import domain.Question;
 import domain.User;
 import domain.Bet;
-import exceptions.FailedLoginException;
-import exceptions.FailedMoneyUpdateException;
 import exceptions.QuestionAlreadyExist;
 
 /**
  * Implements the Data Access utility to the objectDb database
  */
-public class DataAccess  {
+public class DataAccess {
 
 	protected EntityManager  db;
 	protected EntityManagerFactory emf;
@@ -35,7 +33,7 @@ public class DataAccess  {
 
 	public DataAccess(boolean initializeMode)  {
 		System.out.println("Creating DataAccess instance => isDatabaseLocal: " + 
-				config.isDataAccessLocal() + " getDatabBaseOpenMode: " + config.getDataBaseOpenMode());
+				config.isDataAccessLocal() + " getDatabaseOpenMode: " + config.getDataBaseOpenMode());
 		open(initializeMode);
 	}
 
@@ -308,7 +306,7 @@ public class DataAccess  {
 	public void open(boolean initializeMode){
 
 		System.out.println("Opening DataAccess instance => isDatabaseLocal: " + 
-				config.isDataAccessLocal() + " getDatabBaseOpenMode: " + config.getDataBaseOpenMode());
+				config.isDataAccessLocal() + " getDatabaseOpenMode: " + config.getDataBaseOpenMode());
 
 		String fileName = config.getDataBaseFilename();
 		if (initializeMode) {
@@ -397,12 +395,12 @@ public class DataAccess  {
 
 	/**
 	 * Method to create different fees
-	 * @param quest
-	 * @param result
-	 * @param fee
+	 * @param quest quest
+	 * @param result result
+	 * @param fee fee
 	 * @return 0 if everything has updated correctly, -1 if the fee is already stored
 	 */
-	public int createFee(Question quest,String result,float fee) {
+	public int createFee(Question quest,String result, float fee) {
 		db.getTransaction().begin();
 		TypedQuery<Question> q = db.createQuery("SELECT p FROM Question " +"p WHERE p.questionNumber = ?1", Question.class);
 		q.setParameter(1, quest.getQuestionNumber());
@@ -426,26 +424,16 @@ public class DataAccess  {
 	}
 
 	public double insertMoney(User who, double am)  {
-
-		db.getTransaction().begin();
-
 		double total=who.getMoneyAvailable()+ am; //the money he had + the deposited money
-		Query query = db.createQuery("UPDATE User SET moneyAvailable = ?1"+ " WHERE username =?2");
-		query.setParameter(1, total);
-		query.setParameter(2, who.getUsername());
-		int updateCount = query.executeUpdate();
-
-
-		System.out.println(">> DataAccess: money updated");
+		//this.registerUser(who);
+		db.getTransaction().begin();
+		who.setMoneyAvailable(total);
 		db.getTransaction().commit();
 
-		if (updateCount==0){
-			return -1;
+		System.out.println(">> DataAccess: money updated");
 
-		}else{
-			who.setMoneyAvailable(total);
-			return who.getMoneyAvailable();
-		}
+		return who.getMoneyAvailable();
+
 
 
 	}
@@ -493,6 +481,7 @@ public class DataAccess  {
 
 		// ESTA MAL !!
 		// Quiero borrar un bet de la lista de bets de un user
+		//// > Hay que usar DELETE FROM de alguna manera creo. - Asier
 		Query query = db.createQuery("REMOVE bet FROM User us WHERE us.bets=?1",
 				User.class);
 

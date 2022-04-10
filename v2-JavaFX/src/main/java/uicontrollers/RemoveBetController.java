@@ -3,6 +3,7 @@ package uicontrollers;
 import businessLogic.BlFacade;
 import domain.Bet;
 import domain.Event;
+import domain.Fee;
 import domain.Question;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
@@ -46,7 +47,7 @@ public class RemoveBetController implements Controller{
     private URL location;
 
     @FXML
-    private Button btnClose;
+    private Button btnBack;
 
     @FXML
     private Button btnRemove;
@@ -55,13 +56,16 @@ public class RemoveBetController implements Controller{
     private DatePicker calendar;
 
     @FXML
-    private ComboBox<Event> comboEvents;
+    private TableColumn<Event, Integer> ec1;
 
     @FXML
-    private ComboBox<Question> comboQuestions;
+    private TableColumn<Event, String> ec2;
 
     @FXML
-    private ComboBox<Bet> comboBets;
+    private TableColumn<Question, Integer> fc1;
+
+    @FXML
+    private TableColumn<Question, String> fc2;
 
     @FXML
     private Label lblError;
@@ -71,6 +75,27 @@ public class RemoveBetController implements Controller{
 
     @FXML
     private Label listOfEventsLabel;
+
+    @FXML
+    private TableColumn<?, ?> qc1;
+
+    @FXML
+    private TableColumn<?, ?> qc2;
+
+    @FXML
+    private TableView<Event> tblEvents;
+
+    @FXML
+    private TableView<Fee> tblFees;
+
+    @FXML
+    private TableView<Question> tblQuestions;
+
+    @FXML
+    void backClick(ActionEvent event) {
+
+    }
+
 
 
 
@@ -88,19 +113,18 @@ public class RemoveBetController implements Controller{
         Date date = Date.from(instant);
 
 
-        //Event event1 = comboEvents.getSelectionModel().getSelectedItem();
-        Bet bet1 = comboBets.getSelectionModel().getSelectedItem();
+        Question question = tblQuestions.getSelectionModel().getSelectedItem();
+        Fee fee = tblFees.getSelectionModel().getSelectedItem();
 
         try {
-            if (bet1 != null) {
-                //businessLogic.remove(event);
-                businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), bet1);
+            if (fee != null) {
+                //businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), fee);
                 lblMessage.getStyleClass().clear();
                 lblMessage.getStyleClass().setAll("lbl", "lbl-success");
                 lblMessage.setText("Question correctly created");
                 lblMessage.getStyleClass().clear();
             } else {
-            lblMessage.setText("You must select an event.");
+                lblMessage.setText("You must select an event.");
             }
 
             //if la fecha ya ha pasado
@@ -111,12 +135,6 @@ public class RemoveBetController implements Controller{
         }
 
     }
-
-
-
-
-    @FXML
-    public void closeClick(MouseEvent mouseEvent) {mainGUI.showPortal();}
 
 
 
@@ -144,25 +162,39 @@ public class RemoveBetController implements Controller{
     }
 
 
+    private void setupEventSelection() {
+        tblEvents.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+
+                tblQuestions.getItems().clear();
+                for (Question q : tblEvents.getSelectionModel().getSelectedItem().getQuestions()) {
+                    tblQuestions.getItems().add(q);
+                }
+            }
+        });
+    }
+
+
+
+    private void setupQuestionSelection() {
+        tblQuestions.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+
+                tblFees.getItems().clear();
+                for (Fee f : tblQuestions.getSelectionModel().getSelectedItem().getFees()) {
+                    tblFees.getItems().add(f);
+                }
+            }
+        });
+    }
+
+
 
     @FXML
     void initialize() {
 
-        // only show the text of the event in the combobox (without the id)
-        Callback<ListView<Event>, ListCell<Event>> factory = lv -> new ListCell<>() {
-            @Override
-            protected void updateItem(Event item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(empty ? "" : item.getDescription());
-            }
-        };
-
-        comboEvents.setCellFactory(factory);
-        comboEvents.setButtonCell(factory.call(null));
-
-
-        setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
-
+        setupEventSelection();
+        setupQuestionSelection();
 
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
 
@@ -202,75 +234,26 @@ public class RemoveBetController implements Controller{
             }
         });
 
-        // when a date is selected...
+        // a date has been chosen, update the combobox of Events
         calendar.setOnAction(actionEvent -> {
-            comboEvents.getItems().clear();
-
-            oListEvents = FXCollections.observableArrayList(new ArrayList<>());
-            oListEvents.setAll(businessLogic.getEvents(Dates.convertToDate(calendar.getValue())));
-
-            comboEvents.setItems(oListEvents);
-
-            if (comboEvents.getItems().size() == 0){
-                comboQuestions.setDisable(true);
-                lblMessage.setText("There are no Events in the selected date.");
-                lblMessage.getStyleClass().setAll("lbl", "lbl-alert");
+            tblEvents.getItems().clear();
+            Vector<domain.Event> events = businessLogic.getEvents(Dates.convertToDate(calendar.getValue()));
+            for (domain.Event ev : events) {
+                tblEvents.getItems().add(ev);
             }
-            else {
-                comboQuestions.setDisable(false);
-                // select first option
-                comboEvents.getSelectionModel().select(0);
-            }
-
         });
 
+        // Bind columns to Event attributes
+        ec1.setCellValueFactory(new PropertyValueFactory<>("eventNumber"));
+        ec2.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+        qc1.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
+        qc2.setCellValueFactory(new PropertyValueFactory<>("question"));
 
 
-        // when an event is selected...
-        comboEvents.setOnAction(actionEvent -> {
-            comboQuestions.getItems().clear();
+        fc1.setCellValueFactory(new PropertyValueFactory<>("fee"));
+        fc2.setCellValueFactory(new PropertyValueFactory<>("result"));
 
-            oListQuestions = FXCollections.observableArrayList(new ArrayList<>());
-            oListQuestions.setAll(businessLogic.getQuestions(comboEvents.getValue()));
-
-            comboQuestions.setItems(oListQuestions);
-
-            if (comboQuestions.getItems().size() == 0){
-                comboBets.setDisable(true);
-                lblMessage.setText("There are no Questions in the selected event.");
-                lblMessage.getStyleClass().setAll("lbl", "lbl-alert");
-            }
-            else {
-                comboBets.setDisable(false);
-                // select first option
-                comboQuestions.getSelectionModel().select(0);
-            }
-
-        });
-
-
-
-        // when a Question is selected...
-        comboQuestions.setOnAction(actionEvent -> {
-            comboBets.getItems().clear();
-
-            oListBets = FXCollections.observableArrayList(new ArrayList<>());
-            oListBets.setAll(businessLogic.getUserBets(comboQuestions.getValue(), businessLogic.getCurrentUser()));
-
-            comboBets.setItems(oListBets);
-
-            if (comboBets.getItems().size() == 0){
-                btnRemove.setDisable(true);
-                lblMessage.setText("You haven't placed any bet in the selected question.");
-                lblMessage.getStyleClass().setAll("lbl", "lbl-alert");
-            }
-            else {
-                btnRemove.setDisable(false);
-                // select first option
-                comboBets.getSelectionModel().select(0);
-            }
-
-        });
 
     }
 
