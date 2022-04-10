@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.UserPortalController">
+   <children>
+      <ImageView fitHeight="65.0" fitWidth="87.0" layoutX="256.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/logo.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="187.0" layoutY="101.0" mnemonicParsing="false" onAction="#selectBrowse" prefHeight="50.0" prefWidth="226.0" styleClass="btn-default" text="%BrowseQuestions">
+         <font>
+            <Font name="Trebuchet MS Bold" size="17.0" />
+         </font>
+      </Button>
+      <Label layoutX="239.0" layoutY="344.0" text="Logged-in user Portal" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Button layoutX="187.0" layoutY="168.0" mnemonicParsing="false" onAction="#selectPlaceABet" prefHeight="50.0" prefWidth="226.0" styleClass="btn-default" text="Place a Bet">
+         <font>
+            <Font name="Trebuchet MS Bold" size="17.0" />
+         </font>
+      </Button>
+      <Button layoutX="187.0" layoutY="240.0" mnemonicParsing="false" onAction="#selectRemoveABet" prefHeight="50.0" prefWidth="226.0" styleClass="btn-default" text="Remove a Bet">
+         <font>
+            <Font name="Trebuchet MS Bold" size="17.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
