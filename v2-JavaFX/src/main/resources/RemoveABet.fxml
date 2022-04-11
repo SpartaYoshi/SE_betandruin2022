@@ -15,9 +15,9 @@
       <Button fx:id="btnRemove" layoutX="325.0" layoutY="471.0" mnemonicParsing="false" onAction="#removeClick" prefHeight="26.0" prefWidth="88.0" text="%Remove" />
       <Button fx:id="btnBack" layoutX="748.0" layoutY="24.0" mnemonicParsing="false" onAction="#backClick" prefHeight="26.0" prefWidth="88.0" text="%Back" />
       <Label fx:id="lblError" layoutX="357.0" layoutY="528.0" prefHeight="17.0" prefWidth="24.0" />
-      <Label fx:id="listOfEventsLabel" layoutX="55.0" layoutY="111.0" prefHeight="18.0" prefWidth="150.0" text="List of events:" />
+      <Label fx:id="listOfEventsLabel" layoutX="55.0" layoutY="111.0" prefHeight="18.0" prefWidth="150.0" text="%List of events:" />
       <Label fx:id="lblMessage" layoutX="341.0" layoutY="379.0" prefHeight="17.0" prefWidth="56.0" text="   " />
-      <Label layoutX="598.0" layoutY="111.0" text="Results:" />
+      <Label layoutX="598.0" layoutY="111.0" text="%Results:" />
       <TableView fx:id="tblEvents" layoutX="53.0" layoutY="139.0" prefHeight="200.0" prefWidth="249.0">
          <columns>
             <TableColumn fx:id="ec1" prefWidth="65.5999755859375" text="ID" />
@@ -45,6 +45,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="183.0" layoutY="438.0" prefHeight="18.0" prefWidth="371.0" text="Click the remove button and the refound will be done automatically." />
+      <Label layoutX="183.0" layoutY="438.0" prefHeight="18.0" prefWidth="371.0" text="%Click the remove button and the refound will be done automatically." />
    </children>
 </AnchorPane>
