@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><config>
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
   <businessLogic local="true"> 
 	<businessLogicNode>0.0.0.0</businessLogicNode>
 	<businessLogicPort>1099</businessLogicPort>
