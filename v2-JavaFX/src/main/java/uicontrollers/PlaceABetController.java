@@ -38,9 +38,6 @@ public class PlaceABetController implements Controller{
     private DatePicker calendar;
 
     @FXML
-    private Button closeButton;
-
-    @FXML
     private TableView<Event> tblEvents;
 
     @FXML
@@ -114,47 +111,69 @@ public class PlaceABetController implements Controller{
         void jButtonPlaceABet_actionPerformed(ActionEvent event) throws NotEnoughMoneyException, MinimumBetException {
             try {
 
-            messageLabel.setText("");
-            messageLabel.getStyleClass().clear();
+                messageLabel.setText("");
+                messageLabel.getStyleClass().clear();
 
-            String stringAmount = amountMoneyTextField.getText();
-            Question question = tblQuestions.getSelectionModel().getSelectedItem();
-            Result result = tblResults.getSelectionModel().getSelectedItem();
+                String stringAmount = amountMoneyTextField.getText();
+                Event event1 = tblEvents.getSelectionModel().getSelectedItem();
+                Question question = tblQuestions.getSelectionModel().getSelectedItem();
+                Result result = tblResults.getSelectionModel().getSelectedItem();
 
-            LocalDate localDate = calendar.getValue();
-            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-            Date date = Date.from(instant);
-
-            if (stringAmount != null) {
-                Double amount = Double.parseDouble(stringAmount);
-
-                Bet newBet = businessLogic.placeBet(amount, question, result, date);
-
-                if (newBet != null) {
-                    usersMoney();
-                    messageLabel.getStyleClass().setAll("lbl", "lbl-success");
-                    messageLabel.setText("The bet has been succesfully added.");
-                } else {
+                LocalDate localDate = calendar.getValue();
+                if (localDate==null) {
                     messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
-                    messageLabel.setText("Error. The bet could not be added.");
+                    messageLabel.setText("Error. A date must be selected.");
                 }
-            }else{
-                messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
-                messageLabel.setText("Error. The amount field shouldn't be empty.");
-            }
 
-            } catch (NotEnoughMoneyException e1){
-                messageLabel.getStyleClass().setAll("lbl","lbl-danger");
-                messageLabel.setText("Not enough money for the selected amount.");
+                else {
+                    Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+                    Date date = Date.from(instant);
 
-            } catch(MinimumBetException e2){
-                messageLabel.getStyleClass().setAll("lbl","lbl-danger");
-                messageLabel.setText("A larger amount must be selected. Check the minimum amount.");
 
-            } catch (EventFinished e) {
-                messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
-                messageLabel.setText("The event could not be created. Try again selecting another date");
-            }
+                    if (event1 == null) {
+                        messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                        messageLabel.setText("Error. No event has been selected.");
+                    } else if (question == null) {
+                        messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                        messageLabel.setText("Error. No question has been selected.");
+                    } else if (result == null) {
+                        messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                        messageLabel.setText("Error. No result has been selected.");
+                    } else {
+
+                        if (stringAmount != null) {
+                            Double amount = Double.parseDouble(stringAmount);
+
+                            Bet newBet = businessLogic.placeBet(amount, question, result, date);
+
+                            if (newBet != null) {
+                                usersMoney();
+                                messageLabel.getStyleClass().setAll("lbl", "lbl-success");
+                                messageLabel.setText("The bet has been succesfully added.");
+                            } else {
+                                messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                                messageLabel.setText("Error. The bet could not be added.");
+                            }
+                        } else {
+                            messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                            messageLabel.setText("Error. The amount field shouldn't be empty.");
+                        }
+                    }
+                }
+
+                } catch(NotEnoughMoneyException e1){
+                    messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                    messageLabel.setText("Not enough money for the selected amount.");
+
+                } catch(MinimumBetException e2){
+                    messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                    messageLabel.setText("A larger amount must be selected. Check the minimum amount.");
+
+                } catch(EventFinished e){
+                    messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                    messageLabel.setText("The event could not be created. Try again selecting another date");
+                }
+
 
         }
 

@@ -119,7 +119,7 @@ public class MainGUI {
     placeAbet = load("/PlaceABetv2.fxml");
     removebet = load("/RemoveABet.fxml");
 
-    showPortal();
+    showPlaceABet();
 
   }
 
