@@ -254,20 +254,19 @@ public class DataAccess {
 
 	public Vector<Bet> getUserBets(Question question, User user) {
 		System.out.println("Question is "+ question);
-		System.out.println(">> DataAccess: getBets");
+		System.out.println("User is "+ user);
+		System.out.println(">> DataAccess: getUserBets");
 		Vector<Bet> res = new Vector<Bet>();
 
-		// Aqui lo que hago es consegir todas las bets que tiene un user, pero lo que quiero es:
-		// Conseguir solo las bets que tengan fecha, evento y question tal, de tal user.
-		TypedQuery<Bet> query = db.createQuery("SELECT us FROM User us WHERE us.bets=?1",
+		// Aqui lo que hago es consegir todas las bets que tiene un user
+		TypedQuery<Bet> query = db.createQuery("SELECT bets FROM User",
 				Bet.class);
-		query.setParameter(1, question);
 		List<Bet> bets = query.getResultList();
 		for (Bet b1:bets){
 			System.out.println(b1.toString());
 			res.add(b1);
 		}
-		return res;
+		return (Vector<Bet>) bets;
 	}
 
 
