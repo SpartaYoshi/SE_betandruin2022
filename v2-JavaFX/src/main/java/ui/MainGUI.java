@@ -155,7 +155,7 @@ public class MainGUI {
 
   public void showDepositMoney() { setupScene(depositMoney.ui,  "Deposit", 600, 450);}
 
-  public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceABet", 320, 250);}
+  public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceABet", 900, 680);}
 
   public void showRemoveABet(){setupScene(removebet.ui, "RemoveABet", 940, 600);}
 
