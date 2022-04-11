@@ -23,6 +23,11 @@ public class Result implements Serializable{
 	private Vector<Bet> bets = new Vector<Bet>();
 	
 	private String result;
+
+	public Vector<Bet> getBets() {
+		return bets;
+	}
+
 	private float fee;
 
 

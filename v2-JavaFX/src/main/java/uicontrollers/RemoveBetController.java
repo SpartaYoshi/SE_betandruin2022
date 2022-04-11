@@ -112,7 +112,9 @@ public class RemoveBetController implements Controller{
 
         try {
             if (bet != null) {
-                //businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), fee);
+                businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), bet);
+                businessLogic.insertMoney(bet.getAmount());
+
                 lblMessage.getStyleClass().clear();
                 lblMessage.getStyleClass().setAll("lbl", "lbl-success");
                 lblMessage.setText("Question correctly created");
@@ -174,8 +176,13 @@ public class RemoveBetController implements Controller{
         tblQuestions.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 tblBets.getItems().clear();
-                for (Bet b : tblQuestions.getSelectionModel().getSelectedItem().getResults()) {
-                    tblBets.getItems().add(b);
+                Question selectedQuestion = tblQuestions.getSelectionModel().getSelectedItem();
+                Result selectedResults = (Result) selectedQuestion.getResults();
+
+                for (Bet b : selectedResults.getBets()) {
+                    if(businessLogic.getUserBets(selectedQuestion, this.businessLogic.getCurrentUser()).contains(b)){
+                        tblBets.getItems().add(b);
+                    }
                 }
             }
         });
@@ -188,6 +195,7 @@ public class RemoveBetController implements Controller{
 
         setupEventSelection();
         setupQuestionSelection();
+
 
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
 
@@ -244,8 +252,8 @@ public class RemoveBetController implements Controller{
         qc2.setCellValueFactory(new PropertyValueFactory<>("question"));
 
 
-        bc1.setCellValueFactory(new PropertyValueFactory<>("betNumber"));
-        bc2.setCellValueFactory(new PropertyValueFactory<>("bet"));
+        //bc1.setCellValueFactory(new PropertyValueFactory<>("betNumber"));
+        //bc2.setCellValueFactory(new PropertyValueFactory<>("bet"));
 
 
     }
