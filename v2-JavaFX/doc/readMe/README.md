@@ -34,6 +34,10 @@ Our task in this section is to add a new event, so that we can create a question
 
 
 
++ Remove a Bet Use Case:
+  To implement this use case we needed to have a list of bets in each user, which will represent
+  the bets they have made. So taking into accaunt which bet we want to remove and all the bets the user has in that list, the system have to be able to remove the bet from the users list, and also, the system must refound the concrete amount of many placed in that bet in the user bank account. However, if the list does not contain that bet, the system will show an error message.
+
 
 + **Final Note**:
 To login as an administrator, we have created a new User.[*username*: **"juanan"**, *password*: **"hello"**]
