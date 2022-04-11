@@ -105,7 +105,6 @@ public class MainGUI {
 
     this.stage = stage;
 
-
     portal = load("/Portal.fxml");
     adminPortal = load("/AdminPortal.fxml");
     userPortal = load("/UserPortal.fxml");
@@ -165,6 +164,7 @@ public class MainGUI {
     if (scene == null){
       scene = new Scene(ui, width, height);
       scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+      //scene.getStylesheets().add(getClass().getClassLoader().getResource("styles/hover.css").toString());
       stage.setScene(scene);
     }
     stage.setWidth(width);
