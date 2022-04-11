@@ -92,9 +92,7 @@ public class RemoveBetController implements Controller{
     private TableView<Question> tblQuestions;
 
     @FXML
-    void backClick(ActionEvent event) {
-
-    }
+    void backClick(ActionEvent event) {mainGUI.showUserPortal();}
 
 
 

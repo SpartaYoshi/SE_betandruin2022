@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-  private Window portal, adminPortal, createQuestion, browseQuestions, setFee, removebet, userLogin, userRegister, createEvent, placeAbet, depositMoney;
+  private Window portal, adminPortal, userPortal, createQuestion, browseQuestions, setFee, removebet, userLogin, userRegister, createEvent, placeAbet, depositMoney;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -54,6 +54,12 @@ public class MainGUI {
       if (controllerClass == PortalController.class)    // For both Portal and AdminPortal
         return new PortalController(businessLogic);
 
+      if (controllerClass == UserPortalController.class)
+        return new UserPortalController(businessLogic);
+
+      if (controllerClass == AdminPortalController.class)
+        return new AdminPortalController(businessLogic);
+
       if (controllerClass == BrowseQuestionsController.class)
         return new BrowseQuestionsController(businessLogic);
 
@@ -83,7 +89,6 @@ public class MainGUI {
 
 
 
-
       else {
         // default behavior for controllerFactory:
         try {
@@ -106,8 +111,10 @@ public class MainGUI {
 
     this.stage = stage;
 
-    adminPortal = load("/AdminPortal.fxml");
+
     portal = load("/Portal.fxml");
+    adminPortal = load("/AdminPortal.fxml");
+    userPortal = load("/UserPortal.fxml");
     browseQuestions = load("/BrowseQuestions.fxml");
     createQuestion = load("/CreateQuestion.fxml");
     setFee = load("/SetFee.fxml");
@@ -122,10 +129,11 @@ public class MainGUI {
 
   }
 
+  public void showPortal(){setupScene(portal.ui, "Portal", 600, 400);}
 
   public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 320, 250);}
 
-  public void showPortal(){setupScene(portal.ui, "Portal", 395, 285);}
+  public void showUserPortal(){setupScene(userPortal.ui, "UserPortal", 600, 450);}
 
   public void showBrowseQuestions() {
     setupScene(browseQuestions.ui, "BrowseQuestions", 1000, 500);
@@ -155,7 +163,7 @@ public class MainGUI {
 
   public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceABet", 320, 250);}
 
-  public void showRemoveABet(){setupScene(removebet.ui, "RemoveABet", 320, 250);}
+  public void showRemoveABet(){setupScene(removebet.ui, "RemoveABet", 940, 600);}
 
 
 
