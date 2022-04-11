@@ -22,12 +22,15 @@ public class PortalController implements Controller {
     @FXML void selectBrowse(ActionEvent event) {
         mainGUI.showBrowseQuestions();
     }
+    @FXML void selectCreate(ActionEvent event) { mainGUI.showCreateQuestion();}
     @FXML void selectLogin(ActionEvent event) {
         mainGUI.showUserLogin();
     }
     @FXML void selectRegister(ActionEvent event) {
         mainGUI.showUserRegister();
     }
+    @FXML void selectPlaceABet(ActionEvent event) {mainGUI.showPlaceABet();}
+    @FXML void selectRemoveABet(ActionEvent event) {mainGUI.showRemoveABet();}
 
     @Override public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
