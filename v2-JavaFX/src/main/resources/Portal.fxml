@@ -7,33 +7,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.PortalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="378.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.PortalController">
    <children>
-      <Button layoutX="181.0" layoutY="125.0" mnemonicParsing="false" onAction="#selectBrowse" prefHeight="50.0" prefWidth="226.0" styleClass="btn-default" text="%BrowseQuestions">
+      <Button layoutX="77.0" layoutY="65.0" mnemonicParsing="false" onAction="#selectBrowse" prefHeight="50.0" prefWidth="226.0" styleClass="btn-default" text="%BrowseQuestions">
          <font>
             <Font name="Trebuchet MS Bold" size="17.0" />
-         </font>
-      </Button>
-      <ImageView fitHeight="89.0" fitWidth="129.0" layoutX="241.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         </font></Button>
+      <Button layoutX="77.0" layoutY="126.0" mnemonicParsing="false" onAction="#selectCreate" prefHeight="50.0" prefWidth="226.0" styleClass="btn-default" text="%CreateQuestion">
+         <font>
+            <Font name="Trebuchet MS Bold" size="17.0" />
+         </font></Button>
+      <ImageView fitHeight="65.0" fitWidth="87.0" layoutX="147.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/logo.png" />
          </image>
       </ImageView>
-      <Button layoutX="181.0" layoutY="207.0" mnemonicParsing="false" onAction="#selectLogin" prefHeight="31.0" prefWidth="104.0" styleClass="btn-primary" text="%Login">
+      <Button layoutX="77.0" layoutY="192.0" mnemonicParsing="false" onAction="#selectLogin" prefHeight="31.0" prefWidth="104.0" styleClass="btn-primary" text="%Login">
          <font>
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="300.0" layoutY="207.0" mnemonicParsing="false" onAction="#selectRegister" prefHeight="31.0" prefWidth="104.0" styleClass="btn-primary" text="%Register">
+      <Button layoutX="199.0" layoutY="192.0" mnemonicParsing="false" onAction="#selectRegister" prefHeight="31.0" prefWidth="104.0" styleClass="btn-primary" text="%Register">
          <font>
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
       </Button>
-      <Label layoutX="276.0" layoutY="312.0" text="Portal" textAlignment="CENTER">
+      <Label layoutX="158.0" layoutY="253.0" text="User Portal" textAlignment="CENTER">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>
       </Label>
    </children>
 </AnchorPane>
-

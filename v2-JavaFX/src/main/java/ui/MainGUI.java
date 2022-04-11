@@ -54,9 +54,6 @@ public class MainGUI {
       if (controllerClass == PortalController.class)    // For both Portal and AdminPortal
         return new PortalController(businessLogic);
 
-      if (controllerClass == UserPortalController.class)
-        return new UserPortalController(businessLogic);
-
       if (controllerClass == AdminPortalController.class)
         return new AdminPortalController(businessLogic);
 
@@ -129,7 +126,7 @@ public class MainGUI {
 
   }
 
-  public void showPortal(){setupScene(portal.ui, "Portal", 600, 400);}
+  public void showPortal(){setupScene(portal.ui, "Portal", 395, 285);}
 
   public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 320, 250);}
 
