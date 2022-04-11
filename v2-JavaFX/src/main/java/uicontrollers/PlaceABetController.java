@@ -10,7 +10,6 @@ import java.util.*;
 import businessLogic.BlFacade;
 import domain.*;
 import exceptions.*;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,8 +24,6 @@ import utils.Dates;
 public class PlaceABetController implements Controller{
 
 
-    private ObservableList<Event> oListEvents;
-    private ObservableList<Question> oListQuestions;
 
     @FXML
     private ResourceBundle resources;
@@ -53,7 +50,7 @@ public class PlaceABetController implements Controller{
     private TableView<Question> tblQuestions;
 
     @FXML
-    private TableView<Fee> tblFees;
+    private TableView<Result> tblResults;
 
 
     @FXML
@@ -79,10 +76,10 @@ public class PlaceABetController implements Controller{
 
 
     @FXML
-    private TableColumn<Fee, Float> fc1;
+    private TableColumn<Result, Float> fc1;
 
     @FXML
-    private TableColumn<Fee, String> fc2;
+    private TableColumn<Result, String> fc2;
 
     @FXML
     private Label eventDescriptionLabel;
@@ -120,7 +117,7 @@ public class PlaceABetController implements Controller{
 
             String stringAmount = amountMoneyTextField.getText();
             Question question = tblQuestions.getSelectionModel().getSelectedItem();
-            Fee fee = tblFees.getSelectionModel().getSelectedItem();
+            Result result = tblResults.getSelectionModel().getSelectedItem();
 
             LocalDate localDate = calendar.getValue();
             Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
@@ -129,7 +126,7 @@ public class PlaceABetController implements Controller{
             if (stringAmount != null) {
                 Double amount = Double.parseDouble(stringAmount);
 
-                Bet newBet = businessLogic.placeBet(amount, question, fee, date);
+                Bet newBet = businessLogic.placeBet(amount, question, result, date);
 
                 if (newBet != null) {
                     usersMoney();
@@ -206,9 +203,9 @@ public class PlaceABetController implements Controller{
                 questionLabel.setText(tblQuestions.getSelectionModel().getSelectedItem().getQuestion());
                 resultLabel.setText("");
 
-                tblFees.getItems().clear();
-                for (Fee f : tblQuestions.getSelectionModel().getSelectedItem().getFees()) {
-                    tblFees.getItems().add(f);
+                tblResults.getItems().clear();
+                for (Result r : tblQuestions.getSelectionModel().getSelectedItem().getResults()) {
+                    tblResults.getItems().add(r);
                 }
                 Double min = businessLogic.getMoneyMinimumBet(tblQuestions.getSelectionModel().getSelectedItem());
                 minimumBetlabel.getStyleClass().setAll("lbl","lbl-info");
@@ -220,9 +217,9 @@ public class PlaceABetController implements Controller{
 
 
     private void setupResultSelection() {
-        tblFees.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        tblResults.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                resultLabel.setText(tblFees.getSelectionModel().getSelectedItem().getResult());
+                resultLabel.setText(tblResults.getSelectionModel().getSelectedItem().getResult());
             }
         });
 

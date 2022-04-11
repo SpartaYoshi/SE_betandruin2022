@@ -8,8 +8,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -29,9 +27,8 @@ public class Question implements Serializable {
 	private float betMinimum;
 	private String result;
 	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private Vector<Fee> feeList = new Vector<Fee>();
+	private Vector<Result> resultList = new Vector<Result>();
 
-	//private ArrayList<Fee> feeList=new ArrayList<Fee>();
 
 	@ManyToOne
 	@JoinColumn(name = "event_event_number")
@@ -155,29 +152,29 @@ public class Question implements Serializable {
 	}
 	
 	/**
-	 * Adds the fee to the list
+	 * Adds the result to the list
 	 */
-	public Fee addFee(String res,float fee) {
-		Fee f=new Fee(res,fee);
+	public Result addResult(String res, float fee) {
+		Result f=new Result(res,fee);
 		if(f!=null) {
-			System.out.println("our object of fee is "+ f);
-			System.out.println("our list is" +this.feeList);
-			feeList.add(f);
+			System.out.println("our object of result is "+ f);
+			System.out.println("our list is" +this.resultList);
+			resultList.add(f);
 		}
 		return f;
 		
 	}
 	
 	/**
-	 * Sets the fee associated with the question
+	 * Sets the result associated with the question
 	 */
-	public List<Fee> getFees() {
-		return this.feeList;
+	public List<Result> getResults() {
+		return this.resultList;
 	}
 
 	
-	public boolean feeisAlreadyStored(String result) {
-		for (Fee f:this.feeList) {
+	public boolean resultisAlreadyStored(String result) {
+		for (Result f:this.resultList) {
 			if (f.getResult().equals(result))
 				return true;
 		}

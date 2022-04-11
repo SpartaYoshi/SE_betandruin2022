@@ -2430,7 +2430,7 @@
 											"top": 231,
 											"width": 142,
 											"height": 13,
-											"text": "Set a fee for a question"
+											"text": "Set a result for a question"
 										},
 										{
 											"_type": "LabelView",
@@ -4467,8 +4467,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
-					"name": "Set a fee for a question",
-					"documentation": "# Event flow\n\n## Main flow\n1. *Admin* selects a **date**\n2. *System* displays the **events** of this **date**\n3. *Admin* selects an **event**\n4. *System* displays the **questions** of this **event**\n5. *Admin* selects a **question**\n6. *Admin* sets a result and **fee** for the **question**\n7. *System* adds the **fee** to the selected **question**\n\n## Alternative flow\nA2. There are no events on this date. Question cannot be selected.\n\nB4. There are no **questions** for this **event**\n\nC7. If *Admin* doesn't provide a **fee**, then fee cannot be set.\nD7. If the *result* for that question  has been already set before, then the new fee cannot be set\nE7. If the event **date** is before current day, then fee cannot be set."
+					"name": "Set a result for a question",
+					"documentation": "# Event flow\n\n## Main flow\n1. *Admin* selects a **date**\n2. *System* displays the **events** of this **date**\n3. *Admin* selects an **event**\n4. *System* displays the **questions** of this **event**\n5. *Admin* selects a **question**\n6. *Admin* sets a result and **result** for the **question**\n7. *System* adds the **result** to the selected **question**\n\n## Alternative flow\nA2. There are no events on this date. Question cannot be selected.\n\nB4. There are no **questions** for this **event**\n\nC7. If *Admin* doesn't provide a **result**, then result cannot be set.\nD7. If the *result* for that question  has been already set before, then the new result cannot be set\nE7. If the event **date** is before current day, then result cannot be set."
 				},
 				{
 					"_type": "UMLCollaboration",
@@ -13992,7 +13992,7 @@
 											"top": 374,
 											"width": 132.9453125,
 											"height": 13,
-											"text": "-fee: float",
+											"text": "-result: float",
 											"horizontalAlignment": 0
 										}
 									],
@@ -14889,7 +14889,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF/cueOUZc4dcM="
 							},
-							"name": "fee",
+							"name": "result",
 							"visibility": "private",
 							"type": "float"
 						}

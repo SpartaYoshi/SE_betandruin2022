@@ -239,7 +239,7 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 	@WebMethod
-	public Bet placeBet(double amount, Question question, Fee fee, Date date) throws NotEnoughMoneyException, MinimumBetException, EventFinished {
+	public Bet placeBet(double amount, Question question, Result result, Date date) throws NotEnoughMoneyException, MinimumBetException, EventFinished {
 		Bet newBet = null;
 		User who = this.getCurrentUser();
 		Date currentdate = new Date();
@@ -259,7 +259,7 @@ public class BlFacadeImplementation implements BlFacade {
 					getString("ErrorEventHasFinished"));
 		}
 		else{
-			newBet = dbManager.placeBetToQuestion(fee, amount, who);
+			newBet = dbManager.placeBetToQuestion(result, amount, who);
 		}
 
 
