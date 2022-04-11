@@ -111,6 +111,7 @@ public class RemoveBetController implements Controller{
         Date date = Date.from(instant);
 
 
+        Event event1 = tblEvents.getSelectionModel().getSelectedItem();
         Question question = tblQuestions.getSelectionModel().getSelectedItem();
         Bet bet = tblBets.getSelectionModel().getSelectedItem();
 
@@ -119,26 +120,35 @@ public class RemoveBetController implements Controller{
                 lblMessage.setText("You must select a date.");
                 lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
             }
+            if(event1 == null){
+                lblMessage.setText("You must select an event.");
+                lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
+            }
+            if(question == null){
+                lblMessage.setText("You must select a question.");
+                lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
+            }
+            if(bet == null){
+                lblMessage.setText("You must select a bet.");
+                lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
+            }
             else{
-                if (bet != null) {
-                    Bet b1 = businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), bet);
-                    if(b1!=null){
-                        businessLogic.insertMoney(bet.getAmount());
-                        lblMessage.getStyleClass().clear();
-                        lblMessage.getStyleClass().setAll("lbl", "lbl-success");
-                        lblMessage.setText("Bet removed, the money have been transferred to your bank account");
-                        lblMessage.getStyleClass().clear();
-                    }
-
-                } else {
-                    lblMessage.setText("You must select an event.");
+                Bet b1 = businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), bet);
+                if(b1!=null){
+                    businessLogic.insertMoney(bet.getAmount());
+                    lblMessage.getStyleClass().clear();
+                    lblMessage.getStyleClass().setAll("lbl", "lbl-success");
+                    lblMessage.setText("Bet removed, the money have been transferred to your bank account");
+                    lblMessage.getStyleClass().clear();
+                }
+                else {
+                    lblMessage.setText("You must select the bet you want to remove.");
                     lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
                 }
             }
 
 
             //if la fecha ya ha pasado
-
         } catch (Exception e1) {
             lblError.setText("Couldn't remove bet.");
             lblError.getStyleClass().setAll("lbl", "lbl-danger");
