@@ -52,16 +52,31 @@ public class RemoveBetController implements Controller{
     private DatePicker calendar;
 
     @FXML
+    private TableView<Event> tblEvents;
+
+    @FXML
+    private TableView<Question> tblQuestions;
+
+    @FXML
+    private TableView<Bet> tblBets;
+
+    @FXML
     private TableColumn<Event, Integer> ec1;
 
     @FXML
     private TableColumn<Event, String> ec2;
 
     @FXML
-    private TableColumn<Question, Integer> fc1;
+    private TableColumn<Question, Integer> qc1;
 
     @FXML
-    private TableColumn<Question, String> fc2;
+    private TableColumn<Question, String> qc2;
+
+    @FXML
+    private TableColumn<Bet, Integer> bc1;
+
+    @FXML
+    private TableColumn<Bet, String> bc2;
 
     @FXML
     private Label lblError;
@@ -71,21 +86,6 @@ public class RemoveBetController implements Controller{
 
     @FXML
     private Label listOfEventsLabel;
-
-    @FXML
-    private TableColumn<?, ?> qc1;
-
-    @FXML
-    private TableColumn<?, ?> qc2;
-
-    @FXML
-    private TableView<Event> tblEvents;
-
-    @FXML
-    private TableView<Result> tblResults;
-
-    @FXML
-    private TableView<Question> tblQuestions;
 
     @FXML
     void backClick(ActionEvent event) {mainGUI.showUserPortal();}
@@ -108,10 +108,10 @@ public class RemoveBetController implements Controller{
 
 
         Question question = tblQuestions.getSelectionModel().getSelectedItem();
-        Result result = tblResults.getSelectionModel().getSelectedItem();
+        Bet bet = tblBets.getSelectionModel().getSelectedItem();
 
         try {
-            if (result != null) {
+            if (bet != null) {
                 //businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), fee);
                 lblMessage.getStyleClass().clear();
                 lblMessage.getStyleClass().setAll("lbl", "lbl-success");
@@ -173,10 +173,9 @@ public class RemoveBetController implements Controller{
     private void setupQuestionSelection() {
         tblQuestions.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-
-                tblResults.getItems().clear();
-                for (Result f : tblQuestions.getSelectionModel().getSelectedItem().getResults()) {
-                    tblResults.getItems().add(f);
+                tblBets.getItems().clear();
+                for (Bet b : tblQuestions.getSelectionModel().getSelectedItem().getResults()) {
+                    tblBets.getItems().add(b);
                 }
             }
         });
@@ -245,8 +244,8 @@ public class RemoveBetController implements Controller{
         qc2.setCellValueFactory(new PropertyValueFactory<>("question"));
 
 
-        fc1.setCellValueFactory(new PropertyValueFactory<>("fee"));
-        fc2.setCellValueFactory(new PropertyValueFactory<>("result"));
+        bc1.setCellValueFactory(new PropertyValueFactory<>("betNumber"));
+        bc2.setCellValueFactory(new PropertyValueFactory<>("bet"));
 
 
     }
