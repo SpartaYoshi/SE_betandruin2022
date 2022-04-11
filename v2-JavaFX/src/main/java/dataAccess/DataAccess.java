@@ -446,8 +446,6 @@ public class DataAccess {
 		db.getTransaction().begin();
 		fee.addBet(bet);
 		who.addBet(bet);
-		db.persist(fee);
-		db.persist(who);
 		db.persist(bet);
 
 		db.getTransaction().commit();
