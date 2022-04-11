@@ -104,7 +104,9 @@ public class PlaceABetController implements Controller{
 
         @FXML
         void jButtonClose_actionPerformed(ActionEvent event) {
-            closeButton.setVisible(false);
+            if (businessLogic.getCurrentUser().isAdmin())
+                mainGUI.showAdminPortal();
+            else mainGUI.showUserPortal();
         }
 
 
