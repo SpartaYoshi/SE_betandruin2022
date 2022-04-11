@@ -54,9 +54,6 @@ public class MainGUI {
       if (controllerClass == PortalController.class)    // For both Portal and AdminPortal
         return new PortalController(businessLogic);
 
-      if (controllerClass == AdminPortalController.class)
-        return new AdminPortalController(businessLogic);
-
       if (controllerClass == BrowseQuestionsController.class)
         return new BrowseQuestionsController(businessLogic);
 
