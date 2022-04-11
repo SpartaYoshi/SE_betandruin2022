@@ -3,11 +3,8 @@ package uicontrollers;
 import businessLogic.BlFacade;
 import domain.Bet;
 import domain.Event;
-import domain.Fee;
+import domain.Result;
 import domain.Question;
-import exceptions.EventFinished;
-import exceptions.QuestionAlreadyExist;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.DatePickerSkin;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import ui.MainGUI;
 import utils.Dates;
@@ -86,7 +82,7 @@ public class RemoveBetController implements Controller{
     private TableView<Event> tblEvents;
 
     @FXML
-    private TableView<Fee> tblFees;
+    private TableView<Result> tblResults;
 
     @FXML
     private TableView<Question> tblQuestions;
@@ -112,10 +108,10 @@ public class RemoveBetController implements Controller{
 
 
         Question question = tblQuestions.getSelectionModel().getSelectedItem();
-        Fee fee = tblFees.getSelectionModel().getSelectedItem();
+        Result result = tblResults.getSelectionModel().getSelectedItem();
 
         try {
-            if (fee != null) {
+            if (result != null) {
                 //businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), fee);
                 lblMessage.getStyleClass().clear();
                 lblMessage.getStyleClass().setAll("lbl", "lbl-success");
@@ -178,9 +174,9 @@ public class RemoveBetController implements Controller{
         tblQuestions.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
 
-                tblFees.getItems().clear();
-                for (Fee f : tblQuestions.getSelectionModel().getSelectedItem().getFees()) {
-                    tblFees.getItems().add(f);
+                tblResults.getItems().clear();
+                for (Result f : tblQuestions.getSelectionModel().getSelectedItem().getResults()) {
+                    tblResults.getItems().add(f);
                 }
             }
         });

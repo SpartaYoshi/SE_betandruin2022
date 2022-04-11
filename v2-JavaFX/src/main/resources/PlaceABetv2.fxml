@@ -31,7 +31,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TableView fx:id="tblFees" layoutX="623.0" layoutY="136.0" prefHeight="200.0" prefWidth="194.0">
+      <TableView fx:id="tblResults" layoutX="623.0" layoutY="136.0" prefHeight="200.0" prefWidth="194.0">
          <columns>
             <TableColumn fx:id="fc1" prefWidth="64.79998779296875" text="Fee" />
             <TableColumn fx:id="fc2" prefWidth="127.20001220703125" text="Result" />

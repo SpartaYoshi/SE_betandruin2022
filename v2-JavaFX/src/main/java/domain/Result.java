@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
-public class Fee implements Serializable{
+public class Result implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -26,10 +26,10 @@ public class Fee implements Serializable{
 	private float fee;
 
 
-	public Fee() {
+	public Result() {
 	}
 
-	public Fee(String r, float f) {
+	public Result(String r, float f) {
 		this.fee=f;
 		this.result=r;
 		

@@ -14,11 +14,8 @@ import javax.persistence.*;
 
 import configuration.ConfigXML;
 import configuration.UtilDate;
-import domain.Event;
-import domain.Fee;
-import domain.Question;
-import domain.User;
-import domain.Bet;
+import domain.*;
+import domain.Result;
 import exceptions.QuestionAlreadyExist;
 
 /**
@@ -407,10 +404,10 @@ public class DataAccess {
 		Question ourquestion=q.getSingleResult();
 		
 		if(ourquestion!=null) {
-			if(ourquestion.feeisAlreadyStored(result)) {// check if that fee is not used yet
+			if(ourquestion.resultisAlreadyStored(result)) {// check if that fee is not used yet
 				return -1;
 			}else {
-				Fee f=ourquestion.addFee(result,fee);
+				Result f=ourquestion.addResult(result,fee);
 				db.persist(f);
 				db.persist(ourquestion);
 			}
@@ -438,16 +435,14 @@ public class DataAccess {
 
 	}
 
-	public Bet placeBetToQuestion(Fee f, Double amountBet, User who){
+	public Bet placeBetToQuestion(Result f, Double amountBet, User who){
 		System.out.println(">> DataAccess: placeAbet=> On result = " + f.getResult() + ", amount = " +amountBet + " by " + who.getName() + " " + who.getSurname());
-		Fee fee = db.find(Fee.class, f.getId());
+		Result result = db.find(Result.class, f.getId());
 		Bet bet = new Bet(amountBet);
 
 		db.getTransaction().begin();
-		fee.addBet(bet);
+		result.addBet(bet);
 		who.addBet(bet);
-		db.persist(fee);
-		db.persist(who);
 		db.persist(bet);
 
 		db.getTransaction().commit();
