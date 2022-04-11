@@ -148,7 +148,10 @@ public class BlFacadeImplementation implements BlFacade {
 		dbManager.open(false);
 		Bet bet = dbManager.removeCurrentUserBet(currentUser, bet1);
 		dbManager.close();
-		return bet;
+		if(bet != null){
+			return bet;
+		}
+		return null;
 	}
 
 

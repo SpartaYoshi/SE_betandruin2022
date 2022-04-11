@@ -466,16 +466,24 @@ public class DataAccess {
 	}
 
 	public Bet removeCurrentUserBet(User currentUser, Bet bet1) {
+		System.out.println(">> DataAccess: removeAbet=> On bet = " + bet1 + ", by " + currentUser.getName() + " " + currentUser.getSurname());
+		Bet bet = db.find(Bet.class, bet1.getBetNum());
+
 		db.getTransaction().begin();
 
-		// ESTA MAL !!
+		// NO SE SI ESTÁ MAL !!
 		// Quiero borrar un bet de la lista de bets de un user
 		//// > Hay que usar DELETE FROM de alguna manera creo. - Asier
-		Query query = db.createQuery("REMOVE bet FROM User us WHERE us.bets=?1",
+		Query query = db.createQuery("DELETE bet FROM User.bets b WHERE b=?1",
 				User.class);
 
 		query.setParameter(1, bet1);
+
 		db.getTransaction().commit();
-		return bet1;
+		if(bet!=null){
+			return bet;
+		}
+		return  null;
+
 	}
 }

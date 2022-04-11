@@ -88,7 +88,11 @@ public class RemoveBetController implements Controller{
     private Label listOfEventsLabel;
 
     @FXML
-    void backClick(ActionEvent event) {mainGUI.showUserPortal();}
+    void backClick(ActionEvent event) {
+        if (businessLogic.getCurrentUser().isAdmin())
+            mainGUI.showAdminPortal();
+        else mainGUI.showUserPortal();
+    }
 
 
 
@@ -111,23 +115,33 @@ public class RemoveBetController implements Controller{
         Bet bet = tblBets.getSelectionModel().getSelectedItem();
 
         try {
-            if (bet != null) {
-                businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), bet);
-                businessLogic.insertMoney(bet.getAmount());
-
-                lblMessage.getStyleClass().clear();
-                lblMessage.getStyleClass().setAll("lbl", "lbl-success");
-                lblMessage.setText("Question correctly created");
-                lblMessage.getStyleClass().clear();
-            } else {
-                lblMessage.setText("You must select an event.");
+            if(date == null){
+                lblMessage.setText("You must select a date.");
+                lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
             }
+            else{
+                if (bet != null) {
+                    Bet b1 = businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), bet);
+                    if(b1!=null){
+                        businessLogic.insertMoney(bet.getAmount());
+                        lblMessage.getStyleClass().clear();
+                        lblMessage.getStyleClass().setAll("lbl", "lbl-success");
+                        lblMessage.setText("Bet removed, the money have been transferred to your bank account");
+                        lblMessage.getStyleClass().clear();
+                    }
+
+                } else {
+                    lblMessage.setText("You must select an event.");
+                    lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
+                }
+            }
+
 
             //if la fecha ya ha pasado
 
         } catch (Exception e1) {
-            lblMessage.setText("Couldn't remove bet.");
-            lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
+            lblError.setText("Couldn't remove bet.");
+            lblError.getStyleClass().setAll("lbl", "lbl-danger");
         }
 
     }
