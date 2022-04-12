@@ -424,6 +424,8 @@ public class DataAccess {
 		//this.registerUser(who);
 		db.getTransaction().begin();
 		who.setMoneyAvailable(total);
+		User dbUser=db.find(User.class, who.getUsername());
+		dbUser.setMoneyAvailable(total);
 		db.getTransaction().commit();
 
 		System.out.println(">> DataAccess: money updated");
@@ -443,7 +445,8 @@ public class DataAccess {
 		result.addBet(bet);
 		who.addBet(bet);
 		db.persist(bet);
-
+		User dbUser=db.find(User.class, who.getUsername());//update the database object too
+		dbUser.addBet(bet);
 		db.getTransaction().commit();
 		if (bet!= null){
 			this.restMoney(who, amountBet);
@@ -454,9 +457,11 @@ public class DataAccess {
 
 
 	public double restMoney(User who, double bet)  {
-		double total=who.getMoneyAvailable()- bet; //the money he had + the deposited money
+		double total=who.getMoneyAvailable()- bet; //the money he had - the deposited money
 		db.getTransaction().begin();
-		who.setMoneyAvailable(total);
+		who.setMoneyAvailable(total);//our object of the app
+		User dbUser=db.find(User.class, who.getUsername());
+		dbUser.setMoneyAvailable(total);
 		db.getTransaction().commit();
 
 		System.out.println(">> DataAccess: money updated");

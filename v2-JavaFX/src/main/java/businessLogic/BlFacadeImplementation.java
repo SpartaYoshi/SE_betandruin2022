@@ -324,13 +324,6 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 
-	public Question getCurrentQuestion() {
-		return this.currentQuestion;
-	}
-
-	public void setCurrentQuestion(Question currentQuestion){
-		this.currentQuestion=currentQuestion;
-	}
 
 
 }

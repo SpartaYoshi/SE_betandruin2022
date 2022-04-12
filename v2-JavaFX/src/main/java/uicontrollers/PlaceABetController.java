@@ -94,8 +94,7 @@ public class PlaceABetController implements Controller{
     public PlaceABetController(BlFacade bl)  {
 
         this.businessLogic = bl;
-        User u= new User("test9", "test9", "Nagore", "Bravo", new Date(), 200.0);
-        businessLogic.setCurrentUser(u);
+
     }
 
 

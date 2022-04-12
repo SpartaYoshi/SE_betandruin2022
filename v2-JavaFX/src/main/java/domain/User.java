@@ -42,7 +42,7 @@ public class User {
 		this.name = name;
 		this.surname = surname;
 		this.birthdate = birthdate;
-		moneyAvailable=0;
+		moneyAvailable=10;
 		
 		admin = false;
 		bets = new Vector<Bet>();
