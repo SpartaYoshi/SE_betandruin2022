@@ -1,17 +1,13 @@
 package domain;
 
 import java.util.Date;
-import java.util.Locale;
 import java.util.Vector;
-import java.util.*;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-@SuppressWarnings("serial")
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class User {
@@ -28,7 +24,7 @@ public class User {
 	private boolean admin;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private Vector<Bet> bets= new Vector<Bet>();;
+	private Vector<Bet> bets= new Vector<>();
 
 
 	public User() {

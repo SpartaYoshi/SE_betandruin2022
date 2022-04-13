@@ -17,8 +17,8 @@
       <Label layoutX="67.0" layoutY="266.0" text="%MinimumBetPrice" />
       <TextField fx:id="txtQuestion" layoutX="137.0" layoutY="208.0" prefHeight="26.0" prefWidth="359.0" />
       <TextField fx:id="txtMinBet" layoutX="137.0" layoutY="262.0" prefHeight="26.0" prefWidth="106.0" />
-      <Button fx:id="btnCreateQuestion" layoutX="120.0" layoutY="320.0" mnemonicParsing="false" onAction="#createQuestionClick" prefHeight="26.0" prefWidth="130.0" text="%CreateQuestion" />
-      <Button layoutX="310.0" layoutY="321.0" mnemonicParsing="false" onAction="#closeClick" prefHeight="26.0" prefWidth="88.0" text="%Back" />
+      <Button fx:id="btnCreateQuestion" layoutX="120.0" layoutY="320.0" mnemonicParsing="false" onAction="#selectCreate" prefHeight="26.0" prefWidth="130.0" text="%CreateQuestion" />
+      <Button layoutX="310.0" layoutY="321.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="26.0" prefWidth="88.0" text="%Back" />
       <Label fx:id="lblErrorQuestion" layoutX="120.0" layoutY="176.0" />
       <Label fx:id="lblErrorMinBet" layoutX="250.0" layoutY="265.0" />
    </children>

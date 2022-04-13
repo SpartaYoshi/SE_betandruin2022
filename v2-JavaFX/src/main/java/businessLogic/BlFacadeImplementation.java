@@ -25,7 +25,7 @@ public class BlFacadeImplementation implements BlFacade {
 	DataAccess dbManager;
 	ConfigXML config = ConfigXML.getInstance();
 	User currentUser;
-	Question currentQuestion;
+	String sessionMode;
 
 	public BlFacadeImplementation()  {		
 		System.out.println("Creating BlFacadeImplementation instance");
@@ -34,6 +34,7 @@ public class BlFacadeImplementation implements BlFacade {
 		if (initialize)
 			dbManager.initializeDB();
 		dbManager.close();
+		sessionMode = "Anon";
 	}
 
 	public BlFacadeImplementation(DataAccess dam)  {
@@ -63,7 +64,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 		//The minimum bid must be greater than 0
 		dbManager.open(false);
-		Question qry = null;
+		Question qry;
 
 		if (new Date().compareTo(event.getEventDate()) > 0)
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
@@ -86,7 +87,7 @@ public class BlFacadeImplementation implements BlFacade {
 	public Event createEvent(String team1, String team2, Date date) throws EventFinished, TeamPlayingException, TeamRepeatedException {
 
 		dbManager.open(false);
-		Event ev = null;
+		Event ev;
 		Date currentdate = new Date();
 
 		System.out.println("Current date is: "+ currentdate);
@@ -148,10 +149,7 @@ public class BlFacadeImplementation implements BlFacade {
 		dbManager.open(false);
 		Bet bet = dbManager.removeCurrentUserBet(currentUser, bet1);
 		dbManager.close();
-		if(bet != null){
-			return bet;
-		}
-		return null;
+		return bet;
 	}
 
 
@@ -205,12 +203,30 @@ public class BlFacadeImplementation implements BlFacade {
 			
 		} catch (UserIsTakenException e) {
 			dbManager.close();
-			return "The username is already taken. Please try a different one.";
+			ConfigXML config = ConfigXML.getInstance();
+			switch(config.getLocale()){
+				case "en":
+					return "The username is already taken. Please try a different one.";
+				case "es":
+					return "El nombre de usuario ya existe. Por favor, pruebe con uno distinto.";
+				case "eus":
+					return "???"; // TODO
+			}
+
 		} catch (UserIsUnderageException e) {
 			dbManager.close();
-			return "Bet&Ruin services are not available for users under 18 years.";
-	
+			ConfigXML config = ConfigXML.getInstance();
+			switch(config.getLocale()) {
+				case "en":
+					return "Bet&Ruin services are not available for users under 18 years.";
+				case "es":
+					return "Los servicios Bet&Ruin no están disponibles para menores de 18 años.";
+				case "eus":
+					return "???"; // TODO
+			}
+
 		}
+		return "";
 	}
 	
 	
@@ -243,7 +259,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 	@WebMethod
 	public Bet placeBet(double amount, Question question, Result result, Date date) throws NotEnoughMoneyException, MinimumBetException, EventFinished {
-		Bet newBet = null;
+		Bet newBet;
 		User who = this.getCurrentUser();
 		Date currentdate = new Date();
 
@@ -300,7 +316,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 		dbManager.open(false);
 
-		double totalmoney= 0;
+		double totalmoney;
 
 		totalmoney = dbManager.insertMoney(who,amount);
 
@@ -323,7 +339,13 @@ public class BlFacadeImplementation implements BlFacade {
 		this.currentUser=current;
 	}
 
+	public void setSessionMode(String mode){
+		sessionMode = mode;
+	}
 
+	public String getSessionMode(){
+		return sessionMode;
+	}
 
 
 }

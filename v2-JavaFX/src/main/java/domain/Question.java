@@ -11,12 +11,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.List;
 import java.util.Vector;
 
-@SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Question implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 
 	@Id 
 	@XmlJavaTypeAdapter(IntegerAdapter.class)
@@ -27,7 +25,7 @@ public class Question implements Serializable {
 	private float betMinimum;
 	private String result;
 	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private Vector<Result> resultList = new Vector<Result>();
+	private Vector<Result> resultList = new Vector<>();
 
 
 	@ManyToOne
@@ -156,7 +154,7 @@ public class Question implements Serializable {
 	 */
 	public Result addResult(String res, float fee) {
 		Result f=new Result(res,fee);
-		if(f!=null) {
+		if(f != null) {
 			System.out.println("our object of result is "+ f);
 			System.out.println("our list is" +this.resultList);
 			resultList.add(f);

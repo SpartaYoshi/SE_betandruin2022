@@ -13,7 +13,7 @@ import exceptions.*;
  * Interface that specifies the business logic.
  */
 @WebService
-public interface BlFacade  {
+public interface BlFacade {
 
 	/**
 	 * This method creates a question for an event, with a question text and the minimum bet
@@ -36,7 +36,7 @@ public interface BlFacade  {
 	 * @return the created event
 	 * @throws EventFinished if current data is after data of the event
 	 */
-	public Event createEvent(String team1, String team2, Date date) throws EventFinished, TeamPlayingException, TeamRepeatedException;
+	Event createEvent(String team1, String team2, Date date) throws EventFinished, TeamPlayingException, TeamRepeatedException;
 		
 	/**
 	 * This method retrieves all the events of a given date 
@@ -44,7 +44,7 @@ public interface BlFacade  {
 	 * @param date in which events are retrieved
 	 * @return collection of events
 	 */
-	@WebMethod public Vector<Event> getEvents(Date date);
+	@WebMethod Vector<Event> getEvents(Date date);
 	
 	/**
 	 * This method retrieves from the database the dates in a month for which there are events
@@ -52,45 +52,63 @@ public interface BlFacade  {
 	 * @param date of the month for which days with events want to be retrieved 
 	 * @return collection of dates
 	 */
-	@WebMethod public Vector<Date> getEventsMonth(Date date);
+	@WebMethod
+	Vector<Date> getEventsMonth(Date date);
 	
 	
-	@WebMethod public String registerUser(User user);
+	@WebMethod
+	String registerUser(User user);
 	
 
-	@WebMethod public User loginUser(String username, String password) throws FailedLoginException;
+	@WebMethod
+	User loginUser(String username, String password) throws FailedLoginException;
 
 	
-	@WebMethod public void createFee(Question q,String pResult,float pFee) throws FeeAlreadyExists;
+	@WebMethod
+	void createFee(Question q, String pResult, float pFee) throws FeeAlreadyExists;
 
 	/**
 	 * method to insert the money wanted into the user's account
 	 * @param am double
 	 * @return double the amount of money available the user has. (-1 if it has failed)
 	 */
-	@WebMethod public double insertMoney(double am) throws FailedMoneyUpdateException;
+	@WebMethod
+	double insertMoney(double am) throws FailedMoneyUpdateException;
 
 	/**
 	 * method to get the actual user logged
  	 * @return User
 	 */
-	@WebMethod public User getCurrentUser();
+	@WebMethod
+	User getCurrentUser();
 
 	/**
 	 * method to set who is the current user
 	 * @param current a User
 	 */
-	@WebMethod public void setCurrentUser(User current);
+	@WebMethod
+	void setCurrentUser(User current);
 
-	@WebMethod 	public Bet placeBet(double amount, Question question, Result result, Date date) throws NotEnoughMoneyException, MinimumBetException, EventFinished;
-	@WebMethod public Vector<Question> getQuestions(Event value);
+	@WebMethod
+	Bet placeBet(double amount, Question question, Result result, Date date) throws NotEnoughMoneyException, MinimumBetException, EventFinished;
+	@WebMethod
 
-	@WebMethod public Vector<Bet> getUserBets(Question question, User user);
+	Vector<Question> getQuestions(Event value);
 
-	@WebMethod public Bet removeCurrentUserBet(User currentUser, Bet bet1);
+	@WebMethod
+	Vector<Bet> getUserBets(Question question, User user);
 
-	@WebMethod public double getMoneyAvailable();
+	@WebMethod
+	Bet removeCurrentUserBet(User currentUser, Bet bet1);
 
-	@WebMethod public double getMoneyMinimumBet(Question q);
+	@WebMethod
+	double getMoneyAvailable();
 
+	@WebMethod
+	double getMoneyMinimumBet(Question q);
+
+	@WebMethod
+	void setSessionMode(String mode);
+	@WebMethod
+	String getSessionMode();
 	}

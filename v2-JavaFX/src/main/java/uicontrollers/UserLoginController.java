@@ -1,5 +1,6 @@
 package uicontrollers;
 
+import configuration.ConfigXML;
 import domain.User;
 import exceptions.FailedLoginException;
 import javafx.event.ActionEvent;
@@ -29,12 +30,16 @@ public class UserLoginController implements Controller{
 
 
     @FXML
-    void backClick(ActionEvent event) {
-        mainGUI.showPortal();
+    void selectBack(ActionEvent event) {
+        switch (businessLogic.getSessionMode()) {
+            case "Anon" -> mainGUI.showPortal();
+            case "User" -> mainGUI.showUserPortal();
+            case "Admin" -> mainGUI.showAdminPortal();
+        }
     }
 
     @FXML
-    void loginClick(ActionEvent event) {
+    void selectLogin(ActionEvent event) {
 
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
@@ -45,16 +50,23 @@ public class UserLoginController implements Controller{
             if (user.isAdmin()) {
                 //messageLabel.setText("Login was successful!");
                 //messageLabel.getStyleClass().setAll("lbl","lbl-success");
+                businessLogic.setSessionMode("Admin");
                 mainGUI.showAdminPortal();
             }
             else {
                 //messageLabel.setText("Login was successful!");
                 //messageLabel.getStyleClass().setAll("lbl","lbl-success");
+                businessLogic.setSessionMode("User");
                 mainGUI.showUserPortal();
             }
 
         } catch (FailedLoginException e) {
-            messageLabel.setText("The credentials are incorrect");
+            ConfigXML config = ConfigXML.getInstance();
+            switch (config.getLocale()) {
+                case "en" -> messageLabel.setText("The credentials are incorrect.");
+                case "es" -> messageLabel.setText("Los datos introducidos son incorrectos.");
+                case "eus" -> messageLabel.setText("???");    // TODO
+            }
             messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
         }
     }

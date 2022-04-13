@@ -7,11 +7,9 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
-@SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Bet implements Serializable {
-    private static final long serialVersionUID = 1L;
     @XmlID
     @Id
     @XmlJavaTypeAdapter(IntegerAdapter.class)
@@ -54,7 +52,7 @@ public class Bet implements Serializable {
     }
 
     public void setBetNum(Integer betNum) {
-        betNum = betNum;
+        this.betNum = betNum;
     }
 
     public Result getResult() {

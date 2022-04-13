@@ -24,39 +24,16 @@ import java.util.*;
 public class SetFeeController implements Controller {
     private MainGUI mainGUI;
 
-    @FXML
-    private Label warningLbl;
-
-    @FXML
-    private Button btnClose;
-
-    @FXML
-    private DatePicker datepicker;
-
-    @FXML
-    private TableColumn<Event, Integer> ec1;
-
-    @FXML
-    private TableColumn<Event, String> ec2;
-
-    @FXML
-    private TableColumn<Event, Integer> qc1;
-
-    @FXML
-    private TableColumn<Event, Integer>qc2;
-    @FXML
-    private TextField feeField;
-    @FXML
-    private TextField resultField;
-
-    @FXML
-    private Button setBtn;
-
-    @FXML
-    private TableView<Event> tblEvents;
-
-    @FXML
-    private TableView<Question> tblQuestions;
+    @FXML private Label warningLbl;
+    @FXML private DatePicker datepicker;
+    @FXML private TableColumn<Event, Integer> ec1;
+    @FXML private TableColumn<Event, String> ec2;
+    @FXML private TableColumn<Event, Integer> qc1;
+    @FXML private TableColumn<Event, Integer>qc2;
+    @FXML private TextField feeField;
+    @FXML private TextField resultField;
+    @FXML private TableView<Event> tblEvents;
+    @FXML private TableView<Question> tblQuestions;
 
     private BlFacade businessLogic;
     private List<LocalDate> holidays = new ArrayList<>();
@@ -69,8 +46,20 @@ public class SetFeeController implements Controller {
     }
 
     @FXML
-    void closeClick(ActionEvent event) {
-        mainGUI.showPortal();
+    void selectBack(ActionEvent event) {
+        switch(businessLogic.getSessionMode()) {
+            case "Anon":
+                mainGUI.showPortal();
+                break;
+            case "User":
+                mainGUI.showUserPortal();
+                break;
+            case "Admin":
+                mainGUI.showAdminPortal();
+                break;
+            default:
+                break;
+        }
     }
 
     @FXML

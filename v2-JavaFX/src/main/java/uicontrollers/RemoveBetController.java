@@ -99,9 +99,19 @@ public class RemoveBetController implements Controller{
 
     @FXML
     void backClick(ActionEvent event) {
-        if (businessLogic.getCurrentUser().isAdmin())
-            mainGUI.showAdminPortal();
-        else mainGUI.showUserPortal();
+        switch(businessLogic.getSessionMode()) {
+            case "Anon":
+                mainGUI.showPortal();
+                break;
+            case "User":
+                mainGUI.showUserPortal();
+                break;
+            case "Admin":
+                mainGUI.showAdminPortal();
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -166,11 +176,6 @@ public class RemoveBetController implements Controller{
         }
 
     }
-
-
-
-
-
 
 
     private List<LocalDate> holidays = new ArrayList<>();

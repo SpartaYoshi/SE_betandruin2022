@@ -32,6 +32,6 @@
         <Label layoutX="232.0" layoutY="49.0" text="%Events" />
         <Label layoutX="358.0" layoutY="49.0" text="  " />
         <Label layoutX="576.0" layoutY="49.0" text="%SelectedEvent" />
-        <Button fx:id="btnClose" layoutX="535.0" layoutY="332.0" mnemonicParsing="false" onAction="#closeClick" text="%Back" />
+        <Button layoutX="535.0" layoutY="332.0" mnemonicParsing="false" onAction="#selectBack" text="%Back" />
     </children>
 </AnchorPane>

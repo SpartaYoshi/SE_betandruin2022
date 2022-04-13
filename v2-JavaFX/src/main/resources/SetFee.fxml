@@ -34,13 +34,13 @@
       <Label layoutX="314.0" layoutY="59.0" text="%Events" />
       <Label layoutX="368.0" layoutY="59.0" text="  " />
       <Label layoutX="550.0" layoutY="59.0" text="%SelectedEvent" />
-      <Button fx:id="btnClose" layoutX="481.0" layoutY="380.0" mnemonicParsing="false" onAction="#closeClick" text="%Back" />
+      <Button layoutX="481.0" layoutY="380.0" mnemonicParsing="false" onAction="#selectBack" text="%Back" />
       <Label layoutX="746.0" layoutY="92.0" prefHeight="17.0" prefWidth="44.0" text="Result:" />
       <TextField fx:id="resultField" layoutX="806.0" layoutY="88.0" prefHeight="25.0" prefWidth="174.0" />
       <Label layoutX="753.0" layoutY="164.0" prefHeight="17.0" prefWidth="31.0" text="Fee:" />
       <TextField fx:id="feeField" layoutX="806.0" layoutY="160.0" prefHeight="25.0" prefWidth="51.0" />
-      <Button fx:id="setBtn" layoutX="840.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#setFee" prefHeight="25.0" prefWidth="44.0" styleClass="btn-primary" text="SET" />
-      <Label fx:id="warningLbl" layoutX="730.0" layoutY="293.0" prefHeight="33.0" prefWidth="253.0" text="">
+      <Button layoutX="840.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#setFee" prefHeight="25.0" prefWidth="44.0" styleClass="btn-primary" text="SET" />
+      <Label fx:id="warningLbl" layoutX="730.0" layoutY="293.0" prefHeight="33.0" prefWidth="253.0">
          <font>
             <Font name="Source Serif Pro" size="13.0" />
          </font></Label>

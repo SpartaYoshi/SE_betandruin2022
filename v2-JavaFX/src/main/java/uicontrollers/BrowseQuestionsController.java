@@ -1,61 +1,34 @@
 package uicontrollers;
 
-import java.net.URL;
 import java.time.*;
 import java.util.*;
 
 import businessLogic.BlFacade;
 import domain.Event;
 import domain.Question;
-import gui.CreateQuestionGUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.DatePickerSkin;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import ui.MainGUI;
 import utils.Dates;
 
 public class BrowseQuestionsController implements Controller {
 
-  @FXML
-  private ResourceBundle resources;
+  @FXML private DatePicker datepicker;
 
-  @FXML
-  private URL location;
-
-  @FXML
-  private Button btnClose;
-
-  @FXML
-  private DatePicker datepicker;
-
-  @FXML
-  private TableColumn<Event, Integer> ec1;
-
-  @FXML
-  private TableColumn<Event, String> ec2;
-
-  @FXML
-  private TableColumn<Event, Integer> qc1;
-
-  @FXML
-  private TableColumn<Event, Integer> qc2;
-
-  @FXML
-  private TableView<Event> tblEvents;
-
-  @FXML
-  private TableView<Question> tblQuestions;
-
+  @FXML private TableColumn<Event, Integer> ec1;
+  @FXML private TableColumn<Event, String> ec2;
+  @FXML private TableColumn<Event, Integer> qc1;
+  @FXML private TableColumn<Event, Integer> qc2;
+  @FXML private TableView<Event> tblEvents;
+  @FXML private TableView<Question> tblQuestions;
 
   private MainGUI mainGUI;
-
   private List<LocalDate> holidays = new ArrayList<>();
-
   private BlFacade businessLogic;
 
   public BrowseQuestionsController(BlFacade bl) {
@@ -63,9 +36,14 @@ public class BrowseQuestionsController implements Controller {
   }
 
 
-  @FXML
-  void closeClick(ActionEvent event) {
-    mainGUI.showPortal();
+  @FXML void selectBack() {
+    switch (businessLogic.getSessionMode()) {
+      case "Anon" -> mainGUI.showPortal();
+      case "User" -> mainGUI.showUserPortal();
+      case "Admin" -> mainGUI.showAdminPortal();
+      default -> {
+      }
+    }
   }
 
   private void setEvents(int year, int month) {
@@ -95,20 +73,18 @@ public class BrowseQuestionsController implements Controller {
       // attach a listener to the  << and >> buttons
       // mark events for the (prev, current, next) month and year shown
       DatePickerSkin skin = (DatePickerSkin) datepicker.getSkin();
-      skin.getPopupContent().lookupAll(".button").forEach(node -> {
-        node.setOnMouseClicked(event -> {
-          List<Node> labels = skin.getPopupContent().lookupAll(".label").stream().toList();
-          String month = ((Label) (labels.get(0))).getText();
-          String year =  ((Label) (labels.get(1))).getText();
-          YearMonth ym = Dates.getYearMonth(month + " " + year);
-          setEventsPrePost(ym.getYear(), ym.getMonthValue());
-        });
-      });
+      skin.getPopupContent().lookupAll(".button").forEach(node -> node.setOnMouseClicked(event -> {
+        List<Node> labels = skin.getPopupContent().lookupAll(".label").stream().toList();
+        String month = ((Label) (labels.get(0))).getText();
+        String year =  ((Label) (labels.get(1))).getText();
+        YearMonth ym = Dates.getYearMonth(month + " " + year);
+        setEventsPrePost(ym.getYear(), ym.getMonthValue());
+      }));
 
 
     });
 
-    datepicker.setDayCellFactory(new Callback<DatePicker, DateCell>() {
+    datepicker.setDayCellFactory(new Callback<>() {
       @Override
       public DateCell call(DatePicker param) {
         return new DateCell() {

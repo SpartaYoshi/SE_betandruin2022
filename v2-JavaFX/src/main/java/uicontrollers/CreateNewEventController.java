@@ -1,8 +1,4 @@
 package uicontrollers;
-import java.awt.*;
-import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -11,9 +7,7 @@ import java.util.*;
 import java.util.List;
 
 import businessLogic.BlFacade;
-import com.toedter.calendar.JCalendar;
 import domain.Event;
-import domain.Question;
 import exceptions.EventFinished;
 import exceptions.TeamPlayingException;
 import exceptions.TeamRepeatedException;
@@ -32,42 +26,16 @@ import utils.Dates;
 
 public class CreateNewEventController implements Controller{
 
-    @FXML
-    private ResourceBundle resources;
+    @FXML private DatePicker calendar;
 
-    @FXML
-    private URL location;
+    @FXML private Button createEventButton;
 
-    @FXML
-    private DatePicker calendar;
+    @FXML private TextField eventtextField;
+    @FXML private Label messageLabel;
 
-    @FXML
-    private Button closeButton;
-
-    @FXML
-    private Button createEventButton;
-
-    @FXML
-    private TextField eventtextField;
-
-    @FXML
-    private Label listOfEventsLabel;
-
-    @FXML
-    private Label messageLabel;
-
-    @FXML
-    private Label writeEventText;
-
-    @FXML
-    private TableView<Event> tblEvents;
-
-    @FXML
-    private TableColumn<Event, Integer> ec1;
-
-    @FXML
-    private TableColumn<Event, String> ec2;
-
+    @FXML private TableView<Event> tblEvents;
+    @FXML private TableColumn<Event, Integer> ec1;
+    @FXML private TableColumn<Event, String> ec2;
 
     private final BlFacade businessLogic;
     private MainGUI mainGUI;
@@ -77,15 +45,19 @@ public class CreateNewEventController implements Controller{
     }
 
 
-
-
     @FXML
-    void jButtonClose_actionPerformed(ActionEvent event) {
-        closeButton.setVisible(false);
+    void selectBack() {
+        switch (businessLogic.getSessionMode()) {
+            case "Anon" -> mainGUI.showPortal();
+            case "User" -> mainGUI.showUserPortal();
+            case "Admin" -> mainGUI.showAdminPortal();
+            default -> {
+            }
+        }
     }
 
     @FXML
-    void jButtonCreateEvent_actionPerformed(ActionEvent event) {
+    void selectCreateEvent() {
         try {
             messageLabel.setText("");
 
@@ -105,7 +77,7 @@ public class CreateNewEventController implements Controller{
             Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
             Date date = Date.from(instant);
 
-            if (description.length>0) {
+            if (description.length > 0) {
                 Event newEvent = businessLogic.createEvent(team1, team2, date);
 
                 if (newEvent!= null) {
@@ -179,20 +151,18 @@ public class CreateNewEventController implements Controller{
             // attach a listener to the  << and >> buttons
             // mark events for the (prev, current, next) month and year shown
             DatePickerSkin skin = (DatePickerSkin) calendar.getSkin();
-            skin.getPopupContent().lookupAll(".button").forEach(node -> {
-                node.setOnMouseClicked(event -> {
-                    List<Node> labels = skin.getPopupContent().lookupAll(".label").stream().toList();
-                    String month = ((Label) (labels.get(0))).getText();
-                    String year =  ((Label) (labels.get(1))).getText();
-                    YearMonth ym = Dates.getYearMonth(month + " " + year);
-                    setEventsPrePost(ym.getYear(), ym.getMonthValue());
-                });
-            });
+            skin.getPopupContent().lookupAll(".button").forEach(node -> node.setOnMouseClicked(event -> {
+                List<Node> labels = skin.getPopupContent().lookupAll(".label").stream().toList();
+                String month = ((Label) (labels.get(0))).getText();
+                String year =  ((Label) (labels.get(1))).getText();
+                YearMonth ym = Dates.getYearMonth(month + " " + year);
+                setEventsPrePost(ym.getYear(), ym.getMonthValue());
+            }));
 
 
         });
 
-        calendar.setDayCellFactory(new Callback<DatePicker, DateCell>() {
+        calendar.setDayCellFactory(new Callback<>() {
             @Override
             public DateCell call(DatePicker param) {
                 return new DateCell() {

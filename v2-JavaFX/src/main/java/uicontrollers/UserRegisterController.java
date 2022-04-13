@@ -1,6 +1,7 @@
 package uicontrollers;
 
 import businessLogic.BlFacade;
+import configuration.ConfigXML;
 import domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,8 +19,6 @@ public class UserRegisterController implements Controller{
 
     private BlFacade businessLogic;
 
-
-
     @FXML private TextField nameField;
     @FXML private TextField surnameField;
     @FXML private TextField usernameField;
@@ -33,12 +32,16 @@ public class UserRegisterController implements Controller{
 
 
     @FXML
-    void backClick(ActionEvent event) {
-        mainGUI.showPortal();
+    void selectBack(ActionEvent event) {
+        switch (businessLogic.getSessionMode()) {
+            case "Anon" -> mainGUI.showPortal();
+            case "User" -> mainGUI.showUserPortal();
+            case "Admin" -> mainGUI.showAdminPortal();
+        }
     }
 
     @FXML
-    void registerClick(ActionEvent event) {
+    void selectRegister(ActionEvent event) {
         errorMessage.setText(" "); //clear the label
 
         try {
@@ -63,11 +66,21 @@ public class UserRegisterController implements Controller{
                 errorMessage.setText(errorDet);
             } else {
                 errorMessage.getStyleClass().setAll("lbl-primary");
-                errorMessage.setText("Register was successful. Now you can login.");
+                ConfigXML config = ConfigXML.getInstance();
+                switch (config.getLocale()) {
+                    case "en" -> errorMessage.setText("Register was successful. Now you can login.");
+                    case "es" -> errorMessage.setText("Se ha registrado correctamente. Ya puede iniciar sesión.");
+                    case "eus" -> errorMessage.setText("???"); // TODO
+                }
             }
         } catch (NullPointerException e) {
             errorMessage.getStyleClass().setAll("lbl-warning");
-            errorMessage.setText("Please, fill in all the fields.");
+            ConfigXML config = ConfigXML.getInstance();
+            switch (config.getLocale()) {
+                case "en" -> errorMessage.setText("Please, fill in all the fields.");
+                case "es" -> errorMessage.setText("Por favor, rellene todos los datos.");
+                case "eus" -> errorMessage.setText("???"); // TODO
+            }
         }
     }
 

@@ -1,7 +1,6 @@
 package exceptions;
 
 public class QuestionAlreadyExist extends Exception {
-	private static final long serialVersionUID = 1L;
 
 	public QuestionAlreadyExist() {
 		super();

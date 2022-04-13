@@ -3,13 +3,10 @@ package uicontrollers;
 import businessLogic.BlFacade;
 import domain.User;
 import exceptions.FailedMoneyUpdateException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Font;
 import ui.MainGUI;
 
 import java.text.ParseException;
@@ -20,23 +17,9 @@ import java.util.Date;
 public class DepositMoneyController implements Controller {
     private MainGUI mainGUI;
     private BlFacade businessLogic;
-    @FXML
-    private Button backBtn;
 
-    @FXML
-    private Button insertBtn;
-
-    @FXML
-    private Label instructionLbl;
-
-    @FXML
-    private Label titleLbl;
-
-    @FXML
-    private Label warningLbl;
-
-    @FXML
-    private TextField amountField;
+    @FXML private Label warningLbl;
+    @FXML private TextField amountField;
 
     public DepositMoneyController(BlFacade bl){
         this.businessLogic=bl;
@@ -83,5 +66,19 @@ public class DepositMoneyController implements Controller {
 
     }
 
-    public void closeClick(MouseEvent mouseEvent) {mainGUI.showPortal();    }
+    public void selectBack(MouseEvent mouseEvent) {
+        switch(businessLogic.getSessionMode()) {
+            case "Anon":
+                mainGUI.showPortal();
+                break;
+            case "User":
+                mainGUI.showUserPortal();
+                break;
+            case "Admin":
+                mainGUI.showAdminPortal();
+                break;
+            default:
+                break;
+        }
+    }
 }
