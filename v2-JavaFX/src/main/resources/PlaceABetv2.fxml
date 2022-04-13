@@ -55,5 +55,6 @@
       <Label fx:id="questionLabel" layoutX="329.0" layoutY="353.0" prefHeight="18.0" prefWidth="283.0" />
       <Label fx:id="resultLabel" layoutX="623.0" layoutY="353.0" prefHeight="18.0" prefWidth="194.0" />
       <Label fx:id="minimumBetlabel" layoutX="312.0" layoutY="402.0" prefHeight="18.0" prefWidth="236.0" />
+      <Button fx:id="showMoneyButton" layoutX="312.0" layoutY="429.0" mnemonicParsing="false" onAction="#showMoneyClick" prefHeight="26.0" prefWidth="236.0" text="Consult available money" />
    </children>
 </AnchorPane>

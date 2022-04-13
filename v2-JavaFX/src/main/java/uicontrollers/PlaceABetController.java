@@ -26,6 +26,9 @@ public class PlaceABetController implements Controller{
 
     @FXML private DatePicker calendar;
 
+    @FXML
+    private Button showMoneyButton;
+
     @FXML private TableView<Event> tblEvents;
     @FXML private Label minimumBetlabel;
     @FXML private TableView<Question> tblQuestions;
@@ -71,6 +74,11 @@ public class PlaceABetController implements Controller{
                 default:
                     break;
             }
+        }
+
+        @FXML
+        void showMoneyClick(ActionEvent event){
+            this.usersMoney();
         }
 
 
@@ -216,6 +224,7 @@ public class PlaceABetController implements Controller{
 
 
     public void usersMoney(){
+        showMoneyButton.setVisible(false);
         if(businessLogic.getMoneyAvailable()==0){
             availableMoneyLabel.getStyleClass().setAll("lbl","lbl-danger");
         }else{
@@ -229,9 +238,8 @@ public class PlaceABetController implements Controller{
 
     @FXML
         void initialize() {
+        availableMoneyLabel.setText("");
         placeBetButton.getStyleClass().setAll("btn", "btn-primary");
-
-        usersMoney();
 
         setupEventSelection();
         setupQuestionSelection();
