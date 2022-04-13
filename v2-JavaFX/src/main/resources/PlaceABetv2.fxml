@@ -13,11 +13,11 @@
       <DatePicker fx:id="calendar" layoutX="141.0" layoutY="63.0" prefHeight="26.0" prefWidth="182.0" />
       <Label layoutX="66.0" layoutY="67.0" text="%Event Date:" />
       <Label layoutX="329.0" layoutY="108.0" text="%Questions:" />
-      <Button fx:id="closeButton" layoutX="729.0" layoutY="24.0" mnemonicParsing="false" onAction="#jButtonClose_actionPerformed" prefHeight="26.0" prefWidth="88.0" text="%Back" />
+      <Button fx:id="closeButton" layoutX="729.0" layoutY="24.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="26.0" prefWidth="88.0" text="%Back" />
       <Label fx:id="lblError" layoutX="406.0" layoutY="591.0" prefHeight="17.0" prefWidth="24.0" />
       <Label fx:id="listOfEventsLabel" layoutX="66.0" layoutY="108.0" prefHeight="18.0" prefWidth="150.0" text="%List of Bets:" />
       <Label fx:id="lblMessage" layoutX="531.0" layoutY="481.0" text="   " />
-      <Button fx:id="placeBetButton" layoutX="384.0" layoutY="539.0" mnemonicParsing="false" onAction="#jButtonPlaceABet_actionPerformed" prefHeight="26.0" prefWidth="88.0" text="%Place Bet" />
+      <Button fx:id="placeBetButton" layoutX="384.0" layoutY="539.0" mnemonicParsing="false" onAction="#selectPlaceBet" prefHeight="26.0" prefWidth="88.0" text="%PlaceBet" />
       <Label layoutX="253.0" layoutY="471.0" prefHeight="18.0" prefWidth="354.0" text="Please, select the amount you want to bet for the selected result:" />
       <TextField fx:id="amountMoneyTextField" layoutX="341.0" layoutY="492.0" prefHeight="26.0" prefWidth="173.0" />
       <Label fx:id="messageLabel" layoutX="256.0" layoutY="582.0" prefHeight="18.0" prefWidth="344.0" />
