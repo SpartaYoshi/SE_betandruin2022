@@ -1,11 +1,10 @@
 package domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 @SuppressWarnings("serial")
@@ -20,16 +19,22 @@ public class Bet implements Serializable {
     private Integer betNum;
 
     private Double amount;
+    @ManyToOne
+    @JoinColumn(name = "result")
+    @XmlIDREF
+    private Result result;
 
-    public Bet(Double amount) {
+    public Bet(Double amount,Result r) {
         super();
         this.amount = amount;
+        this.result=r;
     }
 
-    public Bet(Integer numBet, Double amount) {
+    public Bet(Integer numBet, Double amount,Result r) {
         super();
         this.betNum=numBet;
         this.amount = amount;
+        this.result=r;
     }
 
     public Bet() {
@@ -50,5 +55,13 @@ public class Bet implements Serializable {
 
     public void setBetNum(Integer betNum) {
         betNum = betNum;
+    }
+
+    public Result getResult() {
+        return result;
+    }
+
+    public void setResult(Result r) {
+        this.result=r;
     }
 }

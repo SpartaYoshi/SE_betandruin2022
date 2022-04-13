@@ -43,10 +43,7 @@ public class RemoveBetController implements Controller{
     private URL location;
 
     @FXML
-    private Button btnBack;
-
-    @FXML
-    private Button btnRemove;
+    private TextField amountMoneyTextField;
 
     @FXML
     private DatePicker calendar;
@@ -55,10 +52,23 @@ public class RemoveBetController implements Controller{
     private TableView<Event> tblEvents;
 
     @FXML
+    private Label minimumBetlabel;
+
+    @FXML
     private TableView<Question> tblQuestions;
 
     @FXML
     private TableView<Bet> tblBets;
+
+
+    @FXML
+    private Label lblMessage;
+
+    @FXML
+    private Button removeBtn;
+
+    @FXML
+    private Label availableMoneyLabel;
 
     @FXML
     private TableColumn<Event, Integer> ec1;
@@ -72,20 +82,20 @@ public class RemoveBetController implements Controller{
     @FXML
     private TableColumn<Question, String> qc2;
 
-    @FXML
-    private TableColumn<Bet, Integer> bc1;
 
     @FXML
-    private TableColumn<Bet, String> bc2;
+    private TableColumn<Bet, Float> betc1;
 
     @FXML
-    private Label lblError;
+    private TableColumn<Bet, String> betc2;
 
     @FXML
-    private Label lblMessage;
+    private Label eventDescriptionLabel;
 
     @FXML
-    private Label listOfEventsLabel;
+    private Label questionLabel;
+
+
 
     @FXML
     void backClick(ActionEvent event) {
@@ -140,6 +150,7 @@ public class RemoveBetController implements Controller{
                     lblMessage.getStyleClass().setAll("lbl", "lbl-success");
                     lblMessage.setText("Bet removed, the money have been transferred to your bank account");
                     lblMessage.getStyleClass().clear();
+                    tblBets.getItems().remove(bet);
                 }
                 else {
                     lblMessage.setText("You must select the bet you want to remove.");
@@ -150,8 +161,8 @@ public class RemoveBetController implements Controller{
 
             //if la fecha ya ha pasado
         } catch (Exception e1) {
-            lblError.setText("Couldn't remove bet.");
-            lblError.getStyleClass().setAll("lbl", "lbl-danger");
+            lblMessage.setText("Couldn't remove bet.");
+            lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
         }
 
     }
@@ -201,24 +212,42 @@ public class RemoveBetController implements Controller{
             if (newSelection != null) {
                 tblBets.getItems().clear();
                 Question selectedQuestion = tblQuestions.getSelectionModel().getSelectedItem();
-                Result selectedResults = (Result) selectedQuestion.getResults();
+                Vector<Result> selectedResults = (Vector<Result>) selectedQuestion.getResults();
 
-                for (Bet b : selectedResults.getBets()) {
-                    if(businessLogic.getUserBets(selectedQuestion, this.businessLogic.getCurrentUser()).contains(b)){
-                        tblBets.getItems().add(b);
+
+                for (Result r: selectedResults){
+                    for (Bet b : r.getBets()) {
+                        for(Bet userbet:businessLogic.getCurrentUser().getBets()){
+                            if(userbet.getBetNum().equals(b.getBetNum())){
+                                tblBets.getItems().add(b);
+                            }
+                        }
+
                     }
                 }
+
             }
         });
+    }
+
+    private void setupBetSelection() {
+        tblBets.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+            }
+        });
+
+
     }
 
 
 
     @FXML
     void initialize() {
+        removeBtn.getStyleClass().setAll("btn", "btn-primary");
 
         setupEventSelection();
         setupQuestionSelection();
+        setupBetSelection();
 
 
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
@@ -276,8 +305,8 @@ public class RemoveBetController implements Controller{
         qc2.setCellValueFactory(new PropertyValueFactory<>("question"));
 
 
-        //bc1.setCellValueFactory(new PropertyValueFactory<>("betNumber"));
-        //bc2.setCellValueFactory(new PropertyValueFactory<>("bet"));
+        betc1.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        betc2.setCellValueFactory(new PropertyValueFactory<>("result"));
 
 
     }

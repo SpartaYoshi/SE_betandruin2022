@@ -439,14 +439,19 @@ public class DataAccess {
 	public Bet placeBetToQuestion(Result f, Double amountBet, User who){
 		System.out.println(">> DataAccess: placeAbet=> On result = " + f.getResult() + ", amount = " +amountBet + " by " + who.getName() + " " + who.getSurname());
 		Result result = db.find(Result.class, f.getId());
-		Bet bet = new Bet(amountBet);
+		Bet bet = new Bet(amountBet,f);
 
 		db.getTransaction().begin();
-		result.addBet(bet);
+
+		f.addBet(bet);
 		who.addBet(bet);
-		db.persist(bet);
+
 		User dbUser=db.find(User.class, who.getUsername());//update the database object too
+
 		dbUser.addBet(bet);
+		result.addBet(bet);
+		db.persist(bet);
+
 		db.getTransaction().commit();
 		if (bet!= null){
 			this.restMoney(who, amountBet);
@@ -472,16 +477,12 @@ public class DataAccess {
 	public Bet removeCurrentUserBet(User currentUser, Bet bet1) {
 		System.out.println(">> DataAccess: removeAbet=> On bet = " + bet1 + ", by " + currentUser.getName() + " " + currentUser.getSurname());
 		Bet bet = db.find(Bet.class, bet1.getBetNum());
+		User dbUser = db.find(User.class, currentUser.getUsername());
 
 		db.getTransaction().begin();
-
-		// NO SE SI ESTÁ MAL !!
-		// Quiero borrar un bet de la lista de bets de un user
-		//// > Hay que usar DELETE FROM de alguna manera creo. - Asier
-		Query query = db.createQuery("DELETE bet FROM User.bets b WHERE b=?1",
-				User.class);
-
-		query.setParameter(1, bet1);
+		db.remove(bet);
+		currentUser.getBets().remove(bet);
+		dbUser.getBets().remove(bet);
 
 		db.getTransaction().commit();
 		if(bet!=null){

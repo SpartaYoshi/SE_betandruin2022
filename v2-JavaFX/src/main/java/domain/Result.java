@@ -40,9 +40,6 @@ public class Result implements Serializable{
 		
 	}
 
-	public String toString() {
-		return " result: "+ result+ " feeAmount "+fee;
-	}
 	/**
 	 * @return the id
 	 */
@@ -96,5 +93,8 @@ public class Result implements Serializable{
 	}
 
 
-
+	@Override
+	public String toString() {
+		return result;
+	}
 }

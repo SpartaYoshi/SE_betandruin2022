@@ -116,7 +116,7 @@ public class MainGUI {
     userRegister = load("/UserRegister.fxml");
     depositMoney = load("/DepositMoney.fxml");
     placeAbet = load("/PlaceABetv2.fxml");
-    removebet = load("/RemoveABet.fxml");
+    removebet = load("/RemoveaBetv2.fxml");
 
     showPortal();
 
