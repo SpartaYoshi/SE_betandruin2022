@@ -254,20 +254,19 @@ public class DataAccess {
 
 	public Vector<Bet> getUserBets(Question question, User user) {
 		System.out.println("Question is "+ question);
-		System.out.println(">> DataAccess: getBets");
+		System.out.println("User is "+ user);
+		System.out.println(">> DataAccess: getUserBets");
 		Vector<Bet> res = new Vector<Bet>();
 
-		// Aqui lo que hago es consegir todas las bets que tiene un user, pero lo que quiero es:
-		// Conseguir solo las bets que tengan fecha, evento y question tal, de tal user.
-		TypedQuery<Bet> query = db.createQuery("SELECT us FROM User us WHERE us.bets=?1",
+		// Aqui lo que hago es consegir todas las bets que tiene un user
+		TypedQuery<Bet> query = db.createQuery("SELECT bets FROM User",
 				Bet.class);
-		query.setParameter(1, question);
 		List<Bet> bets = query.getResultList();
 		for (Bet b1:bets){
 			System.out.println(b1.toString());
 			res.add(b1);
 		}
-		return res;
+		return (Vector<Bet>) bets;
 	}
 
 
@@ -425,6 +424,8 @@ public class DataAccess {
 		//this.registerUser(who);
 		db.getTransaction().begin();
 		who.setMoneyAvailable(total);
+		User dbUser=db.find(User.class, who.getUsername());
+		dbUser.setMoneyAvailable(total);
 		db.getTransaction().commit();
 
 		System.out.println(">> DataAccess: money updated");
@@ -444,7 +445,8 @@ public class DataAccess {
 		result.addBet(bet);
 		who.addBet(bet);
 		db.persist(bet);
-
+		User dbUser=db.find(User.class, who.getUsername());//update the database object too
+		dbUser.addBet(bet);
 		db.getTransaction().commit();
 		if (bet!= null){
 			this.restMoney(who, amountBet);
@@ -455,9 +457,11 @@ public class DataAccess {
 
 
 	public double restMoney(User who, double bet)  {
-		double total=who.getMoneyAvailable()- bet; //the money he had + the deposited money
+		double total=who.getMoneyAvailable()- bet; //the money he had - the deposited money
 		db.getTransaction().begin();
-		who.setMoneyAvailable(total);
+		who.setMoneyAvailable(total);//our object of the app
+		User dbUser=db.find(User.class, who.getUsername());
+		dbUser.setMoneyAvailable(total);
 		db.getTransaction().commit();
 
 		System.out.println(">> DataAccess: money updated");
@@ -466,16 +470,24 @@ public class DataAccess {
 	}
 
 	public Bet removeCurrentUserBet(User currentUser, Bet bet1) {
+		System.out.println(">> DataAccess: removeAbet=> On bet = " + bet1 + ", by " + currentUser.getName() + " " + currentUser.getSurname());
+		Bet bet = db.find(Bet.class, bet1.getBetNum());
+
 		db.getTransaction().begin();
 
-		// ESTA MAL !!
+		// NO SE SI ESTÁ MAL !!
 		// Quiero borrar un bet de la lista de bets de un user
 		//// > Hay que usar DELETE FROM de alguna manera creo. - Asier
-		Query query = db.createQuery("REMOVE bet FROM User us WHERE us.bets=?1",
+		Query query = db.createQuery("DELETE bet FROM User.bets b WHERE b=?1",
 				User.class);
 
 		query.setParameter(1, bet1);
+
 		db.getTransaction().commit();
-		return bet1;
+		if(bet!=null){
+			return bet;
+		}
+		return  null;
+
 	}
 }

@@ -52,16 +52,31 @@ public class RemoveBetController implements Controller{
     private DatePicker calendar;
 
     @FXML
+    private TableView<Event> tblEvents;
+
+    @FXML
+    private TableView<Question> tblQuestions;
+
+    @FXML
+    private TableView<Bet> tblBets;
+
+    @FXML
     private TableColumn<Event, Integer> ec1;
 
     @FXML
     private TableColumn<Event, String> ec2;
 
     @FXML
-    private TableColumn<Question, Integer> fc1;
+    private TableColumn<Question, Integer> qc1;
 
     @FXML
-    private TableColumn<Question, String> fc2;
+    private TableColumn<Question, String> qc2;
+
+    @FXML
+    private TableColumn<Bet, Integer> bc1;
+
+    @FXML
+    private TableColumn<Bet, String> bc2;
 
     @FXML
     private Label lblError;
@@ -73,22 +88,11 @@ public class RemoveBetController implements Controller{
     private Label listOfEventsLabel;
 
     @FXML
-    private TableColumn<?, ?> qc1;
-
-    @FXML
-    private TableColumn<?, ?> qc2;
-
-    @FXML
-    private TableView<Event> tblEvents;
-
-    @FXML
-    private TableView<Result> tblResults;
-
-    @FXML
-    private TableView<Question> tblQuestions;
-
-    @FXML
-    void backClick(ActionEvent event) {mainGUI.showUserPortal();}
+    void backClick(ActionEvent event) {
+        if (businessLogic.getCurrentUser().isAdmin())
+            mainGUI.showAdminPortal();
+        else mainGUI.showUserPortal();
+    }
 
 
 
@@ -107,25 +111,47 @@ public class RemoveBetController implements Controller{
         Date date = Date.from(instant);
 
 
+        Event event1 = tblEvents.getSelectionModel().getSelectedItem();
         Question question = tblQuestions.getSelectionModel().getSelectedItem();
-        Result result = tblResults.getSelectionModel().getSelectedItem();
+        Bet bet = tblBets.getSelectionModel().getSelectedItem();
 
         try {
-            if (result != null) {
-                //businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), fee);
-                lblMessage.getStyleClass().clear();
-                lblMessage.getStyleClass().setAll("lbl", "lbl-success");
-                lblMessage.setText("Question correctly created");
-                lblMessage.getStyleClass().clear();
-            } else {
+            if(date == null){
+                lblMessage.setText("You must select a date.");
+                lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
+            }
+            if(event1 == null){
                 lblMessage.setText("You must select an event.");
+                lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
+            }
+            if(question == null){
+                lblMessage.setText("You must select a question.");
+                lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
+            }
+            if(bet == null){
+                lblMessage.setText("You must select a bet.");
+                lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
+            }
+            else{
+                Bet b1 = businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), bet);
+                if(b1!=null){
+                    businessLogic.insertMoney(bet.getAmount());
+                    lblMessage.getStyleClass().clear();
+                    lblMessage.getStyleClass().setAll("lbl", "lbl-success");
+                    lblMessage.setText("Bet removed, the money have been transferred to your bank account");
+                    lblMessage.getStyleClass().clear();
+                }
+                else {
+                    lblMessage.setText("You must select the bet you want to remove.");
+                    lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
+                }
             }
 
-            //if la fecha ya ha pasado
 
+            //if la fecha ya ha pasado
         } catch (Exception e1) {
-            lblMessage.setText("Couldn't remove bet.");
-            lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
+            lblError.setText("Couldn't remove bet.");
+            lblError.getStyleClass().setAll("lbl", "lbl-danger");
         }
 
     }
@@ -173,10 +199,14 @@ public class RemoveBetController implements Controller{
     private void setupQuestionSelection() {
         tblQuestions.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
+                tblBets.getItems().clear();
+                Question selectedQuestion = tblQuestions.getSelectionModel().getSelectedItem();
+                Result selectedResults = (Result) selectedQuestion.getResults();
 
-                tblResults.getItems().clear();
-                for (Result f : tblQuestions.getSelectionModel().getSelectedItem().getResults()) {
-                    tblResults.getItems().add(f);
+                for (Bet b : selectedResults.getBets()) {
+                    if(businessLogic.getUserBets(selectedQuestion, this.businessLogic.getCurrentUser()).contains(b)){
+                        tblBets.getItems().add(b);
+                    }
                 }
             }
         });
@@ -189,6 +219,7 @@ public class RemoveBetController implements Controller{
 
         setupEventSelection();
         setupQuestionSelection();
+
 
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
 
@@ -245,8 +276,8 @@ public class RemoveBetController implements Controller{
         qc2.setCellValueFactory(new PropertyValueFactory<>("question"));
 
 
-        fc1.setCellValueFactory(new PropertyValueFactory<>("fee"));
-        fc2.setCellValueFactory(new PropertyValueFactory<>("result"));
+        //bc1.setCellValueFactory(new PropertyValueFactory<>("betNumber"));
+        //bc2.setCellValueFactory(new PropertyValueFactory<>("bet"));
 
 
     }

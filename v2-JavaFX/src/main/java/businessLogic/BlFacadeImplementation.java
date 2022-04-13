@@ -148,7 +148,10 @@ public class BlFacadeImplementation implements BlFacade {
 		dbManager.open(false);
 		Bet bet = dbManager.removeCurrentUserBet(currentUser, bet1);
 		dbManager.close();
-		return bet;
+		if(bet != null){
+			return bet;
+		}
+		return null;
 	}
 
 
@@ -321,13 +324,6 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 
-	public Question getCurrentQuestion() {
-		return this.currentQuestion;
-	}
-
-	public void setCurrentQuestion(Question currentQuestion){
-		this.currentQuestion=currentQuestion;
-	}
 
 
 }
