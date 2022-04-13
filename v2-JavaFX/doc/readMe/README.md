@@ -19,10 +19,10 @@
  
  
  + Set a Fee Use Case:
- To implement this use case we needed to create a new class in the Domain. This class is called Fee and has three different attributes.
+ To implement this use case we needed to create a new class in the Domain. This class is called Result and has three different attributes.
  The first one is just an identifier, the second one is the result of a question (for example, the result for who is going to win question, could 
  be 'Real Sociedad'). The last attribute is the actual result, how big is the benefit you get if your answer is correct.
- Now, every question has a list of Fees, since a question can have more than one answer and more than one result.
+ Now, every question has a list of Results, since a question can have more than one answer and more than one result.
  Speaking about the GUI, I created a new JFrame, which will be only available for the admin user. I had to check that there were events and questions for the selected date, 
  and that a result was not set.(For that I created an Exception). I had some issues when loading the calendar (since it was empty), and that was because
  the businessLogic was not properly instantiazed, so the GUI couldn't load it properly.
@@ -31,12 +31,17 @@
  
  + Create Event Use Case: 
 Our task in this section is to add a new event, so that we can create a question or set a result on that event later. It has been necessary to create a new GUI called CreateEventGUI, as well as several new methods in some of the classes: firstly, in the Business Logic, a “createEvent” method, and secondly, in the database, the general "createEvent" method. To ensure its correct operation, it has been essential to implement a method called "isAnyTeamPlaying", which checks if one of the teams is assigned to another event on the same date (they must be written correctly, that is, with the first letter capitalized, since they belong to proper names). Having selected a date, (not before the current one), when clicking on the button to create an Event, it is requested to write the name of each team. As mentioned above, should any of those teams not have another event on that date, the event will be successfully created and added to our database and thus the event combo box. Finally, the calendar will indicate that there is an event on that specific date, painting it.
+This use case has been upgraded since the last iteration: we have added a new exception, for when the administrator tries to create an event with the same team, that is, TeamRepeatedException.
+
+
++ Place a Bet Use Case:
+To implement this use case, it has been mandatory to create a new Domain Class named Bet. This class has some attributes, which are: a numBet as an ID, the amount to bet (amount) and the result it belongs to (result). On the other side, we have also added a vector of Bets in both User Domain class and Result Domain Class. This implementation is prepared to throw some exceptions:  MinimumBetException, for whenever that minimum is not respected; EventFinished, if the selected date is previous to the current one; NotEnoughMoneyException, for when the current user has not enough available money deposited. Moreover, when a bet is placed, that specific amount of money must be substract from the available money of the user, therefore, we have implemented a method that substracts it.
 
 
 
 + Remove a Bet Use Case:
-  To implement this use case we needed to have a list of bets in each user, which will represent
-  the bets they have made. So taking into account which bet we want to remove and all the bets the user has in that list, the system has to be able to remove the bet from the users list, and also, the system must refound the concrete amount of many placed in that bet in the user bank account. However, if the list does not contain that bet, the system will show an error message.
+  To implement this use case, as mentioned in the one above, we needed to have a list of bets in each user and result, which will represent
+  the bets the current user has made. So taking into account which bet we want to remove and all the bets the user has, we fill the table. Now the system has to be able to remove the bet from the users list, and also, the system must refound the concrete amount of many placed in that bet in the user bank account. However, if the list does not contain that bet, the system will show an error message.
 
 
 + **Final Note**:
