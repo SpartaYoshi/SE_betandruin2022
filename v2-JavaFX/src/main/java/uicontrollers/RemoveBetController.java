@@ -16,7 +16,6 @@ import javafx.util.Callback;
 import ui.MainGUI;
 import utils.Dates;
 
-import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -34,64 +33,32 @@ public class RemoveBetController implements Controller{
     private ObservableList<Question> oListQuestions;
     private ObservableList<Bet> oListBets;
 
-
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private Button btnBack;
-
-    @FXML
-    private Button btnRemove;
+    @FXML private DatePicker calendar;
+    @FXML private TableView<Event> tblEvents;
+    @FXML private TableView<Question> tblQuestions;
+    @FXML private TableView<Bet> tblBets;
+    @FXML private TableColumn<Event, Integer> ec1;
+    @FXML private TableColumn<Event, String> ec2;
+    @FXML private TableColumn<Question, Integer> qc1;
+    @FXML private TableColumn<Question, String> qc2;
+    @FXML private Label lblError;
+    @FXML private Label lblMessage;
 
     @FXML
-    private DatePicker calendar;
-
-    @FXML
-    private TableView<Event> tblEvents;
-
-    @FXML
-    private TableView<Question> tblQuestions;
-
-    @FXML
-    private TableView<Bet> tblBets;
-
-    @FXML
-    private TableColumn<Event, Integer> ec1;
-
-    @FXML
-    private TableColumn<Event, String> ec2;
-
-    @FXML
-    private TableColumn<Question, Integer> qc1;
-
-    @FXML
-    private TableColumn<Question, String> qc2;
-
-    @FXML
-    private TableColumn<Bet, Integer> bc1;
-
-    @FXML
-    private TableColumn<Bet, String> bc2;
-
-    @FXML
-    private Label lblError;
-
-    @FXML
-    private Label lblMessage;
-
-    @FXML
-    private Label listOfEventsLabel;
-
-    @FXML
-    void backClick(ActionEvent event) {
-        if (businessLogic.getCurrentUser().isAdmin())
-            mainGUI.showAdminPortal();
-        else mainGUI.showUserPortal();
+    void selectBack(ActionEvent event) {
+        switch(businessLogic.getSessionMode()) {
+            case "Anon":
+                mainGUI.showPortal();
+                break;
+            case "User":
+                mainGUI.showUserPortal();
+                break;
+            case "Admin":
+                mainGUI.showAdminPortal();
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -104,7 +71,7 @@ public class RemoveBetController implements Controller{
 
 
     @FXML
-    void removeClick(ActionEvent event) {
+    void selectRemove(ActionEvent event) {
 
         LocalDate localDate = calendar.getValue();
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
@@ -155,11 +122,6 @@ public class RemoveBetController implements Controller{
         }
 
     }
-
-
-
-
-
 
 
     private List<LocalDate> holidays = new ArrayList<>();

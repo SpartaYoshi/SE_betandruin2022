@@ -1,6 +1,5 @@
 package uicontrollers;
 
-import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -10,7 +9,6 @@ import java.util.*;
 import businessLogic.BlFacade;
 import domain.*;
 import exceptions.*;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -24,69 +22,29 @@ import utils.Dates;
 public class PlaceABetController implements Controller{
 
 
+    @FXML private TextField amountMoneyTextField;
 
-    @FXML
-    private ResourceBundle resources;
+    @FXML private DatePicker calendar;
 
-    @FXML
-    private URL location;
+    @FXML private TableView<Event> tblEvents;
+    @FXML private Label minimumBetlabel;
+    @FXML private TableView<Question> tblQuestions;
+    @FXML private TableView<Result> tblResults;
 
-    @FXML
-    private TextField amountMoneyTextField;
+    @FXML private Label messageLabel;
+    @FXML private Button placeBetButton;
+    @FXML private Label availableMoneyLabel;
 
-    @FXML
-    private DatePicker calendar;
+    @FXML private TableColumn<Event, Integer> ec1;
+    @FXML private TableColumn<Event, String> ec2;
+    @FXML private TableColumn<Question, Integer> qc1;
+    @FXML private TableColumn<Question, String> qc2;
+    @FXML private TableColumn<Result, Float> fc1;
+    @FXML private TableColumn<Result, String> fc2;
 
-    @FXML
-    private TableView<Event> tblEvents;
-
-    @FXML
-    private Label minimumBetlabel;
-
-    @FXML
-    private TableView<Question> tblQuestions;
-
-    @FXML
-    private TableView<Result> tblResults;
-
-
-    @FXML
-    private Label messageLabel;
-
-    @FXML
-    private Button placeBetButton;
-
-    @FXML
-    private Label availableMoneyLabel;
-
-    @FXML
-    private TableColumn<Event, Integer> ec1;
-
-    @FXML
-    private TableColumn<Event, String> ec2;
-
-    @FXML
-    private TableColumn<Question, Integer> qc1;
-
-    @FXML
-    private TableColumn<Question, String> qc2;
-
-
-    @FXML
-    private TableColumn<Result, Float> fc1;
-
-    @FXML
-    private TableColumn<Result, String> fc2;
-
-    @FXML
-    private Label eventDescriptionLabel;
-
-    @FXML
-    private Label questionLabel;
-
-    @FXML
-    private Label resultLabel;
-
+    @FXML private Label eventDescriptionLabel;
+    @FXML private Label questionLabel;
+    @FXML private Label resultLabel;
 
     private final BlFacade businessLogic;
     private MainGUI mainGUI;
@@ -99,15 +57,25 @@ public class PlaceABetController implements Controller{
 
 
         @FXML
-        void jButtonClose_actionPerformed(ActionEvent event) {
-            if (businessLogic.getCurrentUser().isAdmin())
-                mainGUI.showAdminPortal();
-            else mainGUI.showUserPortal();
+        void selectBack(ActionEvent event) {
+            switch(businessLogic.getSessionMode()) {
+                case "Anon":
+                    mainGUI.showPortal();
+                    break;
+                case "User":
+                    mainGUI.showUserPortal();
+                    break;
+                case "Admin":
+                    mainGUI.showAdminPortal();
+                    break;
+                default:
+                    break;
+            }
         }
 
 
         @FXML
-        void jButtonPlaceABet_actionPerformed(ActionEvent event) throws NotEnoughMoneyException, MinimumBetException {
+        void selectPlaceBet(ActionEvent event) throws NotEnoughMoneyException, MinimumBetException {
             try {
 
                 messageLabel.setText("");

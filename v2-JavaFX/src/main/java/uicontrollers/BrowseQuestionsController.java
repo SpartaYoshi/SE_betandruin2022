@@ -1,61 +1,34 @@
 package uicontrollers;
 
-import java.net.URL;
 import java.time.*;
 import java.util.*;
 
 import businessLogic.BlFacade;
 import domain.Event;
 import domain.Question;
-import gui.CreateQuestionGUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.DatePickerSkin;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import ui.MainGUI;
 import utils.Dates;
 
 public class BrowseQuestionsController implements Controller {
 
-  @FXML
-  private ResourceBundle resources;
+  @FXML private DatePicker datepicker;
 
-  @FXML
-  private URL location;
-
-  @FXML
-  private Button btnClose;
-
-  @FXML
-  private DatePicker datepicker;
-
-  @FXML
-  private TableColumn<Event, Integer> ec1;
-
-  @FXML
-  private TableColumn<Event, String> ec2;
-
-  @FXML
-  private TableColumn<Event, Integer> qc1;
-
-  @FXML
-  private TableColumn<Event, Integer> qc2;
-
-  @FXML
-  private TableView<Event> tblEvents;
-
-  @FXML
-  private TableView<Question> tblQuestions;
-
+  @FXML private TableColumn<Event, Integer> ec1;
+  @FXML private TableColumn<Event, String> ec2;
+  @FXML private TableColumn<Event, Integer> qc1;
+  @FXML private TableColumn<Event, Integer> qc2;
+  @FXML private TableView<Event> tblEvents;
+  @FXML private TableView<Question> tblQuestions;
 
   private MainGUI mainGUI;
-
   private List<LocalDate> holidays = new ArrayList<>();
-
   private BlFacade businessLogic;
 
   public BrowseQuestionsController(BlFacade bl) {
@@ -63,9 +36,20 @@ public class BrowseQuestionsController implements Controller {
   }
 
 
-  @FXML
-  void closeClick(ActionEvent event) {
-    mainGUI.showPortal();
+  @FXML void selectBack(ActionEvent event) {
+    switch(businessLogic.getSessionMode()) {
+      case "Anon":
+        mainGUI.showPortal();
+        break;
+      case "User":
+        mainGUI.showUserPortal();
+        break;
+      case "Admin":
+        mainGUI.showAdminPortal();
+        break;
+      default:
+        break;
+    }
   }
 
   private void setEvents(int year, int month) {

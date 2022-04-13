@@ -26,6 +26,7 @@ public class BlFacadeImplementation implements BlFacade {
 	ConfigXML config = ConfigXML.getInstance();
 	User currentUser;
 	Question currentQuestion;
+	String sessionMode;
 
 	public BlFacadeImplementation()  {		
 		System.out.println("Creating BlFacadeImplementation instance");
@@ -34,6 +35,7 @@ public class BlFacadeImplementation implements BlFacade {
 		if (initialize)
 			dbManager.initializeDB();
 		dbManager.close();
+		sessionMode = "Anon";
 	}
 
 	public BlFacadeImplementation(DataAccess dam)  {
@@ -323,7 +325,13 @@ public class BlFacadeImplementation implements BlFacade {
 		this.currentUser=current;
 	}
 
+	public void setSessionMode(String mode){
+		sessionMode = mode;
+	}
 
+	public String getSessionMode(){
+		return sessionMode;
+	}
 
 
 }

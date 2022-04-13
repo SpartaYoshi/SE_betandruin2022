@@ -29,12 +29,24 @@ public class UserLoginController implements Controller{
 
 
     @FXML
-    void backClick(ActionEvent event) {
-        mainGUI.showPortal();
+    void selectBack(ActionEvent event) {
+        switch(businessLogic.getSessionMode()) {
+            case "Anon":
+                mainGUI.showPortal();
+                break;
+            case "User":
+                mainGUI.showUserPortal();
+                break;
+            case "Admin":
+                mainGUI.showAdminPortal();
+                break;
+            default:
+                break;
+        }
     }
 
     @FXML
-    void loginClick(ActionEvent event) {
+    void selectLogin(ActionEvent event) {
 
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
@@ -45,11 +57,13 @@ public class UserLoginController implements Controller{
             if (user.isAdmin()) {
                 //messageLabel.setText("Login was successful!");
                 //messageLabel.getStyleClass().setAll("lbl","lbl-success");
+                businessLogic.setSessionMode("Admin");
                 mainGUI.showAdminPortal();
             }
             else {
                 //messageLabel.setText("Login was successful!");
                 //messageLabel.getStyleClass().setAll("lbl","lbl-success");
+                businessLogic.setSessionMode("User");
                 mainGUI.showUserPortal();
             }
 

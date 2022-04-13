@@ -29,12 +29,12 @@
          </font>
       </Label>
       <Label fx:id="messageLabel" layoutX="280.0" layoutY="263.0" text="  " />
-      <Button fx:id="loginButton" layoutX="259.0" layoutY="314.0" mnemonicParsing="false" onAction="#loginClick" prefHeight="39.0" prefWidth="81.0" text="Log-in">
+      <Button fx:id="loginButton" layoutX="259.0" layoutY="314.0" mnemonicParsing="false" onAction="#selectLogin" prefHeight="39.0" prefWidth="81.0" text="Log-in">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="closeButton" layoutX="554.0" layoutY="14.0" mnemonicParsing="false" onAction="#backClick" text="Close" />
+      <Button fx:id="closeButton" layoutX="554.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectBack" text="Close" />
       <ImageView fx:id="userImage" fitHeight="55.0" fitWidth="68.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/img/imageUser.jpg" />

@@ -18,8 +18,6 @@ public class UserRegisterController implements Controller{
 
     private BlFacade businessLogic;
 
-
-
     @FXML private TextField nameField;
     @FXML private TextField surnameField;
     @FXML private TextField usernameField;
@@ -33,12 +31,24 @@ public class UserRegisterController implements Controller{
 
 
     @FXML
-    void backClick(ActionEvent event) {
-        mainGUI.showPortal();
+    void selectBack(ActionEvent event) {
+        switch(businessLogic.getSessionMode()) {
+            case "Anon":
+                mainGUI.showPortal();
+                break;
+            case "User":
+                mainGUI.showUserPortal();
+                break;
+            case "Admin":
+                mainGUI.showAdminPortal();
+                break;
+            default:
+                break;
+        }
     }
 
     @FXML
-    void registerClick(ActionEvent event) {
+    void selectRegister(ActionEvent event) {
         errorMessage.setText(" "); //clear the label
 
         try {

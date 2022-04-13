@@ -24,7 +24,7 @@
          </image>
       </ImageView>
       <Button fx:id="insertBtn" layoutX="344.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#insertMoney" prefHeight="25.0" prefWidth="82.0" styleClass="btn-success" text="%DepositBtn" />
-      <Button fx:id="backBtn" layoutX="179.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#closeClick" prefHeight="25.0" prefWidth="82.0" styleClass="btn-danger" text="%Back" />
+      <Button fx:id="backBtn" layoutX="179.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#selectBack" prefHeight="25.0" prefWidth="82.0" styleClass="btn-danger" text="%Back" />
       <Label fx:id="warningLbl" layoutX="185.0" layoutY="314.0" prefHeight="25.0" prefWidth="286.0" styleClass="lbl h1" />
    </children>
 </AnchorPane>

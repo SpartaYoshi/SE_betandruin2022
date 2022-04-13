@@ -1,6 +1,5 @@
 package uicontrollers;
 
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.*;
@@ -30,41 +29,36 @@ public class CreateQuestionController implements Controller {
 
   private BlFacade businessLogic;
 
-  @FXML
-  private ResourceBundle resources;
+  @FXML private DatePicker datePicker;
 
-  @FXML
-  private URL location;
-
-  @FXML
-  private DatePicker datePicker;
-
-  @FXML
-  private ComboBox<Event> comboEvents;
-
-  @FXML
-  private TextField txtQuestion;
-
-  @FXML
-  private TextField txtMinBet;
-
-  @FXML
-  private Button btnCreateQuestion;
+  @FXML private ComboBox<Event> comboEvents;
+  @FXML private TextField txtQuestion;
+  @FXML private TextField txtMinBet;
+  @FXML private Button btnCreateQuestion;
 
   private MainGUI mainGUI;
 
-
-  @FXML
-  private Label lblErrorQuestion;
-
-  @FXML
-  private Label lblErrorMinBet;
+  @FXML private Label lblErrorQuestion;
+  @FXML private Label lblErrorMinBet;
 
 
   @FXML
-  void closeClick(ActionEvent event) {
+  void selectBack(ActionEvent event) {
     clearErrorLabels();
-    mainGUI.showPortal();
+
+    switch(businessLogic.getSessionMode()) {
+      case "Anon":
+        mainGUI.showPortal();
+        break;
+      case "User":
+        mainGUI.showUserPortal();
+        break;
+      case "Admin":
+        mainGUI.showAdminPortal();
+        break;
+      default:
+        break;
+    }
   }
 
   private void clearErrorLabels() {
@@ -75,7 +69,7 @@ public class CreateQuestionController implements Controller {
   }
 
   @FXML
-  void createQuestionClick(ActionEvent e) {
+  void selectCreate(ActionEvent e) {
 
     clearErrorLabels();
 

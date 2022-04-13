@@ -1,8 +1,4 @@
 package uicontrollers;
-import java.awt.*;
-import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -11,9 +7,7 @@ import java.util.*;
 import java.util.List;
 
 import businessLogic.BlFacade;
-import com.toedter.calendar.JCalendar;
 import domain.Event;
-import domain.Question;
 import exceptions.EventFinished;
 import exceptions.TeamPlayingException;
 import exceptions.TeamRepeatedException;
@@ -32,42 +26,17 @@ import utils.Dates;
 
 public class CreateNewEventController implements Controller{
 
-    @FXML
-    private ResourceBundle resources;
+    @FXML private DatePicker calendar;
 
-    @FXML
-    private URL location;
+    @FXML private Button closeButton;
+    @FXML private Button createEventButton;
 
-    @FXML
-    private DatePicker calendar;
+    @FXML private TextField eventtextField;
+    @FXML private Label messageLabel;
 
-    @FXML
-    private Button closeButton;
-
-    @FXML
-    private Button createEventButton;
-
-    @FXML
-    private TextField eventtextField;
-
-    @FXML
-    private Label listOfEventsLabel;
-
-    @FXML
-    private Label messageLabel;
-
-    @FXML
-    private Label writeEventText;
-
-    @FXML
-    private TableView<Event> tblEvents;
-
-    @FXML
-    private TableColumn<Event, Integer> ec1;
-
-    @FXML
-    private TableColumn<Event, String> ec2;
-
+    @FXML private TableView<Event> tblEvents;
+    @FXML private TableColumn<Event, Integer> ec1;
+    @FXML private TableColumn<Event, String> ec2;
 
     private final BlFacade businessLogic;
     private MainGUI mainGUI;
@@ -77,15 +46,25 @@ public class CreateNewEventController implements Controller{
     }
 
 
-
-
     @FXML
-    void jButtonClose_actionPerformed(ActionEvent event) {
-        closeButton.setVisible(false);
+    void selectBack(ActionEvent event) {
+        switch(businessLogic.getSessionMode()) {
+            case "Anon":
+                mainGUI.showPortal();
+                break;
+            case "User":
+                mainGUI.showUserPortal();
+                break;
+            case "Admin":
+                mainGUI.showAdminPortal();
+                break;
+            default:
+                break;
+        }
     }
 
     @FXML
-    void jButtonCreateEvent_actionPerformed(ActionEvent event) {
+    void selectCreateEvent(ActionEvent event) {
         try {
             messageLabel.setText("");
 

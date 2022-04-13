@@ -12,8 +12,8 @@
       <DatePicker fx:id="calendar" layoutX="53.0" layoutY="62.0" prefHeight="25.0" prefWidth="194.0" />
       <Label layoutX="69.0" layoutY="37.0" text="%EventDate" />
       <Label layoutX="326.0" layoutY="111.0" text="Questions:" />
-      <Button fx:id="btnRemove" layoutX="325.0" layoutY="471.0" mnemonicParsing="false" onAction="#removeClick" prefHeight="26.0" prefWidth="88.0" text="Remove" />
-      <Button fx:id="btnBack" layoutX="748.0" layoutY="24.0" mnemonicParsing="false" onAction="#backClick" prefHeight="26.0" prefWidth="88.0" text="%Back" />
+      <Button fx:id="btnRemove" layoutX="325.0" layoutY="471.0" mnemonicParsing="false" onAction="#selectRemove" prefHeight="26.0" prefWidth="88.0" text="Remove" />
+      <Button fx:id="btnBack" layoutX="748.0" layoutY="24.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="26.0" prefWidth="88.0" text="%Back" />
       <Label fx:id="lblError" layoutX="270.0" layoutY="528.0" prefHeight="17.0" prefWidth="194.0" />
       <Label fx:id="listOfEventsLabel" layoutX="55.0" layoutY="111.0" prefHeight="18.0" prefWidth="150.0" text="%List of events:" />
       <Label fx:id="lblMessage" layoutX="216.0" layoutY="379.0" prefHeight="17.0" prefWidth="313.0" text="   " />
