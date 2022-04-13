@@ -2,8 +2,6 @@ package dataAccess;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -21,11 +19,8 @@ import configuration.ConfigXML;
  */
 public class ObjectDbManagerServer extends JDialog {
 
-	private static final long serialVersionUID = 1L;
-	
 	private ConfigXML config  = ConfigXML.getInstance();
 
-	private final JPanel contentPanel;
 	private JTextArea textArea;
 
 
@@ -35,7 +30,7 @@ public class ObjectDbManagerServer extends JDialog {
 		setTitle("Data Access Server");
 		setBounds(100, 700, 450, 225);
 
-		contentPanel = new JPanel(new BorderLayout(0, 0));
+		JPanel contentPanel = new JPanel(new BorderLayout(0, 0));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.add(contentPanel);
 
@@ -47,24 +42,20 @@ public class ObjectDbManagerServer extends JDialog {
 		contentPanel.add(buttonPane, BorderLayout.SOUTH);
 
 		JButton okButton = new JButton("Stop DATA ACCESS");
-		okButton.addActionListener(new ActionListener() {
+		okButton.addActionListener(e -> {
 
-			
-			public void actionPerformed(ActionEvent e) {
-
-				textArea.append("\nClosing the database... ");
-				try {
-					TimeUnit.SECONDS.sleep(1);
-					Runtime.getRuntime().exec("java -cp resources/objectdb.jar " +
-							"com.objectdb.Server -port " + config.getDataAccessPort() +
-							" stop");
-				} catch (Exception ioe) {
-					System.out.println (ioe);
-				}
-
-				System.out.println("Server closed");
-				System.exit(1);
+			textArea.append("\nClosing the database... ");
+			try {
+				TimeUnit.SECONDS.sleep(1);
+				Runtime.getRuntime().exec("java -cp resources/objectdb.jar " +
+						"com.objectdb.Server -port " + config.getDataAccessPort() +
+						" stop");
+			} catch (Exception ioe) {
+				System.out.println (ioe);
 			}
+
+			System.out.println("Server closed");
+			System.exit(1);
 		});
 
 		buttonPane.add(okButton);
@@ -87,7 +78,7 @@ public class ObjectDbManagerServer extends JDialog {
 			} catch (IOException ioe) {
 				System.out.println (ioe);
 			} catch (Exception e) {
-				textArea.append("\nUnexpected error in ObjectDbManagerServer: " + e.toString());
+				textArea.append("\nUnexpected error in ObjectDbManagerServer: " + e);
 			}
 		}
 	}

@@ -36,19 +36,13 @@ public class BrowseQuestionsController implements Controller {
   }
 
 
-  @FXML void selectBack(ActionEvent event) {
-    switch(businessLogic.getSessionMode()) {
-      case "Anon":
-        mainGUI.showPortal();
-        break;
-      case "User":
-        mainGUI.showUserPortal();
-        break;
-      case "Admin":
-        mainGUI.showAdminPortal();
-        break;
-      default:
-        break;
+  @FXML void selectBack() {
+    switch (businessLogic.getSessionMode()) {
+      case "Anon" -> mainGUI.showPortal();
+      case "User" -> mainGUI.showUserPortal();
+      case "Admin" -> mainGUI.showAdminPortal();
+      default -> {
+      }
     }
   }
 
@@ -79,20 +73,18 @@ public class BrowseQuestionsController implements Controller {
       // attach a listener to the  << and >> buttons
       // mark events for the (prev, current, next) month and year shown
       DatePickerSkin skin = (DatePickerSkin) datepicker.getSkin();
-      skin.getPopupContent().lookupAll(".button").forEach(node -> {
-        node.setOnMouseClicked(event -> {
-          List<Node> labels = skin.getPopupContent().lookupAll(".label").stream().toList();
-          String month = ((Label) (labels.get(0))).getText();
-          String year =  ((Label) (labels.get(1))).getText();
-          YearMonth ym = Dates.getYearMonth(month + " " + year);
-          setEventsPrePost(ym.getYear(), ym.getMonthValue());
-        });
-      });
+      skin.getPopupContent().lookupAll(".button").forEach(node -> node.setOnMouseClicked(event -> {
+        List<Node> labels = skin.getPopupContent().lookupAll(".label").stream().toList();
+        String month = ((Label) (labels.get(0))).getText();
+        String year =  ((Label) (labels.get(1))).getText();
+        YearMonth ym = Dates.getYearMonth(month + " " + year);
+        setEventsPrePost(ym.getYear(), ym.getMonthValue());
+      }));
 
 
     });
 
-    datepicker.setDayCellFactory(new Callback<DatePicker, DateCell>() {
+    datepicker.setDayCellFactory(new Callback<>() {
       @Override
       public DateCell call(DatePicker param) {
         return new DateCell() {

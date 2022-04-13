@@ -2,8 +2,6 @@ package businessLogic;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -20,13 +18,7 @@ import configuration.ConfigXML;
  */
 public class BusinessLogicServer extends JDialog {
 
-	private static final long serialVersionUID = 1L;
-
-	private ConfigXML config  = ConfigXML.getInstance();
-
-	private final JPanel contentPanel;
 	JTextArea textArea;
-	BlFacade server;
 	String service;
 
 	public BusinessLogicServer() throws Exception {
@@ -35,7 +27,7 @@ public class BusinessLogicServer extends JDialog {
 		setTitle("Business Logic Server");
 		setBounds(100, 400, 500, 200);
 
-		contentPanel = new JPanel(new BorderLayout(0, 0));
+		JPanel contentPanel = new JPanel(new BorderLayout(0, 0));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.add(contentPanel);
 
@@ -47,18 +39,15 @@ public class BusinessLogicServer extends JDialog {
 		contentPanel.add(buttonPane, BorderLayout.SOUTH);
 
 		JButton okButton = new JButton("Stop BUSINESS LOGIC");
-		okButton.addActionListener(new ActionListener() {
-
-			
-			public void actionPerformed(ActionEvent e) {
-				textArea.append("\nClosing the server... ");	
-				System.exit(1);
-			}
+		okButton.addActionListener(e -> {
+			textArea.append("\nClosing the server... ");
+			System.exit(1);
 		});
 
 		buttonPane.add(okButton);
 		getRootPane().setDefaultButton(okButton);
 
+		ConfigXML config = ConfigXML.getInstance();
 		if (config.isBusinessLogicLocal())
 			textArea.append("\nERROR, the business logic is configured as local");
 
@@ -70,7 +59,7 @@ public class BusinessLogicServer extends JDialog {
 						config.getDataAccessPort()+"\n");	
 			try {
 				service= "http://" + config.getBusinessLogicNode() + ":" +
-						config.getBusinessLogicPort()+"/ws/"+config.getBusinessLogicName();
+						config.getBusinessLogicPort()+"/ws/"+ config.getBusinessLogicName();
 
 				Endpoint.publish(service, new BlFacadeImplementation());
 
@@ -78,7 +67,7 @@ public class BusinessLogicServer extends JDialog {
 				textArea.append("\nPress button to stop this server... ");
 
 			} catch (Exception e) {
-				System.out.println("Error in BusinessLogicServer: " + e.toString());
+				System.out.println("Error in BusinessLogicServer: ");
 				textArea.append("\nYou should have not launched DBManagerServer...");
 				textArea.append("\n\nor maybe there is a BusinessLogicServer already launched...");
 				throw e;

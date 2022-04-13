@@ -14,12 +14,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-@SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Event implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 	@XmlID
 	@Id
 	@XmlJavaTypeAdapter(IntegerAdapter.class)
@@ -29,7 +27,7 @@ public class Event implements Serializable {
 	private String description; 
 	private Date eventDate;
 	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private Vector<Question> questions = new Vector<Question>();
+	private Vector<Question> questions = new Vector<>();
 
 	public Vector<Question> getQuestions() {
 		return questions;
@@ -131,8 +129,6 @@ public class Event implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Event other = (Event) obj;
-		if (eventNumber != other.eventNumber)
-			return false;
-		return true;
+		return eventNumber == other.eventNumber;
 	}
 }

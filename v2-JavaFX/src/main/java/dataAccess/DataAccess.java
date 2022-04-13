@@ -223,7 +223,7 @@ public class DataAccess {
 	public Vector<Event> getEvents(Date date) {
 		System.out.println("Date is "+ date);
 		System.out.println(">> DataAccess: getEvents");
-		Vector<Event> res = new Vector<Event>();	
+		Vector<Event> res = new Vector<>();
 		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev WHERE ev.eventDate=?1", 
 				Event.class);   
 		query.setParameter(1, date);
@@ -239,7 +239,7 @@ public class DataAccess {
 	public Vector<Question> getQuestions(Event event) {
 		System.out.println("Event is "+ event);
 		System.out.println(">> DataAccess: getQuestions");
-		Vector<Question> res = new Vector<Question>();
+		Vector<Question> res = new Vector<>();
 		TypedQuery<Question> query = db.createQuery("SELECT qu FROM Question qu WHERE qu.event=?1",
 				Question.class);
 		query.setParameter(1, event);
@@ -256,7 +256,7 @@ public class DataAccess {
 		System.out.println("Question is "+ question);
 		System.out.println("User is "+ user);
 		System.out.println(">> DataAccess: getUserBets");
-		Vector<Bet> res = new Vector<Bet>();
+		Vector<Bet> res = new Vector<>();
 
 		// Aqui lo que hago es consegir todas las bets que tiene un user
 		TypedQuery<Bet> query = db.createQuery("SELECT bets FROM User",
@@ -280,7 +280,7 @@ public class DataAccess {
 	 */
 	public Vector<Date> getEventsMonth(Date date) {
 		System.out.println(">> DataAccess: getEventsMonth");
-		Vector<Date> res = new Vector<Date>();	
+		Vector<Date> res = new Vector<>();
 
 		Date firstDayMonthDate= UtilDate.firstDayMonth(date);
 		Date lastDayMonthDate= UtilDate.lastDayMonth(date);
@@ -314,7 +314,7 @@ public class DataAccess {
 			emf = Persistence.createEntityManagerFactory("objectdb:" + fileName);
 			db = emf.createEntityManager();
 		} else {
-			Map<String, String> properties = new HashMap<String, String>();
+			Map<String, String> properties = new HashMap<>();
 			properties.put("javax.persistence.jdbc.user", config.getDataBaseUser());
 			properties.put("javax.persistence.jdbc.password", config.getDataBasePassword());
 
@@ -378,8 +378,7 @@ public class DataAccess {
 	public User getUser(String username) {
 		try {
 			System.out.println(">> DataAccess: getUser=> username = " + username);
-			User us = db.find(User.class, username);
-			return us;
+			return db.find(User.class, username);
 			
 		} catch (NoResultException e) {
 			return null;
@@ -448,7 +447,7 @@ public class DataAccess {
 		User dbUser=db.find(User.class, who.getUsername());//update the database object too
 		dbUser.addBet(bet);
 		db.getTransaction().commit();
-		if (bet!= null){
+		if (bet != null){
 			this.restMoney(who, amountBet);
 		}
 		return bet;
@@ -479,15 +478,12 @@ public class DataAccess {
 		// Quiero borrar un bet de la lista de bets de un user
 		//// > Hay que usar DELETE FROM de alguna manera creo. - Asier
 		Query query = db.createQuery("DELETE bet FROM User.bets b WHERE b=?1",
-				User.class);
+				User.class); // TODO ESTÁ MAL, HAY QUE ARREGLARLO
 
 		query.setParameter(1, bet1);
 
 		db.getTransaction().commit();
-		if(bet!=null){
-			return bet;
-		}
-		return  null;
+		return bet;
 
 	}
 }

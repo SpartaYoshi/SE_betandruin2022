@@ -1,7 +1,6 @@
 package exceptions;
 
 public class MinimumBetException extends Exception {
-    private static final long serialVersionUID = 1L;
 
     public MinimumBetException() {
         super();

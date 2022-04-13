@@ -8,19 +8,17 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-@SuppressWarnings("serial")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Result implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
 	@Id
 	@XmlJavaTypeAdapter(IntegerAdapter.class)
 	@GeneratedValue
 	private int id;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private Vector<Bet> bets = new Vector<Bet>();
+	private Vector<Bet> bets = new Vector<>();
 	
 	private String result;
 

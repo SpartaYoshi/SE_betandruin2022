@@ -28,7 +28,6 @@ public class CreateNewEventController implements Controller{
 
     @FXML private DatePicker calendar;
 
-    @FXML private Button closeButton;
     @FXML private Button createEventButton;
 
     @FXML private TextField eventtextField;
@@ -47,24 +46,18 @@ public class CreateNewEventController implements Controller{
 
 
     @FXML
-    void selectBack(ActionEvent event) {
-        switch(businessLogic.getSessionMode()) {
-            case "Anon":
-                mainGUI.showPortal();
-                break;
-            case "User":
-                mainGUI.showUserPortal();
-                break;
-            case "Admin":
-                mainGUI.showAdminPortal();
-                break;
-            default:
-                break;
+    void selectBack() {
+        switch (businessLogic.getSessionMode()) {
+            case "Anon" -> mainGUI.showPortal();
+            case "User" -> mainGUI.showUserPortal();
+            case "Admin" -> mainGUI.showAdminPortal();
+            default -> {
+            }
         }
     }
 
     @FXML
-    void selectCreateEvent(ActionEvent event) {
+    void selectCreateEvent() {
         try {
             messageLabel.setText("");
 
@@ -84,7 +77,7 @@ public class CreateNewEventController implements Controller{
             Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
             Date date = Date.from(instant);
 
-            if (description.length>0) {
+            if (description.length > 0) {
                 Event newEvent = businessLogic.createEvent(team1, team2, date);
 
                 if (newEvent!= null) {
@@ -158,20 +151,18 @@ public class CreateNewEventController implements Controller{
             // attach a listener to the  << and >> buttons
             // mark events for the (prev, current, next) month and year shown
             DatePickerSkin skin = (DatePickerSkin) calendar.getSkin();
-            skin.getPopupContent().lookupAll(".button").forEach(node -> {
-                node.setOnMouseClicked(event -> {
-                    List<Node> labels = skin.getPopupContent().lookupAll(".label").stream().toList();
-                    String month = ((Label) (labels.get(0))).getText();
-                    String year =  ((Label) (labels.get(1))).getText();
-                    YearMonth ym = Dates.getYearMonth(month + " " + year);
-                    setEventsPrePost(ym.getYear(), ym.getMonthValue());
-                });
-            });
+            skin.getPopupContent().lookupAll(".button").forEach(node -> node.setOnMouseClicked(event -> {
+                List<Node> labels = skin.getPopupContent().lookupAll(".label").stream().toList();
+                String month = ((Label) (labels.get(0))).getText();
+                String year =  ((Label) (labels.get(1))).getText();
+                YearMonth ym = Dates.getYearMonth(month + " " + year);
+                setEventsPrePost(ym.getYear(), ym.getMonthValue());
+            }));
 
 
         });
 
-        calendar.setDayCellFactory(new Callback<DatePicker, DateCell>() {
+        calendar.setDayCellFactory(new Callback<>() {
             @Override
             public DateCell call(DatePicker param) {
                 return new DateCell() {

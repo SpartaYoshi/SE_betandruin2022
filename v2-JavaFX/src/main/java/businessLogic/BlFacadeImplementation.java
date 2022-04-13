@@ -25,7 +25,6 @@ public class BlFacadeImplementation implements BlFacade {
 	DataAccess dbManager;
 	ConfigXML config = ConfigXML.getInstance();
 	User currentUser;
-	Question currentQuestion;
 	String sessionMode;
 
 	public BlFacadeImplementation()  {		
