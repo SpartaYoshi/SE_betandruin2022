@@ -1,37 +1,25 @@
 # SE_betandruin2022
- Software Engineering project for the creation of a Bet &amp; Ruin interface program (2022).(1st Iteration)
+ Software Engineering project for the creation of a Bet &amp; Ruin interface program (2022).(2nd Iteration)
 
  Editors: Iosu Abal, Nagore Bravo, Asier Septién, Ainhize Legarreta.
  
  Name of the team: Ainhoa Corporation Ltd.
- 
- 
- + Account login use case:
- The login screen's objective is to prevent users to enter accounts where they do not have access to. For that, a Failed Login system check has been implemented to
- ensure that the credentials given are the correct ones registered in the database (username and password). So, when they log-in they can use the service Bet&Ruin.
- 
- 
- 
- + Account registration use case:
- This section corresponds to the creation of identifiable user accounts that are required to use the service Bet&Ruin provides. For the correct implementation of registration
- guidelines and requirements, a few new Exceptions have been made in order to check that the data given by the new user follows the criteria to be elligible to use the platform,
- such as the minimum legal age for betting and choosing available usernames to avoid accidental duplication.
- 
- 
- + Set a Fee Use Case:
- To implement this use case we needed to create a new class in the Domain. This class is called Result and has three different attributes.
- The first one is just an identifier, the second one is the result of a question (for example, the result for who is going to win question, could 
- be 'Real Sociedad'). The last attribute is the actual result, how big is the benefit you get if your answer is correct.
- Now, every question has a list of Results, since a question can have more than one answer and more than one result.
- Speaking about the GUI, I created a new JFrame, which will be only available for the admin user. I had to check that there were events and questions for the selected date, 
- and that a result was not set.(For that I created an Exception). I had some issues when loading the calendar (since it was empty), and that was because
- the businessLogic was not properly instantiazed, so the GUI couldn't load it properly.
- 
- 
- 
- + Create Event Use Case: 
-Our task in this section is to add a new event, so that we can create a question or set a result on that event later. It has been necessary to create a new GUI called CreateEventGUI, as well as several new methods in some of the classes: firstly, in the Business Logic, a “createEvent” method, and secondly, in the database, the general "createEvent" method. To ensure its correct operation, it has been essential to implement a method called "isAnyTeamPlaying", which checks if one of the teams is assigned to another event on the same date (they must be written correctly, that is, with the first letter capitalized, since they belong to proper names). Having selected a date, (not before the current one), when clicking on the button to create an Event, it is requested to write the name of each team. As mentioned above, should any of those teams not have another event on that date, the event will be successfully created and added to our database and thus the event combo box. Finally, the calendar will indicate that there is an event on that specific date, painting it.
-This use case has been upgraded since the last iteration: we have added a new exception, for when the administrator tries to create an event with the same team, that is, TeamRepeatedException.
+
++ Migration to JavaFx:
+At the beginning of the project we needed to import the previous use cases and GUIs into javaFX. Since it is the first time we are using intelliJ, we have encountered with several errors in the project (especially when pulling/pushing and recognizing the project as a maven one)
+Once we solved the problems these are the main changes that we have implemented from the previous iteration:
+ - We have implemented multiple language compatibility, so now all labels and texts are in Spanish Basque and English
+ - Portals are now divided into anonymous user,registered user and administrator
+ - Implemented session mode detection for window backtracking
+ - Revamped prototypes: Login, Register and Portal
+ - Fee class now is named as Result
+
++ Deposit money use case:
+This is the first use case that we implemented. We just had to create a GUI for it and  attribute in User class.
+This attribute (float) stores the actual money available the user has. We have implemented that, just after creating the User object, (s)he will start with 10€, to bet into anything it wants.
+We have had some issues when updating the value of the user, since the current User and the user in the database are not exactly the identical object. However, we managed to update both.
+Apart from that, the businessLogic now has a currentUser attribute, which stores the current user object. This is to know who is logged in, and who is placing bets.
+
 
 
 + Place a Bet Use Case:
@@ -40,11 +28,15 @@ To implement this use case, it has been mandatory to create a new Domain Class n
 
 
 + Remove a Bet Use Case:
-  To implement this use case, as mentioned in the one above, we needed to have a list of bets in each user and result, which will represent
-  the bets the current user has made. So taking into account which bet we want to remove and all the bets the user has, we fill the table. Now the system has to be able to remove the bet from the users list, and also, the system must refound the concrete amount of many placed in that bet in the user bank account. However, if the list does not contain that bet, the system will show an error message.
+  To implement this use case, as mentioned in the one above, we needed to have a list of bets in each User and Result, which will represent
+  the bets the current user has made. So taking into account which bet we want to remove and all the bets the user has, we fill the table. Now the system has to be able to remove the bet from the users list, the Result list and delete that Bet from the database. Also, the system must refound the concrete amount of money placed in that bet into the current user. If no bet was selected, the system will show an error message.
+
+
++ General issues: Apart from that, and as mentioned above, we think we have spend a lot of hours into this project especially because conflicts appeared when pulling / pushing or merging. In one occasion some changes were lost, so we had to implement them again.
+  Finally, another issue that we have spend a lot of time in was the remove Bet. Here we were trying to remove the Bet before removing it from the Result list, so the Bet was never removed and all its attributes were null
+
 
 
 + **Final Note**:
 To login as an administrator, we have created a new User.[*username*: **"juanan"**, *password*: **"hello"**]
-	Because of that, the databaseMode at the beginning is as *initialize*. Once that user has been created, the mode can be changed to *open* again.
- 
+    Because of that, the databaseMode at the beginning is as *initialize*. Once that user has been created, the mode can be changed to *open* again.

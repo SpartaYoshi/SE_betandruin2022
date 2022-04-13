@@ -135,7 +135,7 @@ public class RemoveBetController implements Controller{
                     businessLogic.insertMoney(bet.getAmount());
                     lblMessage.getStyleClass().clear();
                     lblMessage.getStyleClass().setAll("lbl", "lbl-success");
-                    lblMessage.setText("Bet removed, the money have been transferred to your bank account");
+                    lblMessage.setText("Bet removed, the money has been updated into your account");
                     tblBets.getItems().remove(bet);
                 }
                 else {

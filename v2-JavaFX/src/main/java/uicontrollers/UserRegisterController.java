@@ -65,7 +65,7 @@ public class UserRegisterController implements Controller{
                 errorMessage.getStyleClass().setAll("lbl-danger");
                 errorMessage.setText(errorDet);
             } else {
-                errorMessage.getStyleClass().setAll("lbl-primary");
+                errorMessage.getStyleClass().setAll("lbl-success");
                 ConfigXML config = ConfigXML.getInstance();
                 switch (config.getLocale()) {
                     case "en" -> errorMessage.setText("Register was successful. Now you can login.");

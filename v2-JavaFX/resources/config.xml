@@ -8,9 +8,9 @@
 	<dataAccessNode>0.0.0.0</dataAccessNode>
 	<dataAccessPort>6136</dataAccessPort>
 	<dataBaseFilename>db/bets.temp</dataBaseFilename>
-	<dataBaseOpenMode>initialize</dataBaseOpenMode>
+	<dataBaseOpenMode>open</dataBaseOpenMode>
 	<dataBaseUser>admin</dataBaseUser>
 	<dataBasePassword>admin</dataBasePassword>
   </dataAccess>
-  <locale>es</locale>
+  <locale>en</locale>
 </config>
