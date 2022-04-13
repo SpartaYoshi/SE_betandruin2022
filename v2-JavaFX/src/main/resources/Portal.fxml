@@ -72,7 +72,7 @@
       </Label>
       <HBox alignment="CENTER" layoutX="33.0" layoutY="240.0" prefHeight="31.0" prefWidth="314.0">
          <children>
-            <Label styleClass="lbl-info" text="%RebootApp" textAlignment="CENTER" textFill="WHITE" visible="false">
+            <Label fx:id="rebootInfo" styleClass="lbl-info" text="%RebootApp" textAlignment="CENTER" textFill="WHITE" visible="false">
                <font>
                   <Font name="Trebuchet MS Bold" size="12.0" />
                </font>

@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-  private Window portal, adminPortal, userPortal, createQuestion, browseQuestions, setFee, removebet, userLogin, userRegister, createEvent, placeAbet, depositMoney;
+  private Window portal, adminPortal, userPortal, createQuestion, browseQuestions, setFee, removeBet, userLogin, userRegister, createEvent, placeAbet, depositMoney;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -116,17 +116,17 @@ public class MainGUI {
     userRegister = load("/UserRegister.fxml");
     depositMoney = load("/DepositMoney.fxml");
     placeAbet = load("/PlaceABetv2.fxml");
-    removebet = load("/RemoveABet.fxml");
+    removeBet = load("/RemoveABet.fxml");
 
     showPortal();
 
   }
 
-  public void showPortal(){setupScene(portal.ui, "Portal", 395, 285);}
+  public void showPortal(){setupScene(portal.ui, "Portal", 395, 315);}
 
-  public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 320, 250);}
+  public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 395, 470);}
 
-  public void showUserPortal(){setupScene(userPortal.ui, "UserPortal", 600, 450);}
+  public void showUserPortal(){setupScene(userPortal.ui, "UserPortal", 395, 375);}
 
   public void showBrowseQuestions() {
     setupScene(browseQuestions.ui, "BrowseQuestions", 1000, 500);
@@ -140,7 +140,7 @@ public class MainGUI {
     setupScene(setFee.ui, "SetFee", 1050, 480);
   }
 
-  public void showCreateNewEvent() {
+  public void showCreateEvent() {
     setupScene(createEvent.ui, "CreateEvent", 650, 520);
   }
 
@@ -156,7 +156,7 @@ public class MainGUI {
 
   public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceABet", 900, 680);}
 
-  public void showRemoveABet(){setupScene(removebet.ui, "RemoveABet", 940, 600);}
+  public void showRemoveABet(){setupScene(removeBet.ui, "RemoveABet", 940, 600);}
 
 
 

@@ -1,14 +1,9 @@
 package uicontrollers;
 
-import java.io.ObjectInputFilter;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -19,6 +14,7 @@ public class PortalController implements Controller {
     private MainGUI mainGUI;
     private BlFacade businessLogic;
     @FXML private ToggleGroup lang;
+    @FXML private Label rebootInfo;
 
     public PortalController(BlFacade bl) {
         this.businessLogic = bl;
@@ -40,12 +36,13 @@ public class PortalController implements Controller {
             default:
                 break;
         }
+        rebootInfo.setVisible(true);
     }
 
     @FXML void selectBrowse(ActionEvent event) {
         mainGUI.showBrowseQuestions();
     }
-    @FXML void selectCreate(ActionEvent event) { mainGUI.showCreateQuestion();}
+    @FXML void selectCreateQuestion(ActionEvent event) { mainGUI.showCreateQuestion();}
     @FXML void selectLogin(ActionEvent event) { mainGUI.showUserLogin();}
     @FXML void selectRegister(ActionEvent event) {
         mainGUI.showUserRegister();
@@ -53,6 +50,8 @@ public class PortalController implements Controller {
     @FXML void selectPlaceBet(ActionEvent event) {mainGUI.showPlaceABet();}
     @FXML void selectRemoveBet(ActionEvent event) {mainGUI.showRemoveABet();}
     @FXML void selectDeposit(ActionEvent event) { mainGUI.showDepositMoney();}
+    @FXML void selectCreateNewEvent(ActionEvent event) { mainGUI.showCreateEvent();}
+    @FXML void selectSetFee(ActionEvent event) { mainGUI.showSetFee();}
 
     @FXML void selectLogout(ActionEvent event) {
         businessLogic.setSessionMode("Anon");
