@@ -1,6 +1,7 @@
 package uicontrollers;
 
 import businessLogic.BlFacade;
+import configuration.ConfigXML;
 import domain.User;
 import exceptions.FailedMoneyUpdateException;
 import javafx.fxml.FXML;
@@ -51,16 +52,31 @@ public class DepositMoneyController implements Controller {
             double totalMoneyAv=businessLogic.insertMoney(amount);
 
             warningLbl.getStyleClass().setAll("lbl","lbl-success");
+            ConfigXML config = ConfigXML.getInstance();
+            switch (config.getLocale()) {
+                case "en" -> warningLbl.setText("Done! You have inserted "+amount+"€. Total available money: "+ totalMoneyAv+" €");
+                case "es" -> warningLbl.setText("Hecho! Ha insertado "+amount+"€. Cantitad disponible de dinero: "+ totalMoneyAv+" €");
+                case "eus" -> warningLbl.setText("Egina! "+amount+"€ sartu dituzu. Diru kantitate erabilgarri totala: "+ totalMoneyAv+" €");
+            }
 
-            warningLbl.setText("Done! You have inserted "+amount+"€. Total available money: "+ totalMoneyAv+" €");
 
         }catch (FailedMoneyUpdateException e){
             warningLbl.getStyleClass().setAll("lbl","lbl-danger");
-            warningLbl.setText(e.getMessage());
+            ConfigXML config = ConfigXML.getInstance();
+            switch (config.getLocale()) {
+                case "en" -> warningLbl.setText(e.getMessage());
+                case "es" -> warningLbl.setText(e.getMessage());
+                case "eus" -> warningLbl.setText(e.getMessage());
+            }
 
         }catch (Exception e1){
             warningLbl.getStyleClass().setAll("lbl","lbl-danger");
-            warningLbl.setText("Sorry, introduce a positive amount");
+            ConfigXML config = ConfigXML.getInstance();
+            switch (config.getLocale()) {
+                case "en" -> warningLbl.setText("Sorry, introduce a positive amount");
+                case "es" -> warningLbl.setText("Perdone, introduzca un valor positivo");
+                case "eus" -> warningLbl.setText("Barkatu, balio positibo bat sartu ezazu");
+            }
         }
         amountField.setText("");
 

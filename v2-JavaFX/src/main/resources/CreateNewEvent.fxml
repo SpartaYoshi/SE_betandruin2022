@@ -11,18 +11,18 @@
 <AnchorPane prefHeight="488.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.CreateNewEventController">
    <children>
       <DatePicker fx:id="calendar" layoutX="189.0" layoutY="60.0" prefHeight="26.0" prefWidth="254.0" />
-      <Label layoutX="87.0" layoutY="64.0" prefHeight="18.0" prefWidth="175.0" text="Event date:" />
-      <Label layoutX="87.0" layoutY="111.0" prefHeight="18.0" prefWidth="150.0" text="List of events:" />
-      <Button fx:id="createEventButton" layoutX="257.0" layoutY="438.0" mnemonicParsing="false" onAction="#selectCreateEvent" text="Create Event" />
-      <Button fx:id="closeButton" layoutX="524.0" layoutY="438.0" mnemonicParsing="false" onAction="#selectBack" text="Close" />
+      <Label layoutX="87.0" layoutY="64.0" prefHeight="18.0" prefWidth="175.0" text="%EventDate" />
+      <Label layoutX="87.0" layoutY="111.0" prefHeight="18.0" prefWidth="150.0" text="%ListEvents" />
+      <Button fx:id="createEventButton" layoutX="257.0" layoutY="438.0" mnemonicParsing="false" onAction="#selectCreateEvent" text="%CreateEvent" />
+      <Button fx:id="closeButton" layoutX="524.0" layoutY="438.0" mnemonicParsing="false" onAction="#selectBack" text="%Back" />
       <TextField fx:id="eventtextField" layoutX="139.0" layoutY="358.0" prefHeight="26.0" prefWidth="360.0" />
-      <Label layoutX="87.0" layoutY="362.0" prefHeight="18.0" prefWidth="52.0" text="Event:" />
+      <Label layoutX="87.0" layoutY="362.0" prefHeight="18.0" prefWidth="52.0" text="%Event:" />
       <Label fx:id="messageLabel" layoutX="139.0" layoutY="392.0" prefHeight="26.0" prefWidth="360.0" />
-      <Label layoutX="87.0" layoutY="331.0" prefHeight="18.0" prefWidth="137.0" text="Create a new Event" />
+      <Label layoutX="87.0" layoutY="331.0" prefHeight="18.0" prefWidth="412.0" text="%WriteEvent" />
       <TableView fx:id="tblEvents" layoutX="189.0" layoutY="98.0" prefHeight="200.0" prefWidth="254.0">
         <columns>
           <TableColumn fx:id="ec1" prefWidth="58.4000244140625" text="ID" />
-          <TableColumn fx:id="ec2" prefWidth="194.39996337890625" text="Event" />
+          <TableColumn fx:id="ec2" prefWidth="194.39996337890625" text="%Event" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

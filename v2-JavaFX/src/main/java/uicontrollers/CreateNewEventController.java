@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.List;
 
 import businessLogic.BlFacade;
+import configuration.ConfigXML;
 import domain.Event;
 import exceptions.EventFinished;
 import exceptions.TeamPlayingException;
@@ -82,34 +83,70 @@ public class CreateNewEventController implements Controller{
 
                 if (newEvent!= null) {
                     messageLabel.getStyleClass().setAll("lbl","lbl-success");
-                    messageLabel.setText("The event has been succesfully created.");
+                    ConfigXML config = ConfigXML.getInstance();
+                    switch (config.getLocale()) {
+                        case "en" -> messageLabel.setText("The event has been succesfully created.");
+                        case "es" -> messageLabel.setText("El evento ha sido creado correctamente");
+                        case "eus" -> messageLabel.setText("Gertaera behar bezala sortu da");
+                    }
+
                     tblEvents.getItems().add(newEvent);
                     holidays.add(Dates.convertToLocalDateViaInstant(date));
                 }
                 else {
                     messageLabel.getStyleClass().setAll("lbl","lbl-danger");
-                    messageLabel.setText("Error. The event could not be created.");
+                    ConfigXML config = ConfigXML.getInstance();
+                    switch (config.getLocale()) {
+                        case "en" -> messageLabel.setText("Error. The event could not be created.");
+                        case "es" -> messageLabel.setText("Error. El evento no se ha podido crear");
+                        case "eus" -> messageLabel.setText("Errorea. Gertaera ezin izan da sortu");
+                    }
+
                 }
 
             }
         }
         catch (EventFinished e2) {
             messageLabel.getStyleClass().setAll("lbl","lbl-danger");
-            messageLabel.setText("The event could not be created. Try again selecting another date");
+            ConfigXML config = ConfigXML.getInstance();
+            switch (config.getLocale()) {
+                case "en" -> messageLabel.setText("The event could not be created. Try again selecting another date");
+                case "es" -> messageLabel.setText("El evento no se ha podido crear, inténtelo con otra fecha");
+                case "eus" -> messageLabel.setText("Gertaera ezin izan da sortu, beste data batekin saia zaitez");
+            }
+
         }
         catch (TeamPlayingException e3) {
             messageLabel.getStyleClass().setAll("lbl","lbl-danger");
-            messageLabel.setText("Error! Try it again changing the teams. One of those teams is already playing a match that day");
+            ConfigXML config = ConfigXML.getInstance();
+            switch (config.getLocale()) {
+                case "en" -> messageLabel.setText("Error! Try it again changing the teams. One of those teams is already playing a match that day");
+                case "es" -> messageLabel.setText("Error. Uno de los equipos tiene otro evento ese mismo día");
+                case "eus" -> messageLabel.setText("Errorea. Talde batek beste gertaera bat dauka egun berean");
+            }
+
 
         }
         catch (TeamRepeatedException e5){
             messageLabel.getStyleClass().setAll("lbl","lbl-danger");
-            messageLabel.setText("Error! Both teams are the same");
+            ConfigXML config = ConfigXML.getInstance();
+            switch (config.getLocale()) {
+                case "en" -> messageLabel.setText("Error! Both teams are the same");
+                case "es" -> messageLabel.setText("Error. Los dos equipos son el mismo");
+                case "eus" -> messageLabel.setText("Errorea. Talde bera dira");
+            }
+
 
         }
         catch(Exception e4) {
             messageLabel.getStyleClass().setAll("lbl","lbl-danger");
-            messageLabel.setText("Error! It must be written as: Local team's name - Visitor team's name");
+            ConfigXML config = ConfigXML.getInstance();
+            switch (config.getLocale()) {
+                case "en" -> messageLabel.setText("Error! It must be written as: Local team's name - Visitor team's name");
+                case "es" -> messageLabel.setText("Error. Debe escribirse: Equipo local - Equipo visitante");
+                case "eus" -> messageLabel.setText("Errorea. Horrela idatzi ezazu: Talde lokala - Talde bisitaria");
+            }
+
         }
 
 

@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import java.util.*;
 
 import businessLogic.BlFacade;
+import configuration.ConfigXML;
 import domain.*;
 import exceptions.*;
 import javafx.event.ActionEvent;
@@ -97,7 +98,12 @@ public class PlaceABetController implements Controller{
                 LocalDate localDate = calendar.getValue();
                 if (localDate==null) {
                     messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
-                    messageLabel.setText("Error. A date must be selected.");
+                    ConfigXML config = ConfigXML.getInstance();
+                    switch (config.getLocale()) {
+                        case "en" -> messageLabel.setText("Error. A date must be selected.");
+                        case "es" -> messageLabel.setText("Error. Debe selccionar una fecha");
+                        case "eus" -> messageLabel.setText("Errorea. Data bat aukeratu ezazu, mesedez");
+                    }
                 }
 
                 else {
@@ -107,13 +113,30 @@ public class PlaceABetController implements Controller{
 
                     if (event1 == null) {
                         messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
-                        messageLabel.setText("Error. No event has been selected.");
+                        ConfigXML config = ConfigXML.getInstance();
+                        switch (config.getLocale()) {
+                            case "en" -> messageLabel.setText("Error. No event has been selected.");
+                            case "es" -> messageLabel.setText("Error. Ningún evento ha sido seleccionado");
+                            case "eus" -> messageLabel.setText("Errorea. Ez duzu gertaerarik aukeratu");
+                        }
+
                     } else if (question == null) {
                         messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
-                        messageLabel.setText("Error. No question has been selected.");
+                        ConfigXML config = ConfigXML.getInstance();
+                        switch (config.getLocale()) {
+                            case "en" -> messageLabel.setText("Error. No question has been selected.");
+                            case "es" -> messageLabel.setText("Error. Ninguna pregunta ha sido seleccionada");
+                            case "eus" -> messageLabel.setText("Errorea. Ez duzu galderarik aukeratu");
+                        }
+
                     } else if (result == null) {
                         messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
-                        messageLabel.setText("Error. No result has been selected.");
+                        ConfigXML config = ConfigXML.getInstance();
+                        switch (config.getLocale()) {
+                            case "en" -> messageLabel.setText("Error. No result has been selected.");
+                            case "es" -> messageLabel.setText("Error. Ninguna respuesta ha sido seleccionada");
+                            case "eus" -> messageLabel.setText("Errorea. Ez duzu erantzunik aukeratu");
+                        }
                     } else {
 
                         if (stringAmount != null) {
@@ -122,31 +145,66 @@ public class PlaceABetController implements Controller{
                             Bet newBet = businessLogic.placeBet(amount, question, result, date);
 
                             if (newBet != null) {
-                                usersMoney();
                                 messageLabel.getStyleClass().setAll("lbl", "lbl-success");
-                                messageLabel.setText("The bet has been succesfully added.");
+                                ConfigXML config = ConfigXML.getInstance();
+                                switch (config.getLocale()) {
+                                    case "en" -> messageLabel.setText("The bet has been succesfully added.");
+                                    case "es" -> messageLabel.setText("La apuesta se ha realizado correctamente");
+                                    case "eus" -> messageLabel.setText("Apustua behar bezala egin da");
+                                }
+
                             } else {
                                 messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
-                                messageLabel.setText("Error. The bet could not be added.");
+                                ConfigXML config = ConfigXML.getInstance();
+                                switch (config.getLocale()) {
+                                    case "en" -> messageLabel.setText("Error. The bet could not be added.");
+                                    case "es" -> messageLabel.setText("Error. No se ha podido realizar la apuesta");
+                                    case "eus" -> messageLabel.setText("Errorea. Ezin izan da apustua egin");
+                                }
+
                             }
                         } else {
                             messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
-                            messageLabel.setText("Error. The amount field shouldn't be empty.");
+                            ConfigXML config = ConfigXML.getInstance();
+                            switch (config.getLocale()) {
+                                case "en" -> messageLabel.setText("Error. The amount field shouldn't be empty.");
+                                case "es" -> messageLabel.setText("Error. El campo de la cantidad no puede estar vacío");
+                                case "eus" -> messageLabel.setText("Errorea. Kantitatearen eremua ezin da hutsik egon");
+                            }
+
                         }
                     }
                 }
 
                 } catch(NotEnoughMoneyException e1){
                     messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
-                    messageLabel.setText("Not enough money for the selected amount.");
+                    ConfigXML config = ConfigXML.getInstance();
+                    switch (config.getLocale()) {
+                        case "en" -> messageLabel.setText("Not enough money for the selected amount.");
+                        case "es" -> messageLabel.setText("No tiene suficiente dinero para la cantidad seleccionada");
+                        case "eus" -> messageLabel.setText("Ez duzu diru kantitate nahikoa");
+                    }
+
 
                 } catch(MinimumBetException e2){
                     messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
-                    messageLabel.setText("A larger amount must be selected. Check the minimum amount.");
+                    ConfigXML config = ConfigXML.getInstance();
+                    switch (config.getLocale()) {
+                        case "en" -> messageLabel.setText("A larger amount must be selected. Check the minimum amount.");
+                        case "es" -> messageLabel.setText("Debe seleccionar una mayor cantidad. Consulte la cantidad mínima. ");
+                        case "eus" -> messageLabel.setText("Diru kantitate handiago bat aukeratu ezazu. Kontsultatu ezazu kantitate mínimoa.");
+                    }
+
 
                 } catch(EventFinished e){
                     messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
-                    messageLabel.setText("The event could not be created. Try again selecting another date");
+                    ConfigXML config = ConfigXML.getInstance();
+                    switch (config.getLocale()) {
+                        case "en" -> messageLabel.setText("The bet could not be created. Try again selecting another date");
+                        case "es" -> messageLabel.setText("La apuesta no se ha podido realizar. Inténtelo de nuevo con otra fecha ");
+                        case "eus" -> messageLabel.setText("Apustua ezin izan da egin. Saiatu zaitez beste data batekin");
+                    }
+
                 }
 
 
@@ -205,7 +263,13 @@ public class PlaceABetController implements Controller{
                 }
                 Double min = businessLogic.getMoneyMinimumBet(tblQuestions.getSelectionModel().getSelectedItem());
                 minimumBetlabel.getStyleClass().setAll("lbl","lbl-info");
-                minimumBetlabel.setText("Minimum bet for this question: "+ min + "€");
+                ConfigXML config = ConfigXML.getInstance();
+                switch (config.getLocale()) {
+                    case "en" -> minimumBetlabel.setText("Minimum bet for this question: "+ min + "€");
+                    case "es" -> minimumBetlabel.setText("Cantidad mínima para esta pregunta: "+ min + "€");
+                    case "eus" -> minimumBetlabel.setText("Galdera honetarako kantitate minimoa: "+ min + "€");
+                }
+
             }
         });
     }
@@ -230,7 +294,7 @@ public class PlaceABetController implements Controller{
         }else{
             availableMoneyLabel.getStyleClass().setAll("lbl", "lbl-success");
         }
-        availableMoneyLabel.setText("Available money: "+ businessLogic.getMoneyAvailable() + "€");
+        availableMoneyLabel.setText(businessLogic.getMoneyAvailable() + "€");
     }
 
 

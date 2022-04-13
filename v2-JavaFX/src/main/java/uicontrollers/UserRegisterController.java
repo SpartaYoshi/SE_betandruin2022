@@ -70,7 +70,7 @@ public class UserRegisterController implements Controller{
                 switch (config.getLocale()) {
                     case "en" -> errorMessage.setText("Register was successful. Now you can login.");
                     case "es" -> errorMessage.setText("Se ha registrado correctamente. Ya puede iniciar sesión.");
-                    case "eus" -> errorMessage.setText("???"); // TODO
+                    case "eus" -> errorMessage.setText("Behar bezala erregistratu da. Saioa hasi dezakezu.");
                 }
             }
         } catch (NullPointerException e) {
@@ -79,7 +79,7 @@ public class UserRegisterController implements Controller{
             switch (config.getLocale()) {
                 case "en" -> errorMessage.setText("Please, fill in all the fields.");
                 case "es" -> errorMessage.setText("Por favor, rellene todos los datos.");
-                case "eus" -> errorMessage.setText("???"); // TODO
+                case "eus" -> errorMessage.setText("datu guztiak sartu itzazu, mesedez.");
             }
         }
     }
