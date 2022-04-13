@@ -1,6 +1,7 @@
 package uicontrollers;
 
 import businessLogic.BlFacade;
+import configuration.ConfigXML;
 import domain.Event;
 import domain.Question;
 import exceptions.FeeAlreadyExists;
@@ -76,27 +77,46 @@ public class SetFeeController implements Controller {
 
 
                 if(feeAmount<=0) {
-                    warningLbl.setText("Sorry, fee amount should be a numeric positive value");
                     warningLbl.getStyleClass().setAll("lbl","lbl-danger");
+                    ConfigXML config = ConfigXML.getInstance();
+                    switch (config.getLocale()) {
+                        case "en" -> warningLbl.setText("Sorry, fee amount should be a numeric positive value");
+                        case "es" -> warningLbl.setText("La cantidad de la cuota debería ser un valor positivo");
+                        case "eus" -> warningLbl.setText("Barkatu, kuota kantitatea balio positibo bat izan beharko litzateke");
+                    }
 
 
                 }else {
                     businessLogic.createFee(quest, result, feeAmount);
-                    warningLbl.setText("Fee has been set correctly");
                     warningLbl.getStyleClass().setAll("lbl","lbl-success");
-
+                    ConfigXML config = ConfigXML.getInstance();
+                    switch (config.getLocale()) {
+                        case "en" -> warningLbl.setText("Fee has been set correctly");
+                        case "es" -> warningLbl.setText("La cuota se ha añadido correctamente");
+                        case "eus" -> warningLbl.setText("Kuota behar bezala gehitu da");
+                    }
 
                 }
 
             }
             catch (FeeAlreadyExists e1) {
-                warningLbl.setText("Sorry, the fee for that result already exists");
                 warningLbl.getStyleClass().setAll("lbl","lbl-danger");
+                ConfigXML config = ConfigXML.getInstance();
+                switch (config.getLocale()) {
+                    case "en" -> warningLbl.setText("Sorry, the fee for that result already exists");
+                    case "es" -> warningLbl.setText("Perdone, la couta para esa respuesta ya existe");
+                    case "eus" -> warningLbl.setText("Barkatu, erantzun horretarako kuota jadanik existitzen da");
+                }
 
             }
             catch (java.lang.NumberFormatException e1) {
-                warningLbl.setText("Error in numeric value of Fee");
                 warningLbl.getStyleClass().setAll("lbl","lbl-danger");
+                ConfigXML config = ConfigXML.getInstance();
+                switch (config.getLocale()) {
+                    case "en" -> warningLbl.setText("Error in numeric value of Fee");
+                    case "es" -> warningLbl.setText("Error en el valor númerico de Cuota");
+                    case "eus" -> warningLbl.setText("Kuotaren zenbakizko errorea");
+                }
 
 
             }

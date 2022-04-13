@@ -22,16 +22,16 @@
         </TableView>
         <TableView fx:id="tblQuestions" layoutX="580.0" layoutY="78.0" prefHeight="200.0" prefWidth="393.0">
             <columns>
-                <TableColumn fx:id="qc1" prefWidth="39.0" text="%QuestionN" />
+                <TableColumn fx:id="qc1" prefWidth="39.0" text="%ID" />
                 <TableColumn fx:id="qc2" prefWidth="352.0" text="%Question" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <Label layoutX="232.0" layoutY="49.0" text="%Events" />
+        <Label layoutX="232.0" layoutY="49.0" prefHeight="18.0" prefWidth="84.0" text="%Events" />
         <Label layoutX="358.0" layoutY="49.0" text="  " />
         <Label layoutX="576.0" layoutY="49.0" text="%SelectedEvent" />
-        <Button layoutX="535.0" layoutY="332.0" mnemonicParsing="false" onAction="#selectBack" text="%Back" />
+        <Button layoutX="487.0" layoutY="332.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="26.0" prefWidth="100.0" text="%Back" />
     </children>
 </AnchorPane>

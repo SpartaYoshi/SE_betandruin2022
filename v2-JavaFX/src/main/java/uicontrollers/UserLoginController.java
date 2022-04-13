@@ -65,7 +65,7 @@ public class UserLoginController implements Controller{
             switch (config.getLocale()) {
                 case "en" -> messageLabel.setText("The credentials are incorrect.");
                 case "es" -> messageLabel.setText("Los datos introducidos son incorrectos.");
-                case "eus" -> messageLabel.setText("???");    // TODO
+                case "eus" -> messageLabel.setText("Sartutako datuak ez dira zuzenak.");
             }
             messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
         }

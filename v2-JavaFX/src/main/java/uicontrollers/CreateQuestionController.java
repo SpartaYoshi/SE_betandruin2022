@@ -5,6 +5,7 @@ import java.time.YearMonth;
 import java.util.*;
 
 import businessLogic.BlFacade;
+import configuration.ConfigXML;
 import domain.Event;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
@@ -85,25 +86,64 @@ public class CreateQuestionController implements Controller {
         inputPrice = Float.valueOf(txtMinBet.getText());
 
         if (inputPrice <= 0) {
-          lblErrorMinBet.setText("Min bet should be > 0");
+          lblErrorMinBet.getStyleClass().setAll("lbl","lbl-danger");
+          ConfigXML config = ConfigXML.getInstance();
+          switch (config.getLocale()) {
+            case "en" -> lblErrorMinBet.setText("Min bet should be > 0");
+            case "es" -> lblErrorMinBet.setText("La cantidad mínima debería ser > 0");
+            case "eus" -> lblErrorMinBet.setText("Kantitate minimoa > 0 izan beharko litzateke");
+          }
         } else {
           businessLogic.createQuestion(event, inputQuestion, inputPrice);
           lblErrorQuestion.getStyleClass().clear();
           lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-success");
-          lblErrorQuestion.setText("Question correctly created");
+          ConfigXML config = ConfigXML.getInstance();
+          switch (config.getLocale()) {
+            case "en" -> lblErrorQuestion.setText("Question correctly created");
+            case "es" -> lblErrorQuestion.setText("La pregunta ha sido creada correctamente");
+            case "eus" -> lblErrorQuestion.setText("Galdera behar bezala sortu da");
+          }
           lblErrorMinBet.getStyleClass().clear();
           showErrors = false;
         }
       } else {
-        lblErrorQuestion.setText("Question shouldn't be empty");
+          lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-danger");
+          ConfigXML config = ConfigXML.getInstance();
+          switch (config.getLocale()) {
+            case "en" -> lblErrorQuestion.setText("Question shouldn't be empty");
+            case "es" -> lblErrorQuestion.setText("La pregunta no debería estar vacía");
+            case "eus" -> lblErrorQuestion.setText("Galdera hutsik dago");
+          }
+
       }
 
     } catch (NumberFormatException ex) {
-      lblErrorMinBet.setText("Introduce a number");
+        lblErrorMinBet.getStyleClass().setAll("lbl", "lbl-danger");
+        ConfigXML config = ConfigXML.getInstance();
+        switch (config.getLocale()) {
+          case "en" -> lblErrorMinBet.setText("Introduce a number");
+          case "es" -> lblErrorMinBet.setText("Introduzca un número");
+          case "eus" -> lblErrorMinBet.setText("Zenbaki bat sartu ezazu");
+        }
+
     } catch (EventFinished ex) {
-      lblErrorQuestion.setText("Event has finished");
+      lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-danger");
+      ConfigXML config = ConfigXML.getInstance();
+      switch (config.getLocale()) {
+        case "en" -> lblErrorQuestion.setText("Event has finished");
+        case "es" -> lblErrorQuestion.setText("El evento ha terminado");
+        case "eus" -> lblErrorQuestion.setText("Gertaera bukatu da");
+      }
+
     } catch (QuestionAlreadyExist ex) {
-      lblErrorQuestion.setText("Question already exists");
+      lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-danger");
+      ConfigXML config = ConfigXML.getInstance();
+      switch (config.getLocale()) {
+        case "en" -> lblErrorQuestion.setText("Question already exists");
+        case "es" -> lblErrorQuestion.setText("La pregunta ya existe");
+        case "eus" -> lblErrorQuestion.setText("Galdera jadanik existitzen da");
+      }
+
     } catch (Exception ex) {
       ex.printStackTrace();
     }
