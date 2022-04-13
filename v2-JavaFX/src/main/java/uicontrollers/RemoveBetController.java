@@ -99,6 +99,10 @@ public class RemoveBetController implements Controller{
 
     @FXML
     void backClick(ActionEvent event) {
+        tblEvents.getItems().clear();
+        tblQuestions.getItems().clear();
+        tblBets.getItems().clear();
+        calendar.getEditor().clear();
         switch(businessLogic.getSessionMode()) {
             case "Anon":
                 mainGUI.showPortal();
@@ -153,12 +157,12 @@ public class RemoveBetController implements Controller{
                 lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
             }
             else{
-                Bet b1 = businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), bet);
+                Bet b1 = businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), question,bet);
                 if(b1!=null){
                     businessLogic.insertMoney(bet.getAmount());
                     lblMessage.getStyleClass().clear();
-                    lblMessage.getStyleClass().setAll("lbl", "lbl-success");
                     lblMessage.setText("Bet removed, the money have been transferred to your bank account");
+                    lblMessage.getStyleClass().setAll("lbl", "lbl-success");
                     lblMessage.getStyleClass().clear();
                     tblBets.getItems().remove(bet);
                 }
@@ -168,13 +172,14 @@ public class RemoveBetController implements Controller{
                 }
             }
 
-
-            //if la fecha ya ha pasado
         } catch (Exception e1) {
             lblMessage.setText("Couldn't remove bet.");
             lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
         }
-
+        tblEvents.getItems().clear();
+        tblQuestions.getItems().clear();
+        tblBets.getItems().clear();
+        calendar.getEditor().clear();
     }
 
 
@@ -203,6 +208,7 @@ public class RemoveBetController implements Controller{
             if (newSelection != null) {
 
                 tblQuestions.getItems().clear();
+                tblBets.getItems().clear();
                 for (Question q : tblEvents.getSelectionModel().getSelectedItem().getQuestions()) {
                     tblQuestions.getItems().add(q);
                 }
@@ -321,6 +327,11 @@ public class RemoveBetController implements Controller{
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
+        tblEvents.getItems().clear();
+        tblQuestions.getItems().clear();
+        tblBets.getItems().clear();
+        calendar.getEditor().clear();
+
         this.mainGUI = mainGUI;
     }
 }

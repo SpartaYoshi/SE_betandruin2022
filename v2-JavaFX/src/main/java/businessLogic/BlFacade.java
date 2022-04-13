@@ -99,7 +99,7 @@ public interface BlFacade {
 	Vector<Bet> getUserBets(Question question, User user);
 
 	@WebMethod
-	Bet removeCurrentUserBet(User currentUser, Bet bet1);
+	Bet removeCurrentUserBet(User currentUser, Question question, Bet bet1);
 
 	@WebMethod
 	double getMoneyAvailable();

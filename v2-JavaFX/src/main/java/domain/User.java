@@ -41,6 +41,7 @@ public class User {
 		moneyAvailable=10;
 		
 		admin = false;
+
 		bets = new Vector<Bet>();
 
 

@@ -61,6 +61,25 @@ public class PlaceABetController implements Controller{
 
         @FXML
         void selectBack(ActionEvent event) {
+            tblEvents.getItems().clear();
+            tblQuestions.getItems().clear();
+            tblResults.getItems().clear();
+            calendar.setValue(LocalDate.now());
+            showMoneyButton.setVisible(true);
+            availableMoneyLabel.getStyleClass().clear();
+            availableMoneyLabel.setText("");
+            messageLabel.getStyleClass().clear();
+            messageLabel.setText("");
+            amountMoneyTextField.clear();
+            minimumBetlabel.getStyleClass().clear();
+            minimumBetlabel.setText("");
+            eventDescriptionLabel.setText("");
+            questionLabel.setText("");
+            resultLabel.setText("");
+            availableMoneyLabel.setText("");
+            placeBetButton.getStyleClass().setAll("btn", "btn-primary");
+
+
             switch(businessLogic.getSessionMode()) {
                 case "Anon":
                     mainGUI.showPortal();
@@ -238,8 +257,7 @@ public class PlaceABetController implements Controller{
 
     @FXML
         void initialize() {
-        availableMoneyLabel.setText("");
-        placeBetButton.getStyleClass().setAll("btn", "btn-primary");
+
 
         setupEventSelection();
         setupQuestionSelection();
