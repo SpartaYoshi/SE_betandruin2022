@@ -325,12 +325,7 @@ public class DataAccess {
 		}
 	}
 
-	public boolean existQuestion(Event event, String question) {
-		System.out.println(">> DataAccess: existQuestion => event = " + event + 
-				" question = " + question);
-		Event ev = db.find(Event.class, event.getEventNumber());
-		return ev.doesQuestionExist(question);
-	}
+
 	
 	
 	public boolean isAnyTeamPLaying(String team1, String team2, Date date)  {
@@ -418,6 +413,12 @@ public class DataAccess {
 		return 0;
 	}
 
+	/**
+	 * method to add more money to the current user
+	 * @param who
+	 * @param am
+	 * @return
+	 */
 	public double insertMoney(User who, double am)  {
 		double total=who.getMoneyAvailable()+ am; //the money he had + the deposited money
 		//this.registerUser(who);
@@ -435,6 +436,13 @@ public class DataAccess {
 
 	}
 
+	/**
+	 * method to add a bet to the result of a question
+	 * @param f
+	 * @param amountBet
+	 * @param who
+	 * @return
+	 */
 	public Bet placeBetToQuestion(Result f, Double amountBet, User who){
 		System.out.println(">> DataAccess: placeAbet=> On result = " + f.getResult() + ", amount = " +amountBet + " by " + who.getName() + " " + who.getSurname());
 		Result result = db.find(Result.class, f.getId());
@@ -458,6 +466,12 @@ public class DataAccess {
 		return bet;
 	}
 
+	/**
+	 * method to rest money to the current user
+	 * @param who
+	 * @param bet
+	 * @return
+	 */
 
 
 	public double restMoney(User who, double bet)  {
@@ -473,6 +487,13 @@ public class DataAccess {
 		return who.getMoneyAvailable();
 	}
 
+	/**
+	 * method that deletes Bet from database, from user's list and from result's list
+	 * @param currentUser
+	 * @param question
+	 * @param bet1
+	 * @return
+	 */
 	public Bet removeCurrentUserBet(User currentUser, Question question,Bet bet1) {
 		System.out.println(">> DataAccess: removeAbet=> On bet = " + bet1 + ", by " + currentUser.getName() + " " + currentUser.getSurname());
 		Bet bet = db.find(Bet.class, bet1.getBetNum());

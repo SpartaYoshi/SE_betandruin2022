@@ -133,11 +133,11 @@ public class MainGUI {
   }
 
   public void showCreateQuestion() {
-    setupScene(createQuestion.ui, "CreateQuestion", 550, 400);
+    setupScene(createQuestion.ui, "CreateQuestion", 550, 420);
   }
 
   public void showSetFee() {
-    setupScene(setFee.ui, "SetFee", 1050, 480);
+    setupScene(setFee.ui, "SetFee", 1050, 500);
   }
 
   public void showCreateEvent() {
@@ -156,7 +156,7 @@ public class MainGUI {
 
   public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceBet", 900, 680);}
 
-  public void showRemoveABet(){setupScene(removeBet.ui, "RemoveBet", 940, 600);}
+  public void showRemoveABet(){setupScene(removeBet.ui, "RemoveBet", 940, 520);}
 
 
 
@@ -164,7 +164,6 @@ public class MainGUI {
     if (scene == null){
       scene = new Scene(ui, width, height);
       scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
-      //scene.getStylesheets().add(getClass().getClassLoader().getResource("styles/hover.css").toString());
       stage.setScene(scene);
     }
     stage.setWidth(width);

@@ -90,7 +90,7 @@ public class BlFacadeImplementation implements BlFacade {
 		Event ev;
 		Date currentdate = new Date();
 
-		System.out.println("Current date is: "+ currentdate);
+
 		if (currentdate.compareTo(date) > 0) {
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
 					getString("ErrorEventHasFinished"));
@@ -128,21 +128,9 @@ public class BlFacadeImplementation implements BlFacade {
 		return events;
 	}
 
-	@WebMethod
-	public Vector<Question> getQuestions(Event event){
-		dbManager.open(false);
-		Vector<Question>  questions = dbManager.getQuestions(event);
-		dbManager.close();
-		return questions;
-	}
 
-	@WebMethod
-	public Vector<Bet> getUserBets(Question question, User user){
-		dbManager.open(false);
-		Vector<Bet>  bets = dbManager.getUserBets(question, user);
-		dbManager.close();
-		return bets;
-	}
+
+
 
 	@Override
 	public Bet removeCurrentUserBet(User currentUser, Question question, Bet bet1) {
@@ -263,9 +251,6 @@ public class BlFacadeImplementation implements BlFacade {
 		User who = this.getCurrentUser();
 		Date currentdate = new Date();
 
-		System.out.println("Current date is: "+ currentdate);
-
-
 		dbManager.open(false);
 		if (amount>this.currentUser.getMoneyAvailable()){
 			throw new NotEnoughMoneyException();
@@ -280,18 +265,8 @@ public class BlFacadeImplementation implements BlFacade {
 		else{
 			newBet = dbManager.placeBetToQuestion(result, amount, who);
 		}
-
-
-
 		dbManager.close();
-
-
 		return newBet;
-
-
-
-
-
 	}
 
 
@@ -312,7 +287,7 @@ public class BlFacadeImplementation implements BlFacade {
 	@WebMethod
 	public double insertMoney(double amount) throws FailedMoneyUpdateException{
 		User who=this.getCurrentUser();
-		System.out.println(">> user tenia "+who.getMoneyAvailable());
+
 
 		dbManager.open(false);
 

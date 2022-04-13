@@ -30,20 +30,7 @@ public class RemoveBetController implements Controller{
     private MainGUI mainGUI;
     private BlFacade businessLogic;
 
-    private ObservableList<Event> oListEvents;
-    private ObservableList<Question> oListQuestions;
-    private ObservableList<Bet> oListBets;
 
-
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private TextField amountMoneyTextField;
 
     @FXML
     private DatePicker calendar;
@@ -51,8 +38,6 @@ public class RemoveBetController implements Controller{
     @FXML
     private TableView<Event> tblEvents;
 
-    @FXML
-    private Label minimumBetlabel;
 
     @FXML
     private TableView<Question> tblQuestions;
@@ -67,8 +52,6 @@ public class RemoveBetController implements Controller{
     @FXML
     private Button removeBtn;
 
-    @FXML
-    private Label availableMoneyLabel;
 
     @FXML
     private TableColumn<Event, Integer> ec1;
@@ -82,27 +65,17 @@ public class RemoveBetController implements Controller{
     @FXML
     private TableColumn<Question, String> qc2;
 
-
     @FXML
     private TableColumn<Bet, Float> betc1;
 
     @FXML
     private TableColumn<Bet, String> betc2;
 
-    @FXML
-    private Label eventDescriptionLabel;
-
-    @FXML
-    private Label questionLabel;
-
 
 
     @FXML
     void backClick(ActionEvent event) {
-        tblEvents.getItems().clear();
-        tblQuestions.getItems().clear();
-        tblBets.getItems().clear();
-        calendar.getEditor().clear();
+        clearAll();
         switch(businessLogic.getSessionMode()) {
             case "Anon":
                 mainGUI.showPortal();
@@ -161,9 +134,8 @@ public class RemoveBetController implements Controller{
                 if(b1!=null){
                     businessLogic.insertMoney(bet.getAmount());
                     lblMessage.getStyleClass().clear();
-                    lblMessage.setText("Bet removed, the money have been transferred to your bank account");
                     lblMessage.getStyleClass().setAll("lbl", "lbl-success");
-                    lblMessage.getStyleClass().clear();
+                    lblMessage.setText("Bet removed, the money have been transferred to your bank account");
                     tblBets.getItems().remove(bet);
                 }
                 else {
@@ -241,13 +213,15 @@ public class RemoveBetController implements Controller{
         });
     }
 
-    private void setupBetSelection() {
-        tblBets.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-            }
-        });
 
-
+    public void clearAll(){
+        tblEvents.getItems().clear();
+        tblQuestions.getItems().clear();
+        tblBets.getItems().clear();
+        calendar.setValue(LocalDate.now());
+        lblMessage.getStyleClass().clear();
+        lblMessage.setText("");
+        removeBtn.getStyleClass().setAll("btn", "btn-primary");
     }
 
 
@@ -258,15 +232,13 @@ public class RemoveBetController implements Controller{
 
         setupEventSelection();
         setupQuestionSelection();
-        setupBetSelection();
+
 
 
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
 
         calendar.setOnMouseClicked(e -> {
-            // get a reference to datepicker inner content
-            // attach a listener to the  << and >> buttons
-            // mark events for the (prev, current, next) month and year shown
+
             DatePickerSkin skin = (DatePickerSkin) calendar.getSkin();
             skin.getPopupContent().lookupAll(".button").forEach(node -> {
                 node.setOnMouseClicked(event -> {

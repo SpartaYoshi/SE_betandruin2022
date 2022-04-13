@@ -34,7 +34,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="closeButton" layoutX="16.0" layoutY="237.0" mnemonicParsing="false" onAction="#selectBack" styleClass="btn-default" text="%Back" />
+      <Button fx:id="closeButton" layoutX="16.0" layoutY="237.0" mnemonicParsing="false" onAction="#selectBack" styleClass="btn-danger" text="%Back" />
       <ImageView fitHeight="55.0" fitWidth="68.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/imageUser.jpg" />

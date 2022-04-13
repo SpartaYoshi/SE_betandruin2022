@@ -54,16 +54,32 @@ public interface BlFacade {
 	 */
 	@WebMethod
 	Vector<Date> getEventsMonth(Date date);
-	
-	
+
+	/**
+	 * method that persists a new user into the database
+	 * @param user
+	 * @return
+	 */
 	@WebMethod
 	String registerUser(User user);
-	
 
+	/**
+	 * method that ensures a user instance exists in the database
+	 * @param username
+	 * @param password
+	 * @return
+	 * @throws FailedLoginException
+	 */
 	@WebMethod
 	User loginUser(String username, String password) throws FailedLoginException;
 
-	
+	/**
+	 * method to set an specific fee for the result of a question
+	 * @param q
+	 * @param pResult
+	 * @param pFee
+	 * @throws FeeAlreadyExists
+	 */
 	@WebMethod
 	void createFee(Question q, String pResult, float pFee) throws FeeAlreadyExists;
 
@@ -89,26 +105,57 @@ public interface BlFacade {
 	@WebMethod
 	void setCurrentUser(User current);
 
+	/**
+	 * method executed by the current user, which places a bet and his money is discounted from the total amount
+	 * @param amount
+	 * @param question
+	 * @param result
+	 * @param date
+	 * @return
+	 * @throws NotEnoughMoneyException
+	 * @throws MinimumBetException
+	 * @throws EventFinished
+	 */
 	@WebMethod
 	Bet placeBet(double amount, Question question, Result result, Date date) throws NotEnoughMoneyException, MinimumBetException, EventFinished;
-	@WebMethod
 
-	Vector<Question> getQuestions(Event value);
-
-	@WebMethod
-	Vector<Bet> getUserBets(Question question, User user);
+	/**
+	 * method executed by the user, to remove a bet he has made, so he can retake the money inverted
+	 * @param currentUser
+	 * @param question
+	 * @param bet1
+	 * @return
+	 */
 
 	@WebMethod
 	Bet removeCurrentUserBet(User currentUser, Question question, Bet bet1);
 
+	/**
+	 * method to know the money the current user has available
+	 * @return
+	 */
 	@WebMethod
 	double getMoneyAvailable();
 
+	/**
+	 * method to know the minimum Bet of a question of a event
+	 * @param q
+	 * @return
+	 */
 	@WebMethod
 	double getMoneyMinimumBet(Question q);
 
+	/**
+	 * method to set control mode the current user's status mode: Anonymous, user or admin
+	 * @param mode
+	 */
 	@WebMethod
 	void setSessionMode(String mode);
+
+	/**
+	 * method that returns the session mode of the current user
+	 * @return
+	 */
 	@WebMethod
 	String getSessionMode();
 	}

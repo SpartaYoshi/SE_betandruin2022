@@ -60,25 +60,10 @@ public class PlaceABetController implements Controller{
     }
 
 
+
         @FXML
         void selectBack(ActionEvent event) {
-            tblEvents.getItems().clear();
-            tblQuestions.getItems().clear();
-            tblResults.getItems().clear();
-            calendar.setValue(LocalDate.now());
-            showMoneyButton.setVisible(true);
-            availableMoneyLabel.getStyleClass().clear();
-            availableMoneyLabel.setText("");
-            messageLabel.getStyleClass().clear();
-            messageLabel.setText("");
-            amountMoneyTextField.clear();
-            minimumBetlabel.getStyleClass().clear();
-            minimumBetlabel.setText("");
-            eventDescriptionLabel.setText("");
-            questionLabel.setText("");
-            resultLabel.setText("");
-            availableMoneyLabel.setText("");
-            placeBetButton.getStyleClass().setAll("btn", "btn-primary");
+          clearAll();
 
 
             switch(businessLogic.getSessionMode()) {
@@ -224,8 +209,24 @@ public class PlaceABetController implements Controller{
                         case "eus" -> messageLabel.setText("Apustua ezin izan da egin. Saiatu zaitez beste data batekin");
                     }
 
+                }catch (NumberFormatException e3){
+                messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                ConfigXML config = ConfigXML.getInstance();
+                switch (config.getLocale()) {
+                    case "en" -> messageLabel.setText("Insert a numeric value");
+                    case "es" -> messageLabel.setText("Introduzca un valor numérico ");
+                    case "eus" -> messageLabel.setText("Mesedez, sartu zenbaki positibo bat");
                 }
-
+            }
+            catch (Exception e4) {
+                messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                ConfigXML config = ConfigXML.getInstance();
+                switch (config.getLocale()) {
+                    case "en" -> messageLabel.setText("Error, the bet was not created");
+                    case "es" -> messageLabel.setText("Error, la apuesta no se realizó");
+                    case "eus" -> messageLabel.setText("Errorea, apustua ez da egin");
+                }
+            }
 
         }
 
@@ -316,12 +317,30 @@ public class PlaceABetController implements Controller{
         availableMoneyLabel.setText(businessLogic.getMoneyAvailable() + "€");
     }
 
-
+    public void clearAll(){
+        tblEvents.getItems().clear();
+        tblQuestions.getItems().clear();
+        tblResults.getItems().clear();
+        calendar.setValue(LocalDate.now());
+        showMoneyButton.setVisible(true);
+        availableMoneyLabel.getStyleClass().clear();
+        availableMoneyLabel.setText("");
+        messageLabel.getStyleClass().clear();
+        messageLabel.setText("");
+        amountMoneyTextField.clear();
+        minimumBetlabel.getStyleClass().clear();
+        minimumBetlabel.setText("");
+        eventDescriptionLabel.setText("");
+        questionLabel.setText("");
+        resultLabel.setText("");
+        availableMoneyLabel.setText("");
+        placeBetButton.getStyleClass().setAll("btn", "btn-primary");
+    }
 
 
     @FXML
         void initialize() {
-
+        placeBetButton.getStyleClass().setAll("btn", "btn-primary");
 
         setupEventSelection();
         setupQuestionSelection();
