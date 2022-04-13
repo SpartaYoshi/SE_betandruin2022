@@ -1,6 +1,7 @@
 package uicontrollers;
 
 import businessLogic.BlFacade;
+import configuration.ConfigXML;
 import domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,18 +33,10 @@ public class UserRegisterController implements Controller{
 
     @FXML
     void selectBack(ActionEvent event) {
-        switch(businessLogic.getSessionMode()) {
-            case "Anon":
-                mainGUI.showPortal();
-                break;
-            case "User":
-                mainGUI.showUserPortal();
-                break;
-            case "Admin":
-                mainGUI.showAdminPortal();
-                break;
-            default:
-                break;
+        switch (businessLogic.getSessionMode()) {
+            case "Anon" -> mainGUI.showPortal();
+            case "User" -> mainGUI.showUserPortal();
+            case "Admin" -> mainGUI.showAdminPortal();
         }
     }
 
@@ -73,11 +66,21 @@ public class UserRegisterController implements Controller{
                 errorMessage.setText(errorDet);
             } else {
                 errorMessage.getStyleClass().setAll("lbl-primary");
-                errorMessage.setText("Register was successful. Now you can login.");
+                ConfigXML config = ConfigXML.getInstance();
+                switch (config.getLocale()) {
+                    case "en" -> errorMessage.setText("Register was successful. Now you can login.");
+                    case "es" -> errorMessage.setText("Se ha registrado correctamente. Ya puede iniciar sesión.");
+                    case "eus" -> errorMessage.setText("???"); // TODO
+                }
             }
         } catch (NullPointerException e) {
             errorMessage.getStyleClass().setAll("lbl-warning");
-            errorMessage.setText("Please, fill in all the fields.");
+            ConfigXML config = ConfigXML.getInstance();
+            switch (config.getLocale()) {
+                case "en" -> errorMessage.setText("Please, fill in all the fields.");
+                case "es" -> errorMessage.setText("Por favor, rellene todos los datos.");
+                case "eus" -> errorMessage.setText("???"); // TODO
+            }
         }
     }
 

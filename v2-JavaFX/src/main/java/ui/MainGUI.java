@@ -145,11 +145,11 @@ public class MainGUI {
   }
 
   public void showUserLogin() {
-    setupScene(userLogin.ui, "Login", 650, 450);
+    setupScene(userLogin.ui, "Login", 565, 305);
   }
 
   public void showUserRegister() {
-    setupScene(userRegister.ui, "Login", 600, 420);
+    setupScene(userRegister.ui, "Register", 600, 420);
   }
 
   public void showDepositMoney() { setupScene(depositMoney.ui,  "Deposit", 600, 450);}

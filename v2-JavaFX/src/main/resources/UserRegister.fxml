@@ -25,12 +25,12 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="185.0" layoutY="14.0" prefHeight="66.0" prefWidth="229.0" text="%Register" textAlignment="CENTER" textOverrun="CLIP">
+      <Label alignment="CENTER" layoutX="117.0" layoutY="14.0" prefHeight="66.0" prefWidth="365.0" text="%Register" textAlignment="CENTER" textOverrun="CLIP">
          <font>
             <Font name="Trebuchet MS Bold" size="35.0" />
          </font>
       </Label>
-      <Button layoutX="242.0" layoutY="275.0" mnemonicParsing="false" onAction="#selectRegister" prefHeight="32.0" prefWidth="114.0" styleClass="btn-info" text="%Register">
+      <Button layoutX="227.0" layoutY="275.0" mnemonicParsing="false" onAction="#selectRegister" prefHeight="32.0" prefWidth="145.0" styleClass="btn-info" text="%Register">
          <font>
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
@@ -53,7 +53,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="246.0" layoutY="236.0" text="%Birthdate">
+      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="246.0" layoutY="236.0" text="%Birthdate">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

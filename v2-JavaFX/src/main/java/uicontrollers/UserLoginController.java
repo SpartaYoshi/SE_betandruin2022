@@ -1,5 +1,6 @@
 package uicontrollers;
 
+import configuration.ConfigXML;
 import domain.User;
 import exceptions.FailedLoginException;
 import javafx.event.ActionEvent;
@@ -30,18 +31,10 @@ public class UserLoginController implements Controller{
 
     @FXML
     void selectBack(ActionEvent event) {
-        switch(businessLogic.getSessionMode()) {
-            case "Anon":
-                mainGUI.showPortal();
-                break;
-            case "User":
-                mainGUI.showUserPortal();
-                break;
-            case "Admin":
-                mainGUI.showAdminPortal();
-                break;
-            default:
-                break;
+        switch (businessLogic.getSessionMode()) {
+            case "Anon" -> mainGUI.showPortal();
+            case "User" -> mainGUI.showUserPortal();
+            case "Admin" -> mainGUI.showAdminPortal();
         }
     }
 
@@ -68,7 +61,12 @@ public class UserLoginController implements Controller{
             }
 
         } catch (FailedLoginException e) {
-            messageLabel.setText("The credentials are incorrect");
+            ConfigXML config = ConfigXML.getInstance();
+            switch (config.getLocale()) {
+                case "en" -> messageLabel.setText("The credentials are incorrect.");
+                case "es" -> messageLabel.setText("Los datos introducidos son incorrectos.");
+                case "eus" -> messageLabel.setText("???");    // TODO
+            }
             messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
         }
     }
