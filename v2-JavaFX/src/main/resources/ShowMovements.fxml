@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.ShowMovementsController">
+   <children>
+      <TableView layoutX="6.0" layoutY="35.0" prefHeight="329.0" prefWidth="586.0">
+        <columns>
+          <TableColumn prefWidth="102.66665649414062" text="Date" />
+          <TableColumn minWidth="7.33331298828125" prefWidth="146.66668701171875" text="Event" />
+            <TableColumn minWidth="0.0" prefWidth="274.0" text="Question" />
+            <TableColumn prefWidth="62.0" text="Amount" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
