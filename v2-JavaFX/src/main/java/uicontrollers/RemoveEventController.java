@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.DatePickerSkin;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import ui.MainGUI;
 import utils.Dates;
@@ -51,8 +52,9 @@ public class RemoveEventController implements  Controller{
 
     @FXML
     void initialize() {
-        removeBtn.getStyleClass().setAll("btn", "btn-primary");
-        removeBtn.setDisable(true);
+
+
+
 
 
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
@@ -109,15 +111,13 @@ public class RemoveEventController implements  Controller{
 
     }
 
-    @FXML
-    void removeEvent(ActionEvent event){
-        tblEvents.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                removeBtn.setDisable(false);
-            }
-            businessLogic.removeEvent(newSelection);
-            tblEvents.getItems().remove(newSelection);
-        });
+    public void removeEv(MouseEvent mouseEvent) {
+        Event newSelection=tblEvents.getSelectionModel().getSelectedItem();
+        if (newSelection != null) {
+            removeBtn.setDisable(false);
+        }
+        businessLogic.removeEvent(newSelection);
+        tblEvents.getItems().remove(newSelection);
     }
 
 
@@ -165,4 +165,7 @@ public class RemoveEventController implements  Controller{
         removeBtn.getStyleClass().setAll("btn", "btn-primary");
         messageLbl.setText("");
     }
+
+
+
 }

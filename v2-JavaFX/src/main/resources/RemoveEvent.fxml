@@ -23,8 +23,8 @@
         </columns>
       </TableView>
       <DatePicker fx:id="calendar" layoutX="58.0" layoutY="75.0" />
-      <Button fx:id="removeBtn" layoutX="309.0" layoutY="325.0" mnemonicParsing="false" onAction="#removeEvent" text="%Remove" />
       <Label fx:id="messageLbl" layoutX="149.0" layoutY="350.0" prefHeight="25.0" prefWidth="379.0" textAlignment="CENTER" />
       <Button layoutX="33.0" layoutY="375.0" mnemonicParsing="false" onAction="#selectBack" styleClass="btn-danger" text="%Back" />
+      <Button fx:id="removeBtn" layoutX="283.0" layoutY="337.0" mnemonicParsing="false" onMouseClicked="#removeEv" prefHeight="26.0" prefWidth="111.0" styleClass="btn-primary" text="%Remove" />
    </children>
 </AnchorPane>
