@@ -15,7 +15,8 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-  private Window portal, adminPortal, userPortal, createQuestion, browseQuestions, setFee, removeBet, userLogin, userRegister, createEvent, placeAbet, depositMoney, showMovements;
+  private Window portal, adminPortal, userPortal, createQuestion, browseQuestions, setFee, removeBet,
+          userLogin, userRegister, createEvent, placeAbet, depositMoney, showMovements,removeEvent;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -84,6 +85,9 @@ public class MainGUI {
       if (controllerClass == ShowMovementsController.class)
         return new ShowMovementsController(businessLogic);
 
+      if (controllerClass == RemoveEventController.class)
+        return new RemoveEventController(businessLogic);
+
 
 
       else {
@@ -121,31 +125,33 @@ public class MainGUI {
     placeAbet = load("/PlaceABetv2.fxml");
     removeBet = load("/RemoveaBetv2.fxml");
     showMovements = load("/ShowMovements.fxml");
+    removeEvent = load("/RemoveEvent.fxml");
 
-    showPortal();
+
+    showRemoveEvent();
 
   }
 
   public void showPortal(){setupScene(portal.ui, "Portal", 395, 315);}
 
-  public void showAdminPortal(){setupScene(adminPortal.ui, "Admin Portal", 395, 470);}
+  public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 395, 520);}
 
-  public void showUserPortal(){setupScene(userPortal.ui, "User Portal", 395, 375);}
+  public void showUserPortal(){setupScene(userPortal.ui, "UserPortal", 395, 375);}
 
   public void showBrowseQuestions() {
-    setupScene(browseQuestions.ui, "Browse Questions", 1000, 500);
+    setupScene(browseQuestions.ui, "BrowseQuestions", 1000, 500);
   }
 
   public void showCreateQuestion() {
-    setupScene(createQuestion.ui, "Create Question", 550, 420);
+    setupScene(createQuestion.ui, "CreateQuestion", 550, 420);
   }
 
   public void showSetFee() {
-    setupScene(setFee.ui, "Set Fee", 1050, 500);
+    setupScene(setFee.ui, "SetFee", 1050, 500);
   }
 
   public void showCreateEvent() {
-    setupScene(createEvent.ui, "Create Event", 650, 520);
+    setupScene(createEvent.ui, "CreateEvent", 650, 520);
   }
 
   public void showUserLogin() {
@@ -156,13 +162,15 @@ public class MainGUI {
     setupScene(userRegister.ui, "Register", 600, 420);
   }
 
-  public void showDepositMoney() { setupScene(depositMoney.ui,  "Deposit Money", 600, 450);}
+  public void showDepositMoney() { setupScene(depositMoney.ui,  "Deposit", 600, 450);}
 
-  public void showPlaceABet(){setupScene(placeAbet.ui, "Place A Bet", 900, 680);}
+  public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceABet", 900, 680);}
 
-  public void showRemoveABet(){setupScene(removeBet.ui, "Remove A Bet", 940, 520);}
+  public void showRemoveABet(){setupScene(removeBet.ui, "RemoveABet", 940, 520);}
 
-  public void showShowMovements(){setupScene(showMovements.ui, "Show Movements", 395, 470);}
+  public void showRemoveEvent(){setupScene(removeEvent.ui, "RemoveEvent", 680, 475);}
+
+  public void showShowMovements(){setupScene(showMovements.ui, "ShowMovements", 395, 470);}
 
 
 
