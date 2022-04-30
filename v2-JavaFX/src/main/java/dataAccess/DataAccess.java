@@ -520,4 +520,14 @@ public class DataAccess {
 		return bet;
 
 	}
+
+    public Event removeEvent(Event ev) {
+		System.out.println("REMOVEEEEE");
+		Event dbEvent=db.find(Event.class, ev);
+		db.getTransaction().begin();
+
+		db.remove(dbEvent);
+		db.getTransaction().commit();
+		return dbEvent;
+    }
 }

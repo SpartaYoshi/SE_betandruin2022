@@ -322,5 +322,13 @@ public class BlFacadeImplementation implements BlFacade {
 		return sessionMode;
 	}
 
+	@Override
+	public Event removeEvent(Event ev) {
+		dbManager.open(false);
+		Event deleted=dbManager.removeEvent(ev);
+		dbManager.close();
+		return deleted;
+	}
+
 
 }

@@ -158,4 +158,7 @@ public interface BlFacade {
 	 */
 	@WebMethod
 	String getSessionMode();
+
+	@WebMethod
+	public Event removeEvent(Event ev);
 	}
