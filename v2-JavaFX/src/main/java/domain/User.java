@@ -23,7 +23,7 @@ public class User {
 	// private double balance;
 	private boolean admin;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Vector<Bet> bets= new Vector<>();
 
 

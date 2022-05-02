@@ -17,7 +17,7 @@ public class Result implements Serializable{
 	@GeneratedValue
 	private int id;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Vector<Bet> bets = new Vector<>();
 	
 	private String result;

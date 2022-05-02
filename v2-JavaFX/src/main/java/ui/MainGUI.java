@@ -128,7 +128,7 @@ public class MainGUI {
     removeEvent = load("/RemoveEvent.fxml");
 
 
-    showRemoveEvent();
+    showPortal();
 
   }
 
@@ -166,7 +166,7 @@ public class MainGUI {
 
   public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceABet", 900, 680);}
 
-  public void showRemoveABet(){setupScene(removeBet.ui, "RemoveABet", 940, 520);}
+  public void showRemoveABet(){setupScene(removeBet.ui, "RemoveBet", 940, 520);}
 
   public void showRemoveEvent(){setupScene(removeEvent.ui, "RemoveEvent", 680, 475);}
 

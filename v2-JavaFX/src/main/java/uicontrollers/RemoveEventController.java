@@ -1,6 +1,7 @@
 package uicontrollers;
 
 import businessLogic.BlFacade;
+import configuration.ConfigXML;
 import domain.Event;
 import domain.Question;
 import javafx.event.ActionEvent;
@@ -52,11 +53,7 @@ public class RemoveEventController implements  Controller{
 
     @FXML
     void initialize() {
-
-
-
-
-
+        removeBtn.setDisable(true);
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
 
         calendar.setOnMouseClicked(e -> {
@@ -105,6 +102,7 @@ public class RemoveEventController implements  Controller{
         // Bind columns to Event attributes
         colDate.setCellValueFactory(new PropertyValueFactory<>("strDate"));
         colEvents.setCellValueFactory(new PropertyValueFactory<>("description"));
+        setupEventSelection();
 
 
 
@@ -112,15 +110,39 @@ public class RemoveEventController implements  Controller{
     }
 
     public void removeEv(MouseEvent mouseEvent) {
+        ConfigXML config = ConfigXML.getInstance();
         Event newSelection=tblEvents.getSelectionModel().getSelectedItem();
-        if (newSelection != null) {
-            removeBtn.setDisable(false);
+        Event deleted=businessLogic.removeEvent(newSelection);
+        if(deleted.getEventNumber()==newSelection.getEventNumber()){//we have removed the correct one
+            tblEvents.getItems().remove(newSelection);
+            messageLbl.getStyleClass().setAll("lbl", "lbl-success");
+
+            switch (config.getLocale()) {
+                case "en" -> messageLbl.setText("Event successfully removed");
+                case "es" -> messageLbl.setText("Evento correctamente eliminado");
+                case "eus" -> messageLbl.setText("Gertaera ondo ezabatuta");
+            }
+
+
+        }else{
+            messageLbl.getStyleClass().setAll("lbl", "lbl-danger");
+            switch (config.getLocale()) {
+                case "en" -> messageLbl.setText("Error. Event couldn't be removed!");
+                case "es" -> messageLbl.setText("Error. El evento no pudo ser eliminado");
+                case "eus" -> messageLbl.setText("Errorea. Gertaera ezin da ezabatuta izan");
+            }
         }
-        businessLogic.removeEvent(newSelection);
-        tblEvents.getItems().remove(newSelection);
+
     }
 
 
+    private void setupEventSelection() {
+        tblEvents.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                removeBtn.setDisable(false);
+            }
+        });
+    }
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
@@ -162,8 +184,8 @@ public class RemoveEventController implements  Controller{
     public void clearAll(){
         tblEvents.getItems().clear();
         calendar.setValue(LocalDate.now());
-        removeBtn.getStyleClass().setAll("btn", "btn-primary");
         messageLbl.setText("");
+        messageLbl.getStyleClass().setAll("lbl");
     }
 
 

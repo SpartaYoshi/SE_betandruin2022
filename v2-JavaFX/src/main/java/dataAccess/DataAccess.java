@@ -522,7 +522,7 @@ public class DataAccess {
 	}
 
     public Event removeEvent(Event ev) {
-		System.out.println("REMOVEEEEE");
+
 		Event dbEvent=db.find(Event.class, ev);
 		db.getTransaction().begin();
 
