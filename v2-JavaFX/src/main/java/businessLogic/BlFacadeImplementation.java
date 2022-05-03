@@ -289,10 +289,42 @@ public class BlFacadeImplementation implements BlFacade {
 		return newBet;
 
 
-
-
-
 	}
+
+
+	@WebMethod
+	public String editProfileUsername(User user, String newUsername) {
+		try {
+			if (dbManager.existUser2(newUsername))
+				throw new UserIsTakenException();
+			else{
+				dbManager.editUserName(user, newUsername);
+			}
+			dbManager.close();
+			return "";
+
+		} catch (UserIsTakenException e) {
+			dbManager.close();
+			ConfigXML config = ConfigXML.getInstance();
+			switch (config.getLocale()) {
+				case "en":
+					return "The username is already taken. Please try a different one.";
+				case "es":
+					return "El nombre de usuario ya existe. Por favor, pruebe con uno distinto.";
+				case "eus":
+					return "Erabiltzaile-izena existitzen da. Beste batekin saiatu, mesedez.";
+			}
+		}
+		return " ";
+	}
+
+	@WebMethod
+	public String editProfilePassword(User user, String newPassword) {
+		dbManager.editPassWord(user, newPassword);
+
+		return "";
+	}
+
 
 
 	@WebMethod
@@ -345,6 +377,17 @@ public class BlFacadeImplementation implements BlFacade {
 
 	public String getSessionMode(){
 		return sessionMode;
+	}
+
+
+	@Override
+	public String editProfileUsername(User user) {
+		return null;
+	}
+
+	@Override
+	public String editProfilePassword(User user) {
+		return null;
 	}
 
 

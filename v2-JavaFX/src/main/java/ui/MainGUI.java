@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-  private Window portal, adminPortal, userPortal, createQuestion, browseQuestions, setFee, removeBet, userLogin, userRegister, createEvent, placeAbet, depositMoney;
+  private Window myProfile, editProfile, portal, adminPortal, userPortal, createQuestion, browseQuestions, setFee, removeBet, userLogin, userRegister, createEvent, placeAbet, depositMoney;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -81,6 +81,12 @@ public class MainGUI {
       if (controllerClass == RemoveBetController.class)
         return new RemoveBetController(businessLogic);
 
+      if (controllerClass == MyProfileController.class)
+        return new MyProfileController(businessLogic);
+
+      if (controllerClass == EditProfileController.class)
+        return new EditProfileController(businessLogic);
+
 
 
       else {
@@ -117,8 +123,10 @@ public class MainGUI {
     depositMoney = load("/DepositMoney.fxml");
     placeAbet = load("/PlaceABetv2.fxml");
     removeBet = load("/RemoveaBetv2.fxml");
+    myProfile = load("/MyProfile.fxml");
+    editProfile = load(" /EditProfile.fxml");
 
-    showPortal();
+    showMyProfile();
 
   }
 
@@ -157,6 +165,10 @@ public class MainGUI {
   public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceBet", 900, 680);}
 
   public void showRemoveABet(){setupScene(removeBet.ui, "RemoveBet", 940, 600);}
+
+  public void showMyProfile(){setupScene(myProfile.ui, "MyProfile", 750, 300);}
+
+  public void showEditProfile(){setupScene(myProfile.ui, "EditProfile", 600, 300);}
 
 
 

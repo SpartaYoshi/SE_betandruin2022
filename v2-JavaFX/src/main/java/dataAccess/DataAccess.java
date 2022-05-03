@@ -371,6 +371,16 @@ public class DataAccess {
 		}
 	}
 
+	public boolean existUser2(String username) {
+		try {
+			TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + username + "\"", User.class);
+			q.getSingleResult();
+			return true;
+		} catch (NoResultException e) {
+			return false;
+		}
+	}
+
 	/**
 	 * Method to get an existing user
 	 * @return user if exists, null if not
@@ -486,5 +496,31 @@ public class DataAccess {
 		db.getTransaction().commit();
 		return bet;
 
+	}
+
+
+	public User editUserName(User who, String newUsername){
+		db.getTransaction().begin();
+		User dbUser=db.find(User.class, who.getUsername());
+		dbUser.setUsername(newUsername);
+		who.setUsername(newUsername);
+		db.getTransaction().commit();
+
+		System.out.println(">> DataAccess: username updated");
+
+		return who;
+	}
+
+
+	public User editPassWord(User who, String newPassword){
+		db.getTransaction().begin();
+		User dbUser=db.find(User.class, who.getUsername());
+		dbUser.setUsername(newPassword);
+		who.setUsername(newPassword);
+		db.getTransaction().commit();
+
+		System.out.println(">> DataAccess: password updated");
+
+		return who;
 	}
 }
