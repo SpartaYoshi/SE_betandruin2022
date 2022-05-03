@@ -1,6 +1,9 @@
 package domain;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 import javax.persistence.CascadeType;
@@ -23,11 +26,14 @@ public class Event implements Serializable {
 	@XmlJavaTypeAdapter(IntegerAdapter.class)
 	@GeneratedValue
 	private int eventNumber;
-	
 	private String description; 
 	private Date eventDate;
-	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)//when removing also remove questions
 	private Vector<Question> questions = new Vector<>();
+	private String strDate;
+
+
+
 
 	public Vector<Question> getQuestions() {
 		return questions;
@@ -45,12 +51,17 @@ public class Event implements Serializable {
 		this.eventNumber = eventNumber;
 		this.description = description;
 		this.eventDate = eventDate;
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		this.strDate = dateFormat.format(eventDate);
 	}
 
 	public Event(String description,Date eventDate) {
 		this.description = description;
 		this.eventDate=eventDate;
-		
+
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		this.strDate = dateFormat.format(eventDate);
+
 	}
 
 	public Integer getEventNumber() {
@@ -77,6 +88,9 @@ public class Event implements Serializable {
 		this.eventDate = eventDate;
 	}
 
+	public String getStrDate() {return strDate;	}
+
+	public void setStrDate(String strDate) {this.strDate = strDate;	}
 
 	@Override
 	public String toString(){

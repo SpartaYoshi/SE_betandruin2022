@@ -428,6 +428,12 @@ public class DataAccess {
 		return 0;
 	}
 
+	/**
+	 * method to add more money to the current user
+	 * @param who
+	 * @param am
+	 * @return
+	 */
 	public double insertMoney(User who, double am)  {
 		double total=who.getMoneyAvailable()+ am; //the money he had + the deposited money
 		//this.registerUser(who);
@@ -445,6 +451,13 @@ public class DataAccess {
 
 	}
 
+	/**
+	 * method to add a bet to the result of a question
+	 * @param f
+	 * @param amountBet
+	 * @param who
+	 * @return
+	 */
 	public Bet placeBetToQuestion(Result f, Double amountBet, User who){
 		System.out.println(">> DataAccess: placeAbet=> On result = " + f.getResult() + ", amount = " +amountBet + " by " + who.getName() + " " + who.getSurname());
 		Result result = db.find(Result.class, f.getId());
@@ -468,6 +481,12 @@ public class DataAccess {
 		return bet;
 	}
 
+	/**
+	 * method to rest money to the current user
+	 * @param who
+	 * @param bet
+	 * @return
+	 */
 
 
 	public double restMoney(User who, double bet)  {
@@ -483,16 +502,35 @@ public class DataAccess {
 		return who.getMoneyAvailable();
 	}
 
-	public Bet removeCurrentUserBet(User currentUser, Bet bet1) {
+	/**
+	 * method that deletes Bet from database, from user's list and from result's list
+	 * @param currentUser
+	 * @param question
+	 * @param bet1
+	 * @return
+	 */
+	public Bet removeCurrentUserBet(User currentUser, Question question,Bet bet1) {
 		System.out.println(">> DataAccess: removeAbet=> On bet = " + bet1 + ", by " + currentUser.getName() + " " + currentUser.getSurname());
 		Bet bet = db.find(Bet.class, bet1.getBetNum());
 		User dbUser = db.find(User.class, currentUser.getUsername());
-
+		Question dbQuestion=db.find(Question.class,question.getQuestionNumber());
+		Result dbResult = null;
+		//find the result that has that bet
+		for(Result r:dbQuestion.getResults()){
+			for(Bet b:r.getBets()){
+				if(b.getBetNum()== bet1.getBetNum()){
+					 dbResult=db.find(Result.class,r.getId());
+					break;
+				}
+			}
+		}
 		db.getTransaction().begin();
-		db.remove(bet);
 		currentUser.getBets().remove(bet);
 		dbUser.getBets().remove(bet);
-
+		if(dbResult!=null){
+			dbResult.getBets().remove(bet);
+		}
+		db.remove(bet);
 		db.getTransaction().commit();
 		return bet;
 
@@ -523,4 +561,14 @@ public class DataAccess {
 
 		return who;
 	}
+
+    public Event removeEvent(Event ev) {
+
+		Event dbEvent=db.find(Event.class, ev);
+		db.getTransaction().begin();
+
+		db.remove(dbEvent);
+		db.getTransaction().commit();
+		return dbEvent;
+    }
 }

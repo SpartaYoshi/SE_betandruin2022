@@ -90,7 +90,6 @@ public class BlFacadeImplementation implements BlFacade {
 		Event ev;
 		Date currentdate = new Date();
 
-		System.out.println("Current date is: "+ currentdate);
 		if (currentdate.compareTo(date) > 0) {
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
 					getString("ErrorEventHasFinished"));
@@ -263,9 +262,6 @@ public class BlFacadeImplementation implements BlFacade {
 		User who = this.getCurrentUser();
 		Date currentdate = new Date();
 
-		System.out.println("Current date is: "+ currentdate);
-
-
 		dbManager.open(false);
 		if (amount>this.currentUser.getMoneyAvailable()){
 			throw new NotEnoughMoneyException();
@@ -280,15 +276,8 @@ public class BlFacadeImplementation implements BlFacade {
 		else{
 			newBet = dbManager.placeBetToQuestion(result, amount, who);
 		}
-
-
-
 		dbManager.close();
-
-
 		return newBet;
-
-
 	}
 
 
@@ -344,7 +333,7 @@ public class BlFacadeImplementation implements BlFacade {
 	@WebMethod
 	public double insertMoney(double amount) throws FailedMoneyUpdateException{
 		User who=this.getCurrentUser();
-		System.out.println(">> user tenia "+who.getMoneyAvailable());
+
 
 		dbManager.open(false);
 
@@ -377,6 +366,14 @@ public class BlFacadeImplementation implements BlFacade {
 
 	public String getSessionMode(){
 		return sessionMode;
+	}
+
+	@Override
+	public Event removeEvent(Event ev) {
+		dbManager.open(false);
+		Event deleted=dbManager.removeEvent(ev);
+		dbManager.close();
+		return deleted;
 	}
 
 

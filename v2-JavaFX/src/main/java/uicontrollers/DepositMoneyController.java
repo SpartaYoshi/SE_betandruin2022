@@ -5,6 +5,7 @@ import configuration.ConfigXML;
 import domain.User;
 import exceptions.FailedMoneyUpdateException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -21,33 +22,44 @@ public class DepositMoneyController implements Controller {
 
     @FXML private Label warningLbl;
     @FXML private TextField amountField;
+    @FXML private Button depositBtn;
 
     public DepositMoneyController(BlFacade bl){
         this.businessLogic=bl;
-        //needs to be removed when login and register are done from here
-        String sDate1="01/01/1980";
-        Date date1= null;
-        try {
-            date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        User u= new User("prueba", "123", "Iosu", "Abal", date1);
-        businessLogic.setCurrentUser(u);
-        //to here
-
-
-    }
+           }
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI=mainGUI;
     }
 
+    public void selectBack(MouseEvent mouseEvent) {
+
+        clearAll();
+        switch(businessLogic.getSessionMode()) {
+            case "Anon":
+                mainGUI.showPortal();
+                break;
+            case "User":
+                mainGUI.showUserPortal();
+                break;
+            case "Admin":
+                mainGUI.showAdminPortal();
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * method that deposits money into users account when clicking
+     * @param mouseEvent
+     */
     @FXML
     public void insertMoney(MouseEvent mouseEvent) {
 
         try {
+            depositBtn.getStyleClass().setAll("btn", "btn-primary");
             double amount= Double.parseDouble(amountField.getText());
             double totalMoneyAv=businessLogic.insertMoney(amount);
 
@@ -82,19 +94,12 @@ public class DepositMoneyController implements Controller {
 
     }
 
-    public void selectBack(MouseEvent mouseEvent) {
-        switch(businessLogic.getSessionMode()) {
-            case "Anon":
-                mainGUI.showPortal();
-                break;
-            case "User":
-                mainGUI.showUserPortal();
-                break;
-            case "Admin":
-                mainGUI.showAdminPortal();
-                break;
-            default:
-                break;
-        }
+    public void clearAll(){
+        warningLbl.setText("");
+        warningLbl.getStyleClass().clear();
+        depositBtn.getStyleClass().setAll("btn", "btn-primary");
+
     }
+
+
 }

@@ -12,13 +12,11 @@
         <DatePicker fx:id="calendar" layoutX="165.0" layoutY="62.0" prefHeight="26.0" prefWidth="182.0" />
         <Label layoutX="66.0" layoutY="67.0" prefHeight="18.0" prefWidth="88.0" text="%Event Date:" />
         <Label layoutX="329.0" layoutY="108.0" text="%Questions:" />
-        <Button fx:id="closeButton" layoutX="729.0" layoutY="24.0" mnemonicParsing="false" onAction="#backClick" prefHeight="26.0" prefWidth="88.0" text="%Back" />
+        <Button fx:id="closeButton" layoutX="22.0" layoutY="445.0" mnemonicParsing="false" onAction="#backClick" prefHeight="26.0" prefWidth="88.0" styleClass="btn-danger" text="%Back" />
         <Label fx:id="lblError" layoutX="406.0" layoutY="591.0" prefHeight="17.0" prefWidth="24.0" />
         <Label fx:id="listOfEventsLabel" layoutX="66.0" layoutY="108.0" prefHeight="18.0" prefWidth="150.0" text="%List of Bets:" />
-        <Label fx:id="lblMessage" layoutX="531.0" layoutY="481.0" text="   " />
-        <Button fx:id="removeBtn" layoutX="361.0" layoutY="509.0" mnemonicParsing="false" onAction="#removeClick" prefHeight="26.0" prefWidth="137.0" text="%RemoveBet" />
-        <Label layoutX="295.0" layoutY="480.0" prefHeight="18.0" prefWidth="354.0" text="aaaaa" />
-        <Label fx:id="messageLabel" layoutX="256.0" layoutY="582.0" prefHeight="18.0" prefWidth="344.0" />
+        <Label fx:id="lblMessage" layoutX="210.0" layoutY="363.0" prefHeight="17.0" prefWidth="441.0" text="   " />
+        <Button fx:id="removeBtn" layoutX="362.0" layoutY="399.0" mnemonicParsing="false" onAction="#removeClick" prefHeight="26.0" prefWidth="137.0" text="%RemoveBet" />
         <TableView fx:id="tblEvents" layoutX="66.0" layoutY="136.0" prefHeight="200.0" prefWidth="254.0">
             <columns>
                 <TableColumn fx:id="ec1" prefWidth="65.5999755859375" text="%ID" />
@@ -37,7 +35,7 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <Label layoutX="623.0" layoutY="108.0" prefHeight="18.0" prefWidth="119.0" text="%Results:" />
+        <Label layoutX="623.0" layoutY="108.0" prefHeight="18.0" prefWidth="119.0" text="%Bets:" />
         <TableView fx:id="tblQuestions" layoutX="329.0" layoutY="136.0" prefHeight="200.0" prefWidth="283.0">
             <columns>
                 <TableColumn fx:id="qc1" prefWidth="63.20001220703125" text="%ID" />

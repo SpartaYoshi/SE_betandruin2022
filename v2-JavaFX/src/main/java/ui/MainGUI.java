@@ -15,7 +15,9 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-  private Window myProfile, editProfile, portal, adminPortal, userPortal, createQuestion, browseQuestions, setFee, removeBet, userLogin, userRegister, createEvent, placeAbet, depositMoney;
+  private Window portal, adminPortal, userPortal, createQuestion, browseQuestions, setFee, removeBet,
+          userLogin, userRegister, createEvent, placeAbet, depositMoney, showMovements,removeEvent,
+          myProfile, editProfile;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -87,6 +89,12 @@ public class MainGUI {
       if (controllerClass == EditProfileController.class)
         return new EditProfileController(businessLogic);
 
+      if (controllerClass == ShowMovementsController.class)
+        return new ShowMovementsController(businessLogic);
+
+      if (controllerClass == RemoveEventController.class)
+        return new RemoveEventController(businessLogic);
+
 
 
       else {
@@ -125,14 +133,17 @@ public class MainGUI {
     removeBet = load("/RemoveaBetv2.fxml");
     myProfile = load("/MyProfile.fxml");
     editProfile = load(" /EditProfile.fxml");
+    showMovements = load("/ShowMovements.fxml");
+    removeEvent = load("/RemoveEvent.fxml");
 
-    showMyProfile();
+
+    showPortal();
 
   }
 
   public void showPortal(){setupScene(portal.ui, "Portal", 395, 315);}
 
-  public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 395, 470);}
+  public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 395, 520);}
 
   public void showUserPortal(){setupScene(userPortal.ui, "UserPortal", 395, 375);}
 
@@ -141,11 +152,11 @@ public class MainGUI {
   }
 
   public void showCreateQuestion() {
-    setupScene(createQuestion.ui, "CreateQuestion", 550, 400);
+    setupScene(createQuestion.ui, "CreateQuestion", 550, 420);
   }
 
   public void showSetFee() {
-    setupScene(setFee.ui, "SetFee", 1050, 480);
+    setupScene(setFee.ui, "SetFee", 1050, 500);
   }
 
   public void showCreateEvent() {
@@ -162,9 +173,13 @@ public class MainGUI {
 
   public void showDepositMoney() { setupScene(depositMoney.ui,  "Deposit", 600, 450);}
 
-  public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceBet", 900, 680);}
+  public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceABet", 900, 680);}
 
-  public void showRemoveABet(){setupScene(removeBet.ui, "RemoveBet", 940, 600);}
+  public void showRemoveABet(){setupScene(removeBet.ui, "RemoveBet", 940, 520);}
+
+  public void showRemoveEvent(){setupScene(removeEvent.ui, "RemoveEvent", 680, 475);}
+
+  public void showShowMovements(){setupScene(showMovements.ui, "ShowMovements", 395, 470);}
 
   public void showMyProfile(){setupScene(myProfile.ui, "MyProfile", 750, 300);}
 
