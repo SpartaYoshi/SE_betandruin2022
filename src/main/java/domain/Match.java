@@ -213,4 +213,12 @@ public class Match {
             }
         }
     }
+
+    public String getWinner() {
+        return score.winner;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }

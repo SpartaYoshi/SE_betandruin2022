@@ -404,6 +404,21 @@ public class BlFacadeImplementation implements BlFacade {
 		matchList = gson.fromJson((jsonObj.get("matches")), matchListType);
 	}
 
+	private void processMatchResult(Event ev, Match matchAPI) {
+		String winner = matchAPI.getWinner();
+
+		if (winner != null) {
+			if (winner.equals(ev.getHomeTeam())){
+				// process bets for home team winner.
+			}
+			else {
+				// process bets for away team winner
+			}
+		}
+		else {
+			//process bets for draw
+		}
+	}
 
 	 public void updateResults() {
 		fetchFromAPI();
@@ -419,18 +434,10 @@ public class BlFacadeImplementation implements BlFacade {
 			Match conv = new Match (evHomeTeam, evAwayTeam, evDate);
 
 			if (matchList.contains(conv)) {
-
+				Match m = matchList.get(matchList.indexOf(conv));
+				if (m.getStatus().equals("FINISHED"))
+					processMatchResult(ev, m);
 			}
-
-
-
-
-
 		}
-
-
-
-
-
 	 }
 }
