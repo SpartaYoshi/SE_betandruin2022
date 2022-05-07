@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -16,7 +15,7 @@ import configuration.ConfigXML;
 import configuration.UtilDate;
 import domain.*;
 import domain.Result;
-import exceptions.QuestionAlreadyExist;
+import exceptions.QuestionAlreadyExistsException;
 
 /**
  * Implements the Data Access utility to the objectDb database
@@ -57,6 +56,7 @@ public class DataAccess {
 			int year = today.get(Calendar.YEAR);
 			if (month == 12) { month = 0; year += 1;}  
 
+			/*
 			Event ev1 = new Event( "Atlético-Athletic", UtilDate.newDate(year, month, 17));
 			Event ev2 = new Event( "Eibar-Barcelona", UtilDate.newDate(year, month, 17));
 			Event ev3 = new Event( "Getafe-Celta", UtilDate.newDate(year, month, 17));
@@ -113,7 +113,9 @@ public class DataAccess {
 				q5 = ev17.addQuestion("Zeinek irabaziko du partidua?", 1);
 				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
 			}
-			
+
+			*/
+
 			//Admin user:
 			String sDate1="01/01/1980";  
 		    Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1); 
@@ -137,7 +139,7 @@ public class DataAccess {
 			}
 
 		
-			
+			/*
 			db.persist(q1);
 			db.persist(q2);
 			db.persist(q3);
@@ -164,7 +166,9 @@ public class DataAccess {
 			db.persist(ev17);
 			db.persist(ev18);
 			db.persist(ev19);
-			db.persist(ev20);			
+			db.persist(ev20);
+
+			 */
 
 			db.getTransaction().commit();
 			System.out.println("The database has been initialized");
@@ -181,17 +185,17 @@ public class DataAccess {
 	 * @param question text of the question
 	 * @param betMinimum minimum quantity of the bet
 	 * @return the created question, or null, or an exception
-	 * @throws QuestionAlreadyExist if the same question already exists for the event
+	 * @throws QuestionAlreadyExistsException if the same question already exists for the event
 	 */
 	public Question createQuestion(Event event, String question, float betMinimum) 
-			throws QuestionAlreadyExist {
+			throws QuestionAlreadyExistsException {
 		System.out.println(">> DataAccess: createQuestion=> event = " + event + " question = " +
 				question + " minimum bet = " + betMinimum);
 
 		Event ev = db.find(Event.class, event.getEventNumber());
 
-		if (ev.doesQuestionExist(question)) throw new QuestionAlreadyExist(
-				ResourceBundle.getBundle("Etiquetas").getString("ErrorQuestionAlreadyExist"));
+		if (ev.doesQuestionExist(question)) throw new QuestionAlreadyExistsException(
+				ResourceBundle.getBundle("Etiquetas").getString("ErrorQuestionAlreadyExists"));
 
 		db.getTransaction().begin();
 		Question q = ev.addQuestion(question, betMinimum);
@@ -204,14 +208,17 @@ public class DataAccess {
 	}
 	
 	
-	public Event createEvent(String team1, String team2, Date date){
-		System.out.println(">> DataAccess: createEvent=> First team = " + team1 + ", Second team = " +team2);
-		Event ev=null;
-		if (!this.isAnyTeamPLaying(team1, team2, date)) {
+	public Event createEvent(String homeTeam, String awayTeam, Date matchDate){
+
+		System.out.println(">> DataAccess: createEvent=> Home team = " + homeTeam + ", Away team = " +awayTeam);
+		Event ev = null;
+
+		if (!this.isAnyTeamPlaying(homeTeam, awayTeam, matchDate)) {
 			db.getTransaction().begin();
-			String descr = team1 + " - " + team2;
-			ev = new Event(descr, date);
+
+			ev = new Event(homeTeam, awayTeam, matchDate);
 			System.out.println("The new event is "+ ev);
+
 			db.persist(ev);  
 			db.getTransaction().commit();
 		}
@@ -238,11 +245,33 @@ public class DataAccess {
 		query.setParameter(1, date);
 		List<Event> events = query.getResultList();
 		for (Event ev:events){
-			System.out.println(ev.toString());		 
+			System.out.println(ev.getTeamTemplate());
 			res.add(ev);
 		}
 		return res;
 	}
+
+
+	/**
+	 * This method retrieves all currently registered events in the database
+	 *
+	 * @return collection of events
+	 */
+	public Vector<Event> getAllEvents() {
+		System.out.println(">> DataAccess: getEvents");
+
+		Vector<Event> res = new Vector<>();
+		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev",
+				Event.class);
+
+		List<Event> events = query.getResultList();
+		for (Event ev:events) {
+			System.out.println(ev.getTeamTemplate());
+			res.add(ev);
+		}
+		return res;
+	}
+
 
 
 	public Vector<Question> getQuestions(Event event) {
@@ -350,24 +379,18 @@ public class DataAccess {
 	}
 	
 	
-	public boolean isAnyTeamPLaying(String team1, String team2, Date date)  {
-		for (Event ev : this.getEvents(date)) {
+	public boolean isAnyTeamPlaying(String homeTeam, String awayTeam, Date date)  {
+		for (Event ev : this.getEvents(date))
+			if (ev.getHomeTeam().equals((homeTeam)) && ev.getAwayTeam().equals((awayTeam)))
+				return true;
 
-			String[] descr = ev.getDescription().split("-");
-
-			for (int i = 0; i<2 ; i++) {
-				if (team1.toLowerCase().trim().equals(descr[i].toLowerCase().trim()) || team2.toLowerCase().trim().equals(descr[i].toLowerCase().trim())) {
-					return true;
-				}
-			}
-		}
 		return false;	
 	}
 
 
 	public void close() {
 		db.close();
-		System.out.println("DataBase is closed");
+		System.out.println("Database is closed");
 	}
 	
 	

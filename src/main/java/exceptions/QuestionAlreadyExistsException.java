@@ -1,15 +1,15 @@
 package exceptions;
 
-public class QuestionAlreadyExist extends Exception {
+public class QuestionAlreadyExistsException extends Exception {
 
-	public QuestionAlreadyExist() {
+	public QuestionAlreadyExistsException() {
 		super();
 	}
 
 	/**This exception is triggered if the question already exists 
 	 *@param s String of the exception
 	 */
-	public QuestionAlreadyExist(String s) {
+	public QuestionAlreadyExistsException(String s) {
 		super(s);
 	}
 }

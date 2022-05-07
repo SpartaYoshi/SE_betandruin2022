@@ -22,11 +22,11 @@ public interface BlFacade {
 	 * @param question text of the question
 	 * @param betMinimum minimum quantity of the bet
 	 * @return the created question, or null, or an exception
-	 * @throws EventFinished if current data is after data of the event
- 	 * @throws QuestionAlreadyExist if the same question already exists for the event
+	 * @throws EventAlreadyFinishedException if current data is after data of the event
+ 	 * @throws QuestionAlreadyExistsException if the same question already exists for the event
 	 */
 	@WebMethod
-	Question createQuestion(Event event, String question, float betMinimum) throws EventFinished, QuestionAlreadyExist;
+	Question createQuestion(Event event, String question, float betMinimum) throws EventAlreadyFinishedException, QuestionAlreadyExistsException;
 	
 	/**
 	 * This method creates an event which includes two teams
@@ -34,9 +34,9 @@ public interface BlFacade {
 	 * @param team2 second team
 	 * @param date in which the event will be done
 	 * @return the created event
-	 * @throws EventFinished if current data is after data of the event
+	 * @throws EventAlreadyFinishedException if current data is after data of the event
 	 */
-	Event createEvent(String team1, String team2, Date date) throws EventFinished, TeamPlayingException, TeamRepeatedException;
+	Event createEvent(String team1, String team2, Date date) throws EventAlreadyFinishedException, TeamPlayingException, IdenticalTeamsException;
 		
 	/**
 	 * This method retrieves all the events of a given date 
@@ -79,10 +79,10 @@ public interface BlFacade {
 	 * @param q
 	 * @param pResult
 	 * @param pFee
-	 * @throws FeeAlreadyExists
+	 * @throws FeeAlreadyExistsException
 	 */
 	@WebMethod
-	void createFee(Question q, String pResult, float pFee) throws FeeAlreadyExists;
+	void createFee(Question q, String pResult, float pFee) throws FeeAlreadyExistsException;
 
 	/**
 	 * method to insert the money wanted into the user's account
@@ -115,10 +115,10 @@ public interface BlFacade {
 	 * @return
 	 * @throws NotEnoughMoneyException
 	 * @throws MinimumBetException
-	 * @throws EventFinished
+	 * @throws EventAlreadyFinishedException
 	 */
 	@WebMethod
-	Bet placeBet(double amount, Question question, Result result, Date date) throws NotEnoughMoneyException, MinimumBetException, EventFinished;
+	Bet placeBet(double amount, Question question, Result result, Date date) throws NotEnoughMoneyException, MinimumBetException, EventAlreadyFinishedException;
 	@WebMethod
 
 	Vector<Question> getQuestions(Event value);
@@ -129,11 +129,12 @@ public interface BlFacade {
 	/**
 	 * method executed by the user, to remove a bet he has made, so he can retake the money inverted
 	 * @param currentUser
+	 * @param question
 	 * @param bet1
 	 * @return
 	 */
 	@WebMethod
-	Bet removeCurrentUserBet(User currentUser, Bet bet1);
+	Bet removeCurrentUserBet(User currentUser, Question question, Bet bet1);
 
 	/**
 	 * method to know the money the current user has available

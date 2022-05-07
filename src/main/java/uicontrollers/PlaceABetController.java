@@ -200,7 +200,7 @@ public class PlaceABetController implements Controller{
                     }
 
 
-                } catch(EventFinished e){
+                } catch(EventAlreadyFinishedException e){
                     messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
                     ConfigXML config = ConfigXML.getInstance();
                     switch (config.getLocale()) {
@@ -257,7 +257,7 @@ public class PlaceABetController implements Controller{
     private void setupEventSelection() {
         tblEvents.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                eventDescriptionLabel.setText(tblEvents.getSelectionModel().getSelectedItem().getDescription());
+                eventDescriptionLabel.setText(tblEvents.getSelectionModel().getSelectedItem().getTeamTemplate());
                 questionLabel.setText("");
                 resultLabel.setText("");
 

@@ -16,7 +16,7 @@
       <Button fx:id="closeButton" layoutX="22.0" layoutY="578.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="17.0" prefWidth="66.0" styleClass="btn-danger" text="%Back" />
       <Label fx:id="listOfEventsLabel" layoutX="66.0" layoutY="108.0" prefHeight="18.0" prefWidth="150.0" text="%List of Bets:" />
       <Button fx:id="placeBetButton" layoutX="379.0" layoutY="538.0" mnemonicParsing="false" onAction="#selectPlaceBet" prefHeight="26.0" prefWidth="125.0" text="%PlaceBet" textAlignment="CENTER" />
-      <Label layoutX="162.0" layoutY="471.0" prefHeight="18.0" prefWidth="534.0" text="%phrasePLaceBet" />
+      <Label layoutX="162.0" layoutY="471.0" prefHeight="18.0" prefWidth="534.0" text="%phrasePlaceBet" />
       <TextField fx:id="amountMoneyTextField" layoutX="341.0" layoutY="492.0" prefHeight="26.0" prefWidth="173.0" />
       <Label fx:id="messageLabel" layoutX="256.0" layoutY="582.0" prefHeight="18.0" prefWidth="344.0" />
       <Label fx:id="availableMoneyLabel" layoutX="312.0" layoutY="427.0" prefHeight="18.0" prefWidth="236.0" />

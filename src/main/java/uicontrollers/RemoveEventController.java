@@ -26,8 +26,6 @@ public class RemoveEventController implements  Controller{
 
     MainGUI mainGUI;
     BlFacade businessLogic;
-    @FXML
-    private Button backBtn;
 
     @FXML
     private DatePicker calendar;
@@ -48,7 +46,7 @@ public class RemoveEventController implements  Controller{
     private TableView<Event> tblEvents;
 
     public RemoveEventController(BlFacade bl) {
-        this.businessLogic=bl;
+        this.businessLogic = bl;
     }
 
     @FXML

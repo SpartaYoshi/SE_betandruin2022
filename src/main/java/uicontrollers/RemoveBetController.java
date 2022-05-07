@@ -130,7 +130,7 @@ public class RemoveBetController implements Controller{
                 lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
             }
             else{
-                Bet b1 = businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), question,bet);
+                Bet b1 = businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), question, bet);
                 if(b1!=null){
                     businessLogic.insertMoney(bet.getAmount());
                     lblMessage.getStyleClass().clear();

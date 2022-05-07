@@ -9,10 +9,9 @@ import java.util.List;
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
 import domain.Event;
-import exceptions.EventFinished;
+import exceptions.EventAlreadyFinishedException;
 import exceptions.TeamPlayingException;
-import exceptions.TeamRepeatedException;
-import javafx.event.ActionEvent;
+import exceptions.IdenticalTeamsException;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -64,8 +63,8 @@ public class CreateNewEventController implements Controller{
 
             String[] description = eventtextField.getText().split("-");
 
-            String team1 = description[0];
-            String team2 = description[1];
+            String homeTeam = description[0];
+            String awayTeam = description[1];
 
             //parse the date to day month and year, without having into account the hour.
             //SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -79,7 +78,7 @@ public class CreateNewEventController implements Controller{
             Date date = Date.from(instant);
 
             if (description.length > 0) {
-                Event newEvent = businessLogic.createEvent(team1, team2, date);
+                Event newEvent = businessLogic.createEvent(homeTeam, awayTeam, date);
 
                 if (newEvent!= null) {
                     messageLabel.getStyleClass().setAll("lbl","lbl-success");
@@ -106,7 +105,7 @@ public class CreateNewEventController implements Controller{
 
             }
         }
-        catch (EventFinished e2) {
+        catch (EventAlreadyFinishedException e2) {
             messageLabel.getStyleClass().setAll("lbl","lbl-danger");
             ConfigXML config = ConfigXML.getInstance();
             switch (config.getLocale()) {
@@ -127,7 +126,7 @@ public class CreateNewEventController implements Controller{
 
 
         }
-        catch (TeamRepeatedException e5){
+        catch (IdenticalTeamsException e5){
             messageLabel.getStyleClass().setAll("lbl","lbl-danger");
             ConfigXML config = ConfigXML.getInstance();
             switch (config.getLocale()) {

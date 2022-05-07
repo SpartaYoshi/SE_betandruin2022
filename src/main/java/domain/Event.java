@@ -3,7 +3,6 @@ package domain;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 import javax.persistence.CascadeType;
@@ -26,9 +25,12 @@ public class Event implements Serializable {
 	@XmlJavaTypeAdapter(IntegerAdapter.class)
 	@GeneratedValue
 	private int eventNumber;
-	private String description; 
 	private Date eventDate;
-	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)//when removing also remove questions
+
+	private String homeTeam;
+	private String awayTeam;
+
+	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL) //when removing also remove questions
 	private Vector<Question> questions = new Vector<>();
 	private String strDate;
 
@@ -47,17 +49,19 @@ public class Event implements Serializable {
 		super();
 	}
 
-	public Event(Integer eventNumber, String description,Date eventDate) {
+	public Event(Integer eventNumber, String homeTeam, String awayTeam, Date eventDate) {
 		this.eventNumber = eventNumber;
-		this.description = description;
+		this.homeTeam = homeTeam;
+		this.awayTeam = awayTeam;
 		this.eventDate = eventDate;
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		this.strDate = dateFormat.format(eventDate);
 	}
 
-	public Event(String description,Date eventDate) {
-		this.description = description;
-		this.eventDate=eventDate;
+	public Event(String homeTeam, String awayTeam, Date eventDate) {
+		this.homeTeam = homeTeam;
+		this.awayTeam = awayTeam;
+		this.eventDate = eventDate;
 
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		this.strDate = dateFormat.format(eventDate);
@@ -72,13 +76,6 @@ public class Event implements Serializable {
 		this.eventNumber = eventNumber;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description=description;
-	}
 
 	public Date getEventDate() {
 		return eventDate;
@@ -88,17 +85,21 @@ public class Event implements Serializable {
 		this.eventDate = eventDate;
 	}
 
-	public String getStrDate() {return strDate;	}
+	public String getHomeTeam() {
+		return homeTeam;
+	}
 
-	public void setStrDate(String strDate) {this.strDate = strDate;	}
+	public String getAwayTeam() {
+		return awayTeam;
+	}
 
-	@Override
-	public String toString(){
-		return eventNumber+";"+description;
+
+	public String getStrDate() {
+		return strDate;
 	}
 
 	/**
-	 * This method creates a bet with a question, minimum bet ammount and percentual profit
+	 * This method creates a bet with a question, minimum bet amount and percentage profit
 	 * 
 	 * @param question to be added to the event
 	 * @param betMinimum of that question
@@ -144,5 +145,16 @@ public class Event implements Serializable {
 			return false;
 		Event other = (Event) obj;
 		return eventNumber == other.eventNumber;
+	}
+
+	public String getTeamTemplate() {
+		return homeTeam + " - " + awayTeam;
+	}
+
+	@Override
+	public String toString() {
+		return	"eventDate=" + eventDate +
+				", homeTeam='" + homeTeam + '\'' +
+				", awayTeam='" + awayTeam;
 	}
 }

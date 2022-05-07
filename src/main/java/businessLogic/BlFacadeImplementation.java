@@ -1,17 +1,20 @@
 package businessLogic;
 
+import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.ResourceBundle;
-import java.util.Vector;
+import java.util.*;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
+import dataAccess.APIManager;
 import domain.*;
 import exceptions.*;
 
@@ -26,6 +29,8 @@ public class BlFacadeImplementation implements BlFacade {
 	ConfigXML config = ConfigXML.getInstance();
 	User currentUser;
 	String sessionMode;
+	static List<Match> matchList;
+
 
 	public BlFacadeImplementation()  {		
 		System.out.println("Creating BlFacadeImplementation instance");
@@ -55,19 +60,19 @@ public class BlFacadeImplementation implements BlFacade {
 	 * @param question text of the question
 	 * @param betMinimum minimum quantity of the bet
 	 * @return the created question, or null, or an exception
-	 * @throws EventFinished if current data is after data of the event
-	 * @throws QuestionAlreadyExist if the same question already exists for the event
+	 * @throws EventAlreadyFinishedException if current data is after data of the event
+	 * @throws QuestionAlreadyExistsException if the same question already exists for the event
 	 */
 	@WebMethod
 	public Question createQuestion(Event event, String question, float betMinimum) 
-			throws EventFinished, QuestionAlreadyExist {
+			throws EventAlreadyFinishedException, QuestionAlreadyExistsException {
 
 		//The minimum bid must be greater than 0
 		dbManager.open(false);
 		Question qry;
 
 		if (new Date().compareTo(event.getEventDate()) > 0)
-			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
+			throw new EventAlreadyFinishedException(ResourceBundle.getBundle("Etiquetas").
 					getString("ErrorEventHasFinished"));
 
 		qry = dbManager.createQuestion(event, question, betMinimum);		
@@ -78,37 +83,34 @@ public class BlFacadeImplementation implements BlFacade {
 	
 	/**
 	 * This method creates an event which includes two teams
-	 * @param team1 team
-	 * @param team2 team
-	 * @param date in which the event will be done
+	 * @param homeTeam team
+	 * @param awayTeam team
+	 * @param matchDate in which the event will be done
 	 * @return the created event
-	 * @throws EventFinished if current data is after data of the event
+	 * @throws EventAlreadyFinishedException if current data is after data of the event
 	 */
-	public Event createEvent(String team1, String team2, Date date) throws EventFinished, TeamPlayingException, TeamRepeatedException {
+	public Event createEvent(String homeTeam, String awayTeam, Date matchDate) throws EventAlreadyFinishedException, TeamPlayingException, IdenticalTeamsException {
 
 		dbManager.open(false);
 		Event ev;
-		Date currentdate = new Date();
+		Date currentDate = new Date();
 
-		if (currentdate.compareTo(date) > 0) {
-			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
+		if (currentDate.compareTo(matchDate) > 0)
+			throw new EventAlreadyFinishedException(ResourceBundle.getBundle("Etiquetas").
 					getString("ErrorEventHasFinished"));
-				
-		}else {
-			if (team1.toLowerCase().trim().equals(team2.toLowerCase().trim())){
-				throw new TeamRepeatedException();
-			}
-			else {
-				ev = dbManager.createEvent(team1, team2, date);
-				if (ev == null) {
 
-					throw new TeamPlayingException();
-				}
-			}
-			
-			dbManager.close();
+
+		if (homeTeam.toLowerCase().trim().equals(awayTeam.toLowerCase().trim()))
+			throw new IdenticalTeamsException();
+
+		ev = dbManager.createEvent(homeTeam, awayTeam, matchDate);
+
+		if (ev == null) {
+			throw new TeamPlayingException();
 		}
-			
+
+		dbManager.close();
+
 		return ev;
 	}
 
@@ -143,10 +145,11 @@ public class BlFacadeImplementation implements BlFacade {
 		return bets;
 	}
 
+
 	@Override
-	public Bet removeCurrentUserBet(User currentUser, Bet bet1) {
+	public Bet removeCurrentUserBet(User currentUser, Question question, Bet bet1) {
 		dbManager.open(false);
-		Bet bet = dbManager.removeCurrentUserBet(currentUser, bet1);
+		Bet bet = dbManager.removeCurrentUserBet(currentUser, question, bet1);
 		dbManager.close();
 		return bet;
 	}
@@ -246,18 +249,18 @@ public class BlFacadeImplementation implements BlFacade {
 	
 
 	@WebMethod
-	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExists {
+	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExistsException {
 		dbManager.open(false);
 		int n=dbManager.createFee(q,pResult,pFee);
 		if (n == -1) {
-			throw new FeeAlreadyExists();
+			throw new FeeAlreadyExistsException();
 		}
 		dbManager.close();
 
 	}
 
 	@WebMethod
-	public Bet placeBet(double amount, Question question, Result result, Date date) throws NotEnoughMoneyException, MinimumBetException, EventFinished {
+	public Bet placeBet(double amount, Question question, Result result, Date date) throws NotEnoughMoneyException, MinimumBetException, EventAlreadyFinishedException {
 		Bet newBet;
 		User who = this.getCurrentUser();
 		Date currentdate = new Date();
@@ -270,7 +273,7 @@ public class BlFacadeImplementation implements BlFacade {
 			throw new MinimumBetException();
 		}
 		else if (currentdate.compareTo(date) > 0) {
-			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
+			throw new EventAlreadyFinishedException(ResourceBundle.getBundle("Etiquetas").
 					getString("ErrorEventHasFinished"));
 		}
 		else{
@@ -388,4 +391,53 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 
+
+
+	private void fetchFromAPI() {
+		APIManager dataFetcher = new APIManager();
+		String APIData = dataFetcher.request("matches");
+
+		Gson gson = new Gson();
+		JsonObject jsonObj = gson.fromJson(APIData, JsonObject.class);
+
+		Type matchListType = new TypeToken<ArrayList<Match>>(){}.getType();
+		matchList = gson.fromJson((jsonObj.get("matches")), matchListType);
+	}
+
+	private void processMatchResult(Event ev, Match matchAPI) {
+		String winner = matchAPI.getWinner();
+
+		if (winner != null) {
+			if (winner.equals(ev.getHomeTeam())){
+				// process bets for home team winner.
+			}
+			else {
+				// process bets for away team winner
+			}
+		}
+		else {
+			//process bets for draw
+		}
+	}
+
+	 public void updateResults() {
+		fetchFromAPI();
+
+		List<Event> eventList = dbManager.getAllEvents();
+
+		for (Event ev : eventList) {
+			String evHomeTeam = ev.getHomeTeam();
+			String evAwayTeam = ev.getAwayTeam();
+			String evDate = ev.getStrDate();
+
+			// Convert Event to Match for API to Database matching
+			Match conv = new Match (evHomeTeam, evAwayTeam, evDate);
+
+			if (matchList.contains(conv)) {
+				Match m = matchList.get(matchList.indexOf(conv));
+				if (m.getStatus().equals("FINISHED"))
+					processMatchResult(ev, m);
+			}
+		}
+	 }
 }

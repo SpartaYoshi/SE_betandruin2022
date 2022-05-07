@@ -1,15 +1,15 @@
 package exceptions;
 
-public class EventFinished extends Exception {
+public class EventAlreadyFinishedException extends Exception {
 
-	public EventFinished() {
+	public EventAlreadyFinishedException() {
 		super();
 	}
 	
 	/**This exception is triggered if the event has already finished
 	 *@param s String of the exception
 	 */
-	public EventFinished(String s) {
+	public EventAlreadyFinishedException(String s) {
 		super(s);
 	}
 }
