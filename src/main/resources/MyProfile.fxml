@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="353.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.MyProfileController">
+   <children>
+      <Label fx:id="usernameLabel" layoutX="237.0" layoutY="98.0" text="Label" />
+      <Label fx:id="nameLabel" layoutX="237.0" layoutY="191.0" text="Label" />
+      <Label fx:id="surnameLabel" layoutX="237.0" layoutY="235.0" text="Label" />
+      <Label fx:id="birthDateLabel" layoutX="237.0" layoutY="277.0" text="Label" />
+      <ImageView fx:id="imageUser" fitHeight="150.0" fitWidth="200.0" layoutX="23.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/imageUser.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="editProfileButton" layoutX="61.0" layoutY="204.0" mnemonicParsing="false" onAction="#onEditProfileButton" text="%EditProfile" />
+      <Label fx:id="passwordLabel" layoutX="237.0" layoutY="144.0" text="Label" />
+      <Label alignment="CENTER" layoutX="198.0" layoutY="14.0" prefHeight="66.0" prefWidth="365.0" text="%MyProfile" textAlignment="CENTER" textOverrun="CLIP">
+         <font>
+            <Font name="Trebuchet MS Bold" size="35.0" />
+         </font>
+      </Label>
+      <Button fx:id="myResultsButton" layoutX="61.0" layoutY="253.0" mnemonicParsing="false" onAction="#onMyResultsButton" text="%MyResults" />
+   </children>
+</AnchorPane>

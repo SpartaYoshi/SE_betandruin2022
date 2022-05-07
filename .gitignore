@@ -1,3 +1,4 @@
+bin/*
+/bin/
+/target/
 db/*
-.idea/*
-/v2-JavaFX/BetAndRuin22.iml
