@@ -31,11 +31,6 @@ public class BlFacadeImplementation implements BlFacade {
 	String sessionMode;
 	static List<Match> matchList;
 
-	public static void main (String[] args) {
-
-		fetchMatchResults();
-		System.out.println("Hola\n" + matchList);
-	}
 
 	public BlFacadeImplementation()  {		
 		System.out.println("Creating BlFacadeImplementation instance");
@@ -398,7 +393,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 
 
-	private static void fetchMatchResults() {
+	private void fetchFromAPI() {
 		APIManager dataFetcher = new APIManager();
 		String APIData = dataFetcher.request("matches");
 
@@ -408,8 +403,32 @@ public class BlFacadeImplementation implements BlFacade {
 		Type matchListType = new TypeToken<ArrayList<Match>>(){}.getType();
 		matchList = gson.fromJson((jsonObj.get("matches")), matchListType);
 	}
+
+
 	 public void updateResults() {
-		fetchMatchResults();
+		fetchFromAPI();
+
+		List<Event> eventList = dbManager.getAllEvents();
+
+		for (Event ev : eventList) {
+			String evHomeTeam = ev.getHomeTeam();
+			String evAwayTeam = ev.getAwayTeam();
+			String evDate = ev.getStrDate();
+
+			// Convert Event to Match for API to Database matching
+			Match conv = new Match (evHomeTeam, evAwayTeam, evDate);
+
+			if (matchList.contains(conv)) {
+
+			}
+
+
+
+
+
+		}
+
+
 
 
 

@@ -257,7 +257,7 @@ public class PlaceABetController implements Controller{
     private void setupEventSelection() {
         tblEvents.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                eventDescriptionLabel.setText(tblEvents.getSelectionModel().getSelectedItem().getDescription());
+                eventDescriptionLabel.setText(tblEvents.getSelectionModel().getSelectedItem().getTeamTemplate());
                 questionLabel.setText("");
                 resultLabel.setText("");
 

@@ -1,6 +1,9 @@
 package domain;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Match {
     int id;
@@ -18,8 +21,13 @@ public class Match {
     Team awayTeam;
     Referee[] referees;
 
+    String parsedDate;
 
-
+    public Match(String homeTeam, String awayTeam, String parsedDate) {
+        this.parsedDate = parsedDate;
+        this.homeTeam = new Team(homeTeam);
+        this.awayTeam = new Team(awayTeam);
+    }
 
     class Competition {
         int id;
@@ -119,12 +127,24 @@ public class Match {
         int id;
         String name;
 
+        public Team (String name) {
+            this.name = name;
+        }
+
         @Override
         public String toString() {
             return "Team{" +
                     "id=" + id +
                     ", name='" + name + '\'' +
                     '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Team team = (Team) o;
+            return Objects.equals(name, team.name);
         }
     }
 
@@ -163,5 +183,34 @@ public class Match {
                 ", awayTeam=" + awayTeam +
                 ", referees=" + Arrays.toString(referees) +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Match match = (Match) o;
+
+        if (parsedDate == null || parsedDate.equals(""))
+            parseDate();
+
+        return Objects.equals(parsedDate, match.parsedDate) && Objects.equals(homeTeam, match.homeTeam) && Objects.equals(awayTeam, match.awayTeam);
+    }
+
+
+    public void parseDate() {
+        int splitter = utcDate.indexOf("T");
+
+        if (splitter != -1) {
+            parsedDate = utcDate.substring(0, splitter);
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");
+                parsedDate = (sdf2.format(sdf.parse(parsedDate)));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                parsedDate = null;
+            }
+        }
     }
 }

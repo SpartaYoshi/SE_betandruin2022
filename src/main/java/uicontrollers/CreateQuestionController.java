@@ -185,7 +185,7 @@ public class CreateQuestionController implements Controller {
       @Override
       protected void updateItem(Event item, boolean empty) {
         super.updateItem(item, empty);
-        setText(empty ? "" : item.getDescription());
+        setText(empty ? "" : item.getTeamTemplate());
       }
     };
 

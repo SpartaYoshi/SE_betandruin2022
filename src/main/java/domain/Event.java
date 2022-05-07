@@ -3,7 +3,6 @@ package domain;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 import javax.persistence.CascadeType;
@@ -90,16 +89,13 @@ public class Event implements Serializable {
 		return homeTeam;
 	}
 
-	public void setHomeTeam(String homeTeam) {
-		this.homeTeam = homeTeam;
-	}
-
 	public String getAwayTeam() {
 		return awayTeam;
 	}
 
-	public void setAwayTeam(String awayTeam) {
-		this.awayTeam = awayTeam;
+
+	public String getStrDate() {
+		return strDate;
 	}
 
 	/**
@@ -149,5 +145,16 @@ public class Event implements Serializable {
 			return false;
 		Event other = (Event) obj;
 		return eventNumber == other.eventNumber;
+	}
+
+	public String getTeamTemplate() {
+		return homeTeam + " - " + awayTeam;
+	}
+
+	@Override
+	public String toString() {
+		return	"eventDate=" + eventDate +
+				", homeTeam='" + homeTeam + '\'' +
+				", awayTeam='" + awayTeam;
 	}
 }

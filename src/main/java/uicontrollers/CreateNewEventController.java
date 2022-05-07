@@ -63,8 +63,8 @@ public class CreateNewEventController implements Controller{
 
             String[] description = eventtextField.getText().split("-");
 
-            String team1 = description[0];
-            String team2 = description[1];
+            String homeTeam = description[0];
+            String awayTeam = description[1];
 
             //parse the date to day month and year, without having into account the hour.
             //SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -78,7 +78,7 @@ public class CreateNewEventController implements Controller{
             Date date = Date.from(instant);
 
             if (description.length > 0) {
-                Event newEvent = businessLogic.createEvent(team1, team2, date);
+                Event newEvent = businessLogic.createEvent(homeTeam, awayTeam, date);
 
                 if (newEvent!= null) {
                     messageLabel.getStyleClass().setAll("lbl","lbl-success");

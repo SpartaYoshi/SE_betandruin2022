@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -246,11 +245,33 @@ public class DataAccess {
 		query.setParameter(1, date);
 		List<Event> events = query.getResultList();
 		for (Event ev:events){
-			System.out.println(ev.toString());		 
+			System.out.println(ev.getTeamTemplate());
 			res.add(ev);
 		}
 		return res;
 	}
+
+
+	/**
+	 * This method retrieves all currently registered events in the database
+	 *
+	 * @return collection of events
+	 */
+	public Vector<Event> getAllEvents() {
+		System.out.println(">> DataAccess: getEvents");
+
+		Vector<Event> res = new Vector<>();
+		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev",
+				Event.class);
+
+		List<Event> events = query.getResultList();
+		for (Event ev:events) {
+			System.out.println(ev.getTeamTemplate());
+			res.add(ev);
+		}
+		return res;
+	}
+
 
 
 	public Vector<Question> getQuestions(Event event) {
