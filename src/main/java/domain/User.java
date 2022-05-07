@@ -17,9 +17,7 @@ public class User {
 	private String name;
 	private String surname;
 	private Date birthdate;
-
 	private double moneyAvailable;
-	
 	// private double balance;
 	private boolean admin;
 
@@ -39,12 +37,8 @@ public class User {
 		this.surname = surname;
 		this.birthdate = birthdate;
 		moneyAvailable=10;
-		
 		admin = false;
-
 		bets = new Vector<Bet>();
-
-
 	}
 
 	public User(String username, String passwd, String name, String surname, Date birthdate, Double moneyAvailable) {
@@ -55,11 +49,8 @@ public class User {
 		this.surname = surname;
 		this.birthdate = birthdate;
 		this.moneyAvailable=moneyAvailable;
-
 		admin = false;
 		bets = new Vector<Bet>();
-
-
 	}
 
 

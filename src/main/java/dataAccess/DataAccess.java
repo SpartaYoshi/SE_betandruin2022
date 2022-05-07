@@ -117,13 +117,22 @@ public class DataAccess {
 			//Admin user:
 			String sDate1="01/01/1980";  
 		    Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1); 
-			User u= new User("juanan", "hello", "Juan Antonio", "Pereira", date1);
-			u.grantAdmin();
+			User u1= new User("juanan", "hello", "Juan Antonio", "Pereira", date1);
+			u1.grantAdmin();
+			//Admin user:
+			String sDate2="01/01/1980";
+			Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+			User u2= new User("juanan", "hello", "Juan Antonio", "Pereira", date1);
 
 			
-			if(!existUser(u)) {
-				db.persist(u);
+			if(!existUser(u1)) {
+				db.persist(u1);
 				System.out.println("Admin user created and persisted");
+				//admin user persisted
+			}
+			if(!existUser(u2)) {
+				db.persist(u2);
+				System.out.println("Regular user created and persisted");
 				//admin user persisted
 			}
 			
