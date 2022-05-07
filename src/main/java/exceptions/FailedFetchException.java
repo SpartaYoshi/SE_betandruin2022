@@ -1,4 +1,4 @@
-package dataAccess;
+package exceptions;
 
 public class FailedFetchException extends Exception {
 

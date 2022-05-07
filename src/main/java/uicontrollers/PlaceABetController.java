@@ -200,7 +200,7 @@ public class PlaceABetController implements Controller{
                     }
 
 
-                } catch(EventFinished e){
+                } catch(EventAlreadyFinishedException e){
                     messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
                     ConfigXML config = ConfigXML.getInstance();
                     switch (config.getLocale()) {

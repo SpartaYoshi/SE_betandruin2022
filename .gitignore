@@ -2,4 +2,4 @@ bin/*
 /bin/
 /target/
 db/*
-.idea/
+/.idea/*

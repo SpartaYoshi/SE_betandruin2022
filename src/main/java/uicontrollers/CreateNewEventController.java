@@ -9,10 +9,9 @@ import java.util.List;
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
 import domain.Event;
-import exceptions.EventFinished;
+import exceptions.EventAlreadyFinishedException;
 import exceptions.TeamPlayingException;
-import exceptions.TeamRepeatedException;
-import javafx.event.ActionEvent;
+import exceptions.IdenticalTeamsException;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -106,7 +105,7 @@ public class CreateNewEventController implements Controller{
 
             }
         }
-        catch (EventFinished e2) {
+        catch (EventAlreadyFinishedException e2) {
             messageLabel.getStyleClass().setAll("lbl","lbl-danger");
             ConfigXML config = ConfigXML.getInstance();
             switch (config.getLocale()) {
@@ -127,7 +126,7 @@ public class CreateNewEventController implements Controller{
 
 
         }
-        catch (TeamRepeatedException e5){
+        catch (IdenticalTeamsException e5){
             messageLabel.getStyleClass().setAll("lbl","lbl-danger");
             ConfigXML config = ConfigXML.getInstance();
             switch (config.getLocale()) {

@@ -65,19 +65,19 @@ public class BlFacadeImplementation implements BlFacade {
 	 * @param question text of the question
 	 * @param betMinimum minimum quantity of the bet
 	 * @return the created question, or null, or an exception
-	 * @throws EventFinished if current data is after data of the event
-	 * @throws QuestionAlreadyExist if the same question already exists for the event
+	 * @throws EventAlreadyFinishedException if current data is after data of the event
+	 * @throws QuestionAlreadyExistsException if the same question already exists for the event
 	 */
 	@WebMethod
 	public Question createQuestion(Event event, String question, float betMinimum) 
-			throws EventFinished, QuestionAlreadyExist {
+			throws EventAlreadyFinishedException, QuestionAlreadyExistsException {
 
 		//The minimum bid must be greater than 0
 		dbManager.open(false);
 		Question qry;
 
 		if (new Date().compareTo(event.getEventDate()) > 0)
-			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
+			throw new EventAlreadyFinishedException(ResourceBundle.getBundle("Etiquetas").
 					getString("ErrorEventHasFinished"));
 
 		qry = dbManager.createQuestion(event, question, betMinimum);		
@@ -88,37 +88,34 @@ public class BlFacadeImplementation implements BlFacade {
 	
 	/**
 	 * This method creates an event which includes two teams
-	 * @param team1 team
-	 * @param team2 team
-	 * @param date in which the event will be done
+	 * @param homeTeam team
+	 * @param awayTeam team
+	 * @param matchDate in which the event will be done
 	 * @return the created event
-	 * @throws EventFinished if current data is after data of the event
+	 * @throws EventAlreadyFinishedException if current data is after data of the event
 	 */
-	public Event createEvent(String team1, String team2, Date date) throws EventFinished, TeamPlayingException, TeamRepeatedException {
+	public Event createEvent(String homeTeam, String awayTeam, Date matchDate) throws EventAlreadyFinishedException, TeamPlayingException, IdenticalTeamsException {
 
 		dbManager.open(false);
 		Event ev;
-		Date currentdate = new Date();
+		Date currentDate = new Date();
 
-		if (currentdate.compareTo(date) > 0) {
-			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
+		if (currentDate.compareTo(matchDate) > 0)
+			throw new EventAlreadyFinishedException(ResourceBundle.getBundle("Etiquetas").
 					getString("ErrorEventHasFinished"));
-				
-		}else {
-			if (team1.toLowerCase().trim().equals(team2.toLowerCase().trim())){
-				throw new TeamRepeatedException();
-			}
-			else {
-				ev = dbManager.createEvent(team1, team2, date);
-				if (ev == null) {
 
-					throw new TeamPlayingException();
-				}
-			}
-			
-			dbManager.close();
+
+		if (homeTeam.toLowerCase().trim().equals(awayTeam.toLowerCase().trim()))
+			throw new IdenticalTeamsException();
+
+		ev = dbManager.createEvent(homeTeam, awayTeam, matchDate);
+
+		if (ev == null) {
+			throw new TeamPlayingException();
 		}
-			
+
+		dbManager.close();
+
 		return ev;
 	}
 
@@ -257,18 +254,18 @@ public class BlFacadeImplementation implements BlFacade {
 	
 
 	@WebMethod
-	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExists {
+	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExistsException {
 		dbManager.open(false);
 		int n=dbManager.createFee(q,pResult,pFee);
 		if (n == -1) {
-			throw new FeeAlreadyExists();
+			throw new FeeAlreadyExistsException();
 		}
 		dbManager.close();
 
 	}
 
 	@WebMethod
-	public Bet placeBet(double amount, Question question, Result result, Date date) throws NotEnoughMoneyException, MinimumBetException, EventFinished {
+	public Bet placeBet(double amount, Question question, Result result, Date date) throws NotEnoughMoneyException, MinimumBetException, EventAlreadyFinishedException {
 		Bet newBet;
 		User who = this.getCurrentUser();
 		Date currentdate = new Date();
@@ -281,7 +278,7 @@ public class BlFacadeImplementation implements BlFacade {
 			throw new MinimumBetException();
 		}
 		else if (currentdate.compareTo(date) > 0) {
-			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").
+			throw new EventAlreadyFinishedException(ResourceBundle.getBundle("Etiquetas").
 					getString("ErrorEventHasFinished"));
 		}
 		else{
@@ -401,7 +398,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 
 
-	public static void fetchMatchResults() {
+	private static void fetchMatchResults() {
 		APIManager dataFetcher = new APIManager();
 		String APIData = dataFetcher.request("matches");
 
@@ -411,4 +408,10 @@ public class BlFacadeImplementation implements BlFacade {
 		Type matchListType = new TypeToken<ArrayList<Match>>(){}.getType();
 		matchList = gson.fromJson((jsonObj.get("matches")), matchListType);
 	}
+	 public void updateResults() {
+		fetchMatchResults();
+
+
+
+	 }
 }

@@ -4,7 +4,7 @@ import businessLogic.BlFacade;
 import configuration.ConfigXML;
 import domain.Event;
 import domain.Question;
-import exceptions.FeeAlreadyExists;
+import exceptions.FeeAlreadyExistsException;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -99,7 +99,7 @@ public class SetFeeController implements Controller {
                 }
 
             }
-            catch (FeeAlreadyExists e1) {
+            catch (FeeAlreadyExistsException e1) {
                 warningLbl.getStyleClass().setAll("lbl","lbl-danger");
                 ConfigXML config = ConfigXML.getInstance();
                 switch (config.getLocale()) {

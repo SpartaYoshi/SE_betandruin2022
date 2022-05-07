@@ -28,7 +28,7 @@ public class Event implements Serializable {
 	private int eventNumber;
 	private String description; 
 	private Date eventDate;
-	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)//when removing also remove questions
+	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL) //when removing also remove questions
 	private Vector<Question> questions = new Vector<>();
 	private String strDate;
 

@@ -7,8 +7,8 @@ import java.util.*;
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
 import domain.Event;
-import exceptions.EventFinished;
-import exceptions.QuestionAlreadyExist;
+import exceptions.EventAlreadyFinishedException;
+import exceptions.QuestionAlreadyExistsException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -126,7 +126,7 @@ public class CreateQuestionController implements Controller {
           case "eus" -> lblErrorMinBet.setText("Zenbaki bat sartu ezazu");
         }
 
-    } catch (EventFinished ex) {
+    } catch (EventAlreadyFinishedException ex) {
       lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-danger");
       ConfigXML config = ConfigXML.getInstance();
       switch (config.getLocale()) {
@@ -135,7 +135,7 @@ public class CreateQuestionController implements Controller {
         case "eus" -> lblErrorQuestion.setText("Gertaera bukatu da");
       }
 
-    } catch (QuestionAlreadyExist ex) {
+    } catch (QuestionAlreadyExistsException ex) {
       lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-danger");
       ConfigXML config = ConfigXML.getInstance();
       switch (config.getLocale()) {

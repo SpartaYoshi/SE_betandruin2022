@@ -16,7 +16,7 @@ import configuration.ConfigXML;
 import configuration.UtilDate;
 import domain.*;
 import domain.Result;
-import exceptions.QuestionAlreadyExist;
+import exceptions.QuestionAlreadyExistsException;
 
 /**
  * Implements the Data Access utility to the objectDb database
@@ -181,17 +181,17 @@ public class DataAccess {
 	 * @param question text of the question
 	 * @param betMinimum minimum quantity of the bet
 	 * @return the created question, or null, or an exception
-	 * @throws QuestionAlreadyExist if the same question already exists for the event
+	 * @throws QuestionAlreadyExistsException if the same question already exists for the event
 	 */
 	public Question createQuestion(Event event, String question, float betMinimum) 
-			throws QuestionAlreadyExist {
+			throws QuestionAlreadyExistsException {
 		System.out.println(">> DataAccess: createQuestion=> event = " + event + " question = " +
 				question + " minimum bet = " + betMinimum);
 
 		Event ev = db.find(Event.class, event.getEventNumber());
 
-		if (ev.doesQuestionExist(question)) throw new QuestionAlreadyExist(
-				ResourceBundle.getBundle("Etiquetas").getString("ErrorQuestionAlreadyExist"));
+		if (ev.doesQuestionExist(question)) throw new QuestionAlreadyExistsException(
+				ResourceBundle.getBundle("Etiquetas").getString("ErrorQuestionAlreadyExists"));
 
 		db.getTransaction().begin();
 		Question q = ev.addQuestion(question, betMinimum);
@@ -204,12 +204,12 @@ public class DataAccess {
 	}
 	
 	
-	public Event createEvent(String team1, String team2, Date date){
-		System.out.println(">> DataAccess: createEvent=> First team = " + team1 + ", Second team = " +team2);
-		Event ev=null;
-		if (!this.isAnyTeamPLaying(team1, team2, date)) {
+	public Event createEvent(String homeTeam, String awayTeam, Date date){
+		System.out.println(">> DataAccess: createEvent=> First team = " + homeTeam + ", Second team = " +awayTeam);
+		Event ev = null;
+		if (!this.isAnyTeamPlaying(homeTeam, awayTeam, date)) {
 			db.getTransaction().begin();
-			String descr = team1 + " - " + team2;
+			String descr = homeTeam + " - " + awayTeam;
 			ev = new Event(descr, date);
 			System.out.println("The new event is "+ ev);
 			db.persist(ev);  
@@ -342,7 +342,7 @@ public class DataAccess {
 	}
 	
 	
-	public boolean isAnyTeamPLaying(String team1, String team2, Date date)  {
+	public boolean isAnyTeamPlaying(String team1, String team2, Date date)  {
 		for (Event ev : this.getEvents(date)) {
 
 			String[] descr = ev.getDescription().split("-");
