@@ -57,6 +57,7 @@ public class DataAccess {
 			int year = today.get(Calendar.YEAR);
 			if (month == 12) { month = 0; year += 1;}  
 
+			/*
 			Event ev1 = new Event( "Atlético-Athletic", UtilDate.newDate(year, month, 17));
 			Event ev2 = new Event( "Eibar-Barcelona", UtilDate.newDate(year, month, 17));
 			Event ev3 = new Event( "Getafe-Celta", UtilDate.newDate(year, month, 17));
@@ -113,7 +114,9 @@ public class DataAccess {
 				q5 = ev17.addQuestion("Zeinek irabaziko du partidua?", 1);
 				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
 			}
-			
+
+			*/
+
 			//Admin user:
 			String sDate1="01/01/1980";  
 		    Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1); 
@@ -137,7 +140,7 @@ public class DataAccess {
 			}
 			
 		
-			
+			/*
 			db.persist(q1);
 			db.persist(q2);
 			db.persist(q3);
@@ -164,7 +167,9 @@ public class DataAccess {
 			db.persist(ev17);
 			db.persist(ev18);
 			db.persist(ev19);
-			db.persist(ev20);			
+			db.persist(ev20);
+
+			 */
 
 			db.getTransaction().commit();
 			System.out.println("The database has been initialized");
@@ -204,14 +209,17 @@ public class DataAccess {
 	}
 	
 	
-	public Event createEvent(String homeTeam, String awayTeam, Date date){
-		System.out.println(">> DataAccess: createEvent=> First team = " + homeTeam + ", Second team = " +awayTeam);
+	public Event createEvent(String homeTeam, String awayTeam, Date matchDate){
+
+		System.out.println(">> DataAccess: createEvent=> Home team = " + homeTeam + ", Away team = " +awayTeam);
 		Event ev = null;
-		if (!this.isAnyTeamPlaying(homeTeam, awayTeam, date)) {
+
+		if (!this.isAnyTeamPlaying(homeTeam, awayTeam, matchDate)) {
 			db.getTransaction().begin();
-			String descr = homeTeam + " - " + awayTeam;
-			ev = new Event(descr, date);
+
+			ev = new Event(homeTeam, awayTeam, matchDate);
 			System.out.println("The new event is "+ ev);
+
 			db.persist(ev);  
 			db.getTransaction().commit();
 		}
@@ -342,24 +350,18 @@ public class DataAccess {
 	}
 	
 	
-	public boolean isAnyTeamPlaying(String team1, String team2, Date date)  {
-		for (Event ev : this.getEvents(date)) {
+	public boolean isAnyTeamPlaying(String homeTeam, String awayTeam, Date date)  {
+		for (Event ev : this.getEvents(date))
+			if (ev.getHomeTeam().equals((homeTeam)) && ev.getAwayTeam().equals((awayTeam)))
+				return true;
 
-			String[] descr = ev.getDescription().split("-");
-
-			for (int i = 0; i<2 ; i++) {
-				if (team1.toLowerCase().trim().equals(descr[i].toLowerCase().trim()) || team2.toLowerCase().trim().equals(descr[i].toLowerCase().trim())) {
-					return true;
-				}
-			}
-		}
 		return false;	
 	}
 
 
 	public void close() {
 		db.close();
-		System.out.println("DataBase is closed");
+		System.out.println("Database is closed");
 	}
 	
 	
