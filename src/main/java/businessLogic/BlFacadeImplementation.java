@@ -1,17 +1,20 @@
 package businessLogic;
 
+import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.ResourceBundle;
-import java.util.Vector;
+import java.util.*;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
+import dataAccess.APIManager;
 import domain.*;
 import exceptions.*;
 
@@ -26,6 +29,13 @@ public class BlFacadeImplementation implements BlFacade {
 	ConfigXML config = ConfigXML.getInstance();
 	User currentUser;
 	String sessionMode;
+	static List<Match> matchList;
+
+	public static void main (String[] args) {
+
+		fetchMatchResults();
+		System.out.println("Hola\n" + matchList);
+	}
 
 	public BlFacadeImplementation()  {		
 		System.out.println("Creating BlFacadeImplementation instance");
@@ -143,10 +153,11 @@ public class BlFacadeImplementation implements BlFacade {
 		return bets;
 	}
 
+
 	@Override
-	public Bet removeCurrentUserBet(User currentUser, Bet bet1) {
+	public Bet removeCurrentUserBet(User currentUser, Question question, Bet bet1) {
 		dbManager.open(false);
-		Bet bet = dbManager.removeCurrentUserBet(currentUser, bet1);
+		Bet bet = dbManager.removeCurrentUserBet(currentUser, question, bet1);
 		dbManager.close();
 		return bet;
 	}
@@ -388,4 +399,16 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 
+
+
+	public static void fetchMatchResults() {
+		APIManager dataFetcher = new APIManager();
+		String APIData = dataFetcher.request("matches");
+
+		Gson gson = new Gson();
+		JsonObject jsonObj = gson.fromJson(APIData, JsonObject.class);
+
+		Type matchListType = new TypeToken<ArrayList<Match>>(){}.getType();
+		matchList = gson.fromJson((jsonObj.get("matches")), matchListType);
+	}
 }
