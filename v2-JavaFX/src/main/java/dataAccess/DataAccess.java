@@ -252,6 +252,14 @@ public class DataAccess {
 	}
 
 
+	public List<User> getAllUsers() {
+
+		TypedQuery<User> q = db.createQuery("SELECT u FROM User u" , User.class);
+		return q.getResultList();
+	}
+
+
+
 	public Vector<Bet> getUserBets(Question question, User user) {
 		System.out.println("Question is "+ question);
 		System.out.println("User is "+ user);
@@ -521,13 +529,30 @@ public class DataAccess {
 
 	}
 
+
+
     public Event removeEvent(Event ev) {
 
 		Event dbEvent=db.find(Event.class, ev);
 		db.getTransaction().begin();
-
 		db.remove(dbEvent);
 		db.getTransaction().commit();
+
+
+		db.getTransaction().begin();
+		//update users list
+
+		for (User u:this.getAllUsers()){
+			for(Bet b:u.getBets()){
+				if(b.getResult()==null){
+					u.removeBet(b);
+					if(u.getBets().size()==0) break;
+				}
+			}
+			db.persist(u);
+		}
+		db.getTransaction().commit();
+
 		return dbEvent;
     }
 }
