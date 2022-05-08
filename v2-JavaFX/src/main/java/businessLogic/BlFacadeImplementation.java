@@ -144,9 +144,9 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 	@Override
-	public Bet removeCurrentUserBet(User currentUser, Bet bet1) {
+	public Bet removeCurrentUserBet(User currentUser, Question question, Bet bet1) {
 		dbManager.open(false);
-		Bet bet = dbManager.removeCurrentUserBet(currentUser, bet1);
+		Bet bet = dbManager.removeCurrentUserBet(currentUser, question, bet1);
 		dbManager.close();
 		return bet;
 	}

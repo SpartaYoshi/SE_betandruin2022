@@ -509,7 +509,7 @@ public class DataAccess {
 	 * @param bet1
 	 * @return
 	 */
-	public Bet removeCurrentUserBet(User currentUser, Question question,Bet bet1) {
+	public Bet removeCurrentUserBet(User currentUser, Question question, Bet bet1) {
 		System.out.println(">> DataAccess: removeAbet=> On bet = " + bet1 + ", by " + currentUser.getName() + " " + currentUser.getSurname());
 		Bet bet = db.find(Bet.class, bet1.getBetNum());
 		User dbUser = db.find(User.class, currentUser.getUsername());

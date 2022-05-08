@@ -129,11 +129,12 @@ public interface BlFacade {
 	/**
 	 * method executed by the user, to remove a bet he has made, so he can retake the money inverted
 	 * @param currentUser
+	 * @param question
 	 * @param bet1
 	 * @return
 	 */
 	@WebMethod
-	Bet removeCurrentUserBet(User currentUser, Bet bet1);
+	Bet removeCurrentUserBet(User currentUser, Question question, Bet bet1);
 
 	/**
 	 * method to know the money the current user has available
