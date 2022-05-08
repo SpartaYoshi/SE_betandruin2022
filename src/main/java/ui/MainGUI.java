@@ -141,7 +141,7 @@ public class MainGUI {
     checkMyResults = load("/src/main/resources/CheckMyResults.fxml");
 
 
-    showPortal();
+    showMyProfile();
 
   }
 

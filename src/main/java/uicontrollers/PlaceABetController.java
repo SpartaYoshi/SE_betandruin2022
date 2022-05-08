@@ -387,8 +387,8 @@ public class PlaceABetController implements Controller{
         // a date has been chosen, update the combobox of Events
         calendar.setOnAction(actionEvent -> {
             tblEvents.getItems().clear();
-            Vector<domain.Event> events = businessLogic.getEvents(Dates.convertToDate(calendar.getValue()));
-            for (domain.Event ev : events) {
+            Vector<Event> events = businessLogic.getEvents(Dates.convertToDate(calendar.getValue()));
+            for (Event ev : events) {
                 tblEvents.getItems().add(ev);
             }
         });
