@@ -82,12 +82,6 @@ public class PlaceABetController implements Controller{
         }
 
         @FXML
-        void showMoneyClick(ActionEvent event){
-            this.usersMoney();
-        }
-
-
-        @FXML
         void selectPlaceBet(ActionEvent event) throws NotEnoughMoneyException, MinimumBetException {
             try {
 
@@ -340,6 +334,7 @@ public class PlaceABetController implements Controller{
 
     @FXML
         void initialize() {
+        this.usersMoney();
         placeBetButton.getStyleClass().setAll("btn", "btn-primary");
 
         setupEventSelection();
