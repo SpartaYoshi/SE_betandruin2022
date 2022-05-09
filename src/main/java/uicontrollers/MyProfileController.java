@@ -56,6 +56,11 @@ public class MyProfileController implements Controller{
     @FXML
     void initialize() {
         ConfigXML config = ConfigXML.getInstance();
+
+        if (businessLogic.getCurrentUser() == null)
+            return;
+
+
         switch (config.getLocale()) {
             case "en" -> birthDateLabel.setText("Birth Date: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
             case "es" -> birthDateLabel.setText("Fecha de nacimiento: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
