@@ -23,11 +23,10 @@ import java.util.*;
 
 
 
-public class RemoveBetController implements Controller{
+public class RemoveBetController implements Controller {
 
     private MainGUI mainGUI;
     private final BlFacade businessLogic;
-
 
 
     @FXML
@@ -72,7 +71,7 @@ public class RemoveBetController implements Controller{
 
 
     @FXML
-    void backClick(ActionEvent event) {
+    void backClick() {
         clearAll();
         switch(businessLogic.getSessionMode()) {
             case "Anon":
@@ -99,7 +98,7 @@ public class RemoveBetController implements Controller{
 
 
     @FXML
-    void removeClick(ActionEvent event) {
+    void removeClick() {
 
         LocalDate localDate = calendar.getValue();
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
@@ -127,7 +126,7 @@ public class RemoveBetController implements Controller{
                 lblMessage.setText("You must select a bet.");
                 lblMessage.getStyleClass().setAll("lbl", "lbl-danger");
             }
-            else{
+            else {
                 Bet b1 = businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), question, bet);
                 if(b1!=null){
                     businessLogic.insertMoney(bet.getAmount());

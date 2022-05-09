@@ -320,8 +320,8 @@ public class BlFacadeImplementation implements BlFacade {
 
 
 	@WebMethod
-	public double getMoneyAvailable(){
-		User who=this.getCurrentUser();
+	public double getMoneyAvailable() {
+		User who = this.getCurrentUser();
 		return who.getMoneyAvailable();
 	}
 
@@ -337,12 +337,17 @@ public class BlFacadeImplementation implements BlFacade {
 	public double insertMoney(double amount) throws FailedMoneyUpdateException{
 		User who=this.getCurrentUser();
 		dbManager.open(false);
+
 		double totalmoney;
+
 		totalmoney = dbManager.insertMoney(who,amount);
+
 		dbManager.close();
+
 		if(totalmoney==0){
 			throw new FailedMoneyUpdateException("User has still 0€");
 		}
+
 		return totalmoney;
 	}
 
@@ -353,7 +358,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 	@Override
 	public void setCurrentUser(User current) {
-		this.currentUser=current;
+		this.currentUser = current;
 	}
 
 	public void setSessionMode(String mode){
