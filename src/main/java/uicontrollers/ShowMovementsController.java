@@ -49,10 +49,6 @@ public class ShowMovementsController implements Controller{
         businessLogic = bl;
     }
 
-
-
-
-
     @FXML
     void initialize() {
 
