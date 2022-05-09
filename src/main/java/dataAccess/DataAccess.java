@@ -121,10 +121,10 @@ public class DataAccess {
 		    Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1); 
 			User u1= new User("juanan", "hello", "Juan Antonio", "Pereira", date1);
 			u1.grantAdmin();
-			//Admin user:
+			//Regular user:
 			String sDate2="01/01/1980";
 			Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
-			User u2= new User("juanan", "hello", "Juan Antonio", "Pereira", date1);
+			User u2= new User("ainhoa", "123", "Ainhoa", "Corporation", date1);
 
 			
 			if(!existUser(u1)) {
@@ -135,9 +135,9 @@ public class DataAccess {
 			if(!existUser(u2)) {
 				db.persist(u2);
 				System.out.println("Regular user created and persisted");
-				//admin user persisted
+
 			}
-			
+
 		
 			/*
 			db.persist(q1);
@@ -290,6 +290,14 @@ public class DataAccess {
 	}
 
 
+	public List<User> getAllUsers() {
+
+		TypedQuery<User> q = db.createQuery("SELECT u FROM User u" , User.class);
+		return q.getResultList();
+	}
+
+
+
 	public Vector<Bet> getUserBets(Question question, User user) {
 		System.out.println("Question is "+ question);
 		System.out.println("User is "+ user);
@@ -364,7 +372,7 @@ public class DataAccess {
 	}
 
 	public boolean existQuestion(Event event, String question) {
-		System.out.println(">> DataAccess: existQuestion => event = " + event + 
+		System.out.println(">> DataAccess: existQuestion => event = " + event +
 				" question = " + question);
 		Event ev = db.find(Event.class, event.getEventNumber());
 		return ev.doesQuestionExist(question);
@@ -541,7 +549,7 @@ public class DataAccess {
 	 * @param bet1
 	 * @return
 	 */
-	public Bet removeCurrentUserBet(User currentUser, Question question,Bet bet1) {
+	public Bet removeCurrentUserBet(User currentUser, Question question, Bet bet1) {
 		System.out.println(">> DataAccess: removeAbet=> On bet = " + bet1 + ", by " + currentUser.getName() + " " + currentUser.getSurname());
 		Bet bet = db.find(Bet.class, bet1.getBetNum());
 		User dbUser = db.find(User.class, currentUser.getUsername());
@@ -594,13 +602,30 @@ public class DataAccess {
 		return who;
 	}
 
+
+
     public Event removeEvent(Event ev) {
 
 		Event dbEvent=db.find(Event.class, ev);
 		db.getTransaction().begin();
-
 		db.remove(dbEvent);
 		db.getTransaction().commit();
+
+
+		db.getTransaction().begin();
+		//update users list
+
+		for (User u:this.getAllUsers()){
+			for(Bet b:u.getBets()){
+				if(b.getResult()==null){
+					u.removeBet(b);
+					if(u.getBets().size()==0) break;
+				}
+			}
+			db.persist(u);
+		}
+		db.getTransaction().commit();
+
 		return dbEvent;
     }
 }

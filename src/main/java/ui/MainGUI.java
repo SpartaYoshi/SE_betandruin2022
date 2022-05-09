@@ -17,7 +17,7 @@ public class MainGUI {
 
   private Window portal, adminPortal, userPortal, createQuestion, browseQuestions, setFee, removeBet,
           userLogin, userRegister, createEvent, placeAbet, depositMoney, showMovements,removeEvent,
-          myProfile, editProfile;
+          myProfile, editProfile, checkMyResults;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -95,6 +95,9 @@ public class MainGUI {
       if (controllerClass == RemoveEventController.class)
         return new RemoveEventController(businessLogic);
 
+      if (controllerClass == CheckMyResultsController.class)
+        return new CheckMyResultsController(businessLogic);
+
 
 
       else {
@@ -135,9 +138,10 @@ public class MainGUI {
     editProfile = load("/src/main/resources/EditProfile.fxml");
     showMovements = load("/src/main/resources/ShowMovements.fxml");
     removeEvent = load("/src/main/resources/RemoveEvent.fxml");
+    checkMyResults = load("/src/main/resources/CheckMyResults.fxml");
 
 
-    showPortal();
+    showMyProfile();
 
   }
 

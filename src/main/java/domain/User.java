@@ -144,5 +144,9 @@ public class User {
 		this.bets = bets;
 	}
 
+	public void removeBet(Bet b){
+		this.bets.remove(b);
+	}
+
 	
 }

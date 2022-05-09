@@ -56,8 +56,6 @@ public class MyProfileController implements Controller{
     }
 
 
-
-
     @FXML
     void initialize() {
         ConfigXML config = ConfigXML.getInstance();

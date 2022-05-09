@@ -62,4 +62,13 @@ public class Bet implements Serializable {
     public void setResult(Result r) {
         this.result=r;
     }
+
+    @Override
+    public String toString() {
+        return "Bet{" +
+                "betNum=" + betNum +
+                ", amount=" + amount +
+                ", result=" + result +
+                '}';
+    }
 }
