@@ -24,7 +24,7 @@ public class Event implements Serializable {
 	@Id
 	@XmlJavaTypeAdapter(IntegerAdapter.class)
 	@GeneratedValue
-	private int eventNumber;
+	private Integer eventNumber;
 	private Date eventDate;
 
 	private String homeTeam;
@@ -32,10 +32,8 @@ public class Event implements Serializable {
 
 	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL) //when removing also remove questions
 	private Vector<Question> questions = new Vector<>();
+
 	private String strDate;
-
-
-
 
 	public Vector<Question> getQuestions() {
 		return questions;
