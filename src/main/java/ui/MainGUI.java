@@ -156,8 +156,9 @@ public class MainGUI {
 
 
     // DO NOT CHANGE
-    showPortal();
+    //showPortal();
 
+    showEditProfile();
   }
 
   public void showPortal(){setupScene(portal.ui, "Portal", 395, 315);}
@@ -202,7 +203,7 @@ public class MainGUI {
 
   public void showMyProfile(){setupScene(myProfile.ui, "MyProfile", 750, 300);}
 
-  public void showEditProfile(){setupScene(myProfile.ui, "EditProfile", 600, 300);}
+  public void showEditProfile(){setupScene(editProfile.ui, "EditProfile", 600, 300);}
 
 
 
