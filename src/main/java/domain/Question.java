@@ -152,22 +152,12 @@ public class Question implements Serializable {
 	/**
 	 * Adds the result to the list
 	 */
-	public Result addResult(String res, float fee) {
-		Result f=new Result(res,fee);
-		if(f != null) {
-			System.out.println("our object of result is "+ f);
-			System.out.println("our list is" +this.resultList);
-			resultList.add(f);
-		}
-		return f;
-		
-	}
+
 
 	public Result addtoResultList(Result r) {
 
 		if(r != null) {
 			System.out.println("our object of result is "+ r);
-			System.out.println("our list is" +this.resultList);
 			resultList.add(r);
 		}
 		return r;
@@ -192,7 +182,7 @@ public class Question implements Serializable {
 	
 	@Override
 	public String toString(){
-		//return questionNumber + ";" + question + ";" + Float.toString(betMinimum);
+
 		return question;
 	}	
 }
