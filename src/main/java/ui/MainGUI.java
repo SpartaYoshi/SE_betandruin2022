@@ -156,16 +156,14 @@ public class MainGUI {
 
 
     // DO NOT CHANGE
-    //showPortal();
-
-    showEditProfile();
+    showPortal();
   }
 
   public void showPortal(){setupScene(portal.ui, "Portal", 395, 315);}
 
   public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 395, 520);}
 
-  public void showUserPortal(){setupScene(userPortal.ui, "UserPortal", 395, 375);}
+  public void showUserPortal(){setupScene(userPortal.ui, "UserPortal", 395, 440);}
 
   public void showBrowseQuestions() {
     setupScene(browseQuestions.ui, "BrowseQuestions", 1000, 500);
