@@ -10,6 +10,7 @@ package uicontrollers;
         import businessLogic.BlFacade;
         import domain.Bet;
         import domain.Event;
+        import domain.Movement;
         import domain.Question;
         import javafx.fxml.FXML;
         import javafx.scene.control.DatePicker;
@@ -26,16 +27,13 @@ public class ShowMovementsController implements Controller{
     private URL location;
 
     @FXML
-    private TableColumn<Bet, String> tableAmount;
+    private TableColumn<Movement, Double> tableAmount;
 
     @FXML
-    private TableColumn<Event, Date> tableDate;
+    private TableColumn<Movement, Date> tableDate;
 
     @FXML
-    private TableColumn<Event, String> tableEvent;
-
-    @FXML
-    private TableColumn<Question, String> tableQuestion;
+    private TableColumn<Movement, String> tableDescription;
 
     @FXML
     private Label totalMoney;
