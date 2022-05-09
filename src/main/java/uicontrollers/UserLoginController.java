@@ -16,7 +16,7 @@ import ui.MainGUI;
 public class UserLoginController implements Controller{
     private MainGUI mainGUI;
 
-    private BlFacade businessLogic;
+    private final BlFacade businessLogic;
 
     @FXML private Label messageLabel;
     @FXML private PasswordField passwordTextField;

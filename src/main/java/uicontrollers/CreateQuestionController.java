@@ -28,7 +28,7 @@ public class CreateQuestionController implements Controller {
     this.businessLogic = bl;
   }
 
-  private BlFacade businessLogic;
+  private final BlFacade businessLogic;
 
   @FXML private DatePicker datePicker;
 
@@ -47,18 +47,12 @@ public class CreateQuestionController implements Controller {
   void selectBack(ActionEvent event) {
     clearErrorLabels();
 
-    switch(businessLogic.getSessionMode()) {
-      case "Anon":
-        mainGUI.showPortal();
-        break;
-      case "User":
-        mainGUI.showUserPortal();
-        break;
-      case "Admin":
-        mainGUI.showAdminPortal();
-        break;
-      default:
-        break;
+    switch (businessLogic.getSessionMode()) {
+      case "Anon" -> mainGUI.showPortal();
+      case "User" -> mainGUI.showUserPortal();
+      case "Admin" -> mainGUI.showAdminPortal();
+      default -> {
+      }
     }
   }
 
@@ -157,7 +151,7 @@ public class CreateQuestionController implements Controller {
 
   }
 
-  private List<LocalDate> holidays = new ArrayList<>();
+  private final List<LocalDate> holidays = new ArrayList<>();
 
   private void setEventsPrePost(int year, int month) {
     LocalDate date = LocalDate.of(year, month, 1);

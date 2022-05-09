@@ -19,9 +19,9 @@ import configuration.ConfigXML;
  */
 public class ObjectDbManagerServer extends JDialog {
 
-	private ConfigXML config  = ConfigXML.getInstance();
+	private final ConfigXML config  = ConfigXML.getInstance();
 
-	private JTextArea textArea;
+	private final JTextArea textArea;
 
 
 	public ObjectDbManagerServer() {

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;
 import java.util.*;
-import java.util.List;
 
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
@@ -15,9 +14,6 @@ import exceptions.IdenticalTeamsException;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.util.Callback;
@@ -158,7 +154,7 @@ public class CreateNewEventController implements Controller{
     }
 
 
-    private List<LocalDate> holidays = new ArrayList<>();
+    private final List<LocalDate> holidays = new ArrayList<>();
 
 
     private void setEvents(int year, int month) {

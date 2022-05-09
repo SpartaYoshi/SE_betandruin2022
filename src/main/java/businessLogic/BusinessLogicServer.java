@@ -18,10 +18,10 @@ import configuration.ConfigXML;
  */
 public class BusinessLogicServer extends JDialog {
 
-	JTextArea textArea;
+	final JTextArea textArea;
 	String service;
 
-	public BusinessLogicServer() throws Exception {
+	public BusinessLogicServer() {
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		setTitle("Business Logic Server");

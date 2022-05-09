@@ -17,8 +17,8 @@ public class Match {
     String lastUpdated;
     Odds odds;
     Score score;
-    Team homeTeam;
-    Team awayTeam;
+    final Team homeTeam;
+    final Team awayTeam;
     Referee[] referees;
 
     String parsedDate;
@@ -125,7 +125,7 @@ public class Match {
 
     class Team {
         int id;
-        String name;
+        final String name;
 
         public Team (String name) {
             this.name = name;

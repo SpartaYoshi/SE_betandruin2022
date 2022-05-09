@@ -15,9 +15,21 @@ import java.util.ResourceBundle;
 
 public class MainGUI {
 
-  private Window portal, adminPortal, userPortal, createQuestion, browseQuestions, setFee, removeBet,
-          userLogin, userRegister, createEvent, placeAbet, depositMoney, showMovements,removeEvent,
-          myProfile, editProfile, checkMyResults;
+  private Window portal;
+  private Window adminPortal;
+  private Window userPortal;
+  private Window createQuestion;
+  private Window browseQuestions;
+  private Window setFee;
+  private Window removeBet;
+  private Window userLogin;
+  private Window userRegister;
+  private Window createEvent;
+  private Window placeAbet;
+  private Window depositMoney;
+  private Window showMovements;
+  private Window removeEvent;
+  private Window myProfile;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -135,10 +147,10 @@ public class MainGUI {
     placeAbet = load("/src/main/resources/PlaceABetv2.fxml");
     removeBet = load("/src/main/resources/RemoveaBetv2.fxml");
     myProfile = load("/src/main/resources/MyProfile.fxml");
-    editProfile = load("/src/main/resources/EditProfile.fxml");
+    Window editProfile = load("/src/main/resources/EditProfile.fxml");
     showMovements = load("/src/main/resources/ShowMovements.fxml");
     removeEvent = load("/src/main/resources/RemoveEvent.fxml");
-    checkMyResults = load("/src/main/resources/CheckMyResults.fxml");
+    Window checkMyResults = load("/src/main/resources/CheckMyResults.fxml");
 
 
     showMyProfile();
@@ -177,7 +189,7 @@ public class MainGUI {
 
   public void showDepositMoney() { setupScene(depositMoney.ui,  "Deposit", 600, 450);}
 
-  public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceABet", 900, 680);}
+  public void showPlaceABet(){setupScene(placeAbet.ui, "PlaceBet", 900, 680);}
 
   public void showRemoveABet(){setupScene(removeBet.ui, "RemoveBet", 940, 520);}
 

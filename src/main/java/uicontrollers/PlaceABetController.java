@@ -82,7 +82,7 @@ public class PlaceABetController implements Controller{
         }
 
         @FXML
-        void selectPlaceBet(ActionEvent event) throws NotEnoughMoneyException, MinimumBetException {
+        void selectPlaceBet(ActionEvent event) {
             try {
 
                 messageLabel.setText("");
@@ -227,7 +227,7 @@ public class PlaceABetController implements Controller{
 
 
 
-    private List<LocalDate> holidays = new ArrayList<>();
+    private final List<LocalDate> holidays = new ArrayList<>();
 
 
     private void setEvents(int year, int month) {

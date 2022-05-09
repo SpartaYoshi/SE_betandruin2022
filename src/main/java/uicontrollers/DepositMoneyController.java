@@ -2,7 +2,6 @@ package uicontrollers;
 
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
-import domain.User;
 import exceptions.FailedMoneyUpdateException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,14 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import ui.MainGUI;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 
 public class DepositMoneyController implements Controller {
     private MainGUI mainGUI;
-    private BlFacade businessLogic;
+    private final BlFacade businessLogic;
 
     @FXML private Label warningLbl;
     @FXML private TextField amountField;

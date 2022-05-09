@@ -5,7 +5,6 @@ import domain.Bet;
 import domain.Event;
 import domain.Result;
 import domain.Question;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -16,7 +15,6 @@ import javafx.util.Callback;
 import ui.MainGUI;
 import utils.Dates;
 
-import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -28,7 +26,7 @@ import java.util.*;
 public class RemoveBetController implements Controller{
 
     private MainGUI mainGUI;
-    private BlFacade businessLogic;
+    private final BlFacade businessLogic;
 
 
 
@@ -155,7 +153,7 @@ public class RemoveBetController implements Controller{
     }
 
 
-    private List<LocalDate> holidays = new ArrayList<>();
+    private final List<LocalDate> holidays = new ArrayList<>();
 
 
     private void setEvents(int year, int month) {

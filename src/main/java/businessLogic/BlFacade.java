@@ -164,11 +164,13 @@ public interface BlFacade {
 	 */
 	@WebMethod String getSessionMode();
 
-	@WebMethod  public String editProfileUsername(User user);
+	@WebMethod
+	String editProfileUsername(User user);
 
-	@WebMethod  public String editProfilePassword(User user);
+	@WebMethod
+	String editProfilePassword(User user);
 
 
 	@WebMethod
-	public Event removeEvent(Event ev);
+	Event removeEvent(Event ev);
 }

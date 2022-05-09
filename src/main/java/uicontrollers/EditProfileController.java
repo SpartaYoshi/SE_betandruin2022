@@ -1,7 +1,6 @@
 package uicontrollers;
 
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import businessLogic.BlFacade;
@@ -18,7 +17,7 @@ import ui.MainGUI;
 
 public class EditProfileController implements Controller{
     private MainGUI mainGUI;
-    private BlFacade businessLogic;
+    private final BlFacade businessLogic;
 
     public EditProfileController(BlFacade bl) {
         this.businessLogic = bl;
@@ -53,7 +52,7 @@ public class EditProfileController implements Controller{
     private TextField usernameField;
 
     @FXML
-    void onEditProfileButton(ActionEvent event) {
+    void onEditProfileButton() {
 
     }
 

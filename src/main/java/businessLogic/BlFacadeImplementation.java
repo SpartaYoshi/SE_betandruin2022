@@ -25,8 +25,8 @@ import exceptions.*;
 @WebService(endpointInterface = "businessLogic.BlFacade")
 public class BlFacadeImplementation implements BlFacade {
 
-	DataAccess dbManager;
-	ConfigXML config = ConfigXML.getInstance();
+	final DataAccess dbManager;
+	final ConfigXML config = ConfigXML.getInstance();
 	User currentUser;
 	String sessionMode;
 	static List<Match> matchList;

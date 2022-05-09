@@ -3,7 +3,6 @@ package uicontrollers;
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
 import domain.Event;
-import domain.Question;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -25,7 +24,7 @@ import java.util.Vector;
 public class RemoveEventController implements  Controller{
 
     MainGUI mainGUI;
-    BlFacade businessLogic;
+    final BlFacade businessLogic;
 
     @FXML
     private DatePicker calendar;
@@ -146,7 +145,7 @@ public class RemoveEventController implements  Controller{
     public void setMainApp(MainGUI mainGUI) {
         this.mainGUI=mainGUI;
     }
-    private List<LocalDate> holidays = new ArrayList<>();
+    private final List<LocalDate> holidays = new ArrayList<>();
     private void setEventsPrePost(int year, int month) {
         LocalDate date = LocalDate.of(year, month, 1);
         setEvents(date.getYear(), date.getMonth().getValue());

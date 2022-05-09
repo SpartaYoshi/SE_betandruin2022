@@ -26,7 +26,7 @@ public class ConfigXML {
 		return theInstance;
 	}
 
-	private static ConfigXML theInstance = new ConfigXML();
+	private static final ConfigXML theInstance = new ConfigXML();
 
 	private String locale;
 

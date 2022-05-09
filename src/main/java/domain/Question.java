@@ -25,7 +25,7 @@ public class Question implements Serializable {
 	private float betMinimum;
 	private String result;
 	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Vector<Result> resultList = new Vector<>();
+	private final Vector<Result> resultList = new Vector<>();
 
 
 	@ManyToOne

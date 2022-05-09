@@ -6,7 +6,6 @@ import java.util.*;
 import businessLogic.BlFacade;
 import domain.Event;
 import domain.Question;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -28,8 +27,8 @@ public class BrowseQuestionsController implements Controller {
   @FXML private TableView<Question> tblQuestions;
 
   private MainGUI mainGUI;
-  private List<LocalDate> holidays = new ArrayList<>();
-  private BlFacade businessLogic;
+  private final List<LocalDate> holidays = new ArrayList<>();
+  private final BlFacade businessLogic;
 
   public BrowseQuestionsController(BlFacade bl) {
     businessLogic = bl;

@@ -6,8 +6,6 @@ import domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import ui.MainGUI;
 
 import java.time.LocalDate;
@@ -17,7 +15,7 @@ import java.util.Date;
 public class UserRegisterController implements Controller{
     private MainGUI mainGUI;
 
-    private BlFacade businessLogic;
+    private final BlFacade businessLogic;
 
     @FXML private TextField nameField;
     @FXML private TextField surnameField;

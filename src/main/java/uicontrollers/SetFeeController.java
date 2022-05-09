@@ -36,8 +36,8 @@ public class SetFeeController implements Controller {
     @FXML private TableView<Event> tblEvents;
     @FXML private TableView<Question> tblQuestions;
 
-    private BlFacade businessLogic;
-    private List<LocalDate> holidays = new ArrayList<>();
+    private final BlFacade businessLogic;
+    private final List<LocalDate> holidays = new ArrayList<>();
 
     public SetFeeController(BlFacade bl) {
         businessLogic = bl;

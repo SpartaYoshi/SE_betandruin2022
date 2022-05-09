@@ -12,7 +12,7 @@ import ui.MainGUI;
 public class PortalController implements Controller {
 
     private MainGUI mainGUI;
-    private BlFacade businessLogic;
+    private final BlFacade businessLogic;
     @FXML private ToggleGroup lang;
     @FXML private Label rebootInfo;
 

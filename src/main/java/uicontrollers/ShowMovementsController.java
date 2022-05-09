@@ -16,17 +16,12 @@ public class ShowMovementsController implements Controller{
     private URL location;
 
 
-    private final BlFacade businessLogic;
-    private MainGUI mainGUI;
-
     public ShowMovementsController(BlFacade bl) {
-        this.businessLogic = bl;
     }
 
 
     @Override
     public void setMainApp(MainGUI mainGUI) {
-        this.mainGUI = mainGUI;
     }
 
 

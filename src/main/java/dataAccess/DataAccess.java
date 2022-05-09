@@ -14,7 +14,6 @@ import javax.persistence.*;
 import configuration.ConfigXML;
 import configuration.UtilDate;
 import domain.*;
-import domain.Result;
 import exceptions.QuestionAlreadyExistsException;
 
 /**
@@ -25,7 +24,7 @@ public class DataAccess {
 	protected EntityManager  db;
 	protected EntityManagerFactory emf;
 
-	ConfigXML config = ConfigXML.getInstance();
+	final ConfigXML config = ConfigXML.getInstance();
 
 	public DataAccess(boolean initializeMode)  {
 		System.out.println("Creating DataAccess instance => isDatabaseLocal: " + 

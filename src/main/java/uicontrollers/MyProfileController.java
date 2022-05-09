@@ -1,9 +1,6 @@
 package uicontrollers;
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import businessLogic.BlFacade;
@@ -21,7 +18,7 @@ public class MyProfileController implements Controller{
     }
 
     private MainGUI mainGUI;
-    private BlFacade businessLogic;
+    private final BlFacade businessLogic;
 
     @FXML
     private ResourceBundle resources;
@@ -92,5 +89,8 @@ public class MyProfileController implements Controller{
         this.mainGUI = mainGUI;
     }
 
+    @FXML public void onMyResultsButton(){
+
+    }
 
 }
