@@ -298,8 +298,8 @@ public class PlaceABetController implements Controller{
     }
 
 
-    public void usersMoney(){
-        if(businessLogic.getMoneyAvailable()==0){
+    public void usersMoney() {
+        if(businessLogic.getMoneyAvailable() == 0){
             availableMoneyLabel.getStyleClass().setAll("lbl","lbl-danger");
         }else{
             availableMoneyLabel.getStyleClass().setAll("lbl", "lbl-success");
@@ -307,7 +307,7 @@ public class PlaceABetController implements Controller{
         availableMoneyLabel.setText(businessLogic.getMoneyAvailable() + "€");
     }
 
-    public void clearAll(){
+    public void clearAll() {
         tblEvents.getItems().clear();
         tblQuestions.getItems().clear();
         tblResults.getItems().clear();
@@ -328,8 +328,10 @@ public class PlaceABetController implements Controller{
 
 
     @FXML
-        void initialize() {
-        this.usersMoney();
+    void initialize() {
+        if (businessLogic.getCurrentUser() != null)
+            this.usersMoney();
+
         placeBetButton.getStyleClass().setAll("btn", "btn-primary");
 
         setupEventSelection();
