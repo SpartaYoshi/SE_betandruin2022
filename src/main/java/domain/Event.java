@@ -30,6 +30,10 @@ public class Event implements Serializable {
 	private String homeTeam;
 	private String awayTeam;
 
+
+
+	private String description;
+
 	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL) //when removing also remove questions
 	private Vector<Question> questions = new Vector<>();
 	private String strDate;
@@ -56,6 +60,7 @@ public class Event implements Serializable {
 		this.eventDate = eventDate;
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		this.strDate = dateFormat.format(eventDate);
+		this.description=this.getTeamTemplate();
 	}
 
 	public Event(String homeTeam, String awayTeam, Date eventDate) {
@@ -65,6 +70,7 @@ public class Event implements Serializable {
 
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		this.strDate = dateFormat.format(eventDate);
+		this.description=this.getTeamTemplate();
 
 	}
 
@@ -76,6 +82,9 @@ public class Event implements Serializable {
 		this.eventNumber = eventNumber;
 	}
 
+	public String getDescription() {return description;	}
+
+	public void setDescription(String description) {this.description = description;	}
 
 	public Date getEventDate() {
 		return eventDate;

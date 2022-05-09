@@ -4,13 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Vector;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -58,30 +52,30 @@ public class DataAccess {
 			int year = today.get(Calendar.YEAR);
 			if (month == 12) { month = 0; year += 1;}  
 
-			/*
-			Event ev1 = new Event( "Atlético-Athletic", UtilDate.newDate(year, month, 17));
-			Event ev2 = new Event( "Eibar-Barcelona", UtilDate.newDate(year, month, 17));
-			Event ev3 = new Event( "Getafe-Celta", UtilDate.newDate(year, month, 17));
-			Event ev4 = new Event( "Alavés-Deportivo", UtilDate.newDate(year, month, 17));
-			Event ev5 = new Event( "Español-Villareal", UtilDate.newDate(year, month, 17));
-			Event ev6 = new Event( "Las Palmas-Sevilla", UtilDate.newDate(year, month, 17));
-			Event ev7 = new Event( "Malaga-Valencia", UtilDate.newDate(year, month, 17));
-			Event ev8 = new Event( "Girona-Leganés", UtilDate.newDate(year, month, 17));
-			Event ev9 = new Event( "Real Sociedad-Levante", UtilDate.newDate(year, month, 17));
-			Event ev10 = new Event( "Betis-Real Madrid", UtilDate.newDate(year, month, 17));
 
-			Event ev11 = new Event( "Atletico-Athletic", UtilDate.newDate(year, month, 1));
-			Event ev12 = new Event( "Eibar-Barcelona", UtilDate.newDate(year, month, 1));
-			Event ev13 = new Event( "Getafe-Celta", UtilDate.newDate(year, month, 1));
-			Event ev14 = new Event( "Alavés-Deportivo", UtilDate.newDate(year, month, 1));
-			Event ev15 = new Event( "Español-Villareal", UtilDate.newDate(year, month, 1));
-			Event ev16 = new Event( "Las Palmas-Sevilla", UtilDate.newDate(year, month, 1));
+			Event ev1 = new Event( "Atlético","Athletic", UtilDate.newDate(year, month, 17));
+			Event ev2 = new Event( "Eibar","Barcelona", UtilDate.newDate(year, month, 17));
+			Event ev3 = new Event( "Getafe","Celta", UtilDate.newDate(year, month, 17));
+			Event ev4 = new Event( "Alavés","Deportivo", UtilDate.newDate(year, month, 17));
+			Event ev5 = new Event( "Español","Villareal", UtilDate.newDate(year, month, 17));
+			Event ev6 = new Event( "Las Palmas","Sevilla", UtilDate.newDate(year, month, 17));
+			Event ev7 = new Event( "Malaga","Valencia", UtilDate.newDate(year, month, 17));
+			Event ev8 = new Event( "Girona","Leganés", UtilDate.newDate(year, month, 17));
+			Event ev9 = new Event( "Real Sociedad","Levante", UtilDate.newDate(year, month, 17));
+			Event ev10 = new Event( "Betis","Real Madrid", UtilDate.newDate(year, month, 17));
+
+			Event ev11 = new Event( "Atletico","Athletic", UtilDate.newDate(year, month, 1));
+			Event ev12 = new Event( "Eibar","Barcelona", UtilDate.newDate(year, month, 1));
+			Event ev13 = new Event( "Getafe","Celta", UtilDate.newDate(year, month, 1));
+			Event ev14 = new Event( "Alavés","Deportivo", UtilDate.newDate(year, month, 1));
+			Event ev15 = new Event( "Español","Villareal", UtilDate.newDate(year, month, 1));
+			Event ev16 = new Event( "Las Palmas","Sevilla", UtilDate.newDate(year, month, 1));
 
 
-			Event ev17 = new Event( "Málaga-Valencia", UtilDate.newDate(year, month + 1, 28));
-			Event ev18 = new Event( "Girona-Leganés", UtilDate.newDate(year, month + 1, 28));
-			Event ev19 = new Event( "Real Sociedad-Levante", UtilDate.newDate(year, month + 1, 28));
-			Event ev20 = new Event( "Betis-Real Madrid", UtilDate.newDate(year, month + 1, 28));
+			Event ev17 = new Event( "Málaga","Valencia", UtilDate.newDate(year, month + 1, 28));
+			Event ev18 = new Event( "Girona","Leganés", UtilDate.newDate(year, month + 1, 28));
+			Event ev19 = new Event( "Real Sociedad","Levante", UtilDate.newDate(year, month + 1, 28));
+			Event ev20 = new Event( "Betis","Real Madrid", UtilDate.newDate(year, month + 1, 28));
 
 			Question q1;
 			Question q2;
@@ -116,7 +110,7 @@ public class DataAccess {
 				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
 			}
 
-			*/
+
 
 			//Admin user:
 			String sDate1="01/01/1980";  
@@ -141,7 +135,7 @@ public class DataAccess {
 			}
 
 		
-			/*
+
 			db.persist(q1);
 			db.persist(q2);
 			db.persist(q3);
@@ -170,7 +164,7 @@ public class DataAccess {
 			db.persist(ev19);
 			db.persist(ev20);
 
-			 */
+
 
 			db.getTransaction().commit();
 			System.out.println("The database has been initialized");
@@ -460,8 +454,9 @@ public class DataAccess {
 			if(ourquestion.resultisAlreadyStored(result)) {// check if that fee is not used yet
 				return -1;
 			}else {
-				Result f=ourquestion.addResult(result,fee);
+				Result f=new Result(result,fee);
 				db.persist(f);
+				ourquestion.addtoResultList(f);
 				db.persist(ourquestion);
 			}
 			
