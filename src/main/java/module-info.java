@@ -9,4 +9,5 @@ module BetAndRuin22 {
     requires java.xml.bind;
     requires java.xml.ws;
     requires org.kordamp.bootstrapfx.core;
+    requires okhttp3;
 }
