@@ -20,7 +20,7 @@ import org.w3c.dom.NodeList;
  */
 public class ConfigXML {
 
-	private static final String CONFIGURATION_FILENAME = "resources/config.xml";
+	private static final String CONFIGURATION_FILENAME = "server/resources/config.xml";
 
 	public static ConfigXML getInstance() {
 		return theInstance;
