@@ -20,20 +20,16 @@ public class Movement {
     private Date date;
     private String description;
 
-    public Movement(int id, Double amount, Date date, String description) {
-        super();
-        this.id = id;
+    public Movement(Double amount, Date date, String description) {
         this.amount = amount;
         this.date = date;
         this.description =description;
     }
 
-    public Movement(Double amount, Date date, String description) {
-        super();
-        this.amount = amount;
-        this.date = date;
-        this.description =description;
+    public Movement() {
+
     }
+
 
     public int getId() {
         return id;
