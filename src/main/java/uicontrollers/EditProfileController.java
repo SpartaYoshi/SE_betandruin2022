@@ -65,25 +65,36 @@ public class EditProfileController implements Controller{
     void initialize() {
 
         ConfigXML config = ConfigXML.getInstance();
+
+        if (businessLogic.getCurrentUser() == null)
+            return;
+
+
         switch (config.getLocale()) {
-            case "en" -> birthDateLabel.setText("Birth Date: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
-            case "es" -> birthDateLabel.setText("Fecha de nacimiento: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
-            case "eus" -> birthDateLabel.setText("Jaiotze data: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
-        }
-        switch (config.getLocale()) {
-            case "en" -> nameLabel.setText("Name: " +this.businessLogic.getCurrentUser().getName());
-            case "es" -> nameLabel.setText("Nombre: " +this.businessLogic.getCurrentUser().getName());
-            case "eus" -> nameLabel.setText("Izena: " +this.businessLogic.getCurrentUser().getName());
-        }
-        switch (config.getLocale()) {
-            case "en" -> surnameLabel.setText("Surname: " +this.businessLogic.getCurrentUser().getSurname());
-            case "es" -> surnameLabel.setText("Apellido: " +this.businessLogic.getCurrentUser().getSurname());
-            case "eus" -> surnameLabel.setText("Abizena: " +this.businessLogic.getCurrentUser().getSurname());
+            case "en":
+                birthDateLabel.setText("Birth Date: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
+                nameLabel.setText("Name: " +this.businessLogic.getCurrentUser().getName());
+                surnameLabel.setText("Surname: " +this.businessLogic.getCurrentUser().getSurname());
+                break;
+
+            case "es":
+                birthDateLabel.setText("Fecha de nacimiento: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
+                nameLabel.setText("Nombre: " +this.businessLogic.getCurrentUser().getName());
+                surnameLabel.setText("Apellido: " +this.businessLogic.getCurrentUser().getSurname());
+                break;
+
+            case "eus":
+                birthDateLabel.setText("Jaiotze data: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
+                nameLabel.setText("Izena: " +this.businessLogic.getCurrentUser().getName());
+                surnameLabel.setText("Abizena: " +this.businessLogic.getCurrentUser().getSurname());
+                break;
+
+            default:
         }
     }
 
 
-    public void editProfile(){
+    public void editProfile() {
         User u = businessLogic.getCurrentUser();
         if(this.usernameField!=null) {
             String oldUserName = u.getUsername();
