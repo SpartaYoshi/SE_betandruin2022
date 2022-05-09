@@ -2,6 +2,7 @@ package uicontrollers;
 
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
+import domain.Movement;
 import exceptions.FailedMoneyUpdateException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import ui.MainGUI;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 public class DepositMoneyController implements Controller {
@@ -57,6 +62,10 @@ public class DepositMoneyController implements Controller {
             depositBtn.getStyleClass().setAll("btn", "btn-primary");
             double amount= Double.parseDouble(amountField.getText());
             double totalMoneyAv=businessLogic.insertMoney(amount);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Calendar cal = Calendar.getInstance();
+            String now = dateFormat.format(cal.getTime());
+            Movement m1 = new Movement(amount,now);
 
             warningLbl.getStyleClass().setAll("lbl","lbl-success");
             ConfigXML config = ConfigXML.getInstance();

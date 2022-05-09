@@ -17,15 +17,21 @@ public class Movement {
     private int id;
 
     private Double amount;
-    private Date date;
+    private String date;
     private String description;
 
-    public Movement(int id, Double amount, Date date) {
+    public Movement(int id, Double amount, String date) {
+        super();
         this.id = id;
         this.amount = amount;
         this.date = date;
     }
 
+    public Movement(Double amount, String date) {
+        super();
+        this.amount = amount;
+        this.date = date;
+    }
 
     public int getId() {
         return id;
@@ -43,11 +49,11 @@ public class Movement {
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

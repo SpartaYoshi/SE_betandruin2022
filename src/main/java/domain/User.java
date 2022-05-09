@@ -24,6 +24,9 @@ public class User {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Vector<Bet> bets= new Vector<>();
 
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Vector<Movement> movements= new Vector<>();
+
 
 	public User() {
 		super();
@@ -39,6 +42,7 @@ public class User {
 		moneyAvailable=10;
 		admin = false;
 		bets = new Vector<Bet>();
+		movements = new Vector<Movement>();
 	}
 
 	public User(String username, String passwd, String name, String surname, Date birthdate, Double moneyAvailable) {
@@ -51,6 +55,7 @@ public class User {
 		this.moneyAvailable=moneyAvailable;
 		admin = false;
 		bets = new Vector<Bet>();
+		movements = new Vector<Movement>();
 	}
 
 
@@ -65,7 +70,10 @@ public class User {
 		return bet;
 	}
 
-
+	public Movement addMovement(Movement mov)  {
+		movements.add(mov);
+		return mov;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -147,6 +155,18 @@ public class User {
 	public void removeBet(Bet b){
 		this.bets.remove(b);
 	}
+	public Vector<Movement> getMovements() {
+		return movements;
+	}
+
+	public void setMovements(Vector<Movement> movements) {
+		this.movements = movements;
+	}
+
+	public void removeMovement(Movement m){
+		this.movements.remove(m);
+	}
+
 
 	
 }
