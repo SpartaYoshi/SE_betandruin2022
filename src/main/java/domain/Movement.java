@@ -17,20 +17,22 @@ public class Movement {
     private int id;
 
     private Double amount;
-    private String date;
+    private Date date;
     private String description;
 
-    public Movement(int id, Double amount, String date) {
+    public Movement(int id, Double amount, Date date, String description) {
         super();
         this.id = id;
         this.amount = amount;
         this.date = date;
+        this.description =description;
     }
 
-    public Movement(Double amount, String date) {
+    public Movement(Double amount, Date date, String description) {
         super();
         this.amount = amount;
         this.date = date;
+        this.description =description;
     }
 
     public int getId() {
@@ -49,11 +51,11 @@ public class Movement {
         this.amount = amount;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

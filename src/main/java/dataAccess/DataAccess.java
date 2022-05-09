@@ -1,6 +1,9 @@
 package dataAccess;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -475,19 +478,20 @@ public class DataAccess {
 	 */
 	public double insertMoney(User who, double am)  {
 		double total=who.getMoneyAvailable()+ am; //the money he had + the deposited money
-		//this.registerUser(who);
+		String description = new String("Insert money");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		Movement mov = new Movement(am, date, description);
 		db.getTransaction().begin();
 		who.setMoneyAvailable(total);
+		who.addMovement(mov);
 		User dbUser=db.find(User.class, who.getUsername());
 		dbUser.setMoneyAvailable(total);
+		dbUser.addMovement(mov);
+		db.persist(mov);
 		db.getTransaction().commit();
-
 		System.out.println(">> DataAccess: money updated");
-
 		return who.getMoneyAvailable();
-
-
-
 	}
 
 	/**
@@ -501,21 +505,16 @@ public class DataAccess {
 		System.out.println(">> DataAccess: placeAbet=> On result = " + f.getResult() + ", amount = " +amountBet + " by " + who.getName() + " " + who.getSurname());
 		Result result = db.find(Result.class, f.getId());
 		Bet bet = new Bet(amountBet,f);
-
 		db.getTransaction().begin();
-
 		f.addBet(bet);
 		who.addBet(bet);
-
 		User dbUser=db.find(User.class, who.getUsername());//update the database object too
-
 		dbUser.addBet(bet);
 		result.addBet(bet);
 		db.persist(bet);
-
 		db.getTransaction().commit();
 		if (bet != null){
-			this.restMoney(who, amountBet);
+			this.restMoney(who, amountBet, bet);
 		}
 		return bet;
 	}
@@ -528,12 +527,19 @@ public class DataAccess {
 	 */
 
 
-	public double restMoney(User who, double bet)  {
-		double total=who.getMoneyAvailable()- bet; //the money he had - the deposited money
+	public double restMoney(User who, double betAmount, Bet bet)  {
+		double total=who.getMoneyAvailable()- betAmount; //the money he had - the deposited money
+		String description = new String("Placed bet to:" + bet.toString());
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		Movement mov = new Movement(betAmount*(-1), date, description);
 		db.getTransaction().begin();
 		who.setMoneyAvailable(total);//our object of the app
+		who.addMovement(mov);
 		User dbUser=db.find(User.class, who.getUsername());
 		dbUser.setMoneyAvailable(total);
+		dbUser.addMovement(mov);
+		db.persist(mov);
 		db.getTransaction().commit();
 
 		System.out.println(">> DataAccess: money updated");
@@ -566,6 +572,7 @@ public class DataAccess {
 		db.getTransaction().begin();
 		currentUser.getBets().remove(bet);
 		dbUser.getBets().remove(bet);
+		this.insertMoney(currentUser, bet.getAmount());
 		if(dbResult!=null){
 			dbResult.getBets().remove(bet);
 		}

@@ -62,10 +62,6 @@ public class DepositMoneyController implements Controller {
             depositBtn.getStyleClass().setAll("btn", "btn-primary");
             double amount= Double.parseDouble(amountField.getText());
             double totalMoneyAv=businessLogic.insertMoney(amount);
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            Calendar cal = Calendar.getInstance();
-            String now = dateFormat.format(cal.getTime());
-            Movement m1 = new Movement(amount,now);
 
             warningLbl.getStyleClass().setAll("lbl","lbl-success");
             ConfigXML config = ConfigXML.getInstance();
