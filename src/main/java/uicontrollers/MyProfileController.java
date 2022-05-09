@@ -61,32 +61,33 @@ public class MyProfileController implements Controller{
             return;
 
 
-        switch (config.getLocale()) {
-            case "en" -> birthDateLabel.setText("Birth Date: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
-            case "es" -> birthDateLabel.setText("Fecha de nacimiento: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
-            case "eus" -> birthDateLabel.setText("Jaiotze data: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
-        }
-        switch (config.getLocale()) {
-            case "en" -> nameLabel.setText("Name: " +this.businessLogic.getCurrentUser().getName());
-            case "es" -> nameLabel.setText("Nombre: " +this.businessLogic.getCurrentUser().getName());
-            case "eus" -> nameLabel.setText("Izena: " +this.businessLogic.getCurrentUser().getName());
-        }
-        switch (config.getLocale()) {
-            case "en" -> surnameLabel.setText("Surname: " +this.businessLogic.getCurrentUser().getSurname());
-            case "es" -> surnameLabel.setText("Apellido: " +this.businessLogic.getCurrentUser().getSurname());
-            case "eus" -> surnameLabel.setText("Abizena: " +this.businessLogic.getCurrentUser().getSurname());
-        }
-        switch (config.getLocale()) {
-            case "en" -> passwordLabel.setText("Password: " +this.businessLogic.getCurrentUser().getPasswd());
-            case "es" -> passwordLabel.setText("Contraseña: " +this.businessLogic.getCurrentUser().getPasswd());
-            case "eus" -> passwordLabel.setText("Pasahitza: " +this.businessLogic.getCurrentUser().getPasswd());
-        }
-        switch (config.getLocale()) {
-            case "en" -> usernameLabel.setText("Username: " +this.businessLogic.getCurrentUser().getUsername());
-            case "es" -> usernameLabel.setText("Nombre de usuario: " +this.businessLogic.getCurrentUser().getUsername());
-            case "eus" -> usernameLabel.setText("Erabiltzaile izena: " +this.businessLogic.getCurrentUser().getUsername());
-        }
+        switch(config.getLocale()) {
+            case "en":
+                birthDateLabel.setText("Birth Date: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
+                nameLabel.setText("Name: " + this.businessLogic.getCurrentUser().getName());
+                surnameLabel.setText("Surname: " + this.businessLogic.getCurrentUser().getSurname());
+                passwordLabel.setText("Password: " + this.businessLogic.getCurrentUser().getPasswd());
+                usernameLabel.setText("Username: " + this.businessLogic.getCurrentUser().getUsername());
+                break;
 
+            case "es":
+                birthDateLabel.setText("Fecha de nacimiento: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
+                nameLabel.setText("Nombre: " + this.businessLogic.getCurrentUser().getName());
+                surnameLabel.setText("Apellido: " + this.businessLogic.getCurrentUser().getSurname());
+                passwordLabel.setText("Contraseña: " + this.businessLogic.getCurrentUser().getPasswd());
+                usernameLabel.setText("Nombre de usuario: " + this.businessLogic.getCurrentUser().getUsername());
+                break;
+
+            case "eus":
+                birthDateLabel.setText("Jaiotze data: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
+                nameLabel.setText("Izena: " + this.businessLogic.getCurrentUser().getName());
+                surnameLabel.setText("Abizena: " + this.businessLogic.getCurrentUser().getSurname());
+                passwordLabel.setText("Pasahitza: " + this.businessLogic.getCurrentUser().getPasswd());
+                usernameLabel.setText("Erabiltzaile izena: " + this.businessLogic.getCurrentUser().getUsername());
+                break;
+
+            default:
+        }
 
     }
 
