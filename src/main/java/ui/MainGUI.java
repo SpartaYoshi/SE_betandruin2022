@@ -134,23 +134,23 @@ public class MainGUI {
 
     this.stage = stage;
 
-    portal = load("/src/main/resources/Portal.fxml");
-    adminPortal = load("/src/main/resources/AdminPortal.fxml");
-    userPortal = load("/src/main/resources/UserPortal.fxml");
-    browseQuestions = load("/src/main/resources/BrowseQuestions.fxml");
-    createQuestion = load("/src/main/resources/CreateQuestion.fxml");
-    setFee = load("/src/main/resources/SetFee.fxml");
-    createEvent = load("/src/main/resources/CreateNewEvent.fxml");
-    userLogin = load("/src/main/resources/UserLogin.fxml");
-    userRegister = load("/src/main/resources/UserRegister.fxml");
-    depositMoney = load("/src/main/resources/DepositMoney.fxml");
-    placeAbet = load("/src/main/resources/PlaceABetv2.fxml");
-    removeBet = load("/src/main/resources/RemoveaBetv2.fxml");
-    myProfile = load("/src/main/resources/MyProfile.fxml");
-    Window editProfile = load("/src/main/resources/EditProfile.fxml");
-    showMovements = load("/src/main/resources/ShowMovements.fxml");
-    removeEvent = load("/src/main/resources/RemoveEvent.fxml");
-    Window checkMyResults = load("/src/main/resources/CheckMyResults.fxml");
+    portal = load("/Portal.fxml");
+    adminPortal = load("/AdminPortal.fxml");
+    userPortal = load("/UserPortal.fxml");
+    browseQuestions = load("/BrowseQuestions.fxml");
+    createQuestion = load("/CreateQuestion.fxml");
+    setFee = load("/SetFee.fxml");
+    createEvent = load("/CreateNewEvent.fxml");
+    userLogin = load("/UserLogin.fxml");
+    userRegister = load("/UserRegister.fxml");
+    depositMoney = load("/DepositMoney.fxml");
+    placeAbet = load("/PlaceABetv2.fxml");
+    removeBet = load("/RemoveaBetv2.fxml");
+    myProfile = load("/MyProfile.fxml");
+    Window editProfile = load("/EditProfile.fxml");
+    showMovements = load("/ShowMovements.fxml");
+    removeEvent = load("/RemoveEvent.fxml");
+    Window checkMyResults = load("/CheckMyResults.fxml");
 
 
     showMyProfile();
