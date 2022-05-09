@@ -330,7 +330,10 @@ public class DataAccess {
 		Date firstDayMonthDate= UtilDate.firstDayMonth(date);
 		Date lastDayMonthDate= UtilDate.lastDayMonth(date);
 
+		// Introduce class on persistence model, so it is identified before querying
+		db.getMetamodel().entity(Event.class);
 
+		// Query
 		TypedQuery<Date> query = db.createQuery("SELECT DISTINCT ev.eventDate FROM Event ev "
 				+ "WHERE ev.eventDate BETWEEN ?1 and ?2", Date.class);   
 		query.setParameter(1, firstDayMonthDate);

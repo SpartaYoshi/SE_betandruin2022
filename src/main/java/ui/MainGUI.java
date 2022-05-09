@@ -30,6 +30,8 @@ public class MainGUI {
   private Window showMovements;
   private Window removeEvent;
   private Window myProfile;
+  private Window editProfile;
+  private Window checkMyResults;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -147,13 +149,14 @@ public class MainGUI {
     placeAbet = load("/PlaceABetv2.fxml");
     removeBet = load("/RemoveaBetv2.fxml");
     myProfile = load("/MyProfile.fxml");
-    Window editProfile = load("/EditProfile.fxml");
+    editProfile = load("/EditProfile.fxml");
     showMovements = load("/ShowMovements.fxml");
     removeEvent = load("/RemoveEvent.fxml");
-    Window checkMyResults = load("/CheckMyResults.fxml");
+    checkMyResults = load("/CheckMyResults.fxml");
 
 
-    showMyProfile();
+    // DO NOT CHANGE
+    showPortal();
 
   }
 

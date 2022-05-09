@@ -39,7 +39,7 @@ public class UserLoginController implements Controller{
     }
 
     @FXML
-    void selectLogin(ActionEvent event) {
+    void selectLogin(){
 
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
