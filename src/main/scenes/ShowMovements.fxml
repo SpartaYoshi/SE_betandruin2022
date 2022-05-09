@@ -9,10 +9,9 @@
    <children>
       <TableView layoutX="7.0" layoutY="56.0" prefHeight="329.0" prefWidth="586.0">
         <columns>
-          <TableColumn fx:id="tableDate" prefWidth="116.66665649414062" text="Date" />
-          <TableColumn fx:id="tableEvent" minWidth="7.33331298828125" prefWidth="133.33331298828125" text="Event" />
-            <TableColumn fx:id="tableQuestion" minWidth="0.0" prefWidth="274.0" text="Question" />
-            <TableColumn fx:id="tableAmount" prefWidth="62.0" text="Amount" />
+          <TableColumn fx:id="tableDate" prefWidth="133.33331298828125" text="Date" />
+            <TableColumn fx:id="tableDescription" minWidth="0.0" prefWidth="376.6666564941406" text="Description" />
+            <TableColumn fx:id="tableAmount" prefWidth="74.0" text="Amount" />
         </columns>
       </TableView>
       <Label fx:id="totalMoney" layoutX="521.0" layoutY="28.0" prefHeight="17.0" prefWidth="55.0" text="Label" />
