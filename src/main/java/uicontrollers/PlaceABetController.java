@@ -338,7 +338,7 @@ public class PlaceABetController implements Controller{
     @FXML
     void initialize() {
 
-       // if (businessLogic.getCurrentUser() != null)//show money available
+       if (businessLogic.getCurrentUser() != null)//show money available
             this.usersMoney();
 
         placeBetButton.getStyleClass().setAll("btn", "btn-primary");
