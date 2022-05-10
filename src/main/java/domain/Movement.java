@@ -18,12 +18,12 @@ public class Movement {
 
     private Double amount;
     private Date date;
-    private String description;
+    private String descriptionType;
 
-    public Movement(Double amount, Date date, String description) {
+    public Movement(Double amount, Date date, String descriptionType) {
         this.amount = amount;
         this.date = date;
-        this.description =description;
+        this.descriptionType = descriptionType;
     }
 
     public Movement() {
@@ -55,13 +55,21 @@ public class Movement {
         this.date = date;
     }
 
+    public String getDescriptionType() {
+        return descriptionType;
+    }
+
+    public void setDescriptionType(String descriptionType) {
+        this.descriptionType = descriptionType;
+    }
+
     @Override
     public String toString() {
         return "Movement{" +
                 "id=" + id +
                 ", amount=" + amount +
                 ", date=" + date +
-                ", description='" + description + '\'' +
+                ", description='" + descriptionType + '\'' +
                 '}';
     }
 }
