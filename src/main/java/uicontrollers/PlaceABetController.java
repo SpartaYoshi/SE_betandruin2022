@@ -139,6 +139,9 @@ public class PlaceABetController implements Controller{
 
                             Bet newBet = businessLogic.placeBet(amount, question, result, date);
 
+                            if (businessLogic.getCurrentUser() != null)
+                                this.usersMoney();
+
                             if (newBet != null) {
                                 messageLabel.getStyleClass().setAll("lbl", "lbl-success");
                                 ConfigXML config = ConfigXML.getInstance();
@@ -304,7 +307,7 @@ public class PlaceABetController implements Controller{
         }else{
             availableMoneyLabel.getStyleClass().setAll("lbl", "lbl-success");
         }
-        availableMoneyLabel.setText(businessLogic.getMoneyAvailable() + "€");
+        availableMoneyLabel.setText("Money available: "+businessLogic.getMoneyAvailable() + "€");
     }
 
     public void clearAll() {
@@ -329,8 +332,7 @@ public class PlaceABetController implements Controller{
 
     @FXML
     void initialize() {
-        if (businessLogic.getCurrentUser() != null)
-            this.usersMoney();
+
 
         placeBetButton.getStyleClass().setAll("btn", "btn-primary");
 
@@ -340,10 +342,13 @@ public class PlaceABetController implements Controller{
 
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
 
+
         calendar.setOnMouseClicked(e -> {
             // get a reference to datepicker inner content
             // attach a listener to the  << and >> buttons
             // mark events for the (prev, current, next) month and year shown
+            if (businessLogic.getCurrentUser() != null)//show money available
+                this.usersMoney();
             DatePickerSkin skin = (DatePickerSkin) calendar.getSkin();
             skin.getPopupContent().lookupAll(".button").forEach(node -> {
                 node.setOnMouseClicked(event -> {
