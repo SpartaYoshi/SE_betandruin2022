@@ -12,6 +12,7 @@ package uicontrollers;
         import domain.Event;
         import domain.Movement;
         import domain.Question;
+        import javafx.event.ActionEvent;
         import javafx.fxml.FXML;
         import javafx.scene.control.DatePicker;
         import javafx.scene.control.Label;
@@ -51,6 +52,27 @@ public class ShowMovementsController implements Controller{
     void initialize() {
         String totalMoneyString = String.valueOf(businessLogic.getCurrentUser().getMoneyAvailable());
         totalMoney.setText(totalMoneyString);
+
+    }
+
+    @FXML
+    void selectBack(ActionEvent event) {
+        //clearAll();
+
+
+        switch(businessLogic.getSessionMode()) {
+            case "Anon":
+                mainGUI.showPortal();
+                break;
+            case "User":
+                mainGUI.showUserPortal();
+                break;
+            case "Admin":
+                mainGUI.showAdminPortal();
+                break;
+            default:
+                break;
+        }
     }
 
 
