@@ -204,7 +204,7 @@ public class MainGUI {
   public void showShowMovements(){
     if (businessLogic.getCurrentUser() != null)
       ((ShowMovementsController) showMovements.c).initialize();
-    setupScene(showMovements.ui, "ShowMovements", 600, 470);}
+    setupScene(showMovements.ui, "ShowMovements", 650, 470);}
 
   public void showMyProfile(){setupScene(myProfile.ui, "MyProfile", 750, 300);}
 

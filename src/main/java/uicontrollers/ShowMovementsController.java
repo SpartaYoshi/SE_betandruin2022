@@ -67,8 +67,10 @@ public class ShowMovementsController implements Controller{
         tableDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         tableDescription.setCellValueFactory(new PropertyValueFactory<>("descriptionType"));
 
-        for (Movement mov:businessLogic.getCurrentUser().getMovements())
-            tableMovements.getItems().add(mov);
+        if(businessLogic.getCurrentUser() != null) {
+            for (Movement mov:businessLogic.getCurrentUser().getMovements())
+                tableMovements.getItems().add(mov);
+        }
 
 
         tableMovements.getSortOrder().add(tableDate);
