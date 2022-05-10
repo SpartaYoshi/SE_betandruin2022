@@ -485,7 +485,7 @@ public class DataAccess {
 	 */
 	public double insertMoney(User who, double am)  {
 		double total=who.getMoneyAvailable()+ am; //the money he had + the deposited money
-		String description = new String("Insert money");
+		String description = new String("insertMoney");
 		LocalDate localDate = null;
 		Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
 		Date date = Date.from(instant);
@@ -538,7 +538,7 @@ public class DataAccess {
 
 	public double restMoney(User who, double betAmount, Bet bet)  {
 		double total=who.getMoneyAvailable()- betAmount; //the money he had - the deposited money
-		String description = new String("Placed bet to:" + bet.toString());
+		String description = new String("restMoney");
 		LocalDate localDate = null;
 		Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
 		Date date = Date.from(instant);
