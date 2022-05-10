@@ -2,8 +2,6 @@ package dataAccess;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -637,4 +635,15 @@ public class DataAccess {
 
 		return dbEvent;
     }
+
+	public double getUsersMoney(User who) {
+		db.getTransaction().begin();
+		User dbUser=db.find(User.class, who.getUsername());
+		Double money = dbUser.getMoneyAvailable();
+		db.getTransaction().commit();
+
+		System.out.println(">> DataAccess: getting the money available of the current user");
+
+		return money;
+	}
 }
