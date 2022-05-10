@@ -4,8 +4,6 @@ import businessLogic.BlFacade;
 import javafx.event.ActionEvent;
 import ui.MainGUI;
 
-import java.util.function.BiConsumer;
-
 public class PublishResultsController implements Controller{
     private MainGUI mainGUI;
     private final BlFacade businessLogic;

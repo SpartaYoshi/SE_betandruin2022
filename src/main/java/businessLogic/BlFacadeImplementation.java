@@ -322,7 +322,8 @@ public class BlFacadeImplementation implements BlFacade {
 	@WebMethod
 	public double getMoneyAvailable() {
 		User who = this.getCurrentUser();
-		return who.getMoneyAvailable();
+		Double amount = dbManager.getUsersMoney(who);
+		return amount;
 	}
 
 	@WebMethod
@@ -402,6 +403,8 @@ public class BlFacadeImplementation implements BlFacade {
 		matchList = gson.fromJson((jsonObj.get("matches")), matchListType);
 	}
 
+
+
 	private void processMatchResult(Event ev, Match matchAPI) {
 		String winner = matchAPI.getWinner();
 
@@ -417,6 +420,8 @@ public class BlFacadeImplementation implements BlFacade {
 			//process bets for draw
 		}
 	}
+
+
 
 	 public void updateResults() {
 		fetchFromAPI();
