@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Vector;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -108,12 +109,12 @@ public class Event implements Serializable {
 	/**
 	 * This method creates a bet with a question, minimum bet amount and percentage profit
 	 * 
-	 * @param question to be added to the event
+	 * @param questionID to be added to the event
 	 * @param betMinimum of that question
 	 * @return Bet
 	 */
-	public Question addQuestion(String question, float betMinimum)  {
-		Question q=new Question(question,betMinimum, this);
+	public Question addQuestion(String questionID, float betMinimum)  {
+		Question q=new Question(questionID, betMinimum, this);
 		questions.add(q);
 		return q;
 	}
@@ -127,7 +128,7 @@ public class Event implements Serializable {
 	 */
 	public boolean doesQuestionExist(String question)  {	
 		for (Question q:this.getQuestions()){
-			if (q.getQuestion().compareTo(question)==0)
+			if (q.getQuestionID().compareTo(question)==0)
 				return true;
 		}
 		return false;
@@ -151,7 +152,7 @@ public class Event implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Event other = (Event) obj;
-		return eventNumber == other.eventNumber;
+		return Objects.equals(eventNumber, other.eventNumber);
 	}
 
 	public String getTeamTemplate() {

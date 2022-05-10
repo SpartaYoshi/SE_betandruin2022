@@ -270,7 +270,7 @@ public class PlaceABetController implements Controller, Initializable {
     private void setupQuestionSelection() {
         tblQuestions.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                questionLabel.setText(tblQuestions.getSelectionModel().getSelectedItem().getQuestion());
+                questionLabel.setText(tblQuestions.getSelectionModel().getSelectedItem().getQuestionID());
                 resultLabel.setText("");
 
                 tblResults.getItems().clear();
@@ -295,7 +295,7 @@ public class PlaceABetController implements Controller, Initializable {
     private void setupResultSelection() {
         tblResults.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                resultLabel.setText(tblResults.getSelectionModel().getSelectedItem().getQuestionType());
+                resultLabel.setText(tblResults.getSelectionModel().getSelectedItem().getQuestionID());
             }
         });
 

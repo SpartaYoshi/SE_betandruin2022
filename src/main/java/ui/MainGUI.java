@@ -162,6 +162,7 @@ public class MainGUI {
 
     // DO NOT CHANGE
     showPortal();
+
   }
 
   public void showPortal(){setupScene(portal.ui, "Portal", 395, 315);}
@@ -198,7 +199,7 @@ public class MainGUI {
 
   public void showPlaceABet(){
     if (businessLogic.getCurrentUser() != null)
-      ((PlaceABetController) placeAbet.c).displayUsersMoney();
+        ((PlaceABetController) placeAbet.c).displayUsersMoney();
     setupScene(placeAbet.ui, "PlaceBet", 900, 680);
   }
 
@@ -206,12 +207,15 @@ public class MainGUI {
 
   public void showRemoveEvent(){setupScene(removeEvent.ui, "RemoveEvent", 680, 475);}
 
+
   public void showShowMovements(){
     if (businessLogic.getCurrentUser() != null)
       ((ShowMovementsController) showMovements.c).initialize();
     setupScene(showMovements.ui, "ShowMovements", 650, 470);}
 
+
   public void showMyProfile(){setupScene(myProfile.ui, "MyProfile", 750, 300);}
+
 
   public void showEditProfile(){setupScene(editProfile.ui, "EditProfile", 600, 300);}
   public void showPublishResults(){setupScene(publishResults.ui, "Publish", 750, 300);}
