@@ -22,7 +22,7 @@ public class Result implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Vector<Bet> bets = new Vector<>();
 	
-	private String questionType;
+	private String questionID;
 
 
 
@@ -37,7 +37,7 @@ public class Result implements Serializable {
 
 	public Result(String r, float f) {
 		this.fee = f;
-		this.questionType = r;
+		this.questionID = r;
 		
 	}
 
@@ -50,8 +50,8 @@ public class Result implements Serializable {
 	/**
 	 * @return the result
 	 */
-	public String getQuestionType() {
-		return questionType;
+	public String getQuestionID() {
+		return questionID;
 	}
 	/**
 	 * @return the fee
@@ -68,8 +68,8 @@ public class Result implements Serializable {
 	/**
 	 * @param result the result to set
 	 */
-	public void setQuestionType(String result) {
-		this.questionType = result;
+	public void setQuestionID(String result) {
+		this.questionID = result;
 	}
 	/**
 	 * @param fee the fee to set
@@ -96,6 +96,6 @@ public class Result implements Serializable {
 
 	@Override
 	public String toString() {
-		return questionType;
+		return questionID;
 	}
 }

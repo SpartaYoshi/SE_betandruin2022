@@ -21,17 +21,14 @@ public class Question implements Serializable {
 	@GeneratedValue
 	private Integer questionNumber;
 
-	private String question; 
+	private String questionID;
 	private float betMinimum;
-	private String resultPrompt;
 
 	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-
 	private Vector<Result> resultList = new Vector<>();
 
 
-	@ManyToOne
-	@JoinColumn(name = "event_event_number")
+	@OneToOne
 	@XmlIDREF
 	private Event event;
 
@@ -39,11 +36,11 @@ public class Question implements Serializable {
 		super();
 	}
 
-	public Question(Integer queryNumber, String query, float betMinimum, Event event) {
+	public Question(Integer queryNumber, String questionID, float betMinimum, Event event) {
 		super();
 		this.questionNumber = queryNumber;
-		this.question = query;
-		this.betMinimum=betMinimum;
+		this.questionID = questionID;
+		this.betMinimum = betMinimum;
 		this.event = event;
 		
 		
@@ -51,7 +48,7 @@ public class Question implements Serializable {
 
 	public Question(String query, float betMinimum,  Event event) {
 		super();
-		this.question = query;
+		this.questionID = query;
 		this.betMinimum=betMinimum;
 		
 	}
@@ -79,8 +76,8 @@ public class Question implements Serializable {
 	 * 
 	 * @return the bet question
 	 */
-	public String getQuestion() {
-		return question;
+	public String getQuestionID() {
+		return questionID;
 	}
 
 
@@ -89,8 +86,8 @@ public class Question implements Serializable {
 	 * 
 	 * @param question to be set
 	 */	
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setQuestionID(String question) {
+		this.questionID = question;
 	}
 
 
@@ -115,23 +112,6 @@ public class Question implements Serializable {
 	}
 
 
-	/**
-	 * Gets the result of the  query
-	 * 
-	 * @return the the query result
-	 */
-	public String getResultPrompt() {
-		return resultPrompt;
-	}
-
-	/**
-	 * Sets the correct result of the  query
-	 * 
-	 * @param result is the correct result of the query
-	 */
-	public void setResultPrompt(String result) {
-		this.resultPrompt = result;
-	}
 
 	/**
 	 * Gets the event associated with the bet
@@ -176,7 +156,7 @@ public class Question implements Serializable {
 	
 	public boolean resultisAlreadyStored(String result) {
 		for (Result f:this.resultList) {
-			if (f.getQuestionType().equals(result))
+			if (f.getQuestionID().equals(result))
 				return true;
 		}
 		return false;
@@ -185,6 +165,6 @@ public class Question implements Serializable {
 	@Override
 	public String toString(){
 
-		return question;
+		return questionID;
 	}	
 }

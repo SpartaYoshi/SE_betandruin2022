@@ -18,10 +18,13 @@ import exceptions.QuestionAlreadyExistsException;
  */
 public class DataAccess {
 
-	protected EntityManager  db;
+	protected EntityManager db;
 	protected EntityManagerFactory emf;
 
 	final ConfigXML config = ConfigXML.getInstance();
+
+	ResourceBundle resources;
+
 
 	public DataAccess(boolean initializeMode)  {
 		System.out.println("Creating DataAccess instance => isDatabaseLocal: " + 
@@ -77,52 +80,31 @@ public class DataAccess {
 			Event ev19 = new Event( "Real Sociedad","Levante", UtilDate.newDate(year, month + 1, 28));
 			Event ev20 = new Event( "Betis","Real Madrid", UtilDate.newDate(year, month + 1, 28));
 
-			Question q1 = null;
-			Question q2 = null;
-			Question q3 = null;
-			Question q4 = null;
-			Question q5 = null;
-			Question q6 = null;
 
 
-			switch(config.getLocale()) {
-				case "es":
-					q1 = ev1.addQuestion("¿Quién ganará el partido?", 1);
-					q2 = ev1.addQuestion("¿Quién meterá el primer gol?", 2);
-					q3 = ev11.addQuestion("¿Quién ganará el partido?", 1);
-					q4 = ev11.addQuestion("¿Cuántos goles se marcarán?", 2);
-					q5 = ev17.addQuestion("¿Quién ganará el partido?", 1);
-					q6 = ev17.addQuestion("¿Habrá goles en la primera parte?", 2);
-					break;
+			// Question creation
+			Question q1 = ev1.addQuestion("qIDMatchWinner", 1); // "Who will win the match?"
+			Question q2 = ev1.addQuestion("qIDFirstScore", 2); // "Who will score first?"
+			Question q3 = ev11.addQuestion("qIDMatchWinner", 1);
+			Question q4 = ev11.addQuestion("qIDTotalGoals", 2); // "How many goals will be scored in the match?"
+			Question q5 = ev17.addQuestion("qIDMatchWinner", 1);
+			Question q6 = ev17.addQuestion("qIDGoalsFirstHalf", 2); // "Will there be goals in the first half?"
 
-				case "en":
-					q1 = ev1.addQuestion("Who will win the match?", 1);
-					q2 = ev1.addQuestion("Who will score first?", 2);
-					q3 = ev11.addQuestion("Who will win the match?", 1);
-					q4 = ev11.addQuestion("How many goals will be scored in the match?", 2);
-					q5 = ev17.addQuestion("Who will win the match?", 1);
-					q6 = ev17.addQuestion("Will there be goals in the first half?", 2);
-					break;
+			resources = ResourceBundle.getBundle("etiquetas");
 
-				case "eus":
-					q1 = ev1.addQuestion("Zeinek irabaziko du partidua?", 1);
-					q2 = ev1.addQuestion("Zeinek sartuko du lehenengo gola?", 2);
-					q3 = ev11.addQuestion("Zeinek irabaziko du partidua?", 1);
-					q4 = ev11.addQuestion("Zenbat gol sartuko dira?", 2);
-					q5 = ev17.addQuestion("Zeinek irabaziko du partidua?", 1);
-					q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
-					break;
+			Properties props = new Properties();
+			resources.keySet().stream().forEach(k -> props.put(k, resources.getString(k)));
 
-				default:
-			}
+			props.getProperty("qIDMatchWinner", "qIDMatchWinner");
 
 
 
 			//Admin user:
-			String sDate1="01/01/1980";  
+			String sDate1 = "01/01/1980";
 		    Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1); 
 			User u1= new User("juanan", "hello", "Juan Antonio", "Pereira", date1);
 			u1.grantAdmin();
+
 			//Regular user:
 			String sDate2="01/01/1980";
 			Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
@@ -184,23 +166,23 @@ public class DataAccess {
 	 * This method creates a question for an event, with a question text and the minimum bet
 	 * 
 	 * @param event to which question is added
-	 * @param question text of the question
+	 * @param questionID text of the question
 	 * @param betMinimum minimum quantity of the bet
 	 * @return the created question, or null, or an exception
 	 * @throws QuestionAlreadyExistsException if the same question already exists for the event
 	 */
-	public Question createQuestion(Event event, String question, float betMinimum) 
+	public Question createQuestion(Event event, String questionID, float betMinimum)
 			throws QuestionAlreadyExistsException {
 		System.out.println(">> DataAccess: createQuestion=> event = " + event + " question = " +
-				question + " minimum bet = " + betMinimum);
+				questionID + " minimum bet = " + betMinimum);
 
 		Event ev = db.find(Event.class, event.getEventNumber());
 
-		if (ev.doesQuestionExist(question)) throw new QuestionAlreadyExistsException(
+		if (ev.doesQuestionExist(questionID)) throw new QuestionAlreadyExistsException(
 				ResourceBundle.getBundle("Etiquetas").getString("ErrorQuestionAlreadyExists"));
 
 		db.getTransaction().begin();
-		Question q = ev.addQuestion(question, betMinimum);
+		Question q = ev.addQuestion(questionID, betMinimum);
 		//db.persist(q);
 		db.persist(ev); // db.persist(q) not required when CascadeType.PERSIST is added 
 		// in questions property of Event class
@@ -212,7 +194,7 @@ public class DataAccess {
 	
 	public Event createEvent(String homeTeam, String awayTeam, Date matchDate){
 
-		System.out.println(">> DataAccess: createEvent=> Home team = " + homeTeam + ", Away team = " +awayTeam);
+		System.out.println(">> DataAccess: createEvent=> Home team = " + homeTeam + ", Away team = " + awayTeam);
 		Event ev = null;
 
 		if (!this.isAnyTeamPlaying(homeTeam, awayTeam, matchDate)) {
@@ -280,13 +262,13 @@ public class DataAccess {
 	 *
 	 * @return collection of fee results
 	 */
-	public Vector<Result> getResultByType(String questionType) {
+	public Vector<Result> getResultByType(String questionID) {
 		System.out.println(">> DataAccess: getResults");
 
 		Vector<Result> res = new Vector<>();
-		TypedQuery<Result> query = db.createQuery("SELECT r FROM Result r WHERE r.questionType=?1",
+		TypedQuery<Result> query = db.createQuery("SELECT r FROM Result r WHERE r.questionID=?1",
 				Result.class);
-		query.setParameter(1, questionType);
+		query.setParameter(1, questionID);
 
 		List<Result> results = query.getResultList();
 		for (Result r : results) {
@@ -467,21 +449,21 @@ public class DataAccess {
 	/**
 	 * Method to create different fees
 	 * @param quest quest
-	 * @param questionType question type
+	 * @param questionID question type
 	 * @param fee fee
 	 * @return 0 if everything has updated correctly, -1 if the fee is already stored
 	 */
-	public int createFee(Question quest,String questionType, float fee) {
+	public int createFee(Question quest,String questionID, float fee) {
 		db.getTransaction().begin();
 		TypedQuery<Question> q = db.createQuery("SELECT p FROM Question " + "p WHERE p.questionNumber = ?1", Question.class);
 		q.setParameter(1, quest.getQuestionNumber());
 		Question ourquestion = q.getSingleResult();
 		
 		if(ourquestion!=null) {
-			if(ourquestion.resultisAlreadyStored(questionType)) {// check if that fee is not used yet
+			if(ourquestion.resultisAlreadyStored(questionID)) {// check if that fee is not used yet
 				return -1;
 			}else {
-				Result f = new Result(questionType, fee);
+				Result f = new Result(questionID, fee);
 				db.persist(f);
 				ourquestion.addtoResultList(f);
 				db.persist(ourquestion);
@@ -529,7 +511,7 @@ public class DataAccess {
 	 * @return
 	 */
 	public Bet placeBetToQuestion(Result f, Double amountBet, User who){
-		System.out.println(">> DataAccess: placeAbet=> On result = " + f.getQuestionType() + ", amount = " +amountBet + " by " + who.getName() + " " + who.getSurname());
+		System.out.println(">> DataAccess: placeAbet=> On result = " + f.getQuestionID() + ", amount = " +amountBet + " by " + who.getName() + " " + who.getSurname());
 		Result result = db.find(Result.class, f.getId());
 		Bet bet = new Bet(amountBet,f);
 		db.getTransaction().begin();
