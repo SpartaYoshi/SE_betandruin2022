@@ -4,7 +4,7 @@
 	<businessLogicPort>1099</businessLogicPort>
 	<businessLogicName>Bets</businessLogicName>
   </businessLogic>
-  <dataAccess local="true">
+  <dataAccess local="false">
 	<dataAccessNode>0.0.0.0</dataAccessNode>
 	<dataAccessPort>6136</dataAccessPort>
 	<dataBaseFilename>db/bets.temp</dataBaseFilename>

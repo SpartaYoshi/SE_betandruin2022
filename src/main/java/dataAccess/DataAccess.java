@@ -2,8 +2,6 @@ package dataAccess;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import javax.persistence.*;
@@ -77,37 +75,43 @@ public class DataAccess {
 			Event ev19 = new Event( "Real Sociedad","Levante", UtilDate.newDate(year, month + 1, 28));
 			Event ev20 = new Event( "Betis","Real Madrid", UtilDate.newDate(year, month + 1, 28));
 
-			Question q1;
-			Question q2;
-			Question q3;
-			Question q4;
-			Question q5;
-			Question q6;
-		
+			Question q1 = null;
+			Question q2 = null;
+			Question q3 = null;
+			Question q4 = null;
+			Question q5 = null;
+			Question q6 = null;
 
-			if (Locale.getDefault().equals(new Locale("es"))) {
-				q1 = ev1.addQuestion("¿Quién ganará el partido?", 1);
-				q2 = ev1.addQuestion("¿Quién meterá el primer gol?", 2);
-				q3 = ev11.addQuestion("¿Quién ganará el partido?", 1);
-				q4 = ev11.addQuestion("¿Cuántos goles se marcarán?", 2);
-				q5 = ev17.addQuestion("¿Quién ganará el partido?", 1);
-				q6 = ev17.addQuestion("¿Habrá goles en la primera parte?", 2);
-			}
-			else if (Locale.getDefault().equals(new Locale("en"))) {
-				q1 = ev1.addQuestion("Who will win the match?", 1);
-				q2 = ev1.addQuestion("Who will score first?", 2);
-				q3 = ev11.addQuestion("Who will win the match?", 1);
-				q4 = ev11.addQuestion("How many goals will be scored in the match?", 2);
-				q5 = ev17.addQuestion("Who will win the match?", 1);
-				q6 = ev17.addQuestion("Will there be goals in the first half?", 2);
-			}			
-			else {
-				q1 = ev1.addQuestion("Zeinek irabaziko du partidua?", 1);
-				q2 = ev1.addQuestion("Zeinek sartuko du lehenengo gola?", 2);
-				q3 = ev11.addQuestion("Zeinek irabaziko du partidua?", 1);
-				q4 = ev11.addQuestion("Zenbat gol sartuko dira?", 2);
-				q5 = ev17.addQuestion("Zeinek irabaziko du partidua?", 1);
-				q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
+
+			switch(config.getLocale()) {
+				case "es":
+					q1 = ev1.addQuestion("¿Quién ganará el partido?", 1);
+					q2 = ev1.addQuestion("¿Quién meterá el primer gol?", 2);
+					q3 = ev11.addQuestion("¿Quién ganará el partido?", 1);
+					q4 = ev11.addQuestion("¿Cuántos goles se marcarán?", 2);
+					q5 = ev17.addQuestion("¿Quién ganará el partido?", 1);
+					q6 = ev17.addQuestion("¿Habrá goles en la primera parte?", 2);
+					break;
+
+				case "en":
+					q1 = ev1.addQuestion("Who will win the match?", 1);
+					q2 = ev1.addQuestion("Who will score first?", 2);
+					q3 = ev11.addQuestion("Who will win the match?", 1);
+					q4 = ev11.addQuestion("How many goals will be scored in the match?", 2);
+					q5 = ev17.addQuestion("Who will win the match?", 1);
+					q6 = ev17.addQuestion("Will there be goals in the first half?", 2);
+					break;
+
+				case "eus":
+					q1 = ev1.addQuestion("Zeinek irabaziko du partidua?", 1);
+					q2 = ev1.addQuestion("Zeinek sartuko du lehenengo gola?", 2);
+					q3 = ev11.addQuestion("Zeinek irabaziko du partidua?", 1);
+					q4 = ev11.addQuestion("Zenbat gol sartuko dira?", 2);
+					q5 = ev17.addQuestion("Zeinek irabaziko du partidua?", 1);
+					q6 = ev17.addQuestion("Golak sartuko dira lehenengo zatian?", 2);
+					break;
+
+				default:
 			}
 
 
@@ -491,6 +495,7 @@ public class DataAccess {
 		System.out.println(">> DataAccess: money updated");
 		return who.getMoneyAvailable();
 	}
+
 
 	/**
 	 * method to add a bet to the result of a question
