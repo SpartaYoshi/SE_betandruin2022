@@ -30,7 +30,7 @@ public class Bet implements Serializable {
 
     public Bet(Integer numBet, Double amount,Result r) {
         super();
-        this.betNum=numBet;
+        this.betNum = numBet;
         this.amount = amount;
         this.result=r;
     }

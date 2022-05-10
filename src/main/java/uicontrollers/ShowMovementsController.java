@@ -17,7 +17,9 @@ package uicontrollers;
         import javafx.scene.control.DatePicker;
         import javafx.scene.control.Label;
         import javafx.scene.control.TableColumn;
+        import javafx.scene.control.TableView;
         import javafx.scene.control.cell.PropertyValueFactory;
+        import org.intellij.lang.annotations.JdkConstants;
         import ui.MainGUI;
 
 public class ShowMovementsController implements Controller{
@@ -27,7 +29,8 @@ public class ShowMovementsController implements Controller{
 
     @FXML
     private URL location;
-
+    @FXML
+    private TableView<Movement> tableMovements;
     @FXML
     private TableColumn<Movement, Double> tableAmount;
 
@@ -50,14 +53,25 @@ public class ShowMovementsController implements Controller{
     }
 
     @FXML
-    void initialize() {
-        //String totalMoneyString = String.valueOf(businessLogic.getCurrentUser().getMoneyAvailable());
-       // totalMoney.setText(totalMoneyString);
+    public void initialize() {
+
+        if(businessLogic.getCurrentUser() != null) {
+            String totalMoneyString = String.valueOf(businessLogic.getCurrentUser().getMoneyAvailable());
+            totalMoney.setText(totalMoneyString);
+        }
+
+        tableMovements.getItems().clear();
 
         // Bind columns
         tableAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         tableDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        tableDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        tableDescription.setCellValueFactory(new PropertyValueFactory<>("descriptionType"));
+
+        for (Movement mov:businessLogic.getCurrentUser().getMovements())
+            tableMovements.getItems().add(mov);
+
+
+        tableMovements.getSortOrder().add(tableDate);
 
 
     }

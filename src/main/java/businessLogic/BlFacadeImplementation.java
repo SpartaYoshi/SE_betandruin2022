@@ -406,7 +406,15 @@ public class BlFacadeImplementation implements BlFacade {
 
 
 	private void processMatchResult(Event ev, Match matchAPI) {
+
+
+
+		// WINNER BET
 		String winner = matchAPI.getWinner();
+
+		List<Result> winnerFeeResults = dbManager.getResultByType("winner");
+
+
 
 		if (winner != null) {
 			if (winner.equals(ev.getHomeTeam())){
