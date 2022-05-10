@@ -322,7 +322,8 @@ public class BlFacadeImplementation implements BlFacade {
 	@WebMethod
 	public double getMoneyAvailable() {
 		User who = this.getCurrentUser();
-		return who.getMoneyAvailable();
+		Double amount = dbManager.getUsersMoney(who);
+		return amount;
 	}
 
 	@WebMethod
