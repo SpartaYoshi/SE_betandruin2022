@@ -33,7 +33,7 @@
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="125.0" layoutY="426.0" mnemonicParsing="false" onAction="#selectLogout" prefHeight="26.0" prefWidth="129.0" styleClass="btn-primary" text="%Logout">
+      <Button layoutX="203.0" layoutY="426.0" mnemonicParsing="false" onAction="#selectLogout" prefHeight="26.0" prefWidth="100.0" styleClass="btn-primary" text="%Logout">
          <font>
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
@@ -58,5 +58,16 @@
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
       </Button>
+      <Button layoutX="75.0" layoutY="426.0" mnemonicParsing="false" onAction="#selectMyProfile" prefHeight="26.0" prefWidth="100.0" styleClass="btn-primary" text="%MyProfile">
+         <font>
+            <Font name="Trebuchet MS Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="myProfileButton" layoutX="21.0" layoutY="19.0" mnemonicParsing="false" onAction="#selectMyProfile" prefHeight="26.0" prefWidth="33.0" text="MyProfileButton" />
+      <ImageView fitHeight="44.0" fitWidth="47.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/imageUser.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
