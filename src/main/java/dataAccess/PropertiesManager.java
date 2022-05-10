@@ -1,0 +1,37 @@
+package dataAccess;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+public class PropertiesManager {
+    private void createPropertyKey(String filepath, String key, String value) {
+        try {
+            Properties props = new Properties();
+
+            FileInputStream in = new FileInputStream(filepath);
+            props.load(in);
+            in.close();
+
+            props.put(key, value);
+
+            FileOutputStream out = new FileOutputStream(filepath);
+            props.store(out, null);
+            out.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addTagToResources(String id, String text_en, String text_es, String text_eus) {
+        createPropertyKey("/Etiquetas.properties", id, text_en);
+        createPropertyKey("/Etiquetas_en.properties", id, text_en);
+        createPropertyKey("/Etiquetas_es.properties", id, text_es);
+        createPropertyKey("/Etiquetas_eus.properties", id, text_eus);
+    }
+}

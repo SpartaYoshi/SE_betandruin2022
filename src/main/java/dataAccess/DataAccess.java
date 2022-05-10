@@ -23,8 +23,6 @@ public class DataAccess {
 
 	final ConfigXML config = ConfigXML.getInstance();
 
-	ResourceBundle resources;
-
 
 	public DataAccess(boolean initializeMode)  {
 		System.out.println("Creating DataAccess instance => isDatabaseLocal: " + 
@@ -42,7 +40,7 @@ public class DataAccess {
 	 * It is invoked by the business logic when the option "initialize" is used 
 	 * in the tag dataBaseOpenMode of resources/config.xml file
 	 */	
-	public void initializeDB(){
+	public void initializeDB() {
 
 		db.getTransaction().begin();
 
@@ -83,32 +81,48 @@ public class DataAccess {
 
 
 			// Question creation
-			Question q1 = ev1.addQuestion("qIDMatchWinner", 1); // "Who will win the match?"
-			Question q2 = ev1.addQuestion("qIDFirstScore", 2); // "Who will score first?"
+			Question q1 = ev1.addQuestion("qIDMatchWinner", 1);
+			Question q2 = ev1.addQuestion("qIDFirstScore", 2);
 			Question q3 = ev11.addQuestion("qIDMatchWinner", 1);
-			Question q4 = ev11.addQuestion("qIDTotalGoals", 2); // "How many goals will be scored in the match?"
+			Question q4 = ev11.addQuestion("qIDTotalGoals", 2);
 			Question q5 = ev17.addQuestion("qIDMatchWinner", 1);
-			Question q6 = ev17.addQuestion("qIDGoalsFirstHalf", 2); // "Will there be goals in the first half?"
+			Question q6 = ev17.addQuestion("qIDGoalsFirstHalf", 2);
 
-			resources = ResourceBundle.getBundle("etiquetas");
+			// Update properties
+			PropertiesManager propMgr = new PropertiesManager();
+			propMgr.addTagToResources("qIDMatchWinner",
+					"Who will win the match?",
+					"¿Quién ganará el partido?",
+					"Zeinek irabaziko du partidua?");
 
-			Properties props = new Properties();
-			resources.keySet().stream().forEach(k -> props.put(k, resources.getString(k)));
+			propMgr.addTagToResources("qIDFirstScore",
+					"Who will score first?",
+					"¿Quién meterá el primer gol?",
+					"Zeinek sartuko du lehenengo gola?");
 
-			props.getProperty("qIDMatchWinner", "qIDMatchWinner");
+			propMgr.addTagToResources("qIDTotalGoals",
+					"How many goals will be scored in the match?",
+					"¿Cuántos goles se marcarán?",
+					"Zenbat gol sartuko dira?");
+
+			propMgr.addTagToResources("qIDGoalsFirstHalf",
+					"Will there be goals in the first half?",
+					"¿Habrá goles en la primera parte?",
+					"Golak sartuko dira lehenengo zatian?");
+
 
 
 
 			//Admin user:
 			String sDate1 = "01/01/1980";
-		    Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1); 
-			User u1= new User("juanan", "hello", "Juan Antonio", "Pereira", date1);
+		    Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+			User u1 = new User("juanan", "hello", "Juan Antonio", "Pereira", date1);
 			u1.grantAdmin();
 
 			//Regular user:
-			String sDate2="01/01/1980";
-			Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
-			User u2= new User("ainhoa", "123", "Ainhoa", "Corporation", date1);
+			String sDate2 = "01/01/1980";
+			Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+			User u2 = new User("ainhoa", "123", "Ainhoa", "Corporation", date1);
 
 			
 			if(!existUser(u1)) {
