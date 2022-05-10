@@ -20,20 +20,9 @@ public class MyProfileController implements Controller{
     private MainGUI mainGUI;
     private final BlFacade businessLogic;
 
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Label birthDateLabel;
-
-    @FXML
-    private Button editProfileButton;
-
-    @FXML
-    private ImageView imageUser;
 
     @FXML
     private Label nameLabel;
@@ -48,7 +37,7 @@ public class MyProfileController implements Controller{
     private Label usernameLabel;
 
     @FXML
-    void onEditProfileButton(ActionEvent event) {
+    void onEditProfileButton() {
         mainGUI.showEditProfile();
     }
 
