@@ -197,7 +197,7 @@ public class MainGUI {
 
   public void showRemoveEvent(){setupScene(removeEvent.ui, "RemoveEvent", 680, 475);}
 
-  public void showShowMovements(){setupScene(showMovements.ui, "ShowMovements", 395, 470);}
+  public void showShowMovements(){setupScene(showMovements.ui, "ShowMovements", 600, 470);}
 
   public void showMyProfile(){setupScene(myProfile.ui, "MyProfile", 750, 300);}
 
