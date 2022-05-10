@@ -10,6 +10,9 @@ With this, we ensure that when an Event is removed, all its questions are also r
 Finally, the user's list of bets needed to be updated, so we had to do that "manually", checking which user had a bet related to the deleted event. If that's the case, the bet will have all it's attributes marked as null, so we just have to delete it.
 
 
++**ShowMovements()** use case: To implement this use case, we had to take into account that a new class is needed, in this case, we created a new class called Movement, in which we will have the date of the money movement, the description (deposit, place a bet, win a bet), and the amount of money the user gained or lost.
+As we take the dates when the movement is done (current or instant date and hour), all the movements will be represented in a table ordered by the date, and, obviously, the current amount of money will be printed above, so as the user is able to see how much money does he/she has in that moment.
+
 
 + **Final Note**:
   To login as an administrator:[*username*: **"juanan"**, *password*: **"hello"**]
