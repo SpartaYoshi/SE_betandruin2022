@@ -8799,9 +8799,9 @@
 														"$ref": "AAAAAAF/0Egl3fAO1LQ="
 													},
 													"font": "Arial;13;0",
-													"left": 24.72998046875,
+													"left": 22.55908203125,
 													"top": 13,
-													"width": 98.55078125,
+													"width": 86.921875,
 													"height": 13,
 													"text": "CreateQuestions"
 												},
@@ -8814,7 +8814,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 13,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
@@ -12284,9 +12284,9 @@
 														"$ref": "AAAAAAGAE8KO5a9RH+s="
 													},
 													"font": "Arial;13;0",
-													"left": 24.72998046875,
+													"left": 22.55908203125,
 													"top": 5,
-													"width": 32.80810546875,
+													"width": 32.052734375,
 													"height": 13,
 													"text": "Login"
 												},
@@ -12299,7 +12299,7 @@
 													"font": "Arial;13;1",
 													"left": 5,
 													"top": 5,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
@@ -14923,9 +14923,9 @@
 														"$ref": "AAAAAAGArsreccXt2Qs="
 													},
 													"font": "Arial;13;0",
-													"left": 103.9599609375,
+													"left": 100.3291015625,
 													"top": 685,
-													"width": 166.47705078125,
+													"width": 149.7509765625,
 													"height": 13,
 													"text": "if the anonymous user wants"
 												},
@@ -14938,7 +14938,7 @@
 													"font": "Arial;13;1",
 													"left": 77,
 													"top": 685,
-													"width": 21.9599609375,
+													"width": 18.3291015625,
 													"height": 13,
 													"text": "seq"
 												},
@@ -15507,9 +15507,9 @@
 														"$ref": "AAAAAAGAE8NpYK9897E="
 													},
 													"font": "Arial;13;0",
-													"left": 32.72998046875,
+													"left": 30.55908203125,
 													"top": 13,
-													"width": 49.4072265625,
+													"width": 44.32275390625,
 													"height": 13,
 													"text": "Register"
 												},
@@ -15522,7 +15522,7 @@
 													"font": "Arial;13;1",
 													"left": 13,
 													"top": 13,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
@@ -17475,9 +17475,9 @@
 														"$ref": "AAAAAAGArvFSAMZM5CU="
 													},
 													"font": "Arial;13;0",
-													"left": 87.9599609375,
+													"left": 84.3291015625,
 													"top": 637,
-													"width": 166.47705078125,
+													"width": 149.7509765625,
 													"height": 13,
 													"text": "if the anonymous user wants"
 												},
@@ -17490,7 +17490,7 @@
 													"font": "Arial;13;1",
 													"left": 61,
 													"top": 637,
-													"width": 21.9599609375,
+													"width": 18.3291015625,
 													"height": 13,
 													"text": "seq"
 												},
@@ -17977,9 +17977,9 @@
 														"$ref": "AAAAAAGAryYtqVtHaWs="
 													},
 													"font": "Arial;13;0",
-													"left": 32.72998046875,
+													"left": 30.55908203125,
 													"top": 13,
-													"width": 86.9853515625,
+													"width": 78.29541015625,
 													"height": 13,
 													"text": "PublishResults"
 												},
@@ -17992,7 +17992,7 @@
 													"font": "Arial;13;1",
 													"left": 13,
 													"top": 13,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
@@ -18400,7 +18400,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
-					"name": "Publish results"
+					"name": "Publish results",
+					"documentation": "# Event flow\n\n## Main flow\n1. *Admin user* selects a **date**\n2. *System* displays the **events** of this **date**\n3. *Admin user* selects an **event**\n4. *System* shows the **questions** from the selected **event**\n5. *Admin user* selects a **question**\n6. *System* shows the **results** and **betAmount**from the selected **question** the *Admin user* has\n7. *Admin user* writes the final result of that **question**\n8. *Admin user* clicks on **publish** button\n9. *System* updates the question with that **result**\n10. *System* searches for all the **Bets** related to that question, and inserts the corresponding money (multiplying the **betAmount** times **fee**) to all winner users.\n\n\n## Alternative flow\nA2. There are no events on this date\n\nB2. The date is previous to the current one\n\nC4. There are no questions for that event\n\nD6. There are no results for that question\n\nE10. No user has guess the result of the bet correctly, so there are no winners"
 				},
 				{
 					"_type": "UMLUseCase",
@@ -18408,7 +18409,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
-					"name": "Remove event"
+					"name": "Remove event",
+					"documentation": "# Event flow\n\n## Main flow\n1. *Admin user* selects a date\n2. *System* displays the events of that day\n3. *Admin user* selects a event of the table\n4. *System* enables \"remove\" button\n5. *Admin user* clicks on remove button\n6. *System* deletes the event, and all its related questions, bets...\n\n\n\n## Alternative flow\nA3. There are no events for that date\n\nB6. There is no event selected, so the user cannot click on the button"
 				},
 				{
 					"_type": "UMLUseCase",

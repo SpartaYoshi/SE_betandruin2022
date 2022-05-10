@@ -147,7 +147,7 @@ public class PublishResultsController implements Controller{
     private void setupQuestionSelection() {
         tblQuestions.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                questionLabel.setText(tblQuestions.getSelectionModel().getSelectedItem().getQuestion());
+                questionLabel.setText(tblQuestions.getSelectionModel().getSelectedItem().getQuestionID());
                 resultLabel.setText("");
 
                 tblResults.getItems().clear();
@@ -165,7 +165,7 @@ public class PublishResultsController implements Controller{
     private void setupResultSelection() {
         tblResults.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                resultLabel.setText(tblResults.getSelectionModel().getSelectedItem().getQuestionType());
+                resultLabel.setText(tblResults.getSelectionModel().getSelectedItem().getQuestionID());
             }
         });
 
@@ -255,7 +255,7 @@ public class PublishResultsController implements Controller{
 
         // Bind columns to Question attributes
         qc1.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
-        qc2.setCellValueFactory(new PropertyValueFactory<>("question"));
+        qc2.setCellValueFactory(new PropertyValueFactory<>("questionID"));
 
         // Bind columns to Fee (result) attributes
         fc1.setCellValueFactory(new PropertyValueFactory<>("fee"));
