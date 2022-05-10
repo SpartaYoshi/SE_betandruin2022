@@ -167,7 +167,7 @@ public class MainGUI {
 
   public void showPortal(){setupScene(portal.ui, "Portal", 395, 315);}
 
-  public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 395, 520);}
+  public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 395, 575);}
 
   public void showUserPortal(){setupScene(userPortal.ui, "UserPortal", 395, 440);}
 
@@ -218,7 +218,8 @@ public class MainGUI {
 
 
   public void showEditProfile(){setupScene(editProfile.ui, "EditProfile", 600, 300);}
-  public void showPublishResults(){setupScene(publishResults.ui, "Publish", 750, 300);}
+
+  public void showPublishResults(){setupScene(publishResults.ui, "Publish", 870, 590);}
 
 
 
