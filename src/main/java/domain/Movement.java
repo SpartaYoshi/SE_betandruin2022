@@ -14,7 +14,7 @@ public class Movement {
     @Id
     @XmlJavaTypeAdapter(IntegerAdapter.class)
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     private Double amount;
     private Date date;

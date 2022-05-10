@@ -6,16 +6,15 @@ import java.util.ResourceBundle;
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
 import domain.User;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import ui.MainGUI;
 
 
-public class EditProfileController implements Controller{
+public class EditProfileController implements Controller, Initializable {
     private MainGUI mainGUI;
     private final BlFacade businessLogic;
 
@@ -25,16 +24,7 @@ public class EditProfileController implements Controller{
 
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
     private Label birthDateLabel;
-
-    @FXML
-    private Button editProfileButton;
 
     @FXML
     private Label messageLabel;
@@ -57,12 +47,12 @@ public class EditProfileController implements Controller{
     }
 
     @FXML
-    void selectBack(ActionEvent event) {
+    void selectBack() {
         mainGUI.showMyProfile();
     }
 
-    @FXML
-    void initialize() {
+    @Override @FXML
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
         ConfigXML config = ConfigXML.getInstance();
 
@@ -96,7 +86,7 @@ public class EditProfileController implements Controller{
 
     public void editProfile() {
         User u = businessLogic.getCurrentUser();
-        if(this.usernameField!=null) {
+        if(this.usernameField != null) {
             String oldUserName = u.getUsername();
             String newUserName = usernameField.getText();
             if (oldUserName.toLowerCase().trim().equals(newUserName.toLowerCase().trim())) {
@@ -113,7 +103,7 @@ public class EditProfileController implements Controller{
             }
         }
 
-        if(this.passwdField!=null) {
+        if(this.passwdField != null) {
             String oldPassword = u.getUsername();
             String newPassword = passwdField.getText();
             if (oldPassword.toLowerCase().trim().equals(newPassword.toLowerCase().trim())) {
@@ -140,6 +130,7 @@ public class EditProfileController implements Controller{
     @Override public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
     }
+
 
 }
 
