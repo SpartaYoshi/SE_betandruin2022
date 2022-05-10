@@ -49,7 +49,8 @@ public class ShowMovementsController implements Controller{
 
     @FXML
     void initialize() {
-
+        String totalMoneyString = String.valueOf(businessLogic.getCurrentUser().getMoneyAvailable());
+        totalMoney.setText(totalMoneyString);
     }
 
 
