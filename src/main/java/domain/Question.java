@@ -23,8 +23,10 @@ public class Question implements Serializable {
 
 	private String question; 
 	private float betMinimum;
-	private String result;
+	private String resultPrompt;
+
 	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
 	private Vector<Result> resultList = new Vector<>();
 
 
@@ -118,8 +120,8 @@ public class Question implements Serializable {
 	 * 
 	 * @return the the query result
 	 */
-	public String getResult() {
-		return result;
+	public String getResultPrompt() {
+		return resultPrompt;
 	}
 
 	/**
@@ -127,8 +129,8 @@ public class Question implements Serializable {
 	 * 
 	 * @param result is the correct result of the query
 	 */
-	public void setResult(String result) {
-		this.result = result;
+	public void setResultPrompt(String result) {
+		this.resultPrompt = result;
 	}
 
 	/**
@@ -174,7 +176,7 @@ public class Question implements Serializable {
 	
 	public boolean resultisAlreadyStored(String result) {
 		for (Result f:this.resultList) {
-			if (f.getResult().equals(result))
+			if (f.getQuestionType().equals(result))
 				return true;
 		}
 		return false;

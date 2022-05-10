@@ -1,12 +1,9 @@
 package dataAccess;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import javax.persistence.*;
@@ -278,6 +275,27 @@ public class DataAccess {
 	}
 
 
+	/**
+	 * This method retrieves all currently registered fee results in the database
+	 *
+	 * @return collection of fee results
+	 */
+	public Vector<Result> getResultByType(String questionType) {
+		System.out.println(">> DataAccess: getResults");
+
+		Vector<Result> res = new Vector<>();
+		TypedQuery<Result> query = db.createQuery("SELECT r FROM Result r WHERE r.questionType=?1",
+				Result.class);
+		query.setParameter(1, questionType);
+
+		List<Result> results = query.getResultList();
+		for (Result r : results) {
+			res.add(r);
+		}
+		return res;
+	}
+
+
 
 	public Vector<Question> getQuestions(Event event) {
 		System.out.println("Event is "+ event);
@@ -449,21 +467,21 @@ public class DataAccess {
 	/**
 	 * Method to create different fees
 	 * @param quest quest
-	 * @param result result
+	 * @param questionType question type
 	 * @param fee fee
 	 * @return 0 if everything has updated correctly, -1 if the fee is already stored
 	 */
-	public int createFee(Question quest,String result, float fee) {
+	public int createFee(Question quest,String questionType, float fee) {
 		db.getTransaction().begin();
-		TypedQuery<Question> q = db.createQuery("SELECT p FROM Question " +"p WHERE p.questionNumber = ?1", Question.class);
+		TypedQuery<Question> q = db.createQuery("SELECT p FROM Question " + "p WHERE p.questionNumber = ?1", Question.class);
 		q.setParameter(1, quest.getQuestionNumber());
-		Question ourquestion=q.getSingleResult();
+		Question ourquestion = q.getSingleResult();
 		
 		if(ourquestion!=null) {
-			if(ourquestion.resultisAlreadyStored(result)) {// check if that fee is not used yet
+			if(ourquestion.resultisAlreadyStored(questionType)) {// check if that fee is not used yet
 				return -1;
 			}else {
-				Result f=new Result(result,fee);
+				Result f = new Result(questionType, fee);
 				db.persist(f);
 				ourquestion.addtoResultList(f);
 				db.persist(ourquestion);
@@ -511,7 +529,7 @@ public class DataAccess {
 	 * @return
 	 */
 	public Bet placeBetToQuestion(Result f, Double amountBet, User who){
-		System.out.println(">> DataAccess: placeAbet=> On result = " + f.getResult() + ", amount = " +amountBet + " by " + who.getName() + " " + who.getSurname());
+		System.out.println(">> DataAccess: placeAbet=> On result = " + f.getQuestionType() + ", amount = " +amountBet + " by " + who.getName() + " " + who.getSurname());
 		Result result = db.find(Result.class, f.getId());
 		Bet bet = new Bet(amountBet,f);
 		db.getTransaction().begin();

@@ -295,7 +295,7 @@ public class PlaceABetController implements Controller, Initializable {
     private void setupResultSelection() {
         tblResults.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                resultLabel.setText(tblResults.getSelectionModel().getSelectedItem().getResult());
+                resultLabel.setText(tblResults.getSelectionModel().getSelectedItem().getQuestionType());
             }
         });
 
