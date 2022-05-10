@@ -2,6 +2,11 @@ package dataAccess;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import javax.persistence.*;
@@ -481,8 +486,9 @@ public class DataAccess {
 	public double insertMoney(User who, double am)  {
 		double total=who.getMoneyAvailable()+ am; //the money he had + the deposited money
 		String description = new String("Insert money");
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date date = new Date();
+		LocalDate localDate = null;
+		Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+		Date date = Date.from(instant);
 		Movement mov = new Movement(am, date, description);
 		db.getTransaction().begin();
 		who.setMoneyAvailable(total);
@@ -533,8 +539,9 @@ public class DataAccess {
 	public double restMoney(User who, double betAmount, Bet bet)  {
 		double total=who.getMoneyAvailable()- betAmount; //the money he had - the deposited money
 		String description = new String("Placed bet to:" + bet.toString());
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date date = new Date();
+		LocalDate localDate = null;
+		Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+		Date date = Date.from(instant);
 		Movement mov = new Movement(betAmount*(-1), date, description);
 		db.getTransaction().begin();
 		who.setMoneyAvailable(total);//our object of the app
