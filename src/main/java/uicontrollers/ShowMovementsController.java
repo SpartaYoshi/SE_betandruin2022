@@ -17,6 +17,7 @@ package uicontrollers;
         import javafx.scene.control.DatePicker;
         import javafx.scene.control.Label;
         import javafx.scene.control.TableColumn;
+        import javafx.scene.control.cell.PropertyValueFactory;
         import ui.MainGUI;
 
 public class ShowMovementsController implements Controller{
@@ -52,6 +53,12 @@ public class ShowMovementsController implements Controller{
     void initialize() {
         String totalMoneyString = String.valueOf(businessLogic.getCurrentUser().getMoneyAvailable());
         totalMoney.setText(totalMoneyString);
+
+        // Bind columns
+        tableAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        tableDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        tableDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+
 
     }
 
