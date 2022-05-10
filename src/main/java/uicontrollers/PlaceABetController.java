@@ -1,5 +1,6 @@
 package uicontrollers;
 
+import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -12,6 +13,7 @@ import domain.*;
 import exceptions.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,7 +22,7 @@ import javafx.util.Callback;
 import ui.MainGUI;
 import utils.Dates;
 
-public class PlaceABetController implements Controller{
+public class PlaceABetController implements Controller, Initializable {
 
 
     @FXML private TextField amountMoneyTextField;
@@ -140,7 +142,7 @@ public class PlaceABetController implements Controller{
                             Bet newBet = businessLogic.placeBet(amount, question, result, date);
 
                             if (businessLogic.getCurrentUser() != null)
-                                this.usersMoney();
+                                this.displayUsersMoney();
 
                             if (newBet != null) {
                                 messageLabel.getStyleClass().setAll("lbl", "lbl-success");
@@ -301,7 +303,7 @@ public class PlaceABetController implements Controller{
     }
 
 
-    public void usersMoney() {
+    public void displayUsersMoney() {
         if(businessLogic.getMoneyAvailable() <= 0){
             availableMoneyLabel.getStyleClass().setAll("lbl","lbl-danger");
         }else{
@@ -335,12 +337,8 @@ public class PlaceABetController implements Controller{
     }
 
 
-    @FXML
-    void initialize() {
-
-       if (businessLogic.getCurrentUser() != null)//show money available
-            this.usersMoney();
-
+    @Override @FXML
+    public void initialize(URL url, ResourceBundle resources) {
         placeBetButton.getStyleClass().setAll("btn", "btn-primary");
 
         setupEventSelection();

@@ -47,7 +47,9 @@ public class PortalController implements Controller {
     @FXML void selectRegister(ActionEvent event) {
         mainGUI.showUserRegister();
     }
-    @FXML void selectPlaceBet(ActionEvent event) {mainGUI.showPlaceABet();}
+    @FXML void selectPlaceBet(ActionEvent event) {
+        mainGUI.showPlaceABet();
+    }
     @FXML void selectRemoveBet(ActionEvent event) {mainGUI.showRemoveABet();}
     @FXML void selectDeposit(ActionEvent event) { mainGUI.showDepositMoney();}
     @FXML void selectCreateNewEvent(ActionEvent event) { mainGUI.showCreateEvent();}
