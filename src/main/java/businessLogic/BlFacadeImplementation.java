@@ -412,7 +412,7 @@ public class BlFacadeImplementation implements BlFacade {
 		// WINNER BET
 		String winner = matchAPI.getWinner();
 
-		List<Result> winnerFeeResults = dbManager.getResultByType("winner");
+		List<Result> winnerFeeResults = dbManager.getResultByType("qIDMatchWinner");
 
 
 
