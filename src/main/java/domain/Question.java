@@ -157,7 +157,7 @@ public class Question implements Serializable {
 	public Result addtoResultList(Result r) {
 
 		if(r != null) {
-			System.out.println("our object of result is "+ r);
+			System.out.println("Our object of result is "+ r);
 			resultList.add(r);
 		}
 		return r;

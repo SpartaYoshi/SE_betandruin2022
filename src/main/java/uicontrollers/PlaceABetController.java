@@ -302,12 +302,17 @@ public class PlaceABetController implements Controller{
 
 
     public void usersMoney() {
-        if(businessLogic.getMoneyAvailable() == 0){
+        if(businessLogic.getMoneyAvailable() <= 0){
             availableMoneyLabel.getStyleClass().setAll("lbl","lbl-danger");
         }else{
             availableMoneyLabel.getStyleClass().setAll("lbl", "lbl-success");
         }
-        availableMoneyLabel.setText("Money available: "+businessLogic.getMoneyAvailable() + "€");
+        ConfigXML config = ConfigXML.getInstance();
+        switch (config.getLocale()) {
+            case "en" -> availableMoneyLabel.setText("Money available: "+businessLogic.getMoneyAvailable() + "€");
+            case "es" -> availableMoneyLabel.setText("Dinero disponible: "+businessLogic.getMoneyAvailable() + "€");
+            case "eus" -> availableMoneyLabel.setText("Diru erabilgarria: "+businessLogic.getMoneyAvailable() + "€");
+        }
     }
 
     public void clearAll() {
@@ -333,6 +338,8 @@ public class PlaceABetController implements Controller{
     @FXML
     void initialize() {
 
+       // if (businessLogic.getCurrentUser() != null)//show money available
+            this.usersMoney();
 
         placeBetButton.getStyleClass().setAll("btn", "btn-primary");
 
@@ -347,8 +354,6 @@ public class PlaceABetController implements Controller{
             // get a reference to datepicker inner content
             // attach a listener to the  << and >> buttons
             // mark events for the (prev, current, next) month and year shown
-            if (businessLogic.getCurrentUser() != null)//show money available
-                this.usersMoney();
             DatePickerSkin skin = (DatePickerSkin) calendar.getSkin();
             skin.getPopupContent().lookupAll(".button").forEach(node -> {
                 node.setOnMouseClicked(event -> {
