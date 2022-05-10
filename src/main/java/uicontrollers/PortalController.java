@@ -57,6 +57,7 @@ public class PortalController implements Controller {
     @FXML void selectSetFee(ActionEvent event) { mainGUI.showSetFee();}
     @FXML void selectShowMovements(ActionEvent event) { mainGUI.showShowMovements();}
     @FXML void selectMyProfile(ActionEvent event) { mainGUI.showMyProfile();}
+    @FXML void selectPublishResults(ActionEvent actionEvent) {mainGUI.showPublishResults();}
 
 
     @FXML void selectLogout(ActionEvent event) {
@@ -67,4 +68,6 @@ public class PortalController implements Controller {
     @Override public void setMainApp(MainGUI mainGUI) {
         this.mainGUI = mainGUI;
     }
+
+
 }
