@@ -49,7 +49,7 @@ public class MyProfileController implements Controller{
 
     @FXML
     void onEditProfileButton(ActionEvent event) {
-        mainGUI.showBrowseQuestions();
+        mainGUI.showEditProfile();
     }
 
 

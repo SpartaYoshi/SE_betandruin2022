@@ -56,6 +56,8 @@ public class PortalController implements Controller {
     @FXML void selectRemoveEvent(ActionEvent event) { mainGUI.showRemoveEvent();}
     @FXML void selectSetFee(ActionEvent event) { mainGUI.showSetFee();}
     @FXML void selectShowMovements(ActionEvent event) { mainGUI.showShowMovements();}
+    @FXML void selectMyProfile(ActionEvent event) { mainGUI.showMyProfile();}
+
 
     @FXML void selectLogout(ActionEvent event) {
         businessLogic.setSessionMode("Anon");
