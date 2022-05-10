@@ -339,10 +339,6 @@ public class PlaceABetController implements Controller, Initializable {
 
     @Override @FXML
     public void initialize(URL url, ResourceBundle resources) {
-
-       if (businessLogic.getCurrentUser() != null)//show money available
-            this.displayUsersMoney();
-
         placeBetButton.getStyleClass().setAll("btn", "btn-primary");
 
         setupEventSelection();
