@@ -43,5 +43,10 @@
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
       </Button>
+      <Button fx:id="myProfileButton" layoutX="24.0" layoutY="20.0" mnemonicParsing="false" onAction="#selectMyProfile" prefHeight="26.0" prefWidth="33.0" text="MyProfileButton" />
+      <ImageView fitHeight="50.0" fitWidth="54.0" layoutX="14.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/imageUser.jpg" />
+         </image></ImageView>
    </children>
 </AnchorPane>
