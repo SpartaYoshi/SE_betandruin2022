@@ -32,6 +32,7 @@ public class MainGUI {
   private Window myProfile;
   private Window editProfile;
   private Window checkMyResults;
+  private Window publishResults;
 
   private BlFacade businessLogic;
   private Stage stage;
@@ -112,6 +113,9 @@ public class MainGUI {
       if (controllerClass == CheckMyResultsController.class)
         return new CheckMyResultsController(businessLogic);
 
+      if(controllerClass== PublishResultsController.class)
+        return new PublishResultsController(businessLogic);
+
 
 
       else {
@@ -153,6 +157,7 @@ public class MainGUI {
     showMovements = load("/ShowMovements.fxml");
     removeEvent = load("/RemoveEvent.fxml");
     checkMyResults = load("/CheckMyResults.fxml");
+    publishResults = load("/PublishResults.fxml");
 
 
     // DO NOT CHANGE
@@ -209,6 +214,8 @@ public class MainGUI {
   public void showMyProfile(){setupScene(myProfile.ui, "MyProfile", 750, 300);}
 
   public void showEditProfile(){setupScene(editProfile.ui, "EditProfile", 600, 300);}
+  public void showPublishResults(){setupScene(publishResults.ui, "Publish", 750, 300);}
+
 
 
 
