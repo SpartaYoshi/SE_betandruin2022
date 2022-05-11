@@ -8,10 +8,12 @@ package uicontrollers;
         import java.util.ResourceBundle;
 
         import businessLogic.BlFacade;
+        import dataAccess.PropertiesManager;
         import domain.Bet;
         import domain.Event;
         import domain.Movement;
         import domain.Question;
+        import javafx.beans.property.SimpleStringProperty;
         import javafx.event.ActionEvent;
         import javafx.fxml.FXML;
         import javafx.scene.control.DatePicker;
@@ -24,11 +26,6 @@ package uicontrollers;
 
 public class ShowMovementsController implements Controller{
 
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
     @FXML
     private TableView<Movement> tableMovements;
     @FXML
@@ -65,7 +62,12 @@ public class ShowMovementsController implements Controller{
         // Bind columns
         tableAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         tableDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        tableDescription.setCellValueFactory(new PropertyValueFactory<>("descriptionType"));
+        tableDescription.setCellValueFactory( features -> {
+            String descriptionType = features.getValue().getDescriptionType();
+            PropertiesManager propMgr = new PropertiesManager();
+            return new SimpleStringProperty(propMgr.getTag(descriptionType));
+        });
+
 
         if(businessLogic.getCurrentUser() != null) {
             for (Movement mov:businessLogic.getCurrentUser().getMovements())
