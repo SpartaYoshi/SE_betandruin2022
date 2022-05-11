@@ -73,12 +73,12 @@ public class SetFeeController implements Controller {
 
             try {
                 warningLbl.setText("");
-                String result=resultField.getText();
+                int result = Integer.parseInt(resultField.getText());
                 System.out.println(feeField.getText());
-                float feeAmount=Float.parseFloat(feeField.getText());
+                float feeAmount = Float.parseFloat(feeField.getText());
 
 
-                if(feeAmount<=0) {
+                if(feeAmount <= 0) {
                     warningLbl.getStyleClass().setAll("lbl","lbl-danger");
                     ConfigXML config = ConfigXML.getInstance();
                     switch (config.getLocale()) {
@@ -100,8 +100,7 @@ public class SetFeeController implements Controller {
 
                 }
 
-            }
-            catch (FeeAlreadyExistsException e1) {
+            } catch (FeeAlreadyExistsException e1) {
                 warningLbl.getStyleClass().setAll("lbl","lbl-danger");
                 ConfigXML config = ConfigXML.getInstance();
                 switch (config.getLocale()) {
@@ -110,17 +109,14 @@ public class SetFeeController implements Controller {
                     case "eus" -> warningLbl.setText("Barkatu, erantzun horretarako kuota jadanik existitzen da");
                 }
 
-            }
-            catch (java.lang.NumberFormatException e1) {
+            } catch (java.lang.NumberFormatException e1) {
                 warningLbl.getStyleClass().setAll("lbl","lbl-danger");
                 ConfigXML config = ConfigXML.getInstance();
                 switch (config.getLocale()) {
-                    case "en" -> warningLbl.setText("Error in numeric value of Fee");
-                    case "es" -> warningLbl.setText("Error en el valor númerico de Cuota");
-                    case "eus" -> warningLbl.setText("Kuotaren zenbakizko errorea");
+                    case "en" -> warningLbl.setText("Please introduce numbers for all values");
+                    case "es" -> warningLbl.setText("Por favor, introduzca números para todos los valores");
+                    case "eus" -> warningLbl.setText(""); // TODO Traducid pls a euskera jaja gracias
                 }
-
-
             }
 
         }

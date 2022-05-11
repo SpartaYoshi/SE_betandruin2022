@@ -165,7 +165,7 @@ public class PublishResultsController implements Controller{
     private void setupResultSelection() {
         tblResults.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                resultLabel.setText(tblResults.getSelectionModel().getSelectedItem().getQuestionID());
+                resultLabel.setText("" + tblResults.getSelectionModel().getSelectedItem().getPossibleResult());
             }
         });
 

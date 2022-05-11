@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Vector;
 
 import javax.persistence.*;
@@ -22,7 +23,7 @@ public class Result implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Vector<Bet> bets = new Vector<>();
 	
-	private String questionID;
+	private int possibleResult;
 
 
 
@@ -35,9 +36,12 @@ public class Result implements Serializable {
 	public Result() {
 	}
 
-	public Result(String r, float f) {
+	public Result(int r){
+		possibleResult = r;
+	}
+	public Result(int r, float f) {
 		this.fee = f;
-		this.questionID = r;
+		this.possibleResult = r;
 		
 	}
 
@@ -50,8 +54,8 @@ public class Result implements Serializable {
 	/**
 	 * @return the result
 	 */
-	public String getQuestionID() {
-		return questionID;
+	public int getPossibleResult() {
+		return possibleResult;
 	}
 	/**
 	 * @return the fee
@@ -68,8 +72,8 @@ public class Result implements Serializable {
 	/**
 	 * @param result the result to set
 	 */
-	public void setQuestionID(String result) {
-		this.questionID = result;
+	public void setPossibleResult(int result) {
+		this.possibleResult = result;
 	}
 	/**
 	 * @param fee the fee to set
@@ -95,7 +99,12 @@ public class Result implements Serializable {
 
 
 	@Override
-	public String toString() {
-		return questionID;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Result result = (Result) o;
+		return Objects.equals(possibleResult, result.possibleResult);
 	}
+
 }
+

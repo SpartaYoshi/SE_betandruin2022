@@ -246,13 +246,12 @@ public class BlFacadeImplementation implements BlFacade {
 		
 		return user;
 	}
-	
-	
+
 
 	@WebMethod
-	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExistsException {
+	public void createFee(Question q,int pResult, float pFee) throws FeeAlreadyExistsException {
 		dbManager.open(false);
-		int n=dbManager.createFee(q,pResult,pFee);
+		int n = dbManager.createFee(q, pResult, pFee);
 		if (n == -1) {
 			throw new FeeAlreadyExistsException();
 		}
@@ -409,18 +408,21 @@ public class BlFacadeImplementation implements BlFacade {
 	private void processMatchResult(Event ev, Match matchAPI) {
 
 
-
 		// WINNER BET
 		String winner = matchAPI.getWinner();
 
-		List<Result> winnerFeeResults = dbManager.getResultByType("qIDMatchWinner");
+		Result rHome = ev.getQuestionByID("qIDMatchWinner").getResultOption(1);
+
+
+
 
 
 
 		if (winner != null) {
-			if (winner.equals(ev.getHomeTeam())){
-				// process bets for home team winner.
+			if (winner.equals(ev.getHomeTeam())) {
+
 			}
+
 			else {
 				// process bets for away team winner
 			}

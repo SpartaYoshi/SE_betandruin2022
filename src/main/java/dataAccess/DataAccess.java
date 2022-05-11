@@ -273,27 +273,6 @@ public class DataAccess {
 	}
 
 
-	/**
-	 * This method retrieves all currently registered fee results in the database
-	 *
-	 * @return collection of fee results
-	 */
-	public Vector<Result> getResultByType(String questionID) {
-		System.out.println(">> DataAccess: getResults");
-
-		Vector<Result> res = new Vector<>();
-		TypedQuery<Result> query = db.createQuery("SELECT r FROM Result r WHERE r.questionID=?1",
-				Result.class);
-		query.setParameter(1, questionID);
-
-		List<Result> results = query.getResultList();
-		for (Result r : results) {
-			res.add(r);
-		}
-		return res;
-	}
-
-
 
 	public Vector<Question> getQuestions(Event event) {
 		System.out.println("Event is "+ event);
@@ -465,21 +444,21 @@ public class DataAccess {
 	/**
 	 * Method to create different fees
 	 * @param quest quest
-	 * @param questionID question type
+	 * @param possibleResult result number
 	 * @param fee fee
 	 * @return 0 if everything has updated correctly, -1 if the fee is already stored
 	 */
-	public int createFee(Question quest,String questionID, float fee) {
+	public int createFee(Question quest, int possibleResult, float fee) {
 		db.getTransaction().begin();
 		TypedQuery<Question> q = db.createQuery("SELECT p FROM Question " + "p WHERE p.questionNumber = ?1", Question.class);
 		q.setParameter(1, quest.getQuestionNumber());
 		Question ourquestion = q.getSingleResult();
 		
 		if(ourquestion!=null) {
-			if(ourquestion.resultisAlreadyStored(questionID)) {// check if that fee is not used yet
+			if(ourquestion.isResultStored(possibleResult)) {// check if that fee is not used yet
 				return -1;
 			}else {
-				Result f = new Result(questionID, fee);
+				Result f = new Result(possibleResult, fee);
 				db.persist(f);
 				ourquestion.addtoResultList(f);
 				db.persist(ourquestion);
@@ -536,7 +515,7 @@ public class DataAccess {
 	 * @return
 	 */
 	public Bet placeBetToQuestion(Result f, Double amountBet, User who){
-		System.out.println(">> DataAccess: placeAbet=> On result = " + f.getQuestionID() + ", amount = " +amountBet + " by " + who.getName() + " " + who.getSurname());
+		System.out.println(">> DataAccess: placeAbet=> On result = " + f.getPossibleResult() + ", amount = " +amountBet + " by " + who.getName() + " " + who.getSurname());
 		Result result = db.find(Result.class, f.getId());
 		Bet bet = new Bet(amountBet,f);
 		db.getTransaction().begin();
@@ -547,7 +526,7 @@ public class DataAccess {
 		result.addBet(bet);
 		db.persist(bet);
 		db.getTransaction().commit();
-		if (bet != null){
+		if (bet != null) {
 			this.restMoney(who, amountBet, bet);
 		}
 		return bet;
