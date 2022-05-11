@@ -652,4 +652,11 @@ public class DataAccess {
 
 		return money;
 	}
+
+	public int markFinalResult(Result r, int f){
+		db.getTransaction().begin();
+		r.setFinalResult(f);
+		db.getTransaction().commit();
+		return r.getFinalResult();
+	}
 }

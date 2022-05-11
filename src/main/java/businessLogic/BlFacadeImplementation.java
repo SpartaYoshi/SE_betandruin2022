@@ -323,7 +323,8 @@ public class BlFacadeImplementation implements BlFacade {
 	@WebMethod
 	public double getMoneyAvailable() {
 		User who = this.getCurrentUser();
-		Double amount = dbManager.getUsersMoney(who);
+		//Double amount = dbManager.getUsersMoney(who); DO NOT CHANGE, IT CRASHES
+		Double amount= who.getMoneyAvailable();
 		return amount;
 	}
 
@@ -377,6 +378,14 @@ public class BlFacadeImplementation implements BlFacade {
 		Event deleted=dbManager.removeEvent(ev);
 		dbManager.close();
 		return deleted;
+	}
+
+	@Override
+	public int markFinalResult(Result r, int finalR) {
+		dbManager.open(false);
+		int updated=dbManager.markFinalResult(r,finalR);
+		dbManager.close();
+		return updated;
 	}
 
 

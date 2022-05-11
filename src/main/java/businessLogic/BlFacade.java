@@ -173,4 +173,7 @@ public interface BlFacade {
 
 	@WebMethod
 	Event removeEvent(Event ev);
+
+	@WebMethod
+	int markFinalResult(Result r,int finalR);
 }
