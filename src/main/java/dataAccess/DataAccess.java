@@ -546,7 +546,7 @@ public class DataAccess {
 		db.persist(bet);
 		db.getTransaction().commit();
 		if (bet != null){
-			this.restMoney(who, amountBet, bet);
+			this.restMoney(who, amountBet, bet, "PlacedBetMoney");
 		}
 		return bet;
 	}
@@ -559,13 +559,12 @@ public class DataAccess {
 	 */
 
 
-	public double restMoney(User who, double betAmount, Bet bet)  {
+	public double restMoney(User who, double betAmount, Bet bet, String type)  {
 		double total=who.getMoneyAvailable()- betAmount; //the money he had - the deposited money
-		String description = new String("RestMoney");
 		LocalDate localDate = null;
 		Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
 		Date date = Date.from(instant);
-		Movement mov = new Movement(betAmount*(-1), date, description, bet);
+		Movement mov = new Movement(betAmount*(-1), date, type, bet);
 		db.getTransaction().begin();
 		who.setMoneyAvailable(total);//our object of the app
 		who.addMovement(mov);
