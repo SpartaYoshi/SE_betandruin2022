@@ -138,7 +138,7 @@ public class MainGUI {
 
   public void init(Stage stage) throws IOException {
 
-    this.stage = stage;
+    this.stage = stage; //
 
     portal = load("/Portal.fxml");
     adminPortal = load("/AdminPortal.fxml");
@@ -160,8 +160,22 @@ public class MainGUI {
     publishResults = load("/PublishResults.fxml");
 
 
-    // DO NOT CHANGE
-    showPortal();
+
+
+    // DO NOT CHANGE - THE APPLICATION DETECTS IF YOU ARE LOGGED IN
+    switch (businessLogic.getSessionMode()) {
+      case "Anon" -> showPortal();
+      case "User" -> showUserPortal();
+      case "Admin" -> showAdminPortal();
+    }
+
+
+
+
+
+
+
+
 
   }
 

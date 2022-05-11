@@ -20,7 +20,7 @@ import javafx.util.Callback;
 import ui.MainGUI;
 import utils.Dates;
 
-public class CreateNewEventController implements Controller{
+public class CreateNewEventController implements Controller {
 
     @FXML private DatePicker calendar;
 

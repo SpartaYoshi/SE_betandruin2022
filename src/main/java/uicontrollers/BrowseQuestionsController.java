@@ -6,6 +6,7 @@ import java.util.*;
 import businessLogic.BlFacade;
 import domain.Event;
 import domain.Question;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -21,8 +22,8 @@ public class BrowseQuestionsController implements Controller {
 
   @FXML private TableColumn<Event, Integer> ec1;
   @FXML private TableColumn<Event, String> ec2;
-  @FXML private TableColumn<Event, Integer> qc1;
-  @FXML private TableColumn<Event, Integer> qc2;
+  @FXML private TableColumn<Question, Integer> qc1;
+  @FXML private TableColumn<Question, String> qc2;
   @FXML private TableView<Event> tblEvents;
   @FXML private TableView<Question> tblQuestions;
 
@@ -113,9 +114,14 @@ public class BrowseQuestionsController implements Controller {
     // Bind columns to Event attributes
     ec1.setCellValueFactory(new PropertyValueFactory<>("eventNumber"));
     ec2.setCellValueFactory(new PropertyValueFactory<>("description"));
+
     // Bind columns to Question attributes
     qc1.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
-    qc2.setCellValueFactory(new PropertyValueFactory<>("question"));
+
+    /*qc2.setCellValueFactory(features -> {
+      var questionPrompt = new SimpleStringProperty(features.getValue().)
+    })*/
+    qc2.setCellValueFactory(new PropertyValueFactory<>("questionID"));
 
   }
 
