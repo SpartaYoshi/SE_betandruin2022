@@ -1976,7 +1976,7 @@
 									"font": "Arial;13;0",
 									"left": 480,
 									"top": 179.5,
-									"width": 152,
+									"width": 153.03173828125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF/HD406CghfkQ="
@@ -17977,9 +17977,9 @@
 														"$ref": "AAAAAAGAryYtqVtHaWs="
 													},
 													"font": "Arial;13;0",
-													"left": 96.72998046875,
+													"left": 94.55908203125,
 													"top": 13,
-													"width": 86.9853515625,
+													"width": 78.29541015625,
 													"height": 13,
 													"text": "PublishResults"
 												},
@@ -17992,7 +17992,7 @@
 													"font": "Arial;13;1",
 													"left": 77,
 													"top": 13,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
@@ -18834,9 +18834,9 @@
 														"$ref": "AAAAAAGArzqKhOuI6Bk="
 													},
 													"font": "Arial;13;0",
-													"left": 151.9599609375,
+													"left": 148.3291015625,
 													"top": 733,
-													"width": 105.7744140625,
+													"width": 97.3955078125,
 													"height": 13,
 													"text": "if the admin wants"
 												},
@@ -18849,7 +18849,7 @@
 													"font": "Arial;13;1",
 													"left": 125,
 													"top": 733,
-													"width": 21.9599609375,
+													"width": 18.3291015625,
 													"height": 13,
 													"text": "seq"
 												},
@@ -21004,7 +21004,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
-					"name": "Show movements"
+					"name": "Show movements",
+					"documentation": "# Event flow\n\n## Main flow\n1. *Logged-in User* selects back button\n2. *System* goes back to the other page, so the current window is closed.\n\n\n## Alternative flow\nA1. There are no movements"
 				},
 				{
 					"_type": "UMLUseCase",
