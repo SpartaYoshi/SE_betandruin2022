@@ -1,9 +1,7 @@
 package dataAccess;
 
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
+
 import java.util.*;
 
 import javax.persistence.*;
@@ -21,25 +19,27 @@ public class DataAccess {
 	protected EntityManager db;
 	protected EntityManagerFactory emf;
 
+	private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
 	final ConfigXML config = ConfigXML.getInstance();
 
 
 	public DataAccess(boolean initializeMode)  {
-		System.out.println("Creating DataAccess instance => isDatabaseLocal: " + 
+		System.out.println("Creating DataAccess instance => isDatabaseLocal: " +
 				config.isDataAccessLocal() + " getDatabaseOpenMode: " + config.getDataBaseOpenMode());
 		open(initializeMode);
 	}
 
-	public DataAccess()  {	
+	public DataAccess()  {
 		this(false);
 	}
 
 
 	/**
-	 * This method initializes the database with some trial events and questions. 
-	 * It is invoked by the business logic when the option "initialize" is used 
+	 * This method initializes the database with some trial events and questions.
+	 * It is invoked by the business logic when the option "initialize" is used
 	 * in the tag dataBaseOpenMode of resources/config.xml file
-	 */	
+	 */
 	public void initializeDB() {
 
 		db.getTransaction().begin();
@@ -51,7 +51,7 @@ public class DataAccess {
 			int month = today.get(Calendar.MONTH);
 			month += 1;
 			int year = today.get(Calendar.YEAR);
-			if (month == 12) { month = 0; year += 1;}  
+			if (month == 12) { month = 0; year += 1;}
 
 
 			Event ev1 = new Event( "Atlético","Athletic", UtilDate.newDate(year, month, 17));
@@ -117,7 +117,7 @@ public class DataAccess {
 
 			//Admin user:
 			String sDate1 = "01/01/1980";
-		    Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+			Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
 			User u1 = new User("juanan", "hello", "Juan Antonio", "Pereira", date1);
 			u1.grantAdmin();
 
@@ -126,7 +126,7 @@ public class DataAccess {
 			Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
 			User u2 = new User("ainhoa", "123", "Ainhoa", "Corporation", date1);
 
-			
+
 			if(!existUser(u1)) {
 				db.persist(u1);
 				System.out.println("Admin user created and persisted");
@@ -138,7 +138,7 @@ public class DataAccess {
 
 			}
 
-		
+
 
 			db.persist(q1);
 			db.persist(q2);
@@ -180,7 +180,7 @@ public class DataAccess {
 
 	/**
 	 * This method creates a question for an event, with a question text and the minimum bet
-	 * 
+	 *
 	 * @param event to which question is added
 	 * @param questionID text of the question
 	 * @param betMinimum minimum quantity of the bet
@@ -200,14 +200,14 @@ public class DataAccess {
 		db.getTransaction().begin();
 		Question q = ev.addQuestion(questionID, betMinimum);
 		//db.persist(q);
-		db.persist(ev); // db.persist(q) not required when CascadeType.PERSIST is added 
+		db.persist(ev); // db.persist(q) not required when CascadeType.PERSIST is added
 		// in questions property of Event class
 		// @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 		db.getTransaction().commit();
 		return q;
 	}
-	
-	
+
+
 	public Event createEvent(String homeTeam, String awayTeam, Date matchDate){
 
 		System.out.println(">> DataAccess: createEvent=> Home team = " + homeTeam + ", Away team = " + awayTeam);
@@ -219,20 +219,20 @@ public class DataAccess {
 			ev = new Event(homeTeam, awayTeam, matchDate);
 			System.out.println("The new event is "+ ev);
 
-			db.persist(ev);  
+			db.persist(ev);
 			db.getTransaction().commit();
 		}
 
 
-		
+
 		return ev;
 	}
-	
-	
+
+
 
 	/**
-	 * This method retrieves from the database the events of a given date 
-	 * 
+	 * This method retrieves from the database the events of a given date
+	 *
 	 * @param date in which events are retrieved
 	 * @return collection of events
 	 */
@@ -240,8 +240,8 @@ public class DataAccess {
 		System.out.println("Date is "+ date);
 		System.out.println(">> DataAccess: getEvents");
 		Vector<Event> res = new Vector<>();
-		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev WHERE ev.eventDate=?1", 
-				Event.class);   
+		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev WHERE ev.eventDate=?1",
+				Event.class);
 		query.setParameter(1, date);
 		List<Event> events = query.getResultList();
 		for (Event ev:events){
@@ -320,8 +320,8 @@ public class DataAccess {
 
 	/**
 	 * This method retrieves from the database the dates in a month for which there are events
-	 * 
-	 * @param date of the month for which days with events want to be retrieved 
+	 *
+	 * @param date of the month for which days with events want to be retrieved
 	 * @return collection of dates
 	 */
 	public Vector<Date> getEventsMonth(Date date) {
@@ -336,12 +336,12 @@ public class DataAccess {
 
 		// Query
 		TypedQuery<Date> query = db.createQuery("SELECT DISTINCT ev.eventDate FROM Event ev "
-				+ "WHERE ev.eventDate BETWEEN ?1 and ?2", Date.class);   
+				+ "WHERE ev.eventDate BETWEEN ?1 and ?2", Date.class);
 		query.setParameter(1, firstDayMonthDate);
 		query.setParameter(2, lastDayMonthDate);
 		List<Date> dates = query.getResultList();
 		for (Date d:dates){
-			System.out.println(d.toString());		 
+			System.out.println(d.toString());
 			res.add(d);
 		}
 		return res;
@@ -350,7 +350,7 @@ public class DataAccess {
 
 	public void open(boolean initializeMode){
 
-		System.out.println("Opening DataAccess instance => isDatabaseLocal: " + 
+		System.out.println("Opening DataAccess instance => isDatabaseLocal: " +
 				config.isDataAccessLocal() + " getDatabaseOpenMode: " + config.getDataBaseOpenMode());
 
 		String fileName = config.getDataBaseFilename();
@@ -380,14 +380,14 @@ public class DataAccess {
 		Event ev = db.find(Event.class, event.getEventNumber());
 		return ev.doesQuestionExist(question);
 	}
-	
-	
+
+
 	public boolean isAnyTeamPlaying(String homeTeam, String awayTeam, Date date)  {
 		for (Event ev : this.getEvents(date))
 			if (ev.getHomeTeam().equals((homeTeam)) && ev.getAwayTeam().equals((awayTeam)))
 				return true;
 
-		return false;	
+		return false;
 	}
 
 
@@ -395,15 +395,15 @@ public class DataAccess {
 		db.close();
 		System.out.println("Database is closed");
 	}
-	
-	
+
+
 	public void registerUser(User user) {
 		db.getTransaction().begin();
 		db.persist(user);
 		db.getTransaction().commit();
 	}
-	
-	
+
+
 	public boolean existUser(User user) {
 		try {
 			TypedQuery<User> q = db.createQuery("SELECT u FROM User u WHERE u.username = \"" + user.getUsername() + "\"", User.class);
@@ -432,14 +432,14 @@ public class DataAccess {
 		try {
 			System.out.println(">> DataAccess: getUser=> username = " + username);
 			return db.find(User.class, username);
-			
+
 		} catch (NoResultException e) {
 			return null;
 		}
-		
+
 	}
-	
-	
+
+
 
 	/**
 	 * Method to create different fees
@@ -453,7 +453,7 @@ public class DataAccess {
 		TypedQuery<Question> q = db.createQuery("SELECT p FROM Question " + "p WHERE p.questionNumber = ?1", Question.class);
 		q.setParameter(1, quest.getQuestionNumber());
 		Question ourquestion = q.getSingleResult();
-		
+
 		if(ourquestion!=null) {
 			if(ourquestion.isResultStored(possibleResult)) {// check if that fee is not used yet
 				return -1;
@@ -463,8 +463,8 @@ public class DataAccess {
 				ourquestion.addtoResultList(f);
 				db.persist(ourquestion);
 			}
-			
-			
+
+
 		}else {//the question doesn't exist
 			System.out.println("That question doesn't exist");
 		}
@@ -480,18 +480,13 @@ public class DataAccess {
 	 */
 	public double insertMoney(User who, double am, Bet bet)  {
 		double total=who.getMoneyAvailable()+ am; //the money he had + the deposited money
+		Date date = new Date();
 		Movement mov= null;
 		if(bet==null){
 			String description = new String("DepositMoney");
-			LocalDate localDate = null;
-			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-			Date date = Date.from(instant);
 			mov = new Movement(am, date, description);
 		}else{
 			String description = new String("ObtainedMoney");
-			LocalDate localDate = null;
-			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-			Date date = Date.from(instant);
 			mov = new Movement(am, date, description);
 		}
 		db.getTransaction().begin();
@@ -543,9 +538,7 @@ public class DataAccess {
 	public double restMoney(User who, double betAmount, Bet bet)  {
 		double total=who.getMoneyAvailable()- betAmount; //the money he had - the deposited money
 		String description = new String("RestMoney");
-		LocalDate localDate = null;
-		Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-		Date date = Date.from(instant);
+		Date date=new Date();
 		Movement mov = new Movement(betAmount*(-1), date, description);
 		db.getTransaction().begin();
 		who.setMoneyAvailable(total);//our object of the app
@@ -578,7 +571,7 @@ public class DataAccess {
 		for(Result r:dbQuestion.getResults()){
 			for(Bet b:r.getBets()){
 				if(b.getBetNum()== bet1.getBetNum()){
-					 dbResult=db.find(Result.class,r.getId());
+					dbResult=db.find(Result.class,r.getId());
 					break;
 				}
 			}
@@ -624,7 +617,7 @@ public class DataAccess {
 
 
 
-    public Event removeEvent(Event ev) {
+	public Event removeEvent(Event ev) {
 
 		Event dbEvent=db.find(Event.class, ev);
 		db.getTransaction().begin();
@@ -647,7 +640,7 @@ public class DataAccess {
 		db.getTransaction().commit();
 
 		return dbEvent;
-    }
+	}
 
 	public double getUsersMoney(User who) {
 		db.getTransaction().begin();
@@ -659,26 +652,4 @@ public class DataAccess {
 
 		return money;
 	}
-/*
-	public Vector<Result> getMyResults(User who) {
-		db.getTransaction().begin();
-		User dbUser=db.find(User.class, who.getUsername());
-		Vector<Event> res = new Vector<>();
-		TypedQuery<Event> query = db.createQuery("SELECT result FROM Result result WHERE result.=?1",
-				Event.class);
-		query.setParameter(1, date);
-		List<Event> events = query.getResultList();
-		for (Event ev:events){
-			System.out.println(ev.getTeamTemplate());
-			res.add(ev);
-		}
-		return res;
-		db.getTransaction().commit();
-
-		System.out.println(">> DataAccess: getting the results of the current user");
-
-		return myResults;
-	}
-	*/
-
-	}
+}

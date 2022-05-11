@@ -264,7 +264,7 @@ public class PublishResultsController implements Controller{
 
         // Bind columns to Fee (result) attributes
         fc1.setCellValueFactory(new PropertyValueFactory<>("fee"));
-        fc2.setCellValueFactory(new PropertyValueFactory<>("result"));
+        fc2.setCellValueFactory(new PropertyValueFactory<>("possibleResult"));
 
 
 
