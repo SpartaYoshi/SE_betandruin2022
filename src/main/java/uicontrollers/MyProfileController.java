@@ -1,6 +1,7 @@
 package uicontrollers;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import businessLogic.BlFacade;
@@ -20,6 +21,8 @@ public class MyProfileController implements Controller{
     private MainGUI mainGUI;
     private final BlFacade businessLogic;
 
+    @FXML
+    private Button backButton;
 
     @FXML
     private Label birthDateLabel;
@@ -86,6 +89,31 @@ public class MyProfileController implements Controller{
 
     @FXML public void onMyResultsButton(){
 
+    }
+
+    public void clearAll() {
+        birthDateLabel.setText("");
+        nameLabel.setText("");
+        passwordLabel.setText("");
+        surnameLabel.setText("");
+        usernameLabel.setText("");
+    }
+
+    public void selectBack(ActionEvent actionEvent) {
+        clearAll();
+        switch(businessLogic.getSessionMode()) {
+            case "Anon":
+                mainGUI.showPortal();
+                break;
+            case "User":
+                mainGUI.showUserPortal();
+                break;
+            case "Admin":
+                mainGUI.showAdminPortal();
+                break;
+            default:
+                break;
+        }
     }
 
 }

@@ -25,6 +25,7 @@
             <Font name="Trebuchet MS Bold" size="35.0" />
          </font>
       </Label>
-      <Button fx:id="myResultsButton" layoutX="61.0" layoutY="253.0" mnemonicParsing="false" onAction="#onMyResultsButton" text="%MyResults" />
+      <Button fx:id="myResultsButton" layoutX="61.0" layoutY="240.0" mnemonicParsing="false" onAction="#onMyResultsButton" text="%MyResults" />
+      <Button fx:id="backButton" layoutX="65.0" layoutY="302.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="17.0" prefWidth="66.0" styleClass="btn-danger" text="%Back" />
    </children>
 </AnchorPane>
