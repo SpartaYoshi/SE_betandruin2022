@@ -4,6 +4,7 @@ import java.time.*;
 import java.util.*;
 
 import businessLogic.BlFacade;
+import dataAccess.PropertiesManager;
 import domain.Event;
 import domain.Question;
 import javafx.beans.property.SimpleStringProperty;
@@ -117,11 +118,11 @@ public class BrowseQuestionsController implements Controller {
 
     // Bind columns to Question attributes
     qc1.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
-
-    /*qc2.setCellValueFactory(features -> {
-      var questionPrompt = new SimpleStringProperty(features.getValue().)
-    })*/
-    qc2.setCellValueFactory(new PropertyValueFactory<>("questionID"));
+    qc2.setCellValueFactory( features -> {
+      String questionID = features.getValue().getQuestionID();
+      PropertiesManager propMgr = new PropertiesManager();
+      return new SimpleStringProperty(propMgr.getTag(questionID));
+    });
 
   }
 

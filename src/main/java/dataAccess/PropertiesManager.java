@@ -1,5 +1,7 @@
 package dataAccess;
 
+import configuration.ConfigXML;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,6 +9,9 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertiesManager {
+
+    final ConfigXML config = ConfigXML.getInstance();
+
 
     private void createPropertyKey(String filepath, String key, String value) {
         try {
@@ -35,6 +40,26 @@ public class PropertiesManager {
         createPropertyKey("src/main/scenes/Etiquetas_es.properties", id, text_es);
         createPropertyKey("src/main/scenes/Etiquetas_eus.properties", id, text_eus);
     }
+
+    public String getTag(String key) {
+        try {
+
+            Properties props = new Properties();
+            FileInputStream in =
+                    new FileInputStream("src/main/scenes/Etiquetas_" + config.getLocale() + ".properties");
+            props.load(in);
+            in.close();
+
+            return (String) props.get(key);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
 
 
     public boolean resourceBundleContains(String id) {
