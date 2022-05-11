@@ -499,21 +499,19 @@ public class DataAccess {
 	 * @param am
 	 * @return
 	 */
-	public double insertMoney(User who, double am, Bet bet)  {
+	public double insertMoney(User who, double am, Bet bet, String type)  {
 		double total=who.getMoneyAvailable()+ am; //the money he had + the deposited money
 		Movement mov= null;
 		if(bet==null){
-			String description = new String("DepositMoney");
 			LocalDate localDate = null;
 			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
 			Date date = Date.from(instant);
-			mov = new Movement(am, date, description);
+			mov = new Movement(am, date, type);
 		}else{
-			String description = new String("ObtainedMoney");
 			LocalDate localDate = null;
 			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
 			Date date = Date.from(instant);
-			mov = new Movement(am, date, description);
+			mov = new Movement(am, date, type, bet);
 		}
 		db.getTransaction().begin();
 		who.setMoneyAvailable(total);
@@ -567,7 +565,7 @@ public class DataAccess {
 		LocalDate localDate = null;
 		Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
 		Date date = Date.from(instant);
-		Movement mov = new Movement(betAmount*(-1), date, description);
+		Movement mov = new Movement(betAmount*(-1), date, description, bet);
 		db.getTransaction().begin();
 		who.setMoneyAvailable(total);//our object of the app
 		who.addMovement(mov);
@@ -607,7 +605,7 @@ public class DataAccess {
 		db.getTransaction().begin();
 		currentUser.getBets().remove(bet);
 		dbUser.getBets().remove(bet);
-		this.insertMoney(currentUser, bet.getAmount(), bet);
+		//this.insertMoney(currentUser, bet.getAmount(), bet, "PlacedBetMoney");
 		if(dbResult!=null){
 			dbResult.getBets().remove(bet);
 		}

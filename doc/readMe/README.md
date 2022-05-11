@@ -15,6 +15,6 @@ As we take the dates when the movement is done (current or instant date and hour
 
 
 + **Final Note**:
-  To login as an administrator:[*username*: **"juanan"**, *password*: **"hello"**]
+    + To login as an administrator:[*username*: **"juanan"**, *password*: **"hello"**]
     + To login as a regular user: [*username*: **"ainhoa"**, *password*: **"123"**]
       Because of that, the remote database is as *initialize*. Once that user has been created, the mode can be changed to *open* again.
