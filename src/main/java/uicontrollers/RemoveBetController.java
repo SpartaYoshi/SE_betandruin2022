@@ -130,7 +130,7 @@ public class RemoveBetController implements Controller {
             else {
                 Bet b1 = businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), question, bet);
                 if(b1!=null){
-                    businessLogic.insertMoney(bet.getAmount());
+                    businessLogic.insertMoney(bet.getAmount(), bet);
                     lblMessage.getStyleClass().clear();
                     lblMessage.getStyleClass().setAll("lbl", "lbl-success");
                     lblMessage.setText("Bet removed, the money has been updated into your account");

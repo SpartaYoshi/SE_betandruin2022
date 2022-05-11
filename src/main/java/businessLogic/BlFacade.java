@@ -90,7 +90,7 @@ public interface BlFacade {
 	 * @return double the amount of money available the user has. (-1 if it has failed)
 	 */
 	@WebMethod
-	double insertMoney(double am) throws FailedMoneyUpdateException;
+	double insertMoney(double am, Bet bet) throws FailedMoneyUpdateException;
 
 	/**
 	 * method to get the actual user logged
