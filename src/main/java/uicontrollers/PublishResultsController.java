@@ -63,7 +63,7 @@ public class PublishResultsController implements Controller{
     private TableColumn<Result, Float> fc1;
 
     @FXML
-    private TableColumn<Result, String> fc2;
+    private TableColumn<Result, Integer> fc2;
 
     @FXML
     private Label questionLabel;
@@ -189,7 +189,7 @@ public class PublishResultsController implements Controller{
 
      @FXML
     public void initialize() {
-        publishButton.getStyleClass().setAll("btn", "btn-primary");
+
 
          switch (config.getLocale()) {
              case "en" -> instructionLbl.setText("Please, insert the final correct answer for the selected question");

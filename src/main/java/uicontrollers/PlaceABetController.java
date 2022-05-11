@@ -45,7 +45,7 @@ public class PlaceABetController implements Controller, Initializable {
     @FXML private TableColumn<Question, Integer> qc1;
     @FXML private TableColumn<Question, String> qc2;
     @FXML private TableColumn<Result, Float> fc1;
-    @FXML private TableColumn<Result, String> fc2;
+    @FXML private TableColumn<Result, Integer> fc2;
 
     @FXML private Label eventDescriptionLabel;
     @FXML private Label questionLabel;
@@ -410,7 +410,7 @@ public class PlaceABetController implements Controller, Initializable {
 
         // Bind columns to Fee (result) attributes
         fc1.setCellValueFactory(new PropertyValueFactory<>("fee"));
-        fc2.setCellValueFactory(new PropertyValueFactory<>("result"));
+        fc2.setCellValueFactory(new PropertyValueFactory<>("possibleResult"));
 
 
 
