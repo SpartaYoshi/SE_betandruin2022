@@ -680,4 +680,24 @@ public class DataAccess {
 
 		return money;
 	}
-}
+
+	public Vector<Result> getMyResults(User who) {
+		db.getTransaction().begin();
+		User dbUser=db.find(User.class, who.getUsername());
+		Vector<Event> res = new Vector<>();
+		TypedQuery<Event> query = db.createQuery("SELECT result FROM Result result WHERE result.=?1",
+				Event.class);
+		query.setParameter(1, date);
+		List<Event> events = query.getResultList();
+		for (Event ev:events){
+			System.out.println(ev.getTeamTemplate());
+			res.add(ev);
+		}
+		return res;
+		db.getTransaction().commit();
+
+		System.out.println(">> DataAccess: getting the results of the current user");
+
+		return myResults;
+	}
+	}

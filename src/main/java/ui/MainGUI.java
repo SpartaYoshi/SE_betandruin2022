@@ -156,7 +156,7 @@ public class MainGUI {
     editProfile = load("/EditProfile.fxml");
     showMovements = load("/ShowMovements.fxml");
     removeEvent = load("/RemoveEvent.fxml");
-    checkMyResults = load("/CheckMyResults.fxml");
+    checkMyResults = load("/CheckMyResultsv2.fxml");
     publishResults = load("/PublishResults.fxml");
 
 
