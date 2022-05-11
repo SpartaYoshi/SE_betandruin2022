@@ -2,9 +2,11 @@ package uicontrollers;
 
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
+import dataAccess.PropertiesManager;
 import domain.Event;
 import domain.Question;
 import exceptions.FeeAlreadyExistsException;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -29,8 +31,8 @@ public class SetFeeController implements Controller {
     @FXML private DatePicker datepicker;
     @FXML private TableColumn<Event, Integer> ec1;
     @FXML private TableColumn<Event, String> ec2;
-    @FXML private TableColumn<Event, Integer> qc1;
-    @FXML private TableColumn<Event, Integer>qc2;
+    @FXML private TableColumn<Question, Integer> qc1;
+    @FXML private TableColumn<Question, String> qc2;
     @FXML private TextField feeField;
     @FXML private TextField resultField;
     @FXML private TableView<Event> tblEvents;
@@ -207,10 +209,14 @@ public class SetFeeController implements Controller {
         // Bind columns to Event attributes
         ec1.setCellValueFactory(new PropertyValueFactory<>("eventNumber"));
         ec2.setCellValueFactory(new PropertyValueFactory<>("description"));
+
         // Bind columns to Question attributes
         qc1.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
-        qc2.setCellValueFactory(new PropertyValueFactory<>("question"));
-
+        qc2.setCellValueFactory( features -> {
+            String questionID = features.getValue().getQuestionID();
+            PropertiesManager propMgr = new PropertiesManager();
+            return new SimpleStringProperty(propMgr.getTag(questionID));
+        });
 
 
     }

@@ -63,7 +63,6 @@ public class PropertiesManager {
 
 
     public boolean resourceBundleContains(String id) {
-
         try {
             Properties props = new Properties();
 

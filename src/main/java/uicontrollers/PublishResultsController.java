@@ -2,8 +2,10 @@ package uicontrollers;
 
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
+import dataAccess.PropertiesManager;
 import domain.*;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -30,8 +32,6 @@ public class PublishResultsController implements Controller{
     @FXML
     private Label instructionLbl;
 
-    @FXML
-    private Button closeButton;
 
     @FXML
     private TableColumn<Event, Integer> ec1;
@@ -43,10 +43,10 @@ public class PublishResultsController implements Controller{
     private Label eventDescriptionLabel;
 
     @FXML
-    private TableColumn<Question, Integer> fc1;
+    private TableColumn<Question, Integer> qc1;
 
     @FXML
-    private TableColumn<Question, String> fc2;
+    private TableColumn<Question, String> qc2;
 
     @FXML
     private Label listOfEventsLabel;
@@ -60,10 +60,10 @@ public class PublishResultsController implements Controller{
     private Button publishButton;
 
     @FXML
-    private TableColumn<Result, Float> qc1;
+    private TableColumn<Result, Float> fc1;
 
     @FXML
-    private TableColumn<Result, String> qc2;
+    private TableColumn<Result, String> fc2;
 
     @FXML
     private Label questionLabel;
@@ -255,7 +255,12 @@ public class PublishResultsController implements Controller{
 
         // Bind columns to Question attributes
         qc1.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
-        qc2.setCellValueFactory(new PropertyValueFactory<>("questionID"));
+         qc2.setCellValueFactory( features -> {
+             String questionID = features.getValue().getQuestionID();
+             PropertiesManager propMgr = new PropertiesManager();
+             return new SimpleStringProperty(propMgr.getTag(questionID));
+         });
+
 
         // Bind columns to Fee (result) attributes
         fc1.setCellValueFactory(new PropertyValueFactory<>("fee"));

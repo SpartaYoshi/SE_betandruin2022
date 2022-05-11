@@ -1,10 +1,12 @@
 package uicontrollers;
 
 import businessLogic.BlFacade;
+import dataAccess.PropertiesManager;
 import domain.Bet;
 import domain.Event;
 import domain.Result;
 import domain.Question;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -281,8 +283,11 @@ public class RemoveBetController implements Controller {
         ec2.setCellValueFactory(new PropertyValueFactory<>("description"));
 
         qc1.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
-        qc2.setCellValueFactory(new PropertyValueFactory<>("question"));
-
+        qc2.setCellValueFactory( features -> {
+            String questionID = features.getValue().getQuestionID();
+            PropertiesManager propMgr = new PropertiesManager();
+            return new SimpleStringProperty(propMgr.getTag(questionID));
+        });
 
         betc1.setCellValueFactory(new PropertyValueFactory<>("amount"));
         betc2.setCellValueFactory(new PropertyValueFactory<>("result"));

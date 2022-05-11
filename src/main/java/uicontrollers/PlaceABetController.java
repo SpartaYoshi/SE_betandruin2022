@@ -9,8 +9,10 @@ import java.util.*;
 
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
+import dataAccess.PropertiesManager;
 import domain.*;
 import exceptions.*;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,7 +63,7 @@ public class PlaceABetController implements Controller, Initializable {
 
 
         @FXML
-        void selectBack(ActionEvent event) {
+        void selectBack() {
           clearAll();
 
 
@@ -399,7 +401,12 @@ public class PlaceABetController implements Controller, Initializable {
 
         // Bind columns to Question attributes
         qc1.setCellValueFactory(new PropertyValueFactory<>("questionNumber"));
-        qc2.setCellValueFactory(new PropertyValueFactory<>("question"));
+        qc2.setCellValueFactory( features -> {
+            String questionID = features.getValue().getQuestionID();
+            PropertiesManager propMgr = new PropertiesManager();
+            return new SimpleStringProperty(propMgr.getTag(questionID));
+        });
+
 
         // Bind columns to Fee (result) attributes
         fc1.setCellValueFactory(new PropertyValueFactory<>("fee"));

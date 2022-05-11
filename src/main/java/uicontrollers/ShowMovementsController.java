@@ -62,7 +62,8 @@ public class ShowMovementsController implements Controller{
         // Bind columns
         tableAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         tableDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        tableDescription.setCellValueFactory( features -> {
+
+        tableDescription.setCellValueFactory(features -> {
             String descriptionType = features.getValue().getDescriptionType();
             PropertiesManager propMgr = new PropertiesManager();
             return new SimpleStringProperty(propMgr.getTag(descriptionType));
