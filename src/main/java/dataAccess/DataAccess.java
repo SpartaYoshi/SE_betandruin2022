@@ -659,7 +659,6 @@ public class DataAccess {
 
 		return money;
 	}
-
 /*
 	public Vector<Result> getMyResults(User who) {
 		db.getTransaction().begin();
@@ -679,5 +678,7 @@ public class DataAccess {
 		System.out.println(">> DataAccess: getting the results of the current user");
 
 		return myResults;
-	}*/
+	}
+	*/
+
 	}
