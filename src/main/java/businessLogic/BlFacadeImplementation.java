@@ -336,13 +336,13 @@ public class BlFacadeImplementation implements BlFacade {
 
 
 	@WebMethod
-	public double insertMoney(double amount) throws FailedMoneyUpdateException{
+	public double insertMoney(double amount, Bet bet) throws FailedMoneyUpdateException{
 		User who=this.getCurrentUser();
 		dbManager.open(false);
 
 		double totalmoney;
 
-		totalmoney = dbManager.insertMoney(who,amount);
+		totalmoney = dbManager.insertMoney(who,amount, bet);
 
 		dbManager.close();
 

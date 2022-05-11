@@ -56,7 +56,7 @@ public class DepositMoneyController implements Controller {
         try {
             depositBtn.getStyleClass().setAll("btn", "btn-primary");
             double amount= Double.parseDouble(amountField.getText());
-            double totalMoneyAv=businessLogic.insertMoney(amount);
+            double totalMoneyAv=businessLogic.insertMoney(amount, null);
 
             warningLbl.getStyleClass().setAll("lbl","lbl-success");
             ConfigXML config = ConfigXML.getInstance();
