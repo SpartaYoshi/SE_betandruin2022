@@ -82,7 +82,7 @@ public interface BlFacade {
 	 * @throws FeeAlreadyExistsException
 	 */
 	@WebMethod
-	void createFee(Question q, String pResult, float pFee) throws FeeAlreadyExistsException;
+	void createFee(Question q, int pResult, float pFee) throws FeeAlreadyExistsException;
 
 	/**
 	 * method to insert the money wanted into the user's account

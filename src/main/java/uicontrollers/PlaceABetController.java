@@ -297,7 +297,7 @@ public class PlaceABetController implements Controller, Initializable {
     private void setupResultSelection() {
         tblResults.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                resultLabel.setText(tblResults.getSelectionModel().getSelectedItem().getQuestionID());
+                resultLabel.setText("" + tblResults.getSelectionModel().getSelectedItem().getPossibleResult());
             }
         });
 
@@ -313,9 +313,9 @@ public class PlaceABetController implements Controller, Initializable {
         }
         ConfigXML config = ConfigXML.getInstance();
         switch (config.getLocale()) {
-            case "en" -> availableMoneyLabel.setText("Money available: "+businessLogic.getMoneyAvailable() + "€");
-            case "es" -> availableMoneyLabel.setText("Dinero disponible: "+businessLogic.getMoneyAvailable() + "€");
-            case "eus" -> availableMoneyLabel.setText("Diru erabilgarria: "+businessLogic.getMoneyAvailable() + "€");
+            case "en" -> availableMoneyLabel.setText("Money available: " + businessLogic.getMoneyAvailable() + "€");
+            case "es" -> availableMoneyLabel.setText("Dinero disponible: " + businessLogic.getMoneyAvailable() + "€");
+            case "eus" -> availableMoneyLabel.setText("Diru erabilgarria: " + businessLogic.getMoneyAvailable() + "€");
         }
     }
 
