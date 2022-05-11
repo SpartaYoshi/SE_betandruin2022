@@ -88,10 +88,12 @@ public class DataAccess {
 			Question q5 = ev17.addQuestion("qIDMatchWinner", 1);
 			Question q6 = ev17.addQuestion("qIDGoalsFirstHalf", 2);
 
+
+			/*
 			// Update properties
 			PropertiesManager propMgr = new PropertiesManager();
 			propMgr.addTagToResources("qIDMatchWinner",
-					"Who will win the match?",
+					"",
 					"¿Quién ganará el partido?",
 					"Zeinek irabaziko du partidua?");
 
@@ -109,7 +111,7 @@ public class DataAccess {
 					"Will there be goals in the first half?",
 					"¿Habrá goles en la primera parte?",
 					"Golak sartuko dira lehenengo zatian?");
-
+			*/
 
 
 

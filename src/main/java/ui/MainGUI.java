@@ -176,7 +176,7 @@ public class MainGUI {
   }
 
   public void showCreateQuestion() {
-    setupScene(createQuestion.ui, "CreateQuestion", 550, 420);
+    setupScene(createQuestion.ui, "CreateQuestion", 615, 455);
   }
 
   public void showSetFee() {
@@ -219,6 +219,7 @@ public class MainGUI {
 
   public void showEditProfile(){setupScene(editProfile.ui, "EditProfile", 600, 300);}
 
+
   public void showPublishResults(){setupScene(publishResults.ui, "Publish", 870, 590);}
 
 
@@ -226,7 +227,7 @@ public class MainGUI {
 
   private void setupScene(Parent ui, String title, int width, int height) {
     if (scene == null){
-      scene = new Scene(ui, width, height);
+      scene = new Scene(ui);
       scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
       //scene.getStylesheets().add(getClass().getClassLoader().getResource("styles/hover.css").toString());
       stage.setScene(scene);

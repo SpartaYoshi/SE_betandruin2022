@@ -6,20 +6,68 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.CreateQuestionController">
+<AnchorPane prefHeight="426.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.CreateQuestionController">
    <children>
-      <DatePicker fx:id="datePicker" layoutX="53.0" layoutY="85.0" />
-      <Label layoutX="53.0" layoutY="60.0" text="%EventDate" />
-      <Label layoutX="328.0" layoutY="60.0" text="%ListEvents" />
-      <ComboBox fx:id="comboEvents" layoutX="326.0" layoutY="86.0" prefWidth="150.0" />
-      <Label layoutX="68.0" layoutY="211.0" prefHeight="18.0" prefWidth="88.0" text="%Question" />
-      <Label layoutX="53.0" layoutY="265.0" text="%MinimumBetPrice" />
-      <TextField fx:id="txtQuestion" layoutX="163.0" layoutY="207.0" prefHeight="26.0" prefWidth="359.0" />
-      <TextField fx:id="txtMinBet" layoutX="163.0" layoutY="260.0" prefHeight="26.0" prefWidth="106.0" />
-      <Button fx:id="btnCreateQuestion" layoutX="261.0" layoutY="321.0" mnemonicParsing="false" onAction="#selectCreate" prefHeight="26.0" prefWidth="130.0" text="%CreateQuestion" />
-      <Button layoutX="32.0" layoutY="347.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="25.0" prefWidth="62.0" styleClass="btn-danger" text="%Back" />
-      <Label fx:id="lblErrorQuestion" layoutX="174.0" layoutY="181.0" prefHeight="18.0" prefWidth="334.0" />
-      <Label fx:id="lblErrorMinBet" layoutX="317.0" layoutY="264.0" prefHeight="18.0" prefWidth="231.0" />
+      <DatePicker fx:id="datePicker" layoutX="123.0" layoutY="56.0" />
+      <Label layoutX="123.0" layoutY="31.0" text="%EventDate">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="334.0" layoutY="31.0" text="%ListEvents">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <ComboBox fx:id="comboEvents" layoutX="334.0" layoutY="56.0" prefHeight="26.0" prefWidth="175.0" />
+      <Label alignment="CENTER" layoutX="241.0" layoutY="181.0" prefHeight="18.0" prefWidth="150.0" text="%QuestionPrompt">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="401.0" layoutY="114.0" text="%MinimumBetPrice">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="txtQuestion_en" layoutX="123.0" layoutY="207.0" prefHeight="26.0" prefWidth="386.0" />
+      <TextField fx:id="txtMinBet" layoutX="404.0" layoutY="144.0" prefHeight="26.0" prefWidth="106.0" />
+      <Button fx:id="btnCreateQuestion" layoutX="233.0" layoutY="375.0" mnemonicParsing="false" onAction="#selectCreate" prefHeight="26.0" prefWidth="130.0" styleClass="btn-info" text="%CreateQuestion">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="31.0" layoutY="375.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="25.0" prefWidth="62.0" styleClass="btn-danger" text="%Back">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Button>
+      <Label fx:id="lblErrorQuestion" layoutX="126.0" layoutY="314.0" prefHeight="18.0" prefWidth="386.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblErrorMinBet" layoutX="123.0" layoutY="338.0" prefHeight="18.0" prefWidth="386.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="123.0" layoutY="112.0" prefHeight="18.0" prefWidth="88.0" text="%QuestionID">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtQuestionID" layoutX="123.0" layoutY="142.0" prefHeight="26.0" prefWidth="139.0" />
+      <Label layoutX="39.0" layoutY="211.0" prefHeight="18.0" prefWidth="69.0" text="English:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtQuestion_es" layoutX="123.0" layoutY="243.0" prefHeight="26.0" prefWidth="386.0" />
+      <Label layoutX="39.0" layoutY="247.0" prefHeight="18.0" prefWidth="69.0" text="Español:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtQuestion_eus" layoutX="123.0" layoutY="278.0" prefHeight="26.0" prefWidth="386.0" />
+      <Label layoutX="39.0" layoutY="282.0" prefHeight="18.0" prefWidth="69.0" text="Euskara:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
