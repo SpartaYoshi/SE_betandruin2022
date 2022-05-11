@@ -30,10 +30,10 @@ public class PropertiesManager {
     }
 
     public void addTagToResources(String id, String text_en, String text_es, String text_eus) {
-        createPropertyKey("/Etiquetas.properties", id, text_en);
-        createPropertyKey("/Etiquetas_en.properties", id, text_en);
-        createPropertyKey("/Etiquetas_es.properties", id, text_es);
-        createPropertyKey("/Etiquetas_eus.properties", id, text_eus);
+        createPropertyKey("src/main/scenes/Etiquetas.properties", id, text_en);
+        createPropertyKey("src/main/scenes/Etiquetas_en.properties", id, text_en);
+        createPropertyKey("src/main/scenes/Etiquetas_es.properties", id, text_es);
+        createPropertyKey("src/main/scenes/Etiquetas_eus.properties", id, text_eus);
     }
 
 
@@ -42,7 +42,7 @@ public class PropertiesManager {
         try {
             Properties props = new Properties();
 
-            FileInputStream in = new FileInputStream("/Etiquetas.properties");
+            FileInputStream in = new FileInputStream("src/main/scenes/Etiquetas.properties");
             props.load(in);
             in.close();
 
