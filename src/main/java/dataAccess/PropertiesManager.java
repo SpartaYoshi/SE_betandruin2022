@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertiesManager {
+
     private void createPropertyKey(String filepath, String key, String value) {
         try {
             Properties props = new Properties();
@@ -33,5 +34,26 @@ public class PropertiesManager {
         createPropertyKey("/Etiquetas_en.properties", id, text_en);
         createPropertyKey("/Etiquetas_es.properties", id, text_es);
         createPropertyKey("/Etiquetas_eus.properties", id, text_eus);
+    }
+
+
+    public boolean resourceBundleContains(String id) {
+
+        try {
+            Properties props = new Properties();
+
+            FileInputStream in = new FileInputStream("/Etiquetas.properties");
+            props.load(in);
+            in.close();
+
+            return props.containsKey(id);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }

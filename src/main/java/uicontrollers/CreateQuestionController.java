@@ -6,6 +6,7 @@ import java.util.*;
 
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
+import dataAccess.PropertiesManager;
 import domain.Event;
 import exceptions.EventAlreadyFinishedException;
 import exceptions.QuestionAlreadyExistsException;
@@ -33,7 +34,11 @@ public class CreateQuestionController implements Controller {
   @FXML private DatePicker datePicker;
 
   @FXML private ComboBox<Event> comboEvents;
-  @FXML private TextField txtQuestion;
+  @FXML private TextField txtQuestionID;
+  @FXML private TextField txtQuestion_en;
+  @FXML private TextField txtQuestion_es;
+  @FXML private TextField txtQuestion_eus;
+
   @FXML private TextField txtMinBet;
   @FXML private Button btnCreateQuestion;
 
@@ -44,7 +49,7 @@ public class CreateQuestionController implements Controller {
 
 
   @FXML
-  void selectBack(ActionEvent event) {
+  void selectBack() {
     clearErrorLabels();
 
     switch (businessLogic.getSessionMode()) {
@@ -63,53 +68,88 @@ public class CreateQuestionController implements Controller {
     lblErrorQuestion.getStyleClass().clear();
   }
 
+
+
+
+
   @FXML
-  void selectCreate(ActionEvent e) {
+  void selectCreate() {
 
     clearErrorLabels();
 
     Event event = comboEvents.getSelectionModel().getSelectedItem();
-    String inputQuestion = txtQuestion.getText();
-    Float inputPrice;
+
+    String questionID = txtQuestionID.getText();
+
+    String question_en = txtQuestion_en.getText();
+    String question_es = txtQuestion_es.getText();
+    String question_eus = txtQuestion_eus.getText();
+
+    Float minimumBet;
+
     boolean showErrors = true;
 
     try {
 
-      if (inputQuestion.length() > 0) {
+      // Check blank text prompt
+      if (questionID.length() <= 0
+              || question_en.length() <= 0
+              || question_es.length() <= 0
+              || question_eus.length() <= 0) {
 
-        inputPrice = Float.valueOf(txtMinBet.getText());
-
-        if (inputPrice <= 0) {
-          lblErrorMinBet.getStyleClass().setAll("lbl","lbl-danger");
-          ConfigXML config = ConfigXML.getInstance();
-          switch (config.getLocale()) {
-            case "en" -> lblErrorMinBet.setText("Min bet should be > 0");
-            case "es" -> lblErrorMinBet.setText("La cantidad mínima debería ser > 0");
-            case "eus" -> lblErrorMinBet.setText("Kantitate minimoa > 0 izan beharko litzateke");
-          }
-        } else {
-          businessLogic.createQuestion(event, inputQuestion, inputPrice);
-          lblErrorQuestion.getStyleClass().clear();
-          lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-success");
-          ConfigXML config = ConfigXML.getInstance();
-          switch (config.getLocale()) {
-            case "en" -> lblErrorQuestion.setText("Question correctly created");
-            case "es" -> lblErrorQuestion.setText("La pregunta ha sido creada correctamente");
-            case "eus" -> lblErrorQuestion.setText("Galdera behar bezala sortu da");
-          }
-          lblErrorMinBet.getStyleClass().clear();
-          showErrors = false;
+        lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-danger");
+        ConfigXML config = ConfigXML.getInstance();
+        switch (config.getLocale()) {
+          case "en" -> lblErrorQuestion.setText("Question shouldn't be empty");
+          case "es" -> lblErrorQuestion.setText("La pregunta no debería estar vacía");
+          case "eus" -> lblErrorQuestion.setText("Galdera hutsik dago");
         }
-      } else {
-          lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-danger");
-          ConfigXML config = ConfigXML.getInstance();
-          switch (config.getLocale()) {
-            case "en" -> lblErrorQuestion.setText("Question shouldn't be empty");
-            case "es" -> lblErrorQuestion.setText("La pregunta no debería estar vacía");
-            case "eus" -> lblErrorQuestion.setText("Galdera hutsik dago");
-          }
 
+        return;
       }
+
+
+      // Check valid minimum bet prompt
+      minimumBet = Float.valueOf(txtMinBet.getText());
+
+      if (minimumBet <= 0) {
+        lblErrorMinBet.getStyleClass().setAll("lbl","lbl-danger");
+        ConfigXML config = ConfigXML.getInstance();
+        switch (config.getLocale()) {
+          case "en" -> lblErrorMinBet.setText("Min bet should be > 0");
+          case "es" -> lblErrorMinBet.setText("La cantidad mínima debería ser > 0");
+          case "eus" -> lblErrorMinBet.setText("Kantitate minimoa > 0 izan beharko litzateke");
+        }
+
+        return;
+      }
+
+
+      // Create question
+      businessLogic.createQuestion(event, questionID, minimumBet);
+
+
+      // Update properties
+      PropertiesManager propMgr = new PropertiesManager();
+
+      if (!propMgr.resourceBundleContains(questionID))
+        propMgr.addTagToResources(questionID, question_en, question_es, question_eus);
+
+
+
+      lblErrorQuestion.getStyleClass().clear();
+      lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-success");
+      ConfigXML config = ConfigXML.getInstance();
+      switch (config.getLocale()) {
+        case "en" -> lblErrorQuestion.setText("Question correctly created");
+        case "es" -> lblErrorQuestion.setText("La pregunta ha sido creada correctamente");
+        case "eus" -> lblErrorQuestion.setText("Galdera behar bezala sortu da");
+      }
+      lblErrorMinBet.getStyleClass().clear();
+      showErrors = false;
+
+
+
 
     } catch (NumberFormatException ex) {
         lblErrorMinBet.getStyleClass().setAll("lbl", "lbl-danger");
@@ -120,6 +160,7 @@ public class CreateQuestionController implements Controller {
           case "eus" -> lblErrorMinBet.setText("Zenbaki bat sartu ezazu");
         }
 
+
     } catch (EventAlreadyFinishedException ex) {
       lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-danger");
       ConfigXML config = ConfigXML.getInstance();
@@ -128,6 +169,7 @@ public class CreateQuestionController implements Controller {
         case "es" -> lblErrorQuestion.setText("El evento ha terminado");
         case "eus" -> lblErrorQuestion.setText("Gertaera bukatu da");
       }
+
 
     } catch (QuestionAlreadyExistsException ex) {
       lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-danger");
@@ -138,20 +180,28 @@ public class CreateQuestionController implements Controller {
         case "eus" -> lblErrorQuestion.setText("Galdera jadanik existitzen da");
       }
 
+
     } catch (Exception ex) {
       ex.printStackTrace();
     }
 
-    if (lblErrorMinBet.getText().length() > 0 && showErrors) {
+
+    if (lblErrorMinBet.getText().length() > 0 && showErrors)
       lblErrorMinBet.getStyleClass().setAll("lbl", "lbl-danger");
-    }
-    if (lblErrorQuestion.getText().length() > 0 && showErrors) {
+
+
+    if (lblErrorQuestion.getText().length() > 0 && showErrors)
       lblErrorQuestion.getStyleClass().setAll("lbl", "lbl-danger");
-    }
 
   }
 
+
+
+
+
   private final List<LocalDate> holidays = new ArrayList<>();
+
+
 
   private void setEventsPrePost(int year, int month) {
     LocalDate date = LocalDate.of(year, month, 1);
@@ -159,6 +209,8 @@ public class CreateQuestionController implements Controller {
     setEvents(date.plusMonths(1).getYear(), date.plusMonths(1).getMonth().getValue());
     setEvents(date.plusMonths(-1).getYear(), date.plusMonths(-1).getMonth().getValue());
   }
+
+
 
   private void setEvents(int year, int month) {
 
@@ -168,6 +220,9 @@ public class CreateQuestionController implements Controller {
       holidays.add(Dates.convertToLocalDateViaInstant(day));
     }
   }
+
+
+
 
   @FXML
   void initialize() {
