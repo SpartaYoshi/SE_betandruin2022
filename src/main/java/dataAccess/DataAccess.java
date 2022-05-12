@@ -612,7 +612,7 @@ public class DataAccess {
 
 	}
 
-
+	/*
 	public User editUserName(User who, String newUsername){
 		db.getTransaction().begin();
 		User dbUser=db.find(User.class, who.getUsername());
@@ -624,6 +624,7 @@ public class DataAccess {
 
 		return who;
 	}
+	*/
 
 
 	public User editPassWord(User who, String newPassword){
@@ -631,6 +632,7 @@ public class DataAccess {
 		User dbUser=db.find(User.class, who.getUsername());
 		dbUser.setUsername(newPassword);
 		who.setUsername(newPassword);
+		db.persist(dbUser);
 		db.getTransaction().commit();
 
 		System.out.println(">> DataAccess: password updated");
