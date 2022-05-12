@@ -123,8 +123,8 @@ public class DataAccess {
 
 			//Regular user:
 			String sDate2 = "01/01/1980";
-			Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
-			User u2 = new User("ainhoa", "123", "Ainhoa", "Corporation", date1);
+			Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate2);
+			User u2 = new User("ainhoa", "123", "Ainhoa", "Corporation", date2);
 
 
 			if(!existUser(u1)) {

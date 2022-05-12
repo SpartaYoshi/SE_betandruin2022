@@ -386,6 +386,25 @@ public class BlFacadeImplementation implements BlFacade {
 		return updated;
 	}
 
+	@Override
+	public int payWinners(Bet b,int finalR) {
+		int cont=0;
+		dbManager.open(false);
+		List<User> allUsers=dbManager.getAllUsers();
+		for(User u:allUsers){
+			for(Bet betuser:u.getBets()){
+				if(betuser.getBetNum()==b.getBetNum() && betuser.getResult().getPossibleResult()==finalR){// he has a bet, that it's correct, we have to pay this user
+					float total= (float) (betuser.getAmount()+(betuser.getAmount()*b.getResult().getFee()));
+					dbManager.insertMoney(u,total,betuser);//update his account
+					cont++;
+				}
+			}
+
+		}
+
+		return cont;
+	}
+
 
 	@Override
 	public String editProfileUsername(User user) {

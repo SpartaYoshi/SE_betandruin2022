@@ -176,4 +176,12 @@ public interface BlFacade {
 
 	@WebMethod
 	int markFinalResult(Result r,int finalR);
+
+	/**
+	 * returns the amount of transactions done
+	 * @param b
+	 * @return
+	 */
+	@WebMethod
+	int  payWinners(Bet b,int finalR);
 }

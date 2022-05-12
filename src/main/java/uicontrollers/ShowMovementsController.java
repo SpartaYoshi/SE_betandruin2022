@@ -3,6 +3,7 @@ package uicontrollers;
         import java.util.Date;
 
         import businessLogic.BlFacade;
+        import configuration.ConfigXML;
         import dataAccess.PropertiesManager;
         import domain.Movement;
         import javafx.beans.property.SimpleStringProperty;
@@ -42,10 +43,7 @@ public class ShowMovementsController implements Controller{
     @FXML
     public void initialize() {
 
-        if(businessLogic.getCurrentUser() != null) {
-            String totalMoneyString = String.valueOf(businessLogic.getCurrentUser().getBalance());
-            totalMoney.setText(totalMoneyString);
-        }
+        //displayUsersMoney();
 
         tableMovements.getItems().clear();
 
@@ -70,6 +68,23 @@ public class ShowMovementsController implements Controller{
 
 
     }
+
+
+
+    public void displayUsersMoney() {
+        if(businessLogic.getMoneyAvailable() <= 0){
+            totalMoney.getStyleClass().setAll("lbl","lbl-danger");
+        }else{
+            totalMoney.getStyleClass().setAll("lbl", "lbl-success");
+        }
+        ConfigXML config = ConfigXML.getInstance();
+        switch (config.getLocale()) {
+            case "en" -> totalMoney.setText("Money available: " + businessLogic.getMoneyAvailable() + "€");
+            case "es" -> totalMoney.setText("Dinero disponible: " + businessLogic.getMoneyAvailable() + "€");
+            case "eus" -> totalMoney.setText("Diru erabilgarria: " + businessLogic.getMoneyAvailable() + "€");
+        }
+    }
+
 
     @FXML
     void selectBack(ActionEvent event) {

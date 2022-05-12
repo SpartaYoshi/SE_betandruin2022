@@ -27,7 +27,11 @@ public class EditProfileController implements Controller, Initializable {
     private Label birthDateLabel;
 
     @FXML
-    private Label messageLabel;
+    private Label messageLabelUsername;
+
+    @FXML
+    private Label messageLabelPassword;
+
 
     @FXML
     private Label nameLabel;
@@ -90,12 +94,12 @@ public class EditProfileController implements Controller, Initializable {
             String oldUserName = u.getUsername();
             String newUserName = usernameField.getText();
             if (oldUserName.toLowerCase().trim().equals(newUserName.toLowerCase().trim())) {
-                messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                messageLabelUsername.getStyleClass().setAll("lbl", "lbl-danger");
                 ConfigXML config = ConfigXML.getInstance();
                 switch (config.getLocale()) {
-                    case "en" -> messageLabel.setText("The new username is the same as the old one");
-                    case "es" -> messageLabel.setText("El nuevo nombre de usuario es el mismo que el antiguo");
-                    case "eus" -> messageLabel.setText("Erabiltzaile-izen berria aurrekoaren berdina da");
+                    case "en" -> messageLabelUsername.setText("The new username is the same as the old one");
+                    case "es" -> messageLabelUsername.setText("El nuevo nombre de usuario es el mismo que el antiguo");
+                    case "eus" -> messageLabelUsername.setText("Erabiltzaile-izen berria aurrekoaren berdina da");
                 }
 
             }else{
@@ -107,21 +111,21 @@ public class EditProfileController implements Controller, Initializable {
             String oldPassword = u.getUsername();
             String newPassword = passwdField.getText();
             if (oldPassword.toLowerCase().trim().equals(newPassword.toLowerCase().trim())) {
-                messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                messageLabelPassword.getStyleClass().setAll("lbl", "lbl-danger");
                 ConfigXML config = ConfigXML.getInstance();
                 switch (config.getLocale()) {
-                    case "en" -> messageLabel.setText("The new password is the same as the old one");
-                    case "es" -> messageLabel.setText("La nueva contraseña es la misma que la antigua");
-                    case "eus" -> messageLabel.setText("Pasahitz berria aurrekoaren berdina da");
+                    case "en" -> messageLabelPassword.setText("The new password is the same as the old one");
+                    case "es" -> messageLabelPassword.setText("La nueva contraseña es la misma que la antigua");
+                    case "eus" -> messageLabelPassword.setText("Pasahitz berria aurrekoaren berdina da");
                 }
 
             }else{
                 businessLogic.editProfileUsername(u);
                 ConfigXML config = ConfigXML.getInstance();
                 switch (config.getLocale()) {
-                    case "en" -> messageLabel.setText("The password has been successfully changed");
-                    case "es" -> messageLabel.setText("La contraseña se ha cambiado exitosamente");
-                    case "eus" -> messageLabel.setText("Pasahitz berria aurrekoaren berdina da");
+                    case "en" -> messageLabelPassword.setText("The password has been successfully changed");
+                    case "es" -> messageLabelPassword.setText("La contraseña se ha cambiado exitosamente");
+                    case "eus" -> messageLabelPassword.setText("Pasahitz berria aurrekoaren berdina da");
                 }
             }
         }
