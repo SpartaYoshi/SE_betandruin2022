@@ -431,13 +431,17 @@ public class BlFacadeImplementation implements BlFacade {
 
 
 	@WebMethod
-	public void processBets(Result r) {
-
+	public int processBets(Result r) {
+		int cont=0;
 		for (Bet b : r.getBets()) {
 			User u = b.getBetter();
 			double profit = b.getAmount() * r.getFee();
+			dbManager.open(false);
 			dbManager.insertMoney(u, profit, b,"BetProfit");
+			cont++;
+			dbManager.close();
 		}
+		return cont;
 	}
 
 

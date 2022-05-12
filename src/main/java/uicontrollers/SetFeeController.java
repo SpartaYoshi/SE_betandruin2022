@@ -157,9 +157,9 @@ public class SetFeeController implements Controller {
                 if (newSelection.getQuestionID().equals("qIDMatchWinner")) {
                     ConfigXML config = ConfigXML.getInstance();
                     switch (config.getLocale()) {
-                        case "en" -> explanationLbl.setText("Remember: 1=Home Team wins; 2=Away Team wins, 0= Draw");
-                        case "es" -> explanationLbl.setText("Recuerde: 1=Equipo local gana; 2=Equipo visitante gana, 0= Empate");
-                        case "eus" -> explanationLbl.setText("Gogoratu: 1=Ekipo lokala irabazi; 2=Kanpoko ekipoa irabazi, 0= Berdinketa");
+                        case "en" -> explanationLbl.setText("Remember: 1=Home Team wins;       2=Away Team wins,       3= Draw");
+                        case "es" -> explanationLbl.setText("Recuerde: 1=Equipo local gana;      2=Equipo visitante gana,     3= Empate");
+                        case "eus" -> explanationLbl.setText("Gogoratu: 1=Ekipo lokala irabazi;    2=Kanpoko ekipoa irabazi,    3= Berdinketa");
                     }
                 }
             }

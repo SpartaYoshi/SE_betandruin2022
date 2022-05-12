@@ -175,7 +175,7 @@ public interface BlFacade {
 	int markFinalResult(Result r,int finalR);
 
 	@WebMethod
-	void processBets(Result r);
+	int processBets(Result r);
 
 	@WebMethod
 	void updateResultsFromAPI();
