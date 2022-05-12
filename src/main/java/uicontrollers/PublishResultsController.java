@@ -116,12 +116,15 @@ public class PublishResultsController implements Controller{
             }
         }
 
+        tblResults.getItems().remove(ourRes);
         messageLabel.getStyleClass().setAll("lbl", "lbl-success");
         switch (config.getLocale()) {
             case "en" -> messageLabel.setText(howManyChanges + " payments were made successfully");
             case "es" -> messageLabel.setText(howManyChanges + " pagos fueron realizados correctamente");
             case "eus" -> messageLabel.setText(howManyChanges + "ordainketa ondo egin dira");
+
         }
+
     }
 
 

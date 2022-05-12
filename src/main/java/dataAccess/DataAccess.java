@@ -556,9 +556,7 @@ public class DataAccess {
 
 	public double restMoney(User who, double betAmount, Bet bet, String type)  {
 		double total=who.getMoneyAvailable()- betAmount; //the money he had - the deposited money
-		LocalDate localDate = null;
-		Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-		Date date = Date.from(instant);
+		Date date=new Date();
 		Movement mov = new Movement(betAmount*(-1), date, type, bet);
 		db.getTransaction().begin();
 		who.setMoneyAvailable(total);//our object of the app
