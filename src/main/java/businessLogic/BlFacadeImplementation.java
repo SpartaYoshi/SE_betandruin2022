@@ -444,11 +444,11 @@ public class BlFacadeImplementation implements BlFacade {
 
 	@WebMethod
 	public void processBets(Result r) {
-
+		System.out.println(">> Processing final result: " + r.toString());
 		for (Bet b : r.getBets()) {
 			User u = b.getBetter();
 			double profit = b.getAmount() * r.getFee();
-			dbManager.insertMoney(u, profit, b);
+			dbManager.insertMoney(u, profit, b, "BetProfit");
 		}
 	}
 
@@ -462,7 +462,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 		Result rHome = ev.getQuestionByID("qIDMatchWinner").getResultOption(1);
 		Result rAway = ev.getQuestionByID("qIDMatchWinner").getResultOption(2);
-		Result rDraw = ev.getQuestionByID("qIDMatchWinner").getResultOption(0);
+		Result rDraw = ev.getQuestionByID("qIDMatchWinner").getResultOption(3);
 
 		if (winner != null) {
 			if (winner.equals(ev.getHomeTeam()))
@@ -473,7 +473,10 @@ public class BlFacadeImplementation implements BlFacade {
 			processBets(rDraw);
 
 
-
+		// TOTAL GOALS BET
+		int totalGoals = matchAPI.getTotalGoals();
+		Result r = ev.getQuestionByID("qIDTotalGoals").getResultOption(totalGoals);
+		processBets(r);
 
 	}
 

@@ -610,9 +610,9 @@ public class DataAccess {
 	}
 
 
-	public User editUserName(User who, String newUsername){
+	public User editUserName(User who, String newUsername) {
 		db.getTransaction().begin();
-		User dbUser=db.find(User.class, who.getUsername());
+		User dbUser = db.find(User.class, who.getUsername());
 		dbUser.setUsername(newUsername);
 		who.setUsername(newUsername);
 		db.getTransaction().commit();
@@ -625,7 +625,7 @@ public class DataAccess {
 
 	public User editPassWord(User who, String newPassword){
 		db.getTransaction().begin();
-		User dbUser=db.find(User.class, who.getUsername());
+		User dbUser = db.find(User.class, who.getUsername());
 		dbUser.setUsername(newPassword);
 		who.setUsername(newPassword);
 		db.getTransaction().commit();

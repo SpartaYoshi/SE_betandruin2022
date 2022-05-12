@@ -222,4 +222,11 @@ public class Match {
     public String getStatus() {
         return status;
     }
+
+    public int getTotalGoals() {
+        return score.fullTime.homeTeam + score.fullTime.awayTeam
+                + score.halfTime.homeTeam + score.halfTime.awayTeam
+                + score.extraTime.homeTeam + score.extraTime.awayTeam
+                + score.penalties.homeTeam + score.penalties.awayTeam;
+    }
 }
