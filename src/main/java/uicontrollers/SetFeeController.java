@@ -27,6 +27,7 @@ import java.util.*;
 public class SetFeeController implements Controller {
     private MainGUI mainGUI;
 
+    @FXML private Label explanationLbl;
     @FXML private Label warningLbl;
     @FXML private DatePicker datepicker;
     @FXML private TableColumn<Event, Integer> ec1;
@@ -71,14 +72,15 @@ public class SetFeeController implements Controller {
         warningLbl.setText(" ");
         domain.Question quest = ((domain.Question) tblQuestions.getSelectionModel().getSelectedItem());
 
+
             try {
                 warningLbl.setText("");
-                String result=resultField.getText();
+                int result = Integer.parseInt(resultField.getText());
                 System.out.println(feeField.getText());
-                float feeAmount=Float.parseFloat(feeField.getText());
+                float feeAmount = Float.parseFloat(feeField.getText());
 
 
-                if(feeAmount<=0) {
+                if(feeAmount <= 0) {
                     warningLbl.getStyleClass().setAll("lbl","lbl-danger");
                     ConfigXML config = ConfigXML.getInstance();
                     switch (config.getLocale()) {
@@ -100,8 +102,7 @@ public class SetFeeController implements Controller {
 
                 }
 
-            }
-            catch (FeeAlreadyExistsException e1) {
+            } catch (FeeAlreadyExistsException e1) {
                 warningLbl.getStyleClass().setAll("lbl","lbl-danger");
                 ConfigXML config = ConfigXML.getInstance();
                 switch (config.getLocale()) {
@@ -110,17 +111,14 @@ public class SetFeeController implements Controller {
                     case "eus" -> warningLbl.setText("Barkatu, erantzun horretarako kuota jadanik existitzen da");
                 }
 
-            }
-            catch (java.lang.NumberFormatException e1) {
+            } catch (java.lang.NumberFormatException e1) {
                 warningLbl.getStyleClass().setAll("lbl","lbl-danger");
                 ConfigXML config = ConfigXML.getInstance();
                 switch (config.getLocale()) {
-                    case "en" -> warningLbl.setText("Error in numeric value of Fee");
-                    case "es" -> warningLbl.setText("Error en el valor númerico de Cuota");
-                    case "eus" -> warningLbl.setText("Kuotaren zenbakizko errorea");
+                    case "en" -> warningLbl.setText("Please introduce numbers for all values");
+                    case "es" -> warningLbl.setText("Por favor, introduzca números para todos los valores");
+                    case "eus" -> warningLbl.setText(""); // TODO Traducid pls a euskera jaja gracias
                 }
-
-
             }
 
         }
@@ -149,15 +147,33 @@ public class SetFeeController implements Controller {
                 tblQuestions.getItems().clear();
                 for (Question q : tblEvents.getSelectionModel().getSelectedItem().getQuestions()) {
                     tblQuestions.getItems().add(q);
+
                 }
             }
         });
     }
+    private  void setupQuestions(){
+        tblQuestions.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if(newSelection!=null){
+                if (newSelection.getQuestionID().equals("qIDMatchWinner")) {
+                    ConfigXML config = ConfigXML.getInstance();
+                    switch (config.getLocale()) {
+                        case "en" -> explanationLbl.setText("Remember: 1=Home Team wins; 2=Away Team wins, 0= Draw");
+                        case "es" -> explanationLbl.setText("Recuerde: 1=Equipo local gana; 2=Equipo visitante gana, 0= Empate");
+                        case "eus" -> explanationLbl.setText("Gogoratu: 1=Ekipo lokala irabazi; 2=Kanpoko ekipoa irabazi, 0= Berdinketa");
+                    }
+                }
+            }
+
+        });
+    }
+
 
     @FXML
     void initialize() {
 
         setupEventSelection();
+        setupQuestions();
 
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
 

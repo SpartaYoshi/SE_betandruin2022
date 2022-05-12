@@ -2,6 +2,7 @@ package businessLogic;
 
 import java.io.*;
 import java.lang.reflect.Type;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -33,7 +34,7 @@ public class BlFacadeImplementation implements BlFacade {
 	static List<Match> matchList;
 
 
-	public BlFacadeImplementation()  {		
+	public BlFacadeImplementation()  {
 		System.out.println("Creating BlFacadeImplementation instance");
 		boolean initialize = config.getDataBaseOpenMode().equals("initialize");
 		dbManager = new DataAccess(initialize);
@@ -50,13 +51,13 @@ public class BlFacadeImplementation implements BlFacade {
 			dam.initializeDB();
 			dam.close();
 		}
-		dbManager = dam;		
+		dbManager = dam;
 	}
 
 
 	/**
 	 * This method creates a question for an event, with a question text and the minimum bet
-	 * 
+	 *
 	 * @param event to which question is added
 	 * @param question text of the question
 	 * @param betMinimum minimum quantity of the bet
@@ -65,7 +66,7 @@ public class BlFacadeImplementation implements BlFacade {
 	 * @throws QuestionAlreadyExistsException if the same question already exists for the event
 	 */
 	@WebMethod
-	public Question createQuestion(Event event, String question, float betMinimum) 
+	public Question createQuestion(Event event, String question, float betMinimum)
 			throws EventAlreadyFinishedException, QuestionAlreadyExistsException {
 
 		//The minimum bid must be greater than 0
@@ -76,12 +77,12 @@ public class BlFacadeImplementation implements BlFacade {
 			throw new EventAlreadyFinishedException(ResourceBundle.getBundle("Etiquetas").
 					getString("ErrorEventHasFinished"));
 
-		qry = dbManager.createQuestion(event, question, betMinimum);		
+		qry = dbManager.createQuestion(event, question, betMinimum);
 		dbManager.close();
 		return qry;
 	}
-	
-	
+
+
 	/**
 	 * This method creates an event which includes two teams
 	 * @param homeTeam team
@@ -116,13 +117,13 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 	/**
-	 * This method invokes the data access to retrieve the events of a given date 
-	 * 
+	 * This method invokes the data access to retrieve the events of a given date
+	 *
 	 * @param date in which events are retrieved
 	 * @return collection of events
 	 */
-	
-	@WebMethod	
+
+	@WebMethod
 	public Vector<Event> getEvents(Date date)  {
 		dbManager.open(false);
 		Vector<Event>  events = dbManager.getEvents(date);
@@ -147,6 +148,15 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 
+	@WebMethod
+	public Vector<Result> getAllResults()  {
+		dbManager.open(false);
+		Vector<Result>  results = dbManager.getFinalResults();
+		dbManager.close();
+		return results;
+	}
+
+
 	@Override
 	public Bet removeCurrentUserBet(User currentUser, Question question, Bet bet1) {
 		dbManager.open(false);
@@ -158,8 +168,8 @@ public class BlFacadeImplementation implements BlFacade {
 
 	/**
 	 * This method invokes the data access to retrieve the dates a month for which there are events
-	 * 
-	 * @param date of the month for which days with events want to be retrieved 
+	 *
+	 * @param date of the month for which days with events want to be retrieved
 	 * @return collection of dates
 	 */
 
@@ -178,32 +188,32 @@ public class BlFacadeImplementation implements BlFacade {
 	/**
 	 * This method invokes the data access to initialize the database with some events and questions.
 	 * It is invoked only when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
-	 */	
-	@WebMethod	
+	 */
+	@WebMethod
 	public void initializeBD() {
 		dbManager.open(false);
 		dbManager.initializeDB();
 		dbManager.close();
 	}
-	
-	
+
+
 	@WebMethod
 	public String registerUser(User user) {
 		dbManager.open(false);
 		try {
 			if (dbManager.existUser(user))
 				throw new UserIsTakenException();
-			
+
 			LocalDate today = new Date(System.currentTimeMillis()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			LocalDate birthdate = user.getBirthdate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			
+
 			if (Period.between(birthdate, today).getYears() < 18)
 				throw new UserIsUnderageException();
 
 			dbManager.registerUser(user);
 			dbManager.close();
 			return "";
-			
+
 		} catch (UserIsTakenException e) {
 			dbManager.close();
 			ConfigXML config = ConfigXML.getInstance();
@@ -231,9 +241,9 @@ public class BlFacadeImplementation implements BlFacade {
 		}
 		return "";
 	}
-	
-	
-	
+
+
+
 	@WebMethod
 	public User loginUser(String username, String password) throws FailedLoginException {
 		dbManager.open(false);
@@ -243,16 +253,15 @@ public class BlFacadeImplementation implements BlFacade {
 
 		if (user == null || !password.equals(user.getPasswd()))
 			throw new FailedLoginException();
-		
+
 		return user;
 	}
-	
-	
+
 
 	@WebMethod
-	public void createFee(Question q,String pResult, float pFee) throws FeeAlreadyExistsException {
+	public void createFee(Question q,int pResult, float pFee) throws FeeAlreadyExistsException {
 		dbManager.open(false);
-		int n=dbManager.createFee(q,pResult,pFee);
+		int n = dbManager.createFee(q, pResult, pFee);
 		if (n == -1) {
 			throw new FeeAlreadyExistsException();
 		}
@@ -323,7 +332,8 @@ public class BlFacadeImplementation implements BlFacade {
 	@WebMethod
 	public double getMoneyAvailable() {
 		User who = this.getCurrentUser();
-		Double amount = dbManager.getUsersMoney(who);
+		//Double amount = dbManager.getUsersMoney(who); DO NOT CHANGE, IT CRASHES
+		Double amount= who.getMoneyAvailable();
 		return amount;
 	}
 
@@ -331,6 +341,9 @@ public class BlFacadeImplementation implements BlFacade {
 	public double getMoneyMinimumBet(Question q){
 		return q.getBetMinimum();
 	}
+
+
+
 
 
 
@@ -379,6 +392,33 @@ public class BlFacadeImplementation implements BlFacade {
 		return deleted;
 	}
 
+	@Override
+	public int markFinalResult(Result r, int finalR) {
+		dbManager.open(false);
+		int updated=dbManager.markFinalResult(r,finalR);
+		dbManager.close();
+		return updated;
+	}
+
+	@Override
+	public int payWinners(Bet b,int finalR) {
+		int cont=0;
+		dbManager.open(false);
+		List<User> allUsers=dbManager.getAllUsers();
+		for(User u:allUsers){
+			for(Bet betuser:u.getBets()){
+				if(betuser.getBetNum()==b.getBetNum() && betuser.getResult().getPossibleResult()==finalR){// he has a bet, that it's correct, we have to pay this user
+					float total= (float) (betuser.getAmount()+(betuser.getAmount()*b.getResult().getFee()));
+					dbManager.insertMoney(u,total,betuser);//update his account
+					cont++;
+				}
+			}
+
+		}
+
+		return cont;
+	}
+
 
 	@Override
 	public String editProfileUsername(User user) {
@@ -404,23 +444,28 @@ public class BlFacadeImplementation implements BlFacade {
 		matchList = gson.fromJson((jsonObj.get("matches")), matchListType);
 	}
 
+	private void processBet(Result profit, List<Result> losses) {
+
+	}
 
 
 	private void processMatchResult(Event ev, Match matchAPI) {
 
-
-
 		// WINNER BET
 		String winner = matchAPI.getWinner();
 
-		List<Result> winnerFeeResults = dbManager.getResultByType("qIDMatchWinner");
+		Result rHome = ev.getQuestionByID("qIDMatchWinner").getResultOption(1);
+		Result rAway = ev.getQuestionByID("qIDMatchWinner").getResultOption(2);
+		Result rDraw = ev.getQuestionByID("qIDMatchWinner").getResultOption(0);
 
-
+		Result profit;
+		List<Result> losses = new ArrayList<>();
 
 		if (winner != null) {
-			if (winner.equals(ev.getHomeTeam())){
-				// process bets for home team winner.
+			if (winner.equals(ev.getHomeTeam())) {
+				//processBet()
 			}
+
 			else {
 				// process bets for away team winner
 			}
@@ -432,7 +477,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 
 
-	 public void updateResults() {
+	public void updateResults() {
 		fetchFromAPI();
 
 		List<Event> eventList = dbManager.getAllEvents();
@@ -451,5 +496,5 @@ public class BlFacadeImplementation implements BlFacade {
 					processMatchResult(ev, m);
 			}
 		}
-	 }
+	}
 }

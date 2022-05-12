@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Vector;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -36,6 +37,10 @@ public class Question implements Serializable {
 		super();
 	}
 
+	public Question(String questionID) {
+		this.questionID = questionID;
+	}
+
 	public Question(Integer queryNumber, String questionID, float betMinimum, Event event) {
 		super();
 		this.questionNumber = queryNumber;
@@ -52,6 +57,22 @@ public class Question implements Serializable {
 		this.betMinimum=betMinimum;
 		
 	}
+
+
+	public Result getResultOption(int option) {
+		try {
+			Result rCompare = new Result(option);
+			int index = -1;
+			if (resultList.contains(option))
+				index = resultList.indexOf(rCompare);
+
+			return resultList.get(index);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return null;
+		}
+
+	}
+
 
 	/**
 	 * Gets the  number of the question
@@ -154,9 +175,9 @@ public class Question implements Serializable {
 	}
 
 	
-	public boolean resultisAlreadyStored(String result) {
+	public boolean isResultStored(int result) {
 		for (Result f:this.resultList) {
-			if (f.getQuestionID().equals(result))
+			if (f.getPossibleResult() == result)
 				return true;
 		}
 		return false;
@@ -166,5 +187,14 @@ public class Question implements Serializable {
 	public String toString(){
 
 		return questionID;
-	}	
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Question question = (Question) o;
+		return Objects.equals(questionID, question.questionID);
+	}
+
 }

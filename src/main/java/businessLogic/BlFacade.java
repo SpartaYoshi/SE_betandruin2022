@@ -45,6 +45,9 @@ public interface BlFacade {
 	 * @return collection of events
 	 */
 	@WebMethod Vector<Event> getEvents(Date date);
+
+
+	@WebMethod public Vector<Result> getAllResults();
 	
 	/**
 	 * This method retrieves from the database the dates in a month for which there are events
@@ -82,7 +85,7 @@ public interface BlFacade {
 	 * @throws FeeAlreadyExistsException
 	 */
 	@WebMethod
-	void createFee(Question q, String pResult, float pFee) throws FeeAlreadyExistsException;
+	void createFee(Question q, int pResult, float pFee) throws FeeAlreadyExistsException;
 
 	/**
 	 * method to insert the money wanted into the user's account
@@ -173,4 +176,15 @@ public interface BlFacade {
 
 	@WebMethod
 	Event removeEvent(Event ev);
+
+	@WebMethod
+	int markFinalResult(Result r,int finalR);
+
+	/**
+	 * returns the amount of transactions done
+	 * @param b
+	 * @return
+	 */
+	@WebMethod
+	int  payWinners(Bet b,int finalR);
 }

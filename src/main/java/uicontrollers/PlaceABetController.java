@@ -45,7 +45,7 @@ public class PlaceABetController implements Controller, Initializable {
     @FXML private TableColumn<Question, Integer> qc1;
     @FXML private TableColumn<Question, String> qc2;
     @FXML private TableColumn<Result, Float> fc1;
-    @FXML private TableColumn<Result, String> fc2;
+    @FXML private TableColumn<Result, Integer> fc2;
 
     @FXML private Label eventDescriptionLabel;
     @FXML private Label questionLabel;
@@ -297,7 +297,7 @@ public class PlaceABetController implements Controller, Initializable {
     private void setupResultSelection() {
         tblResults.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                resultLabel.setText(tblResults.getSelectionModel().getSelectedItem().getQuestionID());
+                resultLabel.setText("" + tblResults.getSelectionModel().getSelectedItem().getPossibleResult());
             }
         });
 
@@ -313,9 +313,9 @@ public class PlaceABetController implements Controller, Initializable {
         }
         ConfigXML config = ConfigXML.getInstance();
         switch (config.getLocale()) {
-            case "en" -> availableMoneyLabel.setText("Money available: "+businessLogic.getMoneyAvailable() + "€");
-            case "es" -> availableMoneyLabel.setText("Dinero disponible: "+businessLogic.getMoneyAvailable() + "€");
-            case "eus" -> availableMoneyLabel.setText("Diru erabilgarria: "+businessLogic.getMoneyAvailable() + "€");
+            case "en" -> availableMoneyLabel.setText("Money available: " + businessLogic.getMoneyAvailable() + "€");
+            case "es" -> availableMoneyLabel.setText("Dinero disponible: " + businessLogic.getMoneyAvailable() + "€");
+            case "eus" -> availableMoneyLabel.setText("Diru erabilgarria: " + businessLogic.getMoneyAvailable() + "€");
         }
     }
 
@@ -410,7 +410,7 @@ public class PlaceABetController implements Controller, Initializable {
 
         // Bind columns to Fee (result) attributes
         fc1.setCellValueFactory(new PropertyValueFactory<>("fee"));
-        fc2.setCellValueFactory(new PropertyValueFactory<>("result"));
+        fc2.setCellValueFactory(new PropertyValueFactory<>("possibleResult"));
 
 
 

@@ -63,7 +63,7 @@ public class PublishResultsController implements Controller{
     private TableColumn<Result, Float> fc1;
 
     @FXML
-    private TableColumn<Result, String> fc2;
+    private TableColumn<Result, Integer> fc2;
 
     @FXML
     private Label questionLabel;
@@ -95,9 +95,33 @@ public class PublishResultsController implements Controller{
     }
 
 
-
+    @FXML
     public void publishResult(ActionEvent actionEvent) {
+        Result ourRes = tblResults.getSelectionModel().getSelectedItem();
+        int howManyChanges = 0;
+        if (ourRes != null) {
+            int updatedRes = businessLogic.markFinalResult(ourRes, ourRes.getPossibleResult());
+            messageLabel.setText(String.valueOf(updatedRes));
+            Vector<Bet> relatedbets = ourRes.getBets();
 
+            for (Bet b : relatedbets) {
+                howManyChanges = businessLogic.payWinners(b, updatedRes);
+            }
+        } else {// it is null
+            messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+            switch (config.getLocale()) {
+                case "en" -> messageLabel.setText("Error. Please select a Result");
+                case "es" -> messageLabel.setText("Error. Por favor, seleccione un resultado.");
+                case "eus" -> messageLabel.setText("Errorea. Mesedez, sakatu emaitza bat");
+            }
+        }
+
+        messageLabel.getStyleClass().setAll("lbl", "lbl-success");
+        switch (config.getLocale()) {
+            case "en" -> messageLabel.setText(howManyChanges + " payments were made successfully");
+            case "es" -> messageLabel.setText(howManyChanges + " pagos fueron realizados correctamente");
+            case "eus" -> messageLabel.setText(howManyChanges + "ordainketa ondo egin dira");
+        }
     }
 
 
@@ -165,7 +189,7 @@ public class PublishResultsController implements Controller{
     private void setupResultSelection() {
         tblResults.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                resultLabel.setText(tblResults.getSelectionModel().getSelectedItem().getQuestionID());
+                resultLabel.setText("" + tblResults.getSelectionModel().getSelectedItem().getPossibleResult());
             }
         });
 
@@ -189,7 +213,7 @@ public class PublishResultsController implements Controller{
 
      @FXML
     public void initialize() {
-        publishButton.getStyleClass().setAll("btn", "btn-primary");
+
 
          switch (config.getLocale()) {
              case "en" -> instructionLbl.setText("Please, insert the final correct answer for the selected question");
@@ -264,7 +288,7 @@ public class PublishResultsController implements Controller{
 
         // Bind columns to Fee (result) attributes
         fc1.setCellValueFactory(new PropertyValueFactory<>("fee"));
-        fc2.setCellValueFactory(new PropertyValueFactory<>("result"));
+        fc2.setCellValueFactory(new PropertyValueFactory<>("possibleResult"));
 
 
 

@@ -48,6 +48,8 @@ public class Event implements Serializable {
 		this.questions = questions;
 	}
 
+
+
 	public Event() {
 		super();
 	}
@@ -72,6 +74,21 @@ public class Event implements Serializable {
 		this.description=this.getTeamTemplate();
 
 	}
+
+
+	public Question getQuestionByID(String questionID) {
+		try {
+			Question qCompare = new Question(questionID);
+			int index = -1;
+			if (questions.contains(questionID))
+				index = questions.indexOf(qCompare);
+
+			return questions.get(index);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+
 
 	public Integer getEventNumber() {
 		return eventNumber;
