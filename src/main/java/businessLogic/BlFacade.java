@@ -185,5 +185,5 @@ public interface BlFacade {
 	void processBets(Result r);
 
 	@WebMethod
-	void updateResultsFromAPI();
+    int updateResultsFromAPI();
 }

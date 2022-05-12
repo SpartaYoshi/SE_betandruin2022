@@ -482,9 +482,10 @@ public class BlFacadeImplementation implements BlFacade {
 
 
 	@WebMethod
-	public void updateResultsFromAPI() {
+	public int updateResultsFromAPI() {
 		fetchFromAPI();
 
+		int matchesProcessed = 0;
 		List<Event> eventList = dbManager.getAllEvents();
 
 		for (Event ev : eventList) {
@@ -497,9 +498,12 @@ public class BlFacadeImplementation implements BlFacade {
 
 			if (matchList.contains(conv)) {
 				Match m = matchList.get(matchList.indexOf(conv));
-				if (m.getStatus().equals("FINISHED"))
+				if (m.getStatus().equals("FINISHED")) {
 					processMatchResult(ev, m);
+					matchesProcessed++;
+				}
 			}
 		}
+		return matchesProcessed;
 	}
 }
