@@ -666,6 +666,7 @@ public class DataAccess {
 	public int markFinalResult(Result r, int f){
 		db.getTransaction().begin();
 		r.setFinalResult(f);
+		db.persist(f);
 		db.getTransaction().commit();
 		return r.getFinalResult();
 	}

@@ -448,7 +448,7 @@ public class BlFacadeImplementation implements BlFacade {
 		for (Bet b : r.getBets()) {
 			User u = b.getBetter();
 			double profit = b.getAmount() * r.getFee();
-			dbManager.insertMoney(u, profit, b);
+			dbManager.insertMoney(u, profit, b,"BetProfit");
 		}
 	}
 
