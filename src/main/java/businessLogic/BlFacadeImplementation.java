@@ -222,7 +222,7 @@ public class BlFacadeImplementation implements BlFacade {
 				case "es":
 					return "El nombre de usuario ya existe. Por favor, pruebe con uno distinto.";
 				case "eus":
-					return "???"; // TODO
+					return "Erabiltzaile izena dagoeneko existitzen da. Saiatu zaitez beste batekin.";
 			}
 
 		} catch (UserIsUnderageException e) {
@@ -234,9 +234,8 @@ public class BlFacadeImplementation implements BlFacade {
 				case "es":
 					return "Los servicios Bet&Ruin no están disponibles para menores de 18 años.";
 				case "eus":
-					return "???"; // TODO
+					return "Bet&Ruin zerbitzuak ez daude 18 urtetik beherakoentzat eskuragarri.";
 			}
-
 		}
 		return "";
 	}
