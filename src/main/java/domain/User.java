@@ -17,8 +17,7 @@ public class User {
 	private String name;
 	private String surname;
 	private Date birthdate;
-	private double moneyAvailable;
-	// private double balance;
+	private double balance;
 	private boolean admin;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -39,20 +38,20 @@ public class User {
 		this.name = name;
 		this.surname = surname;
 		this.birthdate = birthdate;
-		moneyAvailable=10;
+		balance = 10;
 		admin = false;
 		bets = new Vector<Bet>();
 		movements = new Vector<Movement>();
 	}
 
-	public User(String username, String passwd, String name, String surname, Date birthdate, Double moneyAvailable) {
+	public User(String username, String passwd, String name, String surname, Date birthdate, Double balance) {
 		super();
 		this.username = username;
 		this.passwd = passwd;
 		this.name = name;
 		this.surname = surname;
 		this.birthdate = birthdate;
-		this.moneyAvailable=moneyAvailable;
+		this.balance = balance;
 		admin = false;
 		bets = new Vector<Bet>();
 		movements = new Vector<Movement>();
@@ -124,10 +123,10 @@ public class User {
 	}
 
 
-	public double getMoneyAvailable() {return moneyAvailable;}
+	public double getBalance() {return balance;}
 
-	public void setMoneyAvailable(double amount) {
-		this.moneyAvailable = amount;
+	public void setBalance(double amount) {
+		this.balance = amount;
 	}
 
 

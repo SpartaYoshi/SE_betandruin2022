@@ -97,8 +97,8 @@ public class PublishResultsController implements Controller{
 
     @FXML
     public void publishResult(ActionEvent actionEvent) {
-        Result ourRes=tblResults.getSelectionModel().getSelectedItem();
-        int updatedres=businessLogic.markFinalResult(ourRes,ourRes.getPossibleResult());
+        Result ourRes = tblResults.getSelectionModel().getSelectedItem();
+        int updatedres = businessLogic.markFinalResult(ourRes,ourRes.getPossibleResult());
         messageLabel.setText(String.valueOf(updatedres));
 
 
