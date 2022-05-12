@@ -6,10 +6,8 @@ import java.util.Vector;
 
 import businessLogic.BlFacade;
 import domain.*;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -58,32 +56,30 @@ public class CheckMyResultsController implements Controller {
         columnEvent.setCellValueFactory(new PropertyValueFactory<>("description"));
         columnQuestion.setCellValueFactory(new PropertyValueFactory<>("questionID"));
         columnResult.setCellValueFactory(new PropertyValueFactory<>("finalResult"));
-        columnMyResult.setCellValueFactory(new PropertyValueFactory<>("finalResult"));
+        columnMyResult.setCellValueFactory(new PropertyValueFactory<>("possibleResult"));
 
 
         User who = businessLogic.getCurrentUser();
-        Vector<Bet> usersBets = who.getBets();
+        if (who!= null){
+            Vector<Bet> usersBets = who.getBets();
 
-        Vector<Result> allResults = businessLogic.getAllResults();
+            Vector<Result> allResults = businessLogic.getAllResults();
 
-
-
-        for (Result res: allResults) {
-            int finalRes = res.getFinalResult();
-            for (Bet b : usersBets) {
-                // if los eventos son el mismo
-                tableResults.getItems().add(res); // la respuesta real
-                int usersResult = b.getResult().getPossibleResult(); // la respuesta que eligió el user
-                tableMyResults.getItems().add(usersResult);
-
-
-                //}
-
-
+            for (Result res: allResults) {
+                int finalRes = res.getFinalResult();
+                for (Bet b : usersBets) {
+                    domain.Event usersResultEvent = b.getResult().getQuestion().getEvent();
+                    domain.Event allResultsEvent = res.getQuestion().getEvent();
+                    if (usersResultEvent.equals(allResultsEvent)) {
+                        // if they are the same event:
+                        tableResults.getItems().add(res); // the final result
+                        int usersResult = b.getResult().getPossibleResult();
+                        tableMyResults.getItems().add(usersResult); // the result the user had selected
+                    }
                 }
             }
         }
-
+    }
 
     public CheckMyResultsController(BlFacade bl) {
         businessLogic = bl;

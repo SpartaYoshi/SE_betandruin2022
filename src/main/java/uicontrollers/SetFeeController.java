@@ -117,10 +117,9 @@ public class SetFeeController implements Controller {
                 switch (config.getLocale()) {
                     case "en" -> warningLbl.setText("Please introduce numbers for all values");
                     case "es" -> warningLbl.setText("Por favor, introduzca números para todos los valores");
-                    case "eus" -> warningLbl.setText(""); // TODO Traducid pls a euskera jaja gracias
+                    case "eus" -> warningLbl.setText("Mesedez, sartu zenbakiak balio guztietarako");
                 }
             }
-
         }
 
 
