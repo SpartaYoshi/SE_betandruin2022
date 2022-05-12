@@ -179,4 +179,7 @@ public interface BlFacade {
 
 	@WebMethod
 	void updateResultsFromAPI();
+
+	@WebMethod
+	String editProfilePassword(User user, String newPassword);
 }

@@ -101,8 +101,8 @@ public class MainGUI {
       if (controllerClass == MyProfileController.class)
         return new MyProfileController(businessLogic);
 
-      if (controllerClass == EditProfileController.class)
-        return new EditProfileController(businessLogic);
+      if (controllerClass == EditPasswordController.class)
+        return new EditPasswordController(businessLogic);
 
       if (controllerClass == ShowMovementsController.class)
         return new ShowMovementsController(businessLogic);
@@ -153,7 +153,7 @@ public class MainGUI {
     placeAbet = load("/PlaceABetv2.fxml");
     removeBet = load("/RemoveaBetv2.fxml");
     myProfile = load("/MyProfile.fxml");
-    editProfile = load("/EditProfile.fxml");
+    editProfile = load("/EditPassword.fxml");
     showMovements = load("/ShowMovements.fxml");
     removeEvent = load("/RemoveEvent.fxml");
     checkMyResults = load("/CheckMyResults.fxml");
