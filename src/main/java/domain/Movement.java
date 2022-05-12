@@ -3,6 +3,7 @@ package domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -19,11 +20,22 @@ public class Movement {
     private Double amount;
     private Date date;
     private String descriptionType;
+    @OneToOne
+    private Bet bet;
+
+
+    public Movement(Double amount, Date date, String descriptionType, Bet bet) {
+        this.amount = amount;
+        this.date = date;
+        this.descriptionType = descriptionType;
+        this.bet = bet;
+    }
 
     public Movement(Double amount, Date date, String descriptionType) {
         this.amount = amount;
         this.date = date;
         this.descriptionType = descriptionType;
+        this.bet = null;
     }
 
     public Movement() {

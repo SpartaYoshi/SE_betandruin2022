@@ -2,6 +2,9 @@ package dataAccess;
 
 import java.text.SimpleDateFormat;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 import javax.persistence.*;
@@ -18,8 +21,6 @@ public class DataAccess {
 
 	protected EntityManager db;
 	protected EntityManagerFactory emf;
-
-	private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
 	final ConfigXML config = ConfigXML.getInstance();
 
@@ -273,6 +274,26 @@ public class DataAccess {
 	}
 
 
+	/**
+	 * This method retrieves all currently registered final results in the database
+	 *
+	 * @return collection of results
+	 */
+	public Vector<Result> getFinalResults() {
+		System.out.println(">> DataAccess: get final results");
+
+		Vector<Result> res = new Vector<>();
+		TypedQuery<Result> query = db.createQuery("SELECT re FROM Result re", Result.class);
+
+		List<Result> results = query.getResultList();
+		for (Result re:results) {
+			System.out.println(re.getFinalResult());
+			res.add(re);
+		}
+		return res;
+	}
+
+
 
 	public Vector<Question> getQuestions(Event event) {
 		System.out.println("Event is "+ event);
@@ -478,17 +499,20 @@ public class DataAccess {
 	 * @param am
 	 * @return
 	 */
-	public double insertMoney(User who, double am, Bet bet)  {
-		double total = who.getBalance() + am; //the money he had + the deposited money
+	public double insertMoney(User who, double am, Bet bet, String type)  {
+		double total=who.getBalance() + am; //the money he had + the deposited money
 		Date date = new Date();
-		Movement mov = null;
-
-		if (bet == null){
-			String description = new String("DepositMoney");
-			mov = new Movement(am, date, description);
+		Movement mov= null;
+		if(bet==null){
+			LocalDate localDate = null;
+			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+			date = Date.from(instant);
+			mov = new Movement(am, date, type);
 		}else{
-			String description = new String("ObtainedMoney");
-			mov = new Movement(am, date, description);
+			LocalDate localDate = null;
+			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+			date = Date.from(instant);
+			mov = new Movement(am, date, type, bet);
 		}
 
 		db.getTransaction().begin();
@@ -524,8 +548,8 @@ public class DataAccess {
 		result.addBet(bet);
 		db.persist(bet);
 		db.getTransaction().commit();
-		if (bet != null) {
-			this.restMoney(who, amountBet, bet);
+		if (bet != null){
+			this.restMoney(who, amountBet, bet, "PlacedBetMoney");
 		}
 		return bet;
 	}
@@ -538,11 +562,12 @@ public class DataAccess {
 	 */
 
 
-	public double restMoney(User who, double betAmount, Bet bet)  {
-		double total=who.getBalance()- betAmount; //the money he had - the deposited money
-		String description = new String("RestMoney");
-		Date date=new Date();
-		Movement mov = new Movement(betAmount*(-1), date, description);
+	public double restMoney(User who, double betAmount, Bet bet, String type)  {
+		double total=who.getBalance() - betAmount; //the money he had - the deposited money
+		LocalDate localDate = null;
+		Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+		Date date = Date.from(instant);
+		Movement mov = new Movement(betAmount*(-1), date, type, bet);
 		db.getTransaction().begin();
 		who.setBalance(total);//our object of the app
 		who.addMovement(mov);
@@ -582,7 +607,7 @@ public class DataAccess {
 		db.getTransaction().begin();
 		currentUser.getBets().remove(bet);
 		dbUser.getBets().remove(bet);
-		this.insertMoney(currentUser, bet.getAmount(), bet);
+		//this.insertMoney(currentUser, bet.getAmount(), bet, "PlacedBetMoney");
 		if(dbResult!=null){
 			dbResult.getBets().remove(bet);
 		}
@@ -643,7 +668,7 @@ public class DataAccess {
 		db.getTransaction().commit();
 
 		return dbEvent;
-	}
+    }
 
 
 	public int markFinalResult(Result r, int f){
