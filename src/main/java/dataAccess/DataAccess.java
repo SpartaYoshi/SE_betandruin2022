@@ -504,14 +504,8 @@ public class DataAccess {
 		Date date = new Date();
 		Movement mov= null;
 		if(bet==null){
-			LocalDate localDate = null;
-			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-			date = Date.from(instant);
 			mov = new Movement(am, date, type);
 		}else{
-			LocalDate localDate = null;
-			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-			date = Date.from(instant);
 			mov = new Movement(am, date, type, bet);
 		}
 		db.getTransaction().begin();
