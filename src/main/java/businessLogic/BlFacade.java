@@ -122,6 +122,7 @@ public interface BlFacade {
 	 */
 	@WebMethod
 	Bet placeBet(double amount, Question question, Result result, Date date) throws NotEnoughMoneyException, MinimumBetException, EventAlreadyFinishedException;
+
 	@WebMethod
 
 	Vector<Question> getQuestions(Event value);
@@ -168,23 +169,17 @@ public interface BlFacade {
 	@WebMethod String getSessionMode();
 
 	@WebMethod
-	String editProfileUsername(User user);
-
-	@WebMethod
-	String editProfilePassword(User user);
-
-
-	@WebMethod
 	Event removeEvent(Event ev);
 
 	@WebMethod
 	int markFinalResult(Result r,int finalR);
 
-	/**
-	 * returns the amount of transactions done
-	 * @param b
-	 * @return
-	 */
 	@WebMethod
-	int  payWinners(Bet b,int finalR);
+	int processBets(Result r);
+
+	@WebMethod
+	void updateResultsFromAPI();
+
+	@WebMethod
+	String editProfilePassword(User user, String newPassword);
 }

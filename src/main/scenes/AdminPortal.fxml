@@ -33,7 +33,7 @@
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="203.0" layoutY="492.0" mnemonicParsing="false" onAction="#selectLogout" prefHeight="26.0" prefWidth="100.0" styleClass="btn-primary" text="%Logout">
+      <Button layoutX="203.0" layoutY="492.0" mnemonicParsing="false" onAction="#selectLogout" prefHeight="26.0" prefWidth="150.0" styleClass="btn-primary" text="%Logout">
          <font>
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
@@ -58,7 +58,7 @@
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="76.0" layoutY="492.0" mnemonicParsing="false" onAction="#selectMyProfile" prefHeight="26.0" prefWidth="100.0" styleClass="btn-primary" text="%MyProfile">
+      <Button layoutX="26.0" layoutY="492.0" mnemonicParsing="false" onAction="#selectMyProfile" prefHeight="26.0" prefWidth="150.0" styleClass="btn-primary" text="%MyProfile">
          <font>
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>

@@ -1,6 +1,5 @@
 package businessLogic;
 
-import java.io.*;
 import java.lang.reflect.Type;
 
 import java.time.LocalDate;
@@ -222,7 +221,7 @@ public class BlFacadeImplementation implements BlFacade {
 				case "es":
 					return "El nombre de usuario ya existe. Por favor, pruebe con uno distinto.";
 				case "eus":
-					return "???"; // TODO
+					return "Erabiltzaile izena dagoeneko existitzen da. Saiatu zaitez beste batekin.";
 			}
 
 		} catch (UserIsUnderageException e) {
@@ -234,9 +233,8 @@ public class BlFacadeImplementation implements BlFacade {
 				case "es":
 					return "Los servicios Bet&Ruin no están disponibles para menores de 18 años.";
 				case "eus":
-					return "???"; // TODO
+					return "Bet&Ruin zerbitzuak ez daude 18 urtetik beherakoentzat eskuragarri.";
 			}
-
 		}
 		return "";
 	}
@@ -275,7 +273,7 @@ public class BlFacadeImplementation implements BlFacade {
 		Date currentdate = new Date();
 
 		dbManager.open(false);
-		if (amount>this.currentUser.getMoneyAvailable()){
+		if (amount>this.currentUser.getBalance()){
 			throw new NotEnoughMoneyException();
 		}
 		else if (amount<question.getBetMinimum()){
@@ -292,7 +290,7 @@ public class BlFacadeImplementation implements BlFacade {
 		return newBet;
 	}
 
-
+/*
 	@WebMethod
 	public String editProfileUsername(User user, String newUsername) {
 		try {
@@ -318,11 +316,12 @@ public class BlFacadeImplementation implements BlFacade {
 		}
 		return " ";
 	}
+	*/
+
 
 	@WebMethod
 	public String editProfilePassword(User user, String newPassword) {
 		dbManager.editPassWord(user, newPassword);
-
 		return "";
 	}
 
@@ -331,8 +330,7 @@ public class BlFacadeImplementation implements BlFacade {
 	@WebMethod
 	public double getMoneyAvailable() {
 		User who = this.getCurrentUser();
-		//Double amount = dbManager.getUsersMoney(who); DO NOT CHANGE, IT CRASHES
-		Double amount= who.getMoneyAvailable();
+		Double amount= who.getBalance();
 		return amount;
 	}
 
@@ -399,6 +397,7 @@ public class BlFacadeImplementation implements BlFacade {
 		return updated;
 	}
 
+	/*
 	@Override
 	public int payWinners(Bet b,int finalR) {
 		int cont=0;
@@ -416,20 +415,7 @@ public class BlFacadeImplementation implements BlFacade {
 		}
 
 		return cont;
-	}
-
-
-	@Override
-	public String editProfileUsername(User user) {
-		return null;
-	}
-
-	@Override
-	public String editProfilePassword(User user) {
-		return null;
-	}
-
-
+	}*/
 
 
 	private void fetchFromAPI() {
@@ -443,12 +429,25 @@ public class BlFacadeImplementation implements BlFacade {
 		matchList = gson.fromJson((jsonObj.get("matches")), matchListType);
 	}
 
-	private void processBet(Result profit, List<Result> losses) {
 
+	@WebMethod
+	public int processBets(Result r) {
+		int cont=0;
+		for (Bet b : r.getBets()) {
+			User u = b.getBetter();
+			double profit = b.getAmount() * r.getFee();
+			dbManager.open(false);
+			dbManager.insertMoney(u, profit, b,"BetProfit");
+			cont++;
+			dbManager.close();
+		}
+		return cont;
 	}
 
 
 	private void processMatchResult(Event ev, Match matchAPI) {
+
+		System.out.println("Match found: @" + ev.getStrDate() + ", " + ev.getHomeTeam() + " - " + ev.getAwayTeam());
 
 		// WINNER BET
 		String winner = matchAPI.getWinner();
@@ -457,26 +456,22 @@ public class BlFacadeImplementation implements BlFacade {
 		Result rAway = ev.getQuestionByID("qIDMatchWinner").getResultOption(2);
 		Result rDraw = ev.getQuestionByID("qIDMatchWinner").getResultOption(0);
 
-		Result profit;
-		List<Result> losses = new ArrayList<>();
-
 		if (winner != null) {
-			if (winner.equals(ev.getHomeTeam())) {
-				//processBet()
-			}
+			if (winner.equals(ev.getHomeTeam()))
+				processBets(rHome);
+			else
+				processBets(rAway);
+		} else
+			processBets(rDraw);
 
-			else {
-				// process bets for away team winner
-			}
-		}
-		else {
-			//process bets for draw
-		}
+
+
+
 	}
 
 
-
-	public void updateResults() {
+	@WebMethod
+	public void updateResultsFromAPI() {
 		fetchFromAPI();
 
 		List<Event> eventList = dbManager.getAllEvents();
