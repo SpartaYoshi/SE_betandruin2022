@@ -96,17 +96,15 @@ public class PublishResultsController implements Controller{
 
 
     @FXML
-    public void publishResult(ActionEvent actionEvent) {
+    public void publishResult() {
         Result ourRes = tblResults.getSelectionModel().getSelectedItem();
         int howManyChanges = 0;
         if (ourRes != null) {
             int updatedRes = businessLogic.markFinalResult(ourRes, ourRes.getPossibleResult());
             messageLabel.setText(String.valueOf(updatedRes));
-            Vector<Bet> relatedbets = ourRes.getBets();
 
-            for (Bet b : relatedbets) {
-                howManyChanges = businessLogic.payWinners(b, updatedRes);
-            }
+            businessLogic.processBets(ourRes);
+
         } else {// it is null
             messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
             switch (config.getLocale()) {

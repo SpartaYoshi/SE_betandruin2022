@@ -17,22 +17,28 @@ public class Bet implements Serializable {
     private Integer betNum;
 
     private Double amount;
+
     @ManyToOne
     @JoinColumn(name = "result")
     @XmlIDREF
     private Result result;
 
-    public Bet(Double amount,Result r) {
+    @ManyToOne
+    private User better;
+
+    public Bet(Double amount, Result r, User better) {
         super();
         this.amount = amount;
-        this.result=r;
+        this.result = r;
+        this.better = better;
     }
 
-    public Bet(Integer numBet, Double amount,Result r) {
+    public Bet(Integer numBet, Double amount,Result r, User better) {
         super();
         this.betNum = numBet;
         this.amount = amount;
         this.result=r;
+        this.better = better;
     }
 
     public Bet() {
@@ -70,5 +76,9 @@ public class Bet implements Serializable {
                 ", amount=" + amount +
                 ", result=" + result +
                 '}';
+    }
+
+    public User getBetter() {
+        return better;
     }
 }

@@ -122,6 +122,7 @@ public interface BlFacade {
 	 */
 	@WebMethod
 	Bet placeBet(double amount, Question question, Result result, Date date) throws NotEnoughMoneyException, MinimumBetException, EventAlreadyFinishedException;
+
 	@WebMethod
 
 	Vector<Question> getQuestions(Event value);
@@ -180,11 +181,9 @@ public interface BlFacade {
 	@WebMethod
 	int markFinalResult(Result r,int finalR);
 
-	/**
-	 * returns the amount of transactions done
-	 * @param b
-	 * @return
-	 */
 	@WebMethod
-	int  payWinners(Bet b,int finalR);
+	void processBets(Result r);
+
+	@WebMethod
+	void updateResultsFromAPI();
 }

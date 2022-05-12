@@ -139,7 +139,7 @@ public class PlaceABetController implements Controller, Initializable {
                     } else {
 
                         if (stringAmount != null) {
-                            Double amount = Double.parseDouble(stringAmount);
+                            double amount = Double.parseDouble(stringAmount);
 
                             Bet newBet = businessLogic.placeBet(amount, question, result, date);
 

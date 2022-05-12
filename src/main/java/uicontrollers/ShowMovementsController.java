@@ -1,28 +1,18 @@
 package uicontrollers;
 
-        import java.net.URL;
-        import java.time.LocalDate;
-        import java.util.ArrayList;
         import java.util.Date;
-        import java.util.List;
-        import java.util.ResourceBundle;
 
         import businessLogic.BlFacade;
         import configuration.ConfigXML;
         import dataAccess.PropertiesManager;
-        import domain.Bet;
-        import domain.Event;
         import domain.Movement;
-        import domain.Question;
         import javafx.beans.property.SimpleStringProperty;
         import javafx.event.ActionEvent;
         import javafx.fxml.FXML;
-        import javafx.scene.control.DatePicker;
         import javafx.scene.control.Label;
         import javafx.scene.control.TableColumn;
         import javafx.scene.control.TableView;
         import javafx.scene.control.cell.PropertyValueFactory;
-        import org.intellij.lang.annotations.JdkConstants;
         import ui.MainGUI;
 
 public class ShowMovementsController implements Controller{
