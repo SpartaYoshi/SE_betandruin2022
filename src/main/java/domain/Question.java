@@ -33,6 +33,14 @@ public class Question implements Serializable {
 	@XmlIDREF
 	private Event event;
 
+	public Vector<Result> getResultList() {
+		return resultList;
+	}
+
+	public void setResultList(Vector<Result> resultList) {
+		this.resultList = resultList;
+	}
+
 	public Question(){
 		super();
 	}

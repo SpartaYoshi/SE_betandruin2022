@@ -71,13 +71,16 @@ public class CheckMyResultsController implements Controller {
         for (Result res: allResults) {
             int finalRes = res.getFinalResult();
             for (Bet b : usersBets) {
-                // if los eventos son el mismo
-                tableResults.getItems().add(res); // the final result
-                int usersResult = b.getResult().getPossibleResult();
-                tableMyResults.getItems().add(usersResult); // the result the user had selected
+                domain.Event usersResultEvent = b.getResult().getQuestion().getEvent();
+                domain.Event allResultsEvent = res.getQuestion().getEvent();
+                if (usersResultEvent.equals(allResultsEvent)){
+                    // if los eventos son el mismo
+                    tableResults.getItems().add(res); // the final result
+                    int usersResult = b.getResult().getPossibleResult();
+                    tableMyResults.getItems().add(usersResult); // the result the user had selected
 
 
-                //}
+                }
             }
         }
     }

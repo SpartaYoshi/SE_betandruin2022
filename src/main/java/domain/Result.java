@@ -21,6 +21,14 @@ public class Result implements Serializable {
 	@GeneratedValue
 	private Integer id;
 
+	public Question getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+
 	@OneToOne
 	@XmlIDREF
 	private Question question;
