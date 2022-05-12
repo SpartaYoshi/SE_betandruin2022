@@ -6,7 +6,6 @@ import java.util.Vector;
 
 import businessLogic.BlFacade;
 import domain.*;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -22,7 +21,7 @@ public class CheckMyResultsController implements Controller {
     private TableView<Result> tableResults;
 
     @FXML
-    private TableView<Integer> tableMyResults;
+    private TableView<Result> tableMyResults;
 
 
     @FXML
@@ -34,6 +33,8 @@ public class CheckMyResultsController implements Controller {
     @FXML
     private TableColumn<Result, Integer> columnMyResult;
 
+    //////
+
     @FXML
     private TableColumn<Event, String> columnEvent;
 
@@ -41,7 +42,7 @@ public class CheckMyResultsController implements Controller {
     private TableColumn<Question, String> columnQuestion;
 
     @FXML
-    private TableColumn<Result, Integer> columnResult;
+    private TableColumn<Result, Integer> columnFinalResult;
 
 
     @FXML
@@ -55,26 +56,23 @@ public class CheckMyResultsController implements Controller {
         // Bind columns
         columnEvent.setCellValueFactory(new PropertyValueFactory<>("description"));
         columnQuestion.setCellValueFactory(new PropertyValueFactory<>("questionID"));
-        columnResult.setCellValueFactory(new PropertyValueFactory<>("finalResult"));
+        columnFinalResult.setCellValueFactory(new PropertyValueFactory<>("finalResult"));
+
         columnMyResult.setCellValueFactory(new PropertyValueFactory<>("possibleResult"));
 
 
         User who = businessLogic.getCurrentUser();
         if (who!= null){
             Vector<Bet> usersBets = who.getBets();
-
             Vector<Result> allResults = businessLogic.getAllResults();
-
             for (Result res: allResults) {
-                int finalRes = res.getFinalResult();
                 for (Bet b : usersBets) {
-                    domain.Event usersResultEvent = b.getResult().getQuestion().getEvent();
-                    domain.Event allResultsEvent = res.getQuestion().getEvent();
-                    if (usersResultEvent.equals(allResultsEvent)) {
-                        // if they are the same event:
-                        tableResults.getItems().add(res); // the final result
-                        int usersResult = b.getResult().getPossibleResult();
-                        tableMyResults.getItems().add(usersResult); // the result the user had selected
+                    Result usersResult = b.getResult();
+                    Event usersResultEvent = usersResult.getQuestion().getEvent(); // get the event
+                    Event allResultsEvent = res.getQuestion().getEvent(); // get the event
+                    if (usersResultEvent.equals(allResultsEvent)) { // if they are the same event:
+                        tableResults.getItems().add(res); // insert the final result
+                        tableMyResults.getItems().add(usersResult); // insert the result the user had selected
                     }
                 }
             }

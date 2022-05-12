@@ -290,7 +290,7 @@ public class BlFacadeImplementation implements BlFacade {
 		return newBet;
 	}
 
-
+/*
 	@WebMethod
 	public String editProfileUsername(User user, String newUsername) {
 		try {
@@ -316,11 +316,12 @@ public class BlFacadeImplementation implements BlFacade {
 		}
 		return " ";
 	}
+	*/
+
 
 	@WebMethod
 	public String editProfilePassword(User user, String newPassword) {
 		dbManager.editPassWord(user, newPassword);
-
 		return "";
 	}
 
@@ -415,19 +416,6 @@ public class BlFacadeImplementation implements BlFacade {
 
 		return cont;
 	}*/
-
-
-	@Override
-	public String editProfileUsername(User user) {
-		return null;
-	}
-
-	@Override
-	public String editProfilePassword(User user) {
-		return null;
-	}
-
-
 
 
 	private void fetchFromAPI() {
