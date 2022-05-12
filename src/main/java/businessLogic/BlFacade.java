@@ -45,6 +45,9 @@ public interface BlFacade {
 	 * @return collection of events
 	 */
 	@WebMethod Vector<Event> getEvents(Date date);
+
+
+	@WebMethod public Vector<Result> getAllResults();
 	
 	/**
 	 * This method retrieves from the database the dates in a month for which there are events

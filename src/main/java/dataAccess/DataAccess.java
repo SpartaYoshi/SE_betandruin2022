@@ -273,6 +273,27 @@ public class DataAccess {
 	}
 
 
+	/**
+	 * This method retrieves all currently registered final results in the database
+	 *
+	 * @return collection of results
+	 */
+	public Vector<Result> getFinalResults() {
+		System.out.println(">> DataAccess: get final results");
+
+		Vector<Result> res = new Vector<>();
+		TypedQuery<Result> query = db.createQuery("SELECT re FROM Result re", Result.class);
+
+		List<Result> results = query.getResultList();
+		for (Result re:results) {
+			System.out.println(re.getFinalResult());
+			res.add(re);
+		}
+		return res;
+	}
+
+
+
 
 	public Vector<Question> getQuestions(Event event) {
 		System.out.println("Event is "+ event);

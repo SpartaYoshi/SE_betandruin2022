@@ -148,6 +148,15 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 
+	@WebMethod
+	public Vector<Result> getAllResults()  {
+		dbManager.open(false);
+		Vector<Result>  results = dbManager.getFinalResults();
+		dbManager.close();
+		return results;
+	}
+
+
 	@Override
 	public Bet removeCurrentUserBet(User currentUser, Question question, Bet bet1) {
 		dbManager.open(false);
@@ -332,6 +341,9 @@ public class BlFacadeImplementation implements BlFacade {
 	public double getMoneyMinimumBet(Question q){
 		return q.getBetMinimum();
 	}
+
+
+
 
 
 
