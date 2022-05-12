@@ -27,6 +27,7 @@ import java.util.*;
 public class SetFeeController implements Controller {
     private MainGUI mainGUI;
 
+    @FXML private Label explanationLbl;
     @FXML private Label warningLbl;
     @FXML private DatePicker datepicker;
     @FXML private TableColumn<Event, Integer> ec1;
@@ -70,6 +71,7 @@ public class SetFeeController implements Controller {
 
         warningLbl.setText(" ");
         domain.Question quest = ((domain.Question) tblQuestions.getSelectionModel().getSelectedItem());
+
 
             try {
                 warningLbl.setText("");
@@ -145,15 +147,33 @@ public class SetFeeController implements Controller {
                 tblQuestions.getItems().clear();
                 for (Question q : tblEvents.getSelectionModel().getSelectedItem().getQuestions()) {
                     tblQuestions.getItems().add(q);
+
                 }
             }
         });
     }
+    private  void setupQuestions(){
+        tblQuestions.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if(newSelection!=null){
+                if (newSelection.getQuestionID().equals("qIDMatchWinner")) {
+                    ConfigXML config = ConfigXML.getInstance();
+                    switch (config.getLocale()) {
+                        case "en" -> explanationLbl.setText("Remember: 1=Home Team wins; 2=Away Team wins, 0= Draw");
+                        case "es" -> explanationLbl.setText("Recuerde: 1=Equipo local gana; 2=Equipo visitante gana, 0= Empate");
+                        case "eus" -> explanationLbl.setText("Gogoratu: 1=Ekipo lokala irabazi; 2=Kanpoko ekipoa irabazi, 0= Berdinketa");
+                    }
+                }
+            }
+
+        });
+    }
+
 
     @FXML
     void initialize() {
 
         setupEventSelection();
+        setupQuestions();
 
         setEventsPrePost(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
 

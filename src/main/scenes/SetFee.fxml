@@ -35,14 +35,15 @@
       <Label layoutX="368.0" layoutY="59.0" text="  " />
       <Label layoutX="465.0" layoutY="59.0" text="%SelectedEvent" />
       <Button layoutX="34.0" layoutY="412.0" mnemonicParsing="false" onAction="#selectBack" styleClass="btn-danger" text="%Back" />
-      <Label layoutX="731.0" layoutY="92.0" prefHeight="18.0" prefWidth="74.0" text="%Result:" />
-      <TextField fx:id="resultField" layoutX="806.0" layoutY="88.0" prefHeight="25.0" prefWidth="174.0" />
+      <Label layoutX="734.0" layoutY="113.0" prefHeight="18.0" prefWidth="74.0" text="%Result:" />
+      <TextField fx:id="resultField" layoutX="806.0" layoutY="110.0" prefHeight="25.0" prefWidth="51.0" />
       <Label layoutX="734.0" layoutY="164.0" prefHeight="18.0" prefWidth="50.0" text="%Fee:" />
       <TextField fx:id="feeField" layoutX="806.0" layoutY="160.0" prefHeight="25.0" prefWidth="51.0" />
-      <Button layoutX="881.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#setFee" prefHeight="25.0" prefWidth="110.0" styleClass="btn-primary" text="%SetFee" />
+      <Button layoutX="747.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#setFee" prefHeight="25.0" prefWidth="110.0" styleClass="btn-primary" text="%SetFee" />
       <Label fx:id="warningLbl" layoutX="730.0" layoutY="293.0" prefHeight="33.0" prefWidth="253.0">
          <font>
             <Font name="Source Serif Pro" size="13.0" />
          </font></Label>
+      <Label fx:id="explanationLbl" layoutX="273.0" layoutY="318.0" prefHeight="17.0" prefWidth="417.0" />
    </children>
 </AnchorPane>

@@ -97,12 +97,30 @@ public class PublishResultsController implements Controller{
 
     @FXML
     public void publishResult(ActionEvent actionEvent) {
-        Result ourRes=tblResults.getSelectionModel().getSelectedItem();
-        int updatedres=businessLogic.markFinalResult(ourRes,ourRes.getPossibleResult());
-        messageLabel.setText(String.valueOf(updatedres));
+        Result ourRes = tblResults.getSelectionModel().getSelectedItem();
+        int howManyChanges = 0;
+        if (ourRes != null) {
+            int updatedRes = businessLogic.markFinalResult(ourRes, ourRes.getPossibleResult());
+            messageLabel.setText(String.valueOf(updatedRes));
+            Vector<Bet> relatedbets = ourRes.getBets();
+            for (Bet b : relatedbets) {
+                howManyChanges = businessLogic.payWinners(b, updatedRes);
+            }
+        } else {// it is null
+            messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+            switch (config.getLocale()) {
+                case "en" -> messageLabel.setText("Error. Please select a Result");
+                case "es" -> messageLabel.setText("Error. Por favor, seleccione un resultado.");
+                case "eus" -> messageLabel.setText("Errorea. Mesedez, sakatu emaitza bat");
+            }
+        }
 
-
-
+        messageLabel.getStyleClass().setAll("lbl", "lbl-success");
+        switch (config.getLocale()) {
+            case "en" -> messageLabel.setText(howManyChanges + " payments were made successfully");
+            case "es" -> messageLabel.setText(howManyChanges + " pagos fueron realizados correctamente");
+            case "eus" -> messageLabel.setText(howManyChanges + "ordainketa ondo egin dira");
+        }
     }
 
 
