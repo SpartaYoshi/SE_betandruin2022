@@ -362,7 +362,7 @@ public class DataAccess {
 		query.setParameter(2, lastDayMonthDate);
 		List<Date> dates = query.getResultList();
 		for (Date d:dates){
-			System.out.println(d.toString());		 
+			System.out.println(d.toString());
 			res.add(d);
 		}
 		return res;
@@ -500,30 +500,26 @@ public class DataAccess {
 	 * @return
 	 */
 	public double insertMoney(User who, double am, Bet bet, String type)  {
-		double total=who.getMoneyAvailable()+ am; //the money he had + the deposited money
+		double total=who.getBalance() + am; //the money he had + the deposited money
 		Date date = new Date();
 		Movement mov= null;
 		if(bet==null){
-			LocalDate localDate = null;
-			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-			date = Date.from(instant);
 			mov = new Movement(am, date, type);
 		}else{
-			LocalDate localDate = null;
-			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-			date = Date.from(instant);
 			mov = new Movement(am, date, type, bet);
 		}
+
 		db.getTransaction().begin();
-		who.setMoneyAvailable(total);
+		who.setBalance(total);
 		who.addMovement(mov);
-		User dbUser=db.find(User.class, who.getUsername());
-		dbUser.setMoneyAvailable(total);
+		User dbUser = db.find(User.class, who.getUsername());
+		dbUser.setBalance(total);
 		dbUser.addMovement(mov);
 		db.persist(mov);
 		db.getTransaction().commit();
+
 		System.out.println(">> DataAccess: money updated");
-		return who.getMoneyAvailable();
+		return who.getBalance();
 	}
 
 
@@ -537,7 +533,7 @@ public class DataAccess {
 	public Bet placeBetToQuestion(Result f, Double amountBet, User who){
 		System.out.println(">> DataAccess: placeAbet=> On result = " + f.getPossibleResult() + ", amount = " +amountBet + " by " + who.getName() + " " + who.getSurname());
 		Result result = db.find(Result.class, f.getId());
-		Bet bet = new Bet(amountBet,f);
+		Bet bet = new Bet(amountBet, f, who);
 		db.getTransaction().begin();
 		f.addBet(bet);
 		who.addBet(bet);
@@ -561,23 +557,21 @@ public class DataAccess {
 
 
 	public double restMoney(User who, double betAmount, Bet bet, String type)  {
-		double total=who.getMoneyAvailable()- betAmount; //the money he had - the deposited money
-		LocalDate localDate = null;
-		Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-		Date date = Date.from(instant);
+		double total=who.getBalance()- betAmount; //the money he had - the deposited money
+		Date date=new Date();
 		Movement mov = new Movement(betAmount*(-1), date, type, bet);
 		db.getTransaction().begin();
-		who.setMoneyAvailable(total);//our object of the app
+		who.setBalance(total);//our object of the app
 		who.addMovement(mov);
 		User dbUser=db.find(User.class, who.getUsername());
-		dbUser.setMoneyAvailable(total);
+		dbUser.setBalance(total);
 		dbUser.addMovement(mov);
 		db.persist(mov);
 		db.getTransaction().commit();
 
 		System.out.println(">> DataAccess: money updated");
 
-		return who.getMoneyAvailable();
+		return who.getBalance();
 	}
 
 	/**
@@ -597,7 +591,7 @@ public class DataAccess {
 		for(Result r:dbQuestion.getResults()){
 			for(Bet b:r.getBets()){
 				if(b.getBetNum()== bet1.getBetNum()){
-					 dbResult=db.find(Result.class,r.getId());
+					dbResult=db.find(Result.class,r.getId());
 					break;
 				}
 			}
@@ -668,20 +662,11 @@ public class DataAccess {
 		return dbEvent;
     }
 
-	public double getUsersMoney(User who) {
-		db.getTransaction().begin();
-		User dbUser=db.find(User.class, who.getUsername());
-		Double money = dbUser.getMoneyAvailable();
-		db.getTransaction().commit();
-
-		System.out.println(">> DataAccess: getting the money available of the current user");
-
-		return money;
-	}
 
 	public int markFinalResult(Result r, int f){
 		db.getTransaction().begin();
 		r.setFinalResult(f);
+		db.persist(f);
 		db.getTransaction().commit();
 		return r.getFinalResult();
 	}
