@@ -72,17 +72,15 @@ public class CheckMyResultsController implements Controller {
             int finalRes = res.getFinalResult();
             for (Bet b : usersBets) {
                 // if los eventos son el mismo
-                tableResults.getItems().add(res); // la respuesta real
-                int usersResult = b.getResult().getPossibleResult(); // la respuesta que eligió el user
-                tableMyResults.getItems().add(usersResult);
+                tableResults.getItems().add(res); // the final result
+                int usersResult = b.getResult().getPossibleResult();
+                tableMyResults.getItems().add(usersResult); // the result the user had selected
 
 
                 //}
-
-
-                }
             }
         }
+    }
 
 
     public CheckMyResultsController(BlFacade bl) {
