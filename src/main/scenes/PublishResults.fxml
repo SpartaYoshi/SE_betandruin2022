@@ -14,7 +14,7 @@
         <Label layoutX="66.0" layoutY="67.0" text="%EventDate" />
         <Label layoutX="329.0" layoutY="108.0" text="%Questions:" />
         <Button fx:id="closeButton" layoutX="65.0" layoutY="464.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="17.0" prefWidth="66.0" styleClass="btn-danger" text="%Back" />
-        <Label fx:id="listOfEventsLabel" layoutX="66.0" layoutY="108.0" prefHeight="18.0" prefWidth="150.0" text="%List of Events:" />
+        <Label fx:id="listOfEventsLabel" layoutX="66.0" layoutY="108.0" prefHeight="18.0" prefWidth="150.0" text="%ListofEvents:" />
         <Button fx:id="publishButton" layoutX="309.0" layoutY="442.0" mnemonicParsing="false" onAction="#publishResult" prefHeight="26.0" prefWidth="283.0" styleClass="btn-primary" text="%MarkAsFinal" textAlignment="CENTER">
             <font>
                 <Font name="Segoe UI Bold" size="12.0" />
