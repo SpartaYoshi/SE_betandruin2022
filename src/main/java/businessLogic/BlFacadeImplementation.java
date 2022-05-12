@@ -432,20 +432,23 @@ public class BlFacadeImplementation implements BlFacade {
 
 	@WebMethod
 	public int processBets(Result r) {
-		int cont=0;
+		int payments = 0;
+		System.out.println(">> Processing final result: " + r.toString());
 		for (Bet b : r.getBets()) {
 			User u = b.getBetter();
 			double profit = b.getAmount() * r.getFee();
 			dbManager.open(false);
 			dbManager.insertMoney(u, profit, b,"BetProfit");
-			cont++;
+			payments++;
 			dbManager.close();
 		}
-		return cont;
+		return payments;
 	}
 
 
-	private void processMatchResult(Event ev, Match matchAPI) {
+	private int processMatchResult(Event ev, Match matchAPI) {
+
+		int payments = 0;
 
 		System.out.println("Match found: @" + ev.getStrDate() + ", " + ev.getHomeTeam() + " - " + ev.getAwayTeam());
 
@@ -454,27 +457,33 @@ public class BlFacadeImplementation implements BlFacade {
 
 		Result rHome = ev.getQuestionByID("qIDMatchWinner").getResultOption(1);
 		Result rAway = ev.getQuestionByID("qIDMatchWinner").getResultOption(2);
-		Result rDraw = ev.getQuestionByID("qIDMatchWinner").getResultOption(0);
+		Result rDraw = ev.getQuestionByID("qIDMatchWinner").getResultOption(3);
 
 		if (winner != null) {
 			if (winner.equals(ev.getHomeTeam()))
-				processBets(rHome);
+				payments += processBets(rHome);
 			else
-				processBets(rAway);
+				payments += processBets(rAway);
 		} else
-			processBets(rDraw);
+			payments += processBets(rDraw);
 
 
+		// TOTAL GOALS BET
+		int totalGoals = matchAPI.getTotalGoals();
+		Result r = ev.getQuestionByID("qIDTotalGoals").getResultOption(totalGoals);
+		payments += processBets(r);
 
-
+		return payments;
 	}
 
 
 	@WebMethod
-	public void updateResultsFromAPI() {
+	public int updateResultsFromAPI() {
 		fetchFromAPI();
 
-		List<Event> eventList = dbManager.getAllEvents();
+		int payments = 0;
+
+		List<Event> eventList = dbManager.getAllUnprocessedEvents();
 
 		for (Event ev : eventList) {
 			String evHomeTeam = ev.getHomeTeam();
@@ -486,9 +495,16 @@ public class BlFacadeImplementation implements BlFacade {
 
 			if (matchList.contains(conv)) {
 				Match m = matchList.get(matchList.indexOf(conv));
-				if (m.getStatus().equals("FINISHED"))
-					processMatchResult(ev, m);
+				if (m.getStatus().equals("FINISHED")) {
+					payments += processMatchResult(ev, m);
+					ev.setProcessedWithAPI(true);
+
+					dbManager.open(false);
+					dbManager.updateEvent(ev);
+					dbManager.close();
+				}
 			}
 		}
+	return payments;
 	}
 }

@@ -127,5 +127,16 @@ public class Result implements Serializable {
 		return Objects.equals(possibleResult, result.possibleResult);
 	}
 
+	@Override
+	public String toString() {
+		return "Result{" +
+				"id=" + id +
+				", question=" + question +
+				", bets=" + bets +
+				", possibleResult=" + possibleResult +
+				", finalResult=" + finalResult +
+				", fee=" + fee +
+				'}';
+	}
 }
 

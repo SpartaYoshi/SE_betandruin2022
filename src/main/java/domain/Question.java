@@ -33,13 +33,9 @@ public class Question implements Serializable {
 	@XmlIDREF
 	private Event event;
 
-	public Vector<Result> getResultList() {
-		return resultList;
-	}
 
-	public void setResultList(Vector<Result> resultList) {
-		this.resultList = resultList;
-	}
+
+
 
 	public Question(){
 		super();
@@ -61,7 +57,7 @@ public class Question implements Serializable {
 		super();
 		this.questionID = query;
 		this.betMinimum=betMinimum;
-		
+
 	}
 
 
@@ -190,7 +186,7 @@ public class Question implements Serializable {
 	}
 	
 	@Override
-	public String toString(){
+	public String toString() {
 
 		return questionID;
 	}
@@ -202,5 +198,6 @@ public class Question implements Serializable {
 		Question question = (Question) o;
 		return Objects.equals(questionID, question.questionID);
 	}
+
 
 }
