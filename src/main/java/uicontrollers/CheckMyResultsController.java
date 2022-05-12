@@ -52,7 +52,6 @@ public class CheckMyResultsController implements Controller {
         tableResults.getItems().clear();
         tableMyResults.getItems().clear();
 
-
         // Bind columns
         columnEvent.setCellValueFactory(new PropertyValueFactory<>("description"));
         columnQuestion.setCellValueFactory(new PropertyValueFactory<>("questionID"));

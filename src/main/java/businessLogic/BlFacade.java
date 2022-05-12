@@ -168,6 +168,15 @@ public interface BlFacade {
 	 */
 	@WebMethod String getSessionMode();
 
+	/*
+	@WebMethod
+	String editProfileUsername(User user);
+	 */
+
+	@WebMethod
+	String editProfilePassword(User user, String newPassword);
+
+
 	@WebMethod
 	Event removeEvent(Event ev);
 
@@ -178,8 +187,5 @@ public interface BlFacade {
 	int processBets(Result r);
 
 	@WebMethod
-	void updateResultsFromAPI();
-
-	@WebMethod
-	String editProfilePassword(User user, String newPassword);
+    int updateResultsFromAPI();
 }
