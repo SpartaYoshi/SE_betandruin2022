@@ -9,11 +9,11 @@
 
 <AnchorPane prefHeight="428.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.CheckMyResultsController">
    <children>
-      <TableView fx:id="tableResults" layoutX="8.0" layoutY="54.0" prefHeight="308.0" prefWidth="698.0">
+      <TableView fx:id="tableResults" layoutX="7.0" layoutY="54.0" prefHeight="308.0" prefWidth="698.0">
          <columns>
             <TableColumn fx:id="columnEvent" prefWidth="223.2000732421875" text="%Event" />
             <TableColumn fx:id="columnQuestion" minWidth="0.0" prefWidth="213.60003662109375" text="%Question" />
-            <TableColumn fx:id="columnResult" prefWidth="148.0" text="%FinalResult" />
+            <TableColumn fx:id="columnFinalResult" prefWidth="148.0" text="%FinalResult" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
