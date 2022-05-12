@@ -1,6 +1,5 @@
 package businessLogic;
 
-import java.io.*;
 import java.lang.reflect.Type;
 
 import java.time.LocalDate;
@@ -416,19 +415,6 @@ public class BlFacadeImplementation implements BlFacade {
 
 		return cont;
 	}
-
-
-	@Override
-	public String editProfileUsername(User user) {
-		return null;
-	}
-
-	@Override
-	public String editProfilePassword(User user) {
-		return null;
-	}
-
-
 
 
 	private void fetchFromAPI() {

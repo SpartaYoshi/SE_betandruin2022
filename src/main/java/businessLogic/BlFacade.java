@@ -168,13 +168,6 @@ public interface BlFacade {
 	@WebMethod String getSessionMode();
 
 	@WebMethod
-	String editProfileUsername(User user);
-
-	@WebMethod
-	String editProfilePassword(User user);
-
-
-	@WebMethod
 	Event removeEvent(Event ev);
 
 	@WebMethod

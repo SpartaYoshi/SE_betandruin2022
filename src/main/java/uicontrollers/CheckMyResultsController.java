@@ -56,25 +56,23 @@ public class CheckMyResultsController implements Controller {
         columnEvent.setCellValueFactory(new PropertyValueFactory<>("description"));
         columnQuestion.setCellValueFactory(new PropertyValueFactory<>("questionID"));
         columnResult.setCellValueFactory(new PropertyValueFactory<>("finalResult"));
+
         columnMyResult.setCellValueFactory(new PropertyValueFactory<>("possibleResult"));
 
 
         User who = businessLogic.getCurrentUser();
         if (who!= null){
             Vector<Bet> usersBets = who.getBets();
-
             Vector<Result> allResults = businessLogic.getAllResults();
-
             for (Result res: allResults) {
-                int finalRes = res.getFinalResult();
+                int finalRes = res.getFinalResult(); //final (correct) result
                 for (Bet b : usersBets) {
-                    domain.Event usersResultEvent = b.getResult().getQuestion().getEvent();
-                    domain.Event allResultsEvent = res.getQuestion().getEvent();
-                    if (usersResultEvent.equals(allResultsEvent)) {
-                        // if they are the same event:
-                        tableResults.getItems().add(res); // the final result
-                        int usersResult = b.getResult().getPossibleResult();
-                        tableMyResults.getItems().add(usersResult); // the result the user had selected
+                    domain.Event usersResultEvent = b.getResult().getQuestion().getEvent(); // get the event
+                    domain.Event allResultsEvent = res.getQuestion().getEvent(); // get the event
+                    if (usersResultEvent.equals(allResultsEvent)) { // if they are the same event:
+                        tableResults.getItems().add(finalRes); // insert the final result //TODO
+                        int usersResult = b.getResult().getPossibleResult(); //users result
+                        tableMyResults.getItems().add(usersResult); // insert the result the user had selected
                     }
                 }
             }

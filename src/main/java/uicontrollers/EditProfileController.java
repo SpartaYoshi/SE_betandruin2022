@@ -61,7 +61,14 @@ public class EditProfileController implements Controller, Initializable {
                 }
 
             }else{
-                businessLogic.editProfileUsername(u);
+                businessLogic.editProfileUsername(newUserName);
+                messageLabelUsername.getStyleClass().setAll("lbl", "lbl-success");
+                ConfigXML config = ConfigXML.getInstance();
+                switch (config.getLocale()) {
+                    case "en" -> messageLabelUsername.setText("Username updated");
+                    case "es" -> messageLabelUsername.setText("Nombre de usuario actualizado");
+                    case "eus" -> messageLabelUsername.setText("Erabiltzaile-izena eguneratuta");
+                }
             }
         }
 
@@ -78,12 +85,13 @@ public class EditProfileController implements Controller, Initializable {
                 }
 
             }else{
-                businessLogic.editProfileUsername(u);
+                businessLogic.editProfilePassword(newPassword);
+                messageLabelUsername.getStyleClass().setAll("lbl", "lbl-success");
                 ConfigXML config = ConfigXML.getInstance();
                 switch (config.getLocale()) {
                     case "en" -> messageLabelPassword.setText("The password has been successfully changed");
                     case "es" -> messageLabelPassword.setText("La contraseña se ha cambiado exitosamente");
-                    case "eus" -> messageLabelPassword.setText("Pasahitz berria aurrekoaren berdina da");
+                    case "eus" -> messageLabelPassword.setText("Pasahitza ongi aldatu da");
                 }
             }
         }
