@@ -103,7 +103,7 @@ public class PublishResultsController implements Controller{
             int updatedRes = businessLogic.markFinalResult(ourRes, ourRes.getPossibleResult());
             messageLabel.setText(String.valueOf(updatedRes));
 
-            businessLogic.processBets(ourRes);
+           howManyChanges= businessLogic.processBets(ourRes);
 
         } else {// it is null
             messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
