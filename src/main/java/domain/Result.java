@@ -30,7 +30,6 @@ public class Result implements Serializable {
 	}
 
 	@OneToOne
-	@XmlIDREF
 	private Question question;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

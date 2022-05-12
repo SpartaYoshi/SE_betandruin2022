@@ -6,10 +6,8 @@ import java.util.Vector;
 
 import businessLogic.BlFacade;
 import domain.*;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -74,17 +72,14 @@ public class CheckMyResultsController implements Controller {
                 domain.Event usersResultEvent = b.getResult().getQuestion().getEvent();
                 domain.Event allResultsEvent = res.getQuestion().getEvent();
                 if (usersResultEvent.equals(allResultsEvent)){
-                    // if los eventos son el mismo
+                    // same event
                     tableResults.getItems().add(res); // the final result
                     int usersResult = b.getResult().getPossibleResult();
                     tableMyResults.getItems().add(usersResult); // the result the user had selected
-
-
                 }
             }
         }
     }
-
 
     public CheckMyResultsController(BlFacade bl) {
         businessLogic = bl;
