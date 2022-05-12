@@ -55,8 +55,6 @@ public class Question implements Serializable {
 		this.questionID = questionID;
 		this.betMinimum = betMinimum;
 		this.event = event;
-		
-		
 	}
 
 	public Question(String query, float betMinimum,  Event event) {
