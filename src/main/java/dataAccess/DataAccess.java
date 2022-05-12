@@ -509,12 +509,15 @@ public class DataAccess {
 			mov = new Movement(am, date, type, bet);
 		}
 
-		db.getTransaction().begin();
+
 		who.setBalance(total);
 		who.addMovement(mov);
+
+		db.getTransaction().begin();
 		User dbUser = db.find(User.class, who.getUsername());
 		dbUser.setBalance(total);
 		dbUser.addMovement(mov);
+		db.persist(dbUser);
 		db.persist(mov);
 		db.getTransaction().commit();
 
@@ -665,8 +668,11 @@ public class DataAccess {
 
 	public int markFinalResult(Result r, int f){
 		db.getTransaction().begin();
+		Result dbResult=db.find(Result.class,r.getId());
 		r.setFinalResult(f);
-		db.persist(f);
+		dbResult.setFinalResult(f);
+		db.persist(dbResult);
+
 		db.getTransaction().commit();
 		return r.getFinalResult();
 	}
