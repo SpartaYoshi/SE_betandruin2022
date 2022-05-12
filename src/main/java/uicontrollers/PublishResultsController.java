@@ -103,6 +103,7 @@ public class PublishResultsController implements Controller{
             int updatedRes = businessLogic.markFinalResult(ourRes, ourRes.getPossibleResult());
             messageLabel.setText(String.valueOf(updatedRes));
             Vector<Bet> relatedbets = ourRes.getBets();
+
             for (Bet b : relatedbets) {
                 howManyChanges = businessLogic.payWinners(b, updatedRes);
             }

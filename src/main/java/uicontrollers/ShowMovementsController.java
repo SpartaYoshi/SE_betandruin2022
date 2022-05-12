@@ -53,7 +53,7 @@ public class ShowMovementsController implements Controller{
     @FXML
     public void initialize() {
 
-        displayUsersMoney();
+        //displayUsersMoney();
 
         tableMovements.getItems().clear();
 
