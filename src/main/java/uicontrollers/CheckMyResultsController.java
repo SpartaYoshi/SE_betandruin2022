@@ -24,7 +24,7 @@ public class CheckMyResultsController implements Controller {
     private TableView<Result> tableResults;
 
     @FXML
-    private TableView<Result> tableMyResults;
+    private TableView<Integer> tableMyResults;
 
 
     @FXML
@@ -50,7 +50,9 @@ public class CheckMyResultsController implements Controller {
     void initialize() {
 
 
-        tableMovements.getItems().clear();
+        tableResults.getItems().clear();
+        tableMyResults.getItems().clear();
+
 
         // Bind columns
         columnEvent.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -82,12 +84,6 @@ public class CheckMyResultsController implements Controller {
             }
         }
 
-
-
-
-
-
-    }
 
     public CheckMyResultsController(BlFacade bl) {
         businessLogic = bl;
