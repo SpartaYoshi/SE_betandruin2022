@@ -31,7 +31,7 @@ public class Event implements Serializable {
 	private String homeTeam;
 	private String awayTeam;
 
-
+	private boolean processedWithAPI;
 
 	private String description;
 
@@ -62,6 +62,7 @@ public class Event implements Serializable {
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		this.strDate = dateFormat.format(eventDate);
 		this.description=this.getTeamTemplate();
+		processedWithAPI = false;
 	}
 
 	public Event(String homeTeam, String awayTeam, Date eventDate) {
@@ -72,6 +73,7 @@ public class Event implements Serializable {
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		this.strDate = dateFormat.format(eventDate);
 		this.description=this.getTeamTemplate();
+		processedWithAPI = false;
 
 	}
 
@@ -181,5 +183,13 @@ public class Event implements Serializable {
 		return	"eventDate=" + eventDate +
 				", homeTeam='" + homeTeam + '\'' +
 				", awayTeam='" + awayTeam;
+	}
+
+	public boolean isProcessedWithAPI() {
+		return processedWithAPI;
+	}
+
+	public void setProcessedWithAPI(boolean processedWithAPI) {
+		this.processedWithAPI = processedWithAPI;
 	}
 }
