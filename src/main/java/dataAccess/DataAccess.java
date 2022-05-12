@@ -2,6 +2,9 @@ package dataAccess;
 
 import java.text.SimpleDateFormat;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 import javax.persistence.*;
@@ -503,12 +506,12 @@ public class DataAccess {
 		if(bet==null){
 			LocalDate localDate = null;
 			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-			Date date = Date.from(instant);
+			date = Date.from(instant);
 			mov = new Movement(am, date, type);
 		}else{
 			LocalDate localDate = null;
 			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-			Date date = Date.from(instant);
+			date = Date.from(instant);
 			mov = new Movement(am, date, type, bet);
 		}
 		db.getTransaction().begin();
