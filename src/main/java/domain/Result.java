@@ -24,6 +24,7 @@ public class Result implements Serializable {
 	private Vector<Bet> bets = new Vector<>();
 	
 	private int possibleResult;
+	private int finalResult;
 
 
 
@@ -43,6 +44,14 @@ public class Result implements Serializable {
 		this.fee = f;
 		this.possibleResult = r;
 		
+	}
+
+	public int getFinalResult() {
+		return finalResult;
+	}
+
+	public void setFinalResult(int finalResult) {
+		this.finalResult = finalResult;
 	}
 
 	/**
