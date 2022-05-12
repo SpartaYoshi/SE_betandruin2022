@@ -5142,7 +5142,7 @@
 											"top": 363.5,
 											"width": 109,
 											"height": 13,
-											"text": "Edit profile"
+											"text": "Edit password"
 										},
 										{
 											"_type": "LabelView",
@@ -20880,8 +20880,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
-					"name": "Edit profile",
-					"documentation": "# Event flow\n\n## Main flow\n1. *System* displays both the not editable info (**name**, **surname**, **birthdate**) and the editable one (**username**, **password**)\n2. *Logged-in User* writes new **username**\n2. *Logged-in User* writes new **password**\n3. *System* updates **username** or/and **password**\n\n## Alternative flow\nA3. The **username** already exists\nB3.\tThe **username** is the same as the previous one\nC4.\tThe **password** is the same as the previous one\n"
+					"name": "Edit password",
+					"documentation": "# Event flow\n\n## Main flow\n1. *System* displays both the not editable info (**name**, **surname**, **birthdate**) and the editable one (**username**, **password**)\n2. *Logged-in User* writes new **password**\n3. *System* updates **username** or/and **password**\n\n## Alternative flow\nB3.\tNo **password** has been written\nC3.\tThe **password** is the same as the previous one\n"
 				},
 				{
 					"_type": "UMLUseCase",
