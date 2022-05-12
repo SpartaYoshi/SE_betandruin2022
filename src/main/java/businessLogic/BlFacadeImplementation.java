@@ -417,19 +417,6 @@ public class BlFacadeImplementation implements BlFacade {
 	}*/
 
 
-	@Override
-	public String editProfileUsername(User user) {
-		return null;
-	}
-
-	@Override
-	public String editProfilePassword(User user) {
-		return null;
-	}
-
-
-
-
 	private void fetchFromAPI() {
 		APIManager dataFetcher = new APIManager();
 		String APIData = dataFetcher.request("matches");

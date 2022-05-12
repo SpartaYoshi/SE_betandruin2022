@@ -20863,7 +20863,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
-					"name": "Check my results"
+					"name": "Check my results",
+					"documentation": "# Event flow\n\n## Main flow\n1. *System* displays the **results** the user selected when he/she placed a **bet** that coincide with the existing the **final results**\n2. *Logged-in User* selects back button\n3. *System* goes back to the previous page, so the current window is closed.\n\n\n## Alternative flow\nA1. There is no **selected result** that matches the existing **final results**"
 				},
 				{
 					"_type": "UMLUseCase",
@@ -20879,7 +20880,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
-					"name": "Edit profile"
+					"name": "Edit profile",
+					"documentation": "# Event flow\n\n## Main flow\n1. *System* displays both the not editable info (**name**, **surname**, **birthdate**) and the editable one (**username**, **password**)\n2. *Logged-in User* writes new **username**\n2. *Logged-in User* writes new **password**\n3. *System* updates **username** or/and **password**\n\n## Alternative flow\nA3. The **username** already exists\nB3.\tThe **username** is the same as the previous one\nC4.\tThe **password** is the same as the previous one\n"
 				},
 				{
 					"_type": "UMLUseCase",
