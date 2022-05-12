@@ -148,7 +148,6 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 
-	@WebMethod
 	public Vector<Result> getAllResults()  {
 		dbManager.open(false);
 		Vector<Result>  results = dbManager.getFinalResults();
@@ -349,13 +348,13 @@ public class BlFacadeImplementation implements BlFacade {
 
 
 	@WebMethod
-	public double insertMoney(double amount, Bet bet) throws FailedMoneyUpdateException{
+	public double insertMoney(double amount, Bet bet, String type) throws FailedMoneyUpdateException{
 		User who=this.getCurrentUser();
 		dbManager.open(false);
 
 		double totalmoney;
 
-		totalmoney = dbManager.insertMoney(who,amount, bet);
+		totalmoney = dbManager.insertMoney(who,amount, bet,type);
 
 		dbManager.close();
 
@@ -409,7 +408,7 @@ public class BlFacadeImplementation implements BlFacade {
 			for(Bet betuser:u.getBets()){
 				if(betuser.getBetNum()==b.getBetNum() && betuser.getResult().getPossibleResult()==finalR){// he has a bet, that it's correct, we have to pay this user
 					float total= (float) (betuser.getAmount()+(betuser.getAmount()*b.getResult().getFee()));
-					dbManager.insertMoney(u,total,betuser);//update his account
+					dbManager.insertMoney(u,total,betuser,"GainedBetMoney");//update his account
 					cont++;
 				}
 			}
