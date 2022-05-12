@@ -479,24 +479,27 @@ public class DataAccess {
 	 * @return
 	 */
 	public double insertMoney(User who, double am, Bet bet)  {
-		double total=who.getBalance()+ am; //the money he had + the deposited money
+		double total = who.getBalance() + am; //the money he had + the deposited money
 		Date date = new Date();
-		Movement mov= null;
-		if(bet==null){
+		Movement mov = null;
+
+		if (bet == null){
 			String description = new String("DepositMoney");
 			mov = new Movement(am, date, description);
 		}else{
 			String description = new String("ObtainedMoney");
 			mov = new Movement(am, date, description);
 		}
+
 		db.getTransaction().begin();
 		who.setBalance(total);
 		who.addMovement(mov);
-		User dbUser=db.find(User.class, who.getUsername());
+		User dbUser = db.find(User.class, who.getUsername());
 		dbUser.setBalance(total);
 		dbUser.addMovement(mov);
 		db.persist(mov);
 		db.getTransaction().commit();
+
 		System.out.println(">> DataAccess: money updated");
 		return who.getBalance();
 	}

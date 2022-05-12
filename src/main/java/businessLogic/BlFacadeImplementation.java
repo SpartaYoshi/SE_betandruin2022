@@ -386,6 +386,7 @@ public class BlFacadeImplementation implements BlFacade {
 		return updated;
 	}
 
+	/*
 	@Override
 	public int payWinners(Bet b,int finalR) {
 		int cont=0;
@@ -403,7 +404,7 @@ public class BlFacadeImplementation implements BlFacade {
 		}
 
 		return cont;
-	}
+	}*/
 
 
 	@Override
@@ -431,15 +432,13 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 
-	private void processBet(Result r) {
+	@WebMethod
+	public void processBets(Result r) {
 
 		for (Bet b : r.getBets()) {
-
 			User u = b.getBetter();
 			double profit = b.getAmount() * r.getFee();
-
-			u.setBalance(u.getBalance() + profit);
-
+			dbManager.insertMoney(u, profit, b);
 		}
 	}
 
@@ -457,11 +456,11 @@ public class BlFacadeImplementation implements BlFacade {
 
 		if (winner != null) {
 			if (winner.equals(ev.getHomeTeam()))
-				processBet(rHome);
+				processBets(rHome);
 			else
-				processBet(rAway);
+				processBets(rAway);
 		} else
-			processBet(rDraw);
+			processBets(rDraw);
 
 
 
@@ -469,7 +468,7 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 
-
+	@WebMethod
 	public void updateResultsFromAPI() {
 		fetchFromAPI();
 
