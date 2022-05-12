@@ -520,6 +520,7 @@ public class DataAccess {
 		User dbUser=db.find(User.class, who.getUsername());
 		dbUser.setMoneyAvailable(total);
 		dbUser.addMovement(mov);
+		db.persist(dbUser);
 		db.persist(mov);
 		db.getTransaction().commit();
 		System.out.println(">> DataAccess: money updated");
@@ -682,6 +683,7 @@ public class DataAccess {
 	public int markFinalResult(Result r, int f){
 		db.getTransaction().begin();
 		r.setFinalResult(f);
+		db.persist(r);
 		db.getTransaction().commit();
 		return r.getFinalResult();
 	}
