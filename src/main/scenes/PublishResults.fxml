@@ -19,7 +19,7 @@
             <font>
                 <Font name="Segoe UI Bold" size="12.0" />
             </font></Button>
-        <Label fx:id="messageLabel" layoutX="256.0" layoutY="582.0" prefHeight="18.0" prefWidth="344.0" />
+        <Label fx:id="messageLabel" layoutX="287.0" layoutY="446.0" prefHeight="18.0" prefWidth="344.0" />
         <TableView fx:id="tblEvents" layoutX="47.0" layoutY="136.0" prefHeight="200.0" prefWidth="254.0">
             <columns>
                 <TableColumn fx:id="ec1" prefWidth="65.5999755859375" text="%ID" />

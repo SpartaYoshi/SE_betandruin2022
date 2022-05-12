@@ -102,6 +102,7 @@ public class PublishResultsController implements Controller{
         messageLabel.setText(String.valueOf(updatedres));
 
 
+
     }
 
 
