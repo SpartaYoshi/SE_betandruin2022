@@ -23,6 +23,9 @@ public class Bet implements Serializable {
     @XmlIDREF
     private Result result;
 
+    public int ourPossibleResult;
+
+
     @ManyToOne
     private User better;
 
@@ -31,6 +34,7 @@ public class Bet implements Serializable {
         this.amount = amount;
         this.result = r;
         this.better = better;
+        ourPossibleResult=r.getPossibleResult();
     }
 
     public Bet(Integer numBet, Double amount,Result r, User better) {
@@ -39,6 +43,7 @@ public class Bet implements Serializable {
         this.amount = amount;
         this.result=r;
         this.better = better;
+        ourPossibleResult=r.getPossibleResult();
     }
 
     public Bet() {
@@ -69,6 +74,7 @@ public class Bet implements Serializable {
         this.result=r;
     }
 
+
     @Override
     public String toString() {
         return "Bet{" +
@@ -80,5 +86,13 @@ public class Bet implements Serializable {
 
     public User getBetter() {
         return better;
+    }
+
+    public int getOurPossibleResult() {
+        return ourPossibleResult;
+    }
+
+    public void setOurPossibleResult(int ourPossibleResult) {
+        this.ourPossibleResult = ourPossibleResult;
     }
 }

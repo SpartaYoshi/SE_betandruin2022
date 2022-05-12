@@ -67,7 +67,7 @@ public class RemoveBetController implements Controller {
     private TableColumn<Bet, Float> betc1;
 
     @FXML
-    private TableColumn<Bet, String> betc2;
+    private TableColumn<Bet, Integer> betc2;
 
 
 
@@ -290,7 +290,7 @@ public class RemoveBetController implements Controller {
         });
 
         betc1.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        betc2.setCellValueFactory(new PropertyValueFactory<>("result"));
+        betc2.setCellValueFactory(new PropertyValueFactory<>("ourPossibleResult"));
 
 
     }
