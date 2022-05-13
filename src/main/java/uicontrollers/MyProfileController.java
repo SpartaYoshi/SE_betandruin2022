@@ -47,12 +47,12 @@ public class MyProfileController implements Controller{
 
     @FXML
     void initialize() {
+
+
+    }
+
+    public void usersData(){
         ConfigXML config = ConfigXML.getInstance();
-
-        if (businessLogic.getCurrentUser() == null)
-            return;
-
-
         switch(config.getLocale()) {
             case "en":
                 birthDateLabel.setText("Birth Date: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
@@ -80,7 +80,6 @@ public class MyProfileController implements Controller{
 
             default:
         }
-
     }
 
     @Override public void setMainApp(MainGUI mainGUI) {
@@ -88,7 +87,7 @@ public class MyProfileController implements Controller{
     }
 
     @FXML public void onMyResultsButton(){
-
+        mainGUI.showCheckMyResults();
     }
 
     public void clearAll() {

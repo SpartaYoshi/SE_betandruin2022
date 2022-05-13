@@ -79,20 +79,9 @@ public class EditPasswordController implements Controller, Initializable {
         }
     }
 
-    @FXML
-    void selectBack() {
-        mainGUI.showMyProfile();
-    }
-
-    @Override @FXML
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void usersSomeData(){
 
         ConfigXML config = ConfigXML.getInstance();
-
-        if (businessLogic.getCurrentUser() == null)
-            return;
-
-
         switch (config.getLocale()) {
             case "en":
                 birthDateLabel.setText("Birth Date: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
@@ -119,6 +108,17 @@ public class EditPasswordController implements Controller, Initializable {
 
             default:
         }
+    }
+
+
+    @FXML
+    void selectBack() {
+        mainGUI.showMyProfile();
+    }
+
+    @Override @FXML
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 
     @Override public void setMainApp(MainGUI mainGUI) {
