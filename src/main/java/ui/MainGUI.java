@@ -193,7 +193,7 @@ public class MainGUI {
   public void showUserPortal(){
     if (businessLogic.getCurrentUser() != null)
       businessLogic.refreshUser();
-    setupScene(userPortal.ui, "UserPortal", 395, 440);}
+    setupScene(userPortal.ui, "UserPortal", 395, 400);}
 
   public void showBrowseQuestions() {
     setupScene(browseQuestions.ui, "BrowseQuestions", 1000, 500);

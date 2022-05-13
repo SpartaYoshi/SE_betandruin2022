@@ -42,11 +42,7 @@ public class ShowMovementsController implements Controller{
 
     @FXML
     public void initialize() {
-
-        //displayUsersMoney();
-
         tableMovements.getItems().clear();
-
         // Bind columns
         tableAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         tableDate.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -56,14 +52,11 @@ public class ShowMovementsController implements Controller{
             PropertiesManager propMgr = new PropertiesManager();
             return new SimpleStringProperty(propMgr.getTag(descriptionType));
         });
-
-
         if(businessLogic.getCurrentUser() != null) {
+            displayUsersMoney();
             for (Movement mov:businessLogic.getCurrentUser().getMovements())
                 tableMovements.getItems().add(mov);
         }
-
-
         tableMovements.getSortOrder().add(tableDate);
 
 
@@ -96,10 +89,10 @@ public class ShowMovementsController implements Controller{
                 mainGUI.showPortal();
                 break;
             case "User":
-                mainGUI.showUserPortal();
+                mainGUI.showMyProfile();
                 break;
             case "Admin":
-                mainGUI.showAdminPortal();
+                mainGUI.showMyProfile();
                 break;
             default:
                 break;
