@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="420.0" prefWidth="378.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.PortalController">
+<AnchorPane prefHeight="355.0" prefWidth="378.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.PortalController">
    <children>
       <ImageView fitHeight="65.0" fitWidth="87.0" layoutX="146.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -33,12 +33,7 @@
             <Font name="Trebuchet MS Bold" size="17.0" />
          </font>
       </Button>
-      <Button layoutX="76.0" layoutY="290.0" mnemonicParsing="false" onAction="#selectShowMovements" prefHeight="42.0" prefWidth="226.0" styleClass="btn-default" text="%Show movements">
-         <font>
-            <Font name="Trebuchet MS Bold" size="17.0" />
-         </font>
-      </Button>
-      <Button layoutX="201.0" layoutY="359.0" mnemonicParsing="false" onAction="#selectLogout" prefHeight="26.0" prefWidth="150.0" styleClass="btn-primary" text="%Logout">
+      <Button layoutX="200.0" layoutY="305.0" mnemonicParsing="false" onAction="#selectLogout" prefHeight="26.0" prefWidth="150.0" styleClass="btn-primary" text="%Logout">
          <font>
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
@@ -48,7 +43,7 @@
          <image>
             <Image url="@img/imageUser.jpg" />
          </image></ImageView>
-      <Button layoutX="39.0" layoutY="359.0" mnemonicParsing="false" onAction="#selectMyProfile" prefHeight="26.0" prefWidth="150.0" styleClass="btn-primary" text="%MyProfile">
+      <Button layoutX="39.0" layoutY="305.0" mnemonicParsing="false" onAction="#selectMyProfile" prefHeight="26.0" prefWidth="150.0" styleClass="btn-primary" text="%MyProfile">
          <font>
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
