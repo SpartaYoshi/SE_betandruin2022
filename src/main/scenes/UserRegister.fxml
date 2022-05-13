@@ -35,7 +35,6 @@
             <Font name="Trebuchet MS Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="23.0" layoutY="349.0" mnemonicParsing="false" onAction="#selectBack" styleClass="btn-danger" text="%Back" />
       <ImageView fitHeight="55.0" fitWidth="68.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/imageUser.jpg" />
@@ -64,5 +63,10 @@
             <Label fx:id="errorMessage" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" text="  " textAlignment="CENTER" />
          </children>
       </HBox>
+      <Button layoutX="42.0" layoutY="349.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="25.0" prefWidth="62.0" styleClass="btn-danger" text="%Back">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

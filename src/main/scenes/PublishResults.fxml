@@ -8,18 +8,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="631.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.PublishResultsController">
+<AnchorPane prefHeight="564.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.PublishResultsController">
     <children>
         <DatePicker fx:id="calendar" layoutX="182.0" layoutY="63.0" prefHeight="26.0" prefWidth="182.0" />
-        <Label layoutX="66.0" layoutY="67.0" text="%EventDate" />
-        <Label layoutX="329.0" layoutY="108.0" text="%Questions:" />
-        <Button fx:id="closeButton" layoutX="65.0" layoutY="509.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="17.0" prefWidth="66.0" styleClass="btn-danger" text="%Back" />
-        <Label fx:id="listOfEventsLabel" layoutX="66.0" layoutY="108.0" prefHeight="18.0" prefWidth="150.0" text="%ListofEvents:" />
-        <Button fx:id="publishButton" layoutX="459.0" layoutY="434.0" mnemonicParsing="false" onAction="#publishResult" prefHeight="26.0" prefWidth="283.0" styleClass="btn-primary" text="%MarkAsFinal" textAlignment="CENTER">
+        <Label layoutX="66.0" layoutY="67.0" text="%EventDate">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+        <Label layoutX="329.0" layoutY="108.0" text="%Questions:">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+        <Label fx:id="listOfEventsLabel" layoutX="66.0" layoutY="108.0" prefHeight="18.0" prefWidth="150.0" text="%ListofEvents:">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+        <Button fx:id="publishButton" layoutX="478.0" layoutY="435.0" mnemonicParsing="false" onAction="#publishResult" prefHeight="26.0" prefWidth="283.0" styleClass="btn-primary" text="%MarkAsFinal" textAlignment="CENTER">
             <font>
                 <Font name="Segoe UI Bold" size="12.0" />
             </font></Button>
-        <Label fx:id="messageLabel" layoutX="287.0" layoutY="480.0" prefHeight="18.0" prefWidth="344.0" />
+        <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="256.0" layoutY="479.0" prefHeight="18.0" prefWidth="344.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
         <TableView fx:id="tblEvents" layoutX="47.0" layoutY="136.0" prefHeight="200.0" prefWidth="254.0">
             <columns>
                 <TableColumn fx:id="ec1" prefWidth="65.5999755859375" text="%ID" />
@@ -40,7 +51,7 @@
         </TableView>
         <Label layoutX="623.0" layoutY="108.0" prefHeight="18.0" prefWidth="88.0" text="%Results:">
             <font>
-                <Font name="Segoe UI" size="12.0" />
+                <Font name="Segoe UI Bold" size="12.0" />
             </font></Label>
         <TableView fx:id="tblQuestions" layoutX="317.0" layoutY="136.0" prefHeight="200.0" prefWidth="283.0">
             <columns>
@@ -51,11 +62,28 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <Label fx:id="eventDescriptionLabel" layoutX="66.0" layoutY="353.0" prefHeight="18.0" prefWidth="174.0" />
-        <Label fx:id="questionLabel" layoutX="340.0" layoutY="363.0" prefHeight="17.0" prefWidth="108.0" />
-        <Label fx:id="resultLabel" layoutX="623.0" layoutY="353.0" prefHeight="18.0" prefWidth="75.0" />
-        <Label fx:id="instructionLbl" layoutX="76.0" layoutY="404.0" prefHeight="18.0" prefWidth="666.0" />
-      <Button fx:id="publishButton1" layoutX="75.0" layoutY="434.0" mnemonicParsing="false" onAction="#updateFromAPI" prefHeight="26.0" prefWidth="283.0" styleClass="btn-primary" text="%UpdateFromAPI" textAlignment="CENTER">
+        <Label fx:id="eventDescriptionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="46.0" layoutY="353.0" prefHeight="18.0" prefWidth="254.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+        <Label fx:id="questionLabel" layoutX="317.0" layoutY="353.0" prefHeight="18.0" prefWidth="283.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+        <Label fx:id="resultLabel" layoutX="614.0" layoutY="353.0" prefHeight="18.0" prefWidth="194.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+        <Label fx:id="instructionLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="398.0" prefHeight="18.0" prefWidth="671.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Button fx:id="publishButton1" layoutX="94.0" layoutY="435.0" mnemonicParsing="false" onAction="#updateFromAPI" prefHeight="26.0" prefWidth="283.0" styleClass="btn-primary" text="%UpdateFromAPI" textAlignment="CENTER">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="closeButton" layoutX="46.0" layoutY="505.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="25.0" prefWidth="62.0" styleClass="btn-danger" text="%Back">
          <font>
             <Font name="Segoe UI Bold" size="12.0" />
          </font>

@@ -19,7 +19,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="21.0" layoutY="381.0" mnemonicParsing="false" onAction="#selectBack" styleClass="btn-danger" text="%Back" />
       <Label alignment="CENTER" layoutX="264.0" layoutY="-7.0" prefHeight="66.0" prefWidth="344.0" text="%MyResults" textAlignment="CENTER" textOverrun="CLIP">
          <font>
             <Font name="Trebuchet MS Bold" size="35.0" />
@@ -33,6 +32,14 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label fx:id="messageLabel" layoutX="184.0" layoutY="385.0" prefHeight="18.0" prefWidth="447.0" text="Label" />
+      <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="212.0" layoutY="384.0" prefHeight="18.0" prefWidth="447.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Button layoutX="47.0" layoutY="381.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="25.0" prefWidth="62.0" styleClass="btn-danger" text="%Back">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

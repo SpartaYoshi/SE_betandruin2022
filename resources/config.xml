@@ -12,5 +12,5 @@
 	<dataBaseUser>admin</dataBaseUser>
 	<dataBasePassword>admin</dataBasePassword>
   </dataAccess>
-  <locale>es</locale>
+  <locale>en</locale>
 </config>

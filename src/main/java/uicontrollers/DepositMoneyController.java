@@ -28,7 +28,7 @@ public class DepositMoneyController implements Controller {
         this.mainGUI=mainGUI;
     }
 
-    public void selectBack(MouseEvent mouseEvent) {
+    public void selectBack() {
 
         clearAll();
         switch(businessLogic.getSessionMode()) {

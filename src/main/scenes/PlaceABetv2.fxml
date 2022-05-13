@@ -7,19 +7,40 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="631.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.PlaceABetController">
    <children>
       <DatePicker fx:id="calendar" layoutX="162.0" layoutY="62.0" prefHeight="26.0" prefWidth="182.0" />
-      <Label layoutX="66.0" layoutY="67.0" text="%Event Date:" />
-      <Label layoutX="329.0" layoutY="108.0" text="%Questions:" />
-      <Button fx:id="closeButton" layoutX="22.0" layoutY="578.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="17.0" prefWidth="66.0" styleClass="btn-danger" text="%Back" />
-      <Label fx:id="listOfEventsLabel" layoutX="66.0" layoutY="108.0" prefHeight="18.0" prefWidth="150.0" text="%List of Bets:" />
-      <Button fx:id="placeBetButton" layoutX="379.0" layoutY="538.0" mnemonicParsing="false" onAction="#selectPlaceBet" prefHeight="26.0" prefWidth="125.0" text="%PlaceBet" textAlignment="CENTER" />
-      <Label layoutX="162.0" layoutY="471.0" prefHeight="18.0" prefWidth="534.0" text="%phrasePlaceBet" />
-      <TextField fx:id="amountMoneyTextField" layoutX="341.0" layoutY="492.0" prefHeight="26.0" prefWidth="173.0" />
-      <Label fx:id="messageLabel" layoutX="256.0" layoutY="582.0" prefHeight="18.0" prefWidth="344.0" />
-      <Label fx:id="availableMoneyLabel" layoutX="312.0" layoutY="427.0" prefHeight="18.0" prefWidth="236.0" />
+      <Label layoutX="66.0" layoutY="67.0" text="%Event Date:">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="329.0" layoutY="108.0" text="%Questions:">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="listOfEventsLabel" layoutX="66.0" layoutY="108.0" prefHeight="18.0" prefWidth="150.0" text="%List of Bets:">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Button fx:id="placeBetButton" alignment="CENTER" layoutX="365.0" layoutY="538.0" mnemonicParsing="false" onAction="#selectPlaceBet" prefHeight="26.0" prefWidth="125.0" styleClass="btn-info" text="%PlaceBet" textAlignment="CENTER">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Button>
+      <Label alignment="CENTER" layoutX="162.0" layoutY="471.0" prefHeight="18.0" prefWidth="534.0" text="%phrasePlaceBet">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="amountMoneyTextField" layoutX="343.0" layoutY="491.0" prefHeight="26.0" prefWidth="173.0" />
+      <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="256.0" layoutY="582.0" prefHeight="18.0" prefWidth="344.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="availableMoneyLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="312.0" layoutY="427.0" prefHeight="18.0" prefWidth="236.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
       <TableView fx:id="tblEvents" layoutX="66.0" layoutY="136.0" prefHeight="200.0" prefWidth="254.0">
          <columns>
             <TableColumn fx:id="ec1" prefWidth="65.5999755859375" text="%ID" />
@@ -38,8 +59,14 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="623.0" layoutY="108.0" prefHeight="18.0" prefWidth="88.0" text="%Results:" />
-      <Label layoutX="527.0" layoutY="496.0" text="€" />
+      <Label layoutX="623.0" layoutY="108.0" prefHeight="18.0" prefWidth="88.0" text="%Results:">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="527.0" layoutY="497.0" text="€">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
       <TableView fx:id="tblQuestions" layoutX="329.0" layoutY="136.0" prefHeight="200.0" prefWidth="283.0">
          <columns>
             <TableColumn fx:id="qc1" prefWidth="63.20001220703125" text="%ID" />
@@ -49,9 +76,26 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label fx:id="eventDescriptionLabel" layoutX="66.0" layoutY="353.0" prefHeight="18.0" prefWidth="174.0" />
-      <Label fx:id="questionLabel" layoutX="329.0" layoutY="353.0" prefHeight="18.0" prefWidth="283.0" />
-      <Label fx:id="resultLabel" layoutX="623.0" layoutY="353.0" prefHeight="18.0" prefWidth="194.0" />
-      <Label fx:id="minimumBetlabel" layoutX="312.0" layoutY="402.0" prefHeight="18.0" prefWidth="236.0" />
+      <Label fx:id="eventDescriptionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="66.0" layoutY="353.0" prefHeight="18.0" prefWidth="254.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="questionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="329.0" layoutY="353.0" prefHeight="18.0" prefWidth="283.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="resultLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="623.0" layoutY="353.0" prefHeight="18.0" prefWidth="194.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="minimumBetlabel" alignment="CENTER" contentDisplay="CENTER" layoutX="312.0" layoutY="402.0" prefHeight="18.0" prefWidth="236.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Button fx:id="closeButton" layoutX="41.0" layoutY="569.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="25.0" prefWidth="62.0" styleClass="btn-danger" text="%Back">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

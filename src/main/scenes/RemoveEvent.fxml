@@ -10,9 +10,9 @@
 
 <AnchorPane prefHeight="422.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.RemoveEventController">
    <children>
-      <Label layoutX="243.0" layoutY="21.0" prefHeight="25.0" prefWidth="193.0" text="%RemoveEvent">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="242.0" layoutY="23.0" prefHeight="25.0" prefWidth="193.0" text="%RemoveEvent">
          <font>
-            <Font name="Trebuchet MS" size="21.0" />
+            <Font name="Trebuchet MS Bold" size="21.0" />
          </font>
       </Label>
       <TableView fx:id="tblEvents" layoutX="43.0" layoutY="118.0" prefHeight="200.0" prefWidth="592.0">
@@ -22,8 +22,18 @@
         </columns>
       </TableView>
       <DatePicker fx:id="calendar" layoutX="58.0" layoutY="75.0" />
-      <Label fx:id="messageLbl" layoutX="149.0" layoutY="375.0" prefHeight="25.0" prefWidth="379.0" textAlignment="CENTER" />
-      <Button layoutX="33.0" layoutY="375.0" mnemonicParsing="false" onAction="#selectBack" styleClass="btn-danger" text="%Back" />
-      <Button fx:id="removeBtn" layoutX="283.0" layoutY="337.0" mnemonicParsing="false" onMouseClicked="#removeEv" prefHeight="26.0" prefWidth="111.0" styleClass="btn-primary" text="%Remove" />
+      <Label fx:id="messageLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="145.0" layoutY="375.0" prefHeight="25.0" prefWidth="379.0" textAlignment="CENTER">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Button fx:id="removeBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="283.0" layoutY="337.0" mnemonicParsing="false" onMouseClicked="#removeEv" prefHeight="26.0" prefWidth="111.0" styleClass="btn-primary" text="%Remove">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="43.0" layoutY="362.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="25.0" prefWidth="62.0" styleClass="btn-danger" text="%Back">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

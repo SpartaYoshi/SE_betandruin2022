@@ -141,7 +141,7 @@ public class MainGUI {
     setupScene(userPortal.ui, "UserPortal", 395, 400);}
 
   public void showBrowseQuestions() {
-    setupScene(browseQuestions.ui, "BrowseQuestions", 1000, 500);
+    setupScene(browseQuestions.ui, "BrowseQuestions", 1030, 380);
   }
 
   public void showCreateQuestion() {
@@ -149,7 +149,7 @@ public class MainGUI {
   }
 
   public void showSetFee() {
-    setupScene(setFee.ui, "SetFee", 1050, 500);
+    setupScene(setFee.ui, "SetFee", 784, 432);
   }
 
   public void showCreateEvent() {
@@ -169,12 +169,12 @@ public class MainGUI {
   public void showPlaceABet(){
     if (businessLogic.getCurrentUser() != null)
         ((PlaceABetController) placeAbet.c).displayUsersMoney();
-    setupScene(placeAbet.ui, "PlaceBet", 900, 680);
+    setupScene(placeAbet.ui, "PlaceBet", 900, 670);
   }
 
-  public void showRemoveABet(){setupScene(removeBet.ui, "RemoveBet", 940, 520);}
+  public void showRemoveABet(){setupScene(removeBet.ui, "RemoveBet", 905, 520);}
 
-  public void showRemoveEvent(){setupScene(removeEvent.ui, "RemoveEvent", 680, 475);}
+  public void showRemoveEvent(){setupScene(removeEvent.ui, "RemoveEvent", 685, 447);}
 
 
   public void showShowMovements(){

@@ -9,10 +9,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="460.0" prefWidth="1013.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.SetFeeController">
+<AnchorPane prefHeight="407.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.SetFeeController">
    <children>
       <DatePicker fx:id="datepicker" layoutX="34.0" layoutY="88.0" />
-      <Label layoutX="34.0" layoutY="59.0" text="%EventDate" />
+      <Label layoutX="34.0" layoutY="59.0" text="%EventDate">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
       <TableView fx:id="tblEvents" layoutX="229.0" layoutY="88.0" prefHeight="217.0" prefWidth="214.0">
          <columns>
             <TableColumn fx:id="ec1" maxWidth="200.0" minWidth="30.0" prefWidth="41.60005187988281" text="ID" />
@@ -31,19 +34,41 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="229.0" layoutY="59.0" text="%Events" />
-      <Label layoutX="368.0" layoutY="59.0" text="  " />
-      <Label layoutX="465.0" layoutY="59.0" text="%SelectedEvent" />
-      <Button layoutX="34.0" layoutY="412.0" mnemonicParsing="false" onAction="#selectBack" styleClass="btn-danger" text="%Back" />
-      <Label layoutX="734.0" layoutY="113.0" prefHeight="18.0" prefWidth="74.0" text="%Result:" />
-      <TextField fx:id="resultField" layoutX="806.0" layoutY="110.0" prefHeight="25.0" prefWidth="51.0" />
-      <Label layoutX="734.0" layoutY="164.0" prefHeight="18.0" prefWidth="50.0" text="%Fee:" />
-      <TextField fx:id="feeField" layoutX="806.0" layoutY="160.0" prefHeight="25.0" prefWidth="51.0" />
-      <Button layoutX="747.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#setFee" prefHeight="25.0" prefWidth="110.0" styleClass="btn-primary" text="%SetFee" />
-      <Label fx:id="warningLbl" layoutX="730.0" layoutY="293.0" prefHeight="33.0" prefWidth="253.0">
+      <Label layoutX="229.0" layoutY="59.0" text="%Events">
          <font>
-            <Font name="Source Serif Pro" size="13.0" />
+            <Font name="Segoe UI Bold" size="12.0" />
          </font></Label>
-      <Label fx:id="explanationLbl" layoutX="273.0" layoutY="318.0" prefHeight="17.0" prefWidth="417.0" />
+      <Label layoutX="368.0" layoutY="59.0" text="  " />
+      <Label layoutX="465.0" layoutY="59.0" text="%SelectedEvent">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="58.0" layoutY="142.0" prefHeight="18.0" prefWidth="74.0" text="%Result:">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="resultField" layoutX="134.0" layoutY="139.0" prefHeight="25.0" prefWidth="51.0" />
+      <Label layoutX="58.0" layoutY="192.0" prefHeight="18.0" prefWidth="50.0" text="%Fee:">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="feeField" layoutX="134.0" layoutY="189.0" prefHeight="25.0" prefWidth="51.0" />
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="66.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#setFee" prefHeight="25.0" prefWidth="110.0" styleClass="btn-primary" text="%SetFee">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Button>
+      <Label fx:id="warningLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="340.0" layoutY="336.0" prefHeight="33.0" prefWidth="253.0">
+         <font>
+            <Font name="Segoe UI Bold" size="13.0" />
+         </font></Label>
+      <Label fx:id="explanationLbl" layoutX="229.0" layoutY="314.0" prefHeight="18.0" prefWidth="489.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Button layoutX="52.0" layoutY="357.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="25.0" prefWidth="62.0" styleClass="btn-danger" text="%Back">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

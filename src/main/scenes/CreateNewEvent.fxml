@@ -7,18 +7,36 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="488.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.CreateNewEventController">
    <children>
       <DatePicker fx:id="calendar" layoutX="189.0" layoutY="60.0" prefHeight="26.0" prefWidth="254.0" />
-      <Label layoutX="87.0" layoutY="64.0" prefHeight="18.0" prefWidth="175.0" text="%EventDate" />
-      <Label layoutX="87.0" layoutY="111.0" prefHeight="18.0" prefWidth="150.0" text="%ListEvents" />
-      <Button fx:id="createEventButton" layoutX="257.0" layoutY="438.0" mnemonicParsing="false" onAction="#selectCreateEvent" text="%CreateEvent" />
-      <Button fx:id="closeButton" layoutX="36.0" layoutY="438.0" mnemonicParsing="false" onAction="#selectBack" styleClass="btn-danger" text="%Back" />
+      <Label layoutX="87.0" layoutY="64.0" prefHeight="18.0" prefWidth="175.0" text="%EventDate">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="87.0" layoutY="101.0" prefHeight="18.0" prefWidth="150.0" text="%ListofEvents:">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Button fx:id="createEventButton" alignment="CENTER" contentDisplay="CENTER" layoutX="253.0" layoutY="436.0" mnemonicParsing="false" onAction="#selectCreateEvent" styleClass="btn-info" text="%CreateEvent">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Button>
       <TextField fx:id="eventtextField" layoutX="139.0" layoutY="358.0" prefHeight="26.0" prefWidth="360.0" />
-      <Label layoutX="87.0" layoutY="362.0" prefHeight="18.0" prefWidth="52.0" text="%Event:" />
-      <Label fx:id="messageLabel" layoutX="139.0" layoutY="392.0" prefHeight="26.0" prefWidth="360.0" />
-      <Label layoutX="87.0" layoutY="331.0" prefHeight="18.0" prefWidth="412.0" text="%WriteEvent" />
+      <Label layoutX="87.0" layoutY="362.0" prefHeight="18.0" prefWidth="52.0" text="%Event:">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="139.0" layoutY="392.0" prefHeight="26.0" prefWidth="360.0">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="94.0" layoutY="331.0" prefHeight="18.0" prefWidth="412.0" text="%WriteEvent">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font></Label>
       <TableView fx:id="tblEvents" layoutX="189.0" layoutY="98.0" prefHeight="200.0" prefWidth="254.0">
         <columns>
           <TableColumn fx:id="ec1" prefWidth="58.4000244140625" text="ID" />
@@ -28,5 +46,10 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Button fx:id="closeButon" layoutX="41.0" layoutY="438.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="25.0" prefWidth="62.0" styleClass="btn-danger" text="%Back">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

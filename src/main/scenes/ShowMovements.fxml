@@ -5,17 +5,25 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.ShowMovementsController">
+<AnchorPane prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.ShowMovementsController">
    <children>
-      <TableView fx:id="tableMovements" layoutX="7.0" layoutY="40.0" prefHeight="308.0" prefWidth="586.0">
+      <TableView fx:id="tableMovements" layoutX="27.0" layoutY="27.0" prefHeight="308.0" prefWidth="586.0">
         <columns>
           <TableColumn fx:id="tableDate" prefWidth="217.99996948242188" resizable="false" sortable="false" text="%Date" />
             <TableColumn fx:id="tableDescription" minWidth="0.0" prefWidth="284.0" resizable="false" sortable="false" text="%Description" />
             <TableColumn fx:id="tableAmount" prefWidth="82.0" resizable="false" sortable="false" text="%Amount" />
         </columns>
       </TableView>
-      <Label fx:id="totalMoney" layoutX="412.0" layoutY="14.0" prefHeight="18.0" prefWidth="166.0" />
-      <Button layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onAction="#selectBack" styleClass="btn-danger" text="%Back" />
+      <Label fx:id="totalMoney" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="446.0" layoutY="351.0" prefHeight="18.0" prefWidth="166.0">
+         <font>
+            <Font name="Segoe UI Bold" size="17.0" />
+         </font></Label>
+      <Button layoutX="27.0" layoutY="349.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="25.0" prefWidth="62.0" styleClass="btn-danger" text="%Back">
+         <font>
+            <Font name="Segoe UI Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
