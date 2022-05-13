@@ -62,22 +62,26 @@ public class CheckMyResultsController implements Controller {
         if (who!= null){
             Vector<Bet> usersBets = who.getBets();
             Vector<Result> allResults = businessLogic.getAllResults();
-            for (Result res: allResults) {
-                if (res.getQuestion().questionProcessed()){
+            //for (Result res: allResults) {
+                //if (res.getQuestion().questionProcessed()){
                     for (Bet b : usersBets) {
                         Result usersResult = b.getResult();
-                        Event usersResultEvent = usersResult.getQuestion().getEvent(); // get the event
-                        Event allResultsEvent = res.getQuestion().getEvent(); // get the event
-                        if (usersResultEvent.equals(allResultsEvent)) { // if they are the same event:
-                            tableResults.getItems().add(res); // insert the final result
+                        Question currentquestion = usersResult.getQuestion();
+                        if (currentquestion.questionProcessed()){
+                            Event usersResultEvent = currentquestion.getEvent(); // get the event
+
+                        }
+                        //Event allResultsEvent = res.getQuestion().getEvent(); // get the event
+                        //if (usersResultEvent.equals(allResultsEvent)) { // if they are the same event:
+                            tableResults.getItems().add(usersResult); // insert the final result
                             tableMyResults.getItems().add(usersResult); // insert the result the user had selected
 
                         }
                     }
-                }
-            }
+
+
         }
-    }
+
 
     @FXML
     void initialize() {

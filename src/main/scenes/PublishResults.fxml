@@ -54,7 +54,7 @@
         <Label fx:id="eventDescriptionLabel" layoutX="66.0" layoutY="353.0" prefHeight="18.0" prefWidth="174.0" />
         <Label fx:id="questionLabel" layoutX="340.0" layoutY="363.0" prefHeight="17.0" prefWidth="108.0" />
         <Label fx:id="resultLabel" layoutX="623.0" layoutY="353.0" prefHeight="18.0" prefWidth="75.0" />
-        <Label fx:id="instructionLbl" layoutX="252.0" layoutY="404.0" prefHeight="17.0" prefWidth="352.0" />
+        <Label fx:id="instructionLbl" layoutX="76.0" layoutY="404.0" prefHeight="18.0" prefWidth="666.0" />
       <Button fx:id="publishButton1" layoutX="75.0" layoutY="434.0" mnemonicParsing="false" onAction="#updateFromAPI" prefHeight="26.0" prefWidth="283.0" styleClass="btn-primary" text="%UpdateFromAPI" textAlignment="CENTER">
          <font>
             <Font name="Segoe UI Bold" size="12.0" />

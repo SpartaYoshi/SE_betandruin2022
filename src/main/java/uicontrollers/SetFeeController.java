@@ -190,7 +190,6 @@ public class SetFeeController implements Controller {
                     explanationLbl.setText(" ");
                 }
             }
-
         });
     }
 
