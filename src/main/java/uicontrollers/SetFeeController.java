@@ -51,6 +51,7 @@ public class SetFeeController implements Controller {
 
     @FXML
     void selectBack(ActionEvent event) {
+        clearAll();
         switch(businessLogic.getSessionMode()) {
             case "Anon":
                 mainGUI.showPortal();
@@ -66,6 +67,18 @@ public class SetFeeController implements Controller {
         }
     }
 
+    private void clearAll() {
+        tblEvents.getItems().clear();
+        tblQuestions.getItems().clear();
+        feeField.setText("");
+        resultField.setText("");
+        datepicker.setValue(LocalDate.now());
+        warningLbl.getStyleClass().clear();
+        warningLbl.setText("");
+        explanationLbl.setText("");
+
+    }
+
     @FXML
     void setFee() {
 
@@ -78,9 +91,22 @@ public class SetFeeController implements Controller {
                 int result = Integer.parseInt(resultField.getText());
                 System.out.println(feeField.getText());
                 float feeAmount = Float.parseFloat(feeField.getText());
+                int res= Integer.parseInt(resultField.getText());
+                Question q=tblQuestions.getSelectionModel().getSelectedItem();
 
+                if(q.getQuestionID().equals("qIDMatchWinner")){
+                    if(res<1 || res >3){
+                        ConfigXML config = ConfigXML.getInstance();
+                        warningLbl.getStyleClass().setAll("lbl","lbl-danger");
+                        switch (config.getLocale()) {
+                            case "en" -> warningLbl.setText("Sorry, that is not a possible result");
+                            case "es" -> warningLbl.setText("Lo sentimos. Resultado no valido");
+                            case "eus" -> warningLbl.setText("Barkatu, emaitza ez da baliozkoa");
+                        }
+                    }
+                }
 
-                if(feeAmount <= 0) {
+                else if(feeAmount <= 0) {
                     warningLbl.getStyleClass().setAll("lbl","lbl-danger");
                     ConfigXML config = ConfigXML.getInstance();
                     switch (config.getLocale()) {
