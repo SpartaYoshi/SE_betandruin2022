@@ -17977,9 +17977,9 @@
 														"$ref": "AAAAAAGAryYtqVtHaWs="
 													},
 													"font": "Arial;13;0",
-													"left": 32.72998046875,
+													"left": 30.55908203125,
 													"top": 13,
-													"width": 86.9853515625,
+													"width": 78.29541015625,
 													"height": 13,
 													"text": "PublishResults"
 												},
@@ -17992,7 +17992,7 @@
 													"font": "Arial;13;1",
 													"left": 13,
 													"top": 13,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
@@ -18723,9 +18723,9 @@
 														"$ref": "AAAAAAGArzqKhOuI6Bk="
 													},
 													"font": "Arial;13;0",
-													"left": 111.9599609375,
+													"left": 108.3291015625,
 													"top": 1981,
-													"width": 105.7744140625,
+													"width": 97.3955078125,
 													"height": 13,
 													"text": "if the admin wants"
 												},
@@ -18738,7 +18738,7 @@
 													"font": "Arial;13;1",
 													"left": 85,
 													"top": 1981,
-													"width": 21.9599609375,
+													"width": 18.3291015625,
 													"height": 13,
 													"text": "seq"
 												},
@@ -25324,9 +25324,9 @@
 														"$ref": "AAAAAAGAuIN4fiZLrBo="
 													},
 													"font": "Arial;13;0",
-													"left": 335.9599609375,
+													"left": 332.3291015625,
 													"top": 789,
-													"width": 102.16259765625,
+													"width": 94.12646484375,
 													"height": 13,
 													"text": "for all relatedBets"
 												},
@@ -25339,7 +25339,7 @@
 													"font": "Arial;13;1",
 													"left": 309,
 													"top": 789,
-													"width": 21.9599609375,
+													"width": 18.3291015625,
 													"height": 13,
 													"text": "seq"
 												},
@@ -25541,9 +25541,9 @@
 														"$ref": "AAAAAAGAuJMYySbRiVM="
 													},
 													"font": "Arial;13;0",
-													"left": 559.9599609375,
+													"left": 556.3291015625,
 													"top": 949,
-													"width": 105.03173828125,
+													"width": 94.48193359375,
 													"height": 13,
 													"text": "for each User (us)"
 												},
@@ -25556,7 +25556,7 @@
 													"font": "Arial;13;1",
 													"left": 533,
 													"top": 949,
-													"width": 21.9599609375,
+													"width": 18.3291015625,
 													"height": 13,
 													"text": "seq"
 												},
@@ -25642,9 +25642,9 @@
 														"$ref": "AAAAAAGAuJXZ3ScNWtQ="
 													},
 													"font": "Arial;13;0",
-													"left": 599.9599609375,
+													"left": 596.3291015625,
 													"top": 1029,
-													"width": 69.65625,
+													"width": 62.35009765625,
 													"height": 13,
 													"text": "for each bet"
 												},
@@ -25657,7 +25657,7 @@
 													"font": "Arial;13;1",
 													"left": 573,
 													"top": 1029,
-													"width": 21.9599609375,
+													"width": 18.3291015625,
 													"height": 13,
 													"text": "seq"
 												},
@@ -27705,7 +27705,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF/0Egl3fALpN8="
 							},
-							"name": "Role36"
+							"name": "Role36",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -27781,7 +27782,7 @@
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
 					"name": "Check my results",
-					"documentation": "# Event flow\n\n## Main flow\n1. *System* displays the **results** the user selected when he/she placed a **bet** that coincide with the existing the **final results**\n2. *Logged-in User* selects back button\n3. *System* goes back to the previous page, so the current window is closed.\n\n\n## Alternative flow\nA1. There is no **selected result** that matches the existing **final results**"
+					"documentation": "# Event flow\n\n## Main flow\n1. *System* displays the **results** the user selected when he/she placed a **bet** that coincide with the existing the **final results**\n2. *Logged-in User* selects back button\n3. *System* goes back to the previous page, so the current window is closed.\n\n\n## Alternative flow\nA1. There is no **selected result** that matches the existing **final results** >>> empty table"
 				},
 				{
 					"_type": "UMLUseCase",
