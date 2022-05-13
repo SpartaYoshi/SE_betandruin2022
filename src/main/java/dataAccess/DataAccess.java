@@ -614,6 +614,7 @@ public class DataAccess {
 		db.getTransaction().begin();
 		User dbUser = db.find(User.class, who.getUsername());
 		who.setPasswd(newPassword);
+		dbUser.setPasswd(newPassword);
 		db.persist(dbUser);
 		db.getTransaction().commit();
 

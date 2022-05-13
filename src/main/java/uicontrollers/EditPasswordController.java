@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import ui.MainGUI;
 
 
@@ -37,7 +36,7 @@ public class EditPasswordController implements Controller, Initializable {
     private Label nameLabel;
 
     @FXML
-    private PasswordField passwdField;
+    private PasswordField passwordField;
 
     @FXML
     private Label surnameLabel;
@@ -46,9 +45,9 @@ public class EditPasswordController implements Controller, Initializable {
     @FXML
     void onEditProfileButton() {
         User u = businessLogic.getCurrentUser();
-        if(this.passwdField != null) {
-            String oldPassword = u.getUsername();
-            String newPassword = passwdField.getText();
+        if(this.passwordField.getText().length() != 0) {
+            String oldPassword = u.getPasswd();
+            String newPassword = passwordField.getText();
             if (oldPassword.toLowerCase().trim().equals(newPassword.toLowerCase().trim())) {
                 messageLabelPassword.getStyleClass().setAll("lbl", "lbl-danger");
                 ConfigXML config = ConfigXML.getInstance();
