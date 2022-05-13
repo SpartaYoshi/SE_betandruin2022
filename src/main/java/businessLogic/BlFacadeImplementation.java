@@ -481,6 +481,7 @@ public class BlFacadeImplementation implements BlFacade {
 
 	@WebMethod
 	public int updateResultsFromAPI() {
+		dbManager.open(false);
 		fetchFromAPI();
 
 		int payments = 0;
@@ -507,6 +508,7 @@ public class BlFacadeImplementation implements BlFacade {
 				}
 			}
 		}
+		dbManager.close();
 	return payments;
 	}
 

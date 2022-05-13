@@ -191,6 +191,7 @@ public class PublishResultsController implements Controller{
         tblResults.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 resultLabel.setText("" + tblResults.getSelectionModel().getSelectedItem().getPossibleResult());
+                publishButton.setDisable(false);
             }
         });
 
@@ -214,12 +215,12 @@ public class PublishResultsController implements Controller{
 
      @FXML
     public void initialize() {
-
+        publishButton.setDisable(true);
 
          switch (config.getLocale()) {
-             case "en" -> instructionLbl.setText("Please, insert the final correct answer for the selected question");
-             case "es" -> instructionLbl.setText("Por favor, indique la respuesta final de la pregunta seleccionada.");
-             case "eus" -> instructionLbl.setText("Mesedez, sartu aukeratutako galderaren behin betiko emaitza");
+             case "en" -> instructionLbl.setText("Select a question and a result, or load all the results from the API automatically");
+             case "es" -> instructionLbl.setText("Seleccione una pregunta y respuesta, o cargue todos los resultados de la API automáticamente.");
+             case "eus" -> instructionLbl.setText("Aukeratu galdera eta emaitza bat, edo kargatu APIak emandako emaitza guztiak automatikoki.");
          }
 
         setupEventSelection();
@@ -314,4 +315,26 @@ public class PublishResultsController implements Controller{
                 break;
         }
     }
-}
+
+    public void updateFromAPI(ActionEvent actionEvent) {
+        try {
+            int howManyChanges=businessLogic.updateResultsFromAPI();
+            messageLabel.getStyleClass().setAll("lbl", "lbl-success");
+            switch (config.getLocale()) {
+                case "en" -> messageLabel.setText(howManyChanges + " payments were made successfully");
+                case "es" -> messageLabel.setText(howManyChanges + " pagos fueron realizados correctamente");
+                case "eus" -> messageLabel.setText(howManyChanges + "ordainketa ondo egin dira");
+            }
+        }catch(Exception e1){
+                messageLabel.getStyleClass().setAll("lbl", "lbl-success");
+                switch (config.getLocale()) {
+                    case "en" -> messageLabel.setText("Error when fetching the API");
+                    case "es" -> messageLabel.setText("Error al cargar la API");
+                    case "eus" -> messageLabel.setText("Errorea APIa atzitzerakoan");
+                }
+            }
+
+        }
+
+    }
+

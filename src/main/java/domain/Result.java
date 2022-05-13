@@ -129,17 +129,5 @@ public class Result implements Serializable {
 		return Objects.equals(possibleResult, result.possibleResult);
 	}
 
-	/*HE COMENTADO ESTO POR Q SE QUEDA EN BUCLE INFINITO
-	@Override
-	public String toString() {
-		return "Result{" +
-				"id=" + id +
-				", question=" + question +
-				", bets=" + bets +
-				", possibleResult=" + possibleResult +
-				", finalResult=" + finalResult +
-				", fee=" + fee +
-				'}';
-	}*/
 }
 
