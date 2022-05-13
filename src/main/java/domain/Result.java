@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -36,7 +35,7 @@ public class Result implements Serializable {
 	private Vector<Bet> bets = new Vector<>();
 	
 	private int possibleResult;
-	private int finalResult;
+	private boolean finalResult;
 
 
 
@@ -47,22 +46,25 @@ public class Result implements Serializable {
 	private float fee;
 
 	public Result() {
+		finalResult = false;
 	}
 
 	public Result(int r){
+		finalResult = false;
 		possibleResult = r;
 	}
 	public Result(int r, float f) {
 		this.fee = f;
 		this.possibleResult = r;
+		this.finalResult = false;
 		
 	}
 
-	public int getFinalResult() {
+	public boolean isFinalResult() {
 		return finalResult;
 	}
 
-	public void setFinalResult(int finalResult) {
+	public void setFinalResult(boolean finalResult) {
 		this.finalResult = finalResult;
 	}
 

@@ -179,11 +179,21 @@ public class MainGUI {
 
   }
 
-  public void showPortal(){setupScene(portal.ui, "Portal", 395, 315);}
+  public void showPortal(){
+    if (businessLogic.getCurrentUser() != null)
+      businessLogic.refreshUser();
+      setupScene(portal.ui, "Portal", 395, 315);
+  }
 
-  public void showAdminPortal(){setupScene(adminPortal.ui, "AdminPortal", 395, 575);}
+  public void showAdminPortal(){
+    if (businessLogic.getCurrentUser() != null)
+      businessLogic.refreshUser();
+    setupScene(adminPortal.ui, "AdminPortal", 395, 575);}
 
-  public void showUserPortal(){setupScene(userPortal.ui, "UserPortal", 395, 440);}
+  public void showUserPortal(){
+    if (businessLogic.getCurrentUser() != null)
+      businessLogic.refreshUser();
+    setupScene(userPortal.ui, "UserPortal", 395, 440);}
 
   public void showBrowseQuestions() {
     setupScene(browseQuestions.ui, "BrowseQuestions", 1000, 500);

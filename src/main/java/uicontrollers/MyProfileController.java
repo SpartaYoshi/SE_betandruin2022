@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import ui.MainGUI;
 
-public class MyProfileController implements Controller{
+public class MyProfileController implements Controller {
     public MyProfileController(BlFacade bl) {
             this.businessLogic = bl;
     }

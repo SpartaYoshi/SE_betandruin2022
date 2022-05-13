@@ -100,7 +100,7 @@ public class PublishResultsController implements Controller{
         Result ourRes = tblResults.getSelectionModel().getSelectedItem();
         int howManyChanges = 0;
         if (ourRes != null) {
-            int updatedRes = businessLogic.markFinalResult(ourRes, ourRes.getPossibleResult());
+            int updatedRes = businessLogic.markAsFinalResult(ourRes);
             messageLabel.setText(String.valueOf(updatedRes));
 
            howManyChanges= businessLogic.processBets(ourRes);

@@ -390,9 +390,9 @@ public class BlFacadeImplementation implements BlFacade {
 	}
 
 	@Override
-	public int markFinalResult(Result r, int finalR) {
+	public int markAsFinalResult(Result r) {
 		dbManager.open(false);
-		int updated=dbManager.markFinalResult(r,finalR);
+		int updated=dbManager.markAsFinalResult(r);
 		dbManager.close();
 		return updated;
 	}
@@ -506,5 +506,12 @@ public class BlFacadeImplementation implements BlFacade {
 			}
 		}
 	return payments;
+	}
+
+	@WebMethod @Override
+	public void refreshUser() {
+		dbManager.open(false);
+		setCurrentUser(dbManager.refreshUser(currentUser));
+		dbManager.close();
 	}
 }

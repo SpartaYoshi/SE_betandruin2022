@@ -65,7 +65,7 @@ public class CheckMyResultsController implements Controller {
             Vector<Bet> usersBets = who.getBets();
             Vector<Result> allResults = businessLogic.getAllResults();
             for (Result res: allResults) {
-                if (res.getFinalResult()!=0){
+                if (res.isFinalResult()){
                     for (Bet b : usersBets) {
                         Result usersResult = b.getResult();
                         Event usersResultEvent = usersResult.getQuestion().getEvent(); // get the event
