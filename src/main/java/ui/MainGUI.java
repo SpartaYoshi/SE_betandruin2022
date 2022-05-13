@@ -255,7 +255,11 @@ public class MainGUI {
   public void showPublishResults(){setupScene(publishResults.ui, "Publish", 870, 590);}
 
 
-  public void showCheckMyResults(){setupScene(checkMyResults.ui, "ChekMyResults", 890, 450);}
+  public void showCheckMyResults(){
+    if (businessLogic.getCurrentUser() != null)
+      ((CheckMyResultsController) checkMyResults.c).getResults();
+    setupScene(checkMyResults.ui, "ChekMyResults", 890, 450);
+  }
 
 
 

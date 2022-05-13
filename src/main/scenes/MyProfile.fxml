@@ -18,14 +18,15 @@
             <Image url="@img/imageUser.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="onEditProfileButton" layoutX="61.0" layoutY="204.0" mnemonicParsing="false" onAction="#onEditProfileButton" text="%EditPassword" />
+      <Button fx:id="onEditProfileButton" layoutX="29.0" layoutY="189.0" mnemonicParsing="false" onAction="#onEditProfileButton" prefHeight="26.0" prefWidth="150.0" text="%EditPassword" />
       <Label fx:id="passwordLabel" layoutX="237.0" layoutY="144.0" text="Label" />
       <Label alignment="CENTER" layoutX="198.0" layoutY="14.0" prefHeight="66.0" prefWidth="365.0" text="%MyProfile" textAlignment="CENTER" textOverrun="CLIP">
          <font>
             <Font name="Trebuchet MS Bold" size="35.0" />
          </font>
       </Label>
-      <Button fx:id="myResultsButton" layoutX="61.0" layoutY="240.0" mnemonicParsing="false" onAction="#onMyResultsButton" text="%MyResults" />
+      <Button fx:id="myResultsButton" layoutX="29.0" layoutY="222.0" mnemonicParsing="false" onAction="#onMyResultsButton" prefHeight="26.0" prefWidth="150.0" text="%MyResults" />
       <Button fx:id="backButton" layoutX="65.0" layoutY="302.0" mnemonicParsing="false" onAction="#selectBack" prefHeight="17.0" prefWidth="66.0" styleClass="btn-danger" text="%Back" />
+      <Button fx:id="myResultsButton1" layoutX="29.0" layoutY="257.0" mnemonicParsing="false" onAction="#onShowMovementsButton" prefHeight="26.0" prefWidth="150.0" text="%ShowMovements" />
    </children>
 </AnchorPane>

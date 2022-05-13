@@ -45,9 +45,7 @@ public class CheckMyResultsController implements Controller {
     private TableColumn<Result, Integer> columnFinalResult;
 
 
-    @FXML
-    void initialize() {
-
+    public void getResults(){
 
         tableResults.getItems().clear();
         tableMyResults.getItems().clear();
@@ -78,6 +76,10 @@ public class CheckMyResultsController implements Controller {
                 }
             }
         }
+    }
+
+    @FXML
+    void initialize() {
     }
 
     public CheckMyResultsController(BlFacade bl) {

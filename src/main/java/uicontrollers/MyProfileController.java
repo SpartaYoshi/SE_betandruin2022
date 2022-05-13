@@ -20,6 +20,10 @@ public class MyProfileController implements Controller {
     private Button backButton;
 
     @FXML
+    private Button showCheckMyResults;
+
+
+    @FXML
     private Label birthDateLabel;
 
     @FXML
@@ -83,6 +87,11 @@ public class MyProfileController implements Controller {
 
     @FXML public void onMyResultsButton(){
         mainGUI.showCheckMyResults();
+    }
+
+    @FXML public void onShowMovementsButton(){
+        mainGUI.showShowMovements();
+
     }
 
     public void clearAll() {
