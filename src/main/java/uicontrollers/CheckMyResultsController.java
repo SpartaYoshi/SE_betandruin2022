@@ -52,7 +52,7 @@ public class CheckMyResultsController implements Controller {
 
         // Bind columns
         columnEvent.setCellValueFactory(new PropertyValueFactory<>("description"));
-        columnQuestion.setCellValueFactory(new PropertyValueFactory<>("questionID"));
+        columnQuestion.setCellValueFactory(new PropertyValueFactory<>("question"));
         columnFinalResult.setCellValueFactory(new PropertyValueFactory<>("finalResult"));
 
         columnMyResult.setCellValueFactory(new PropertyValueFactory<>("possibleResult"));
