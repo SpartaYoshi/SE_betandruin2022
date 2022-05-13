@@ -98,7 +98,7 @@ public class CheckMyResultsController implements Controller {
 
     @FXML
     void initialize() {
-
+        clearAll();
     }
 
     public CheckMyResultsController(BlFacade bl) {

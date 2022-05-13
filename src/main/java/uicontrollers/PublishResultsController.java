@@ -116,6 +116,11 @@ public class PublishResultsController implements Controller{
 
         tblResults.getItems().clear();
         tblQuestions.getItems().clear();
+        tblEvents.getItems().clear();
+        calendar.setValue(LocalDate.now());
+        resultLabel.setText("");
+        questionLabel.setText("");
+        eventDescriptionLabel.setText("");
         messageLabel.getStyleClass().setAll("lbl", "lbl-success");
         switch (config.getLocale()) {
             case "en" -> messageLabel.setText(howManyChanges + " payments were made successfully");
@@ -161,6 +166,7 @@ public class PublishResultsController implements Controller{
                 resultLabel.setText("");
 
                 tblQuestions.getItems().clear();
+
                 for (Question q : tblEvents.getSelectionModel().getSelectedItem().getQuestions()) {
                     if (q.questionProcessed()==false) tblQuestions.getItems().add(q);
                 }
