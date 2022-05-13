@@ -114,7 +114,8 @@ public class PublishResultsController implements Controller{
             }
         }
 
-        tblResults.getItems().remove(ourRes);
+        tblResults.getItems().clear();
+        tblQuestions.getItems().clear();
         messageLabel.getStyleClass().setAll("lbl", "lbl-success");
         switch (config.getLocale()) {
             case "en" -> messageLabel.setText(howManyChanges + " payments were made successfully");
@@ -161,7 +162,7 @@ public class PublishResultsController implements Controller{
 
                 tblQuestions.getItems().clear();
                 for (Question q : tblEvents.getSelectionModel().getSelectedItem().getQuestions()) {
-                    tblQuestions.getItems().add(q);
+                    if (q.questionProcessed()==false) tblQuestions.getItems().add(q);
                 }
             }
         });

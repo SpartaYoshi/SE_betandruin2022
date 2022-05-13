@@ -75,20 +75,30 @@ public class CheckMyResultsController implements Controller {
                 }
             }
         }
-        if (tableMyResults.getItems().isEmpty() || tableResults.getItems().isEmpty()){
-            messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
-            ConfigXML config = ConfigXML.getInstance();
-            switch (config.getLocale()) {
-                case "en" -> messageLabel.setText("You have no result respective to the processed questions");
-                case "es" -> messageLabel.setText("No tienes resultados respectivos a las preguntas procesadas");
-                case "eus" -> messageLabel.setText("Ez duzu erantzunik galdera prozesatuentzat");
+        try {
+            if (tableMyResults.getItems().isEmpty() || tableResults.getItems().isEmpty()){
+                messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+                ConfigXML config = ConfigXML.getInstance();
+                switch (config.getLocale()) {
+                    case "en" -> messageLabel.setText("You have no result respective to the processed questions");
+                    case "es" -> messageLabel.setText("No tienes resultados respectivos a las preguntas procesadas");
+                    case "eus" -> messageLabel.setText("Ez duzu erantzunik galdera prozesatuentzat");
+                }
             }
+            else{
+                messageLabel.setText("");
+                messageLabel.getStyleClass().clear();
+            }
+        }catch (Exception e){
+
         }
+
     }
 
 
     @FXML
     void initialize() {
+
     }
 
     public CheckMyResultsController(BlFacade bl) {
@@ -98,6 +108,18 @@ public class CheckMyResultsController implements Controller {
     @FXML
     void selectBack() {
         mainGUI.showMyProfile();
+        clearAll();
+    }
+
+    private void clearAll() {
+        try{
+            messageLabel.setText("");
+            messageLabel.getStyleClass().clear();
+        }catch (Exception e){
+
+        }
+
+
     }
 
     @Override
