@@ -10,6 +10,7 @@ import org.kordamp.bootstrapfx.BootstrapFX;
 import uicontrollers.*;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -67,68 +68,12 @@ public class MainGUI {
     Window window = new Window();
     FXMLLoader loader = new FXMLLoader(MainGUI.class.getResource(fxmlfile), ResourceBundle.getBundle("Etiquetas", Locale.getDefault()));
     loader.setControllerFactory(controllerClass -> {
-
-      if (controllerClass == PortalController.class)    // For both Portal and AdminPortal
-        return new PortalController(businessLogic);
-
-      if (controllerClass == BrowseQuestionsController.class)
-        return new BrowseQuestionsController(businessLogic);
-
-      if (controllerClass == CreateQuestionController.class)
-        return new CreateQuestionController(businessLogic);
-
-      if(controllerClass== SetFeeController.class)
-        return new SetFeeController(businessLogic);
-
-      if(controllerClass== UserLoginController.class)
-        return new UserLoginController(businessLogic);
-
-      if(controllerClass== UserRegisterController.class)
-        return new UserRegisterController(businessLogic);
-
-      if (controllerClass == CreateNewEventController.class)
-        return new CreateNewEventController(businessLogic);
-
-      if (controllerClass == DepositMoneyController.class)
-        return new DepositMoneyController(businessLogic);
-
-      if (controllerClass == PlaceABetController.class)
-        return new PlaceABetController(businessLogic);
-
-      if (controllerClass == RemoveBetController.class)
-        return new RemoveBetController(businessLogic);
-
-      if (controllerClass == MyProfileController.class)
-        return new MyProfileController(businessLogic);
-
-      if (controllerClass == EditPasswordController.class)
-        return new EditPasswordController(businessLogic);
-
-      if (controllerClass == ShowMovementsController.class)
-        return new ShowMovementsController(businessLogic);
-
-      if (controllerClass == RemoveEventController.class)
-        return new RemoveEventController(businessLogic);
-
-      if (controllerClass == CheckMyResultsController.class)
-        return new CheckMyResultsController(businessLogic);
-
-      if(controllerClass== PublishResultsController.class)
-        return new PublishResultsController(businessLogic);
-
-
-
-      else {
-        // default behavior for controllerFactory:
-        try {
-          return controllerClass.getDeclaredConstructor().newInstance();
-        } catch (Exception exc) {
-          exc.printStackTrace();
-          throw new RuntimeException(exc); // fatal, just bail...
-        }
+      try{
+        return controllerClass.getConstructor(BlFacade.class).newInstance(businessLogic);
+      }catch (Exception e){
+        System.out.println("Error when loading window");
+        throw new RuntimeException(e);
       }
-
-
     });
     window.ui = loader.load();
     ((Controller) loader.getController()).setMainApp(this);
