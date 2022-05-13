@@ -9,17 +9,32 @@
 
 <AnchorPane prefHeight="353.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uicontrollers.MyProfileController">
    <children>
-      <Label fx:id="usernameLabel" layoutX="237.0" layoutY="98.0" text="Label" />
-      <Label fx:id="nameLabel" layoutX="237.0" layoutY="191.0" text="Label" />
-      <Label fx:id="surnameLabel" layoutX="237.0" layoutY="235.0" text="Label" />
-      <Label fx:id="birthDateLabel" layoutX="237.0" layoutY="277.0" text="Label" />
+      <Label fx:id="usernameLabel" layoutX="237.0" layoutY="98.0" text="Label">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label fx:id="nameLabel" layoutX="237.0" layoutY="191.0" text="Label">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="surnameLabel" layoutX="237.0" layoutY="235.0" text="Label">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="birthDateLabel" layoutX="237.0" layoutY="277.0" text="Label">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
       <ImageView fx:id="imageUser" fitHeight="150.0" fitWidth="200.0" layoutX="23.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/imageUser.jpg" />
          </image>
       </ImageView>
       <Button fx:id="onEditProfileButton" layoutX="29.0" layoutY="189.0" mnemonicParsing="false" onAction="#onEditProfileButton" prefHeight="26.0" prefWidth="150.0" text="%EditPassword" />
-      <Label fx:id="passwordLabel" layoutX="237.0" layoutY="144.0" text="Label" />
+      <Label fx:id="passwordLabel" layoutX="237.0" layoutY="144.0" text="Label">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
       <Label alignment="CENTER" layoutX="198.0" layoutY="14.0" prefHeight="66.0" prefWidth="365.0" text="%MyProfile" textAlignment="CENTER" textOverrun="CLIP">
          <font>
             <Font name="Trebuchet MS Bold" size="35.0" />
