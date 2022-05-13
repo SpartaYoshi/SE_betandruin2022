@@ -168,6 +168,9 @@ public interface BlFacade {
 	 */
 	@WebMethod String getSessionMode();
 
+	public Vector<Event> getEventsWithNoDate();
+
+
 	/*
 	@WebMethod
 	String editProfileUsername(User user);

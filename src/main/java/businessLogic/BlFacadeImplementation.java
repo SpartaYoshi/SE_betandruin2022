@@ -130,6 +130,15 @@ public class BlFacadeImplementation implements BlFacade {
 		return events;
 	}
 
+	public Vector<Event> getEventsWithNoDate()  {
+		dbManager.open(false);
+		Vector<Event>  events = dbManager.getEventsWithNoDate();
+		dbManager.close();
+		return events;
+	}
+
+
+
 	@WebMethod
 	public Vector<Question> getQuestions(Event event){
 		dbManager.open(false);
