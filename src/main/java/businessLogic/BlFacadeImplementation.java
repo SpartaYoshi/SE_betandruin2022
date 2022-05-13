@@ -321,7 +321,9 @@ public class BlFacadeImplementation implements BlFacade {
 
 	@WebMethod
 	public String editProfilePassword(User user, String newPassword) {
+		dbManager.open(false);
 		dbManager.editPassWord(user, newPassword);
+		dbManager.close();
 		return "";
 	}
 

@@ -238,13 +238,24 @@ public class MainGUI {
     setupScene(showMovements.ui, "ShowMovements", 650, 470);}
 
 
-  public void showMyProfile(){setupScene(myProfile.ui, "MyProfile", 750, 300);}
+  public void showMyProfile() {
+    if (businessLogic.getCurrentUser() != null)
+      ((MyProfileController) myProfile.c).usersData();
+    setupScene(myProfile.ui, "MyProfile", 750, 400);
+  }
 
 
-  public void showEditProfile(){setupScene(editProfile.ui, "EditProfile", 600, 300);}
+  public void showEditPassword(){
+    if (businessLogic.getCurrentUser() != null)
+      ((EditPasswordController) editProfile.c).usersSomeData();
+    setupScene(editProfile.ui, "EditPassword", 600, 400);
+  }
 
 
   public void showPublishResults(){setupScene(publishResults.ui, "Publish", 870, 590);}
+
+
+  public void showCheckMyResults(){setupScene(checkMyResults.ui, "ChekMyResults", 890, 450);}
 
 
 

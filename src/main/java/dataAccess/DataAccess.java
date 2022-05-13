@@ -609,34 +609,19 @@ public class DataAccess {
 
 	}
 
-	/*
-	public User editUserName(User who, String newUsername){
-		db.getTransaction().begin();
-		User dbUser=db.find(User.class, who.getUsername());
-		dbUser.setUsername(newUsername);
-		who.setUsername(newUsername);
-		db.getTransaction().commit();
-
-		System.out.println(">> DataAccess: username updated");
-
-		return who;
-	}
-	*/
-
 
 	public User editPassWord(User who, String newPassword){
 		db.getTransaction().begin();
 		User dbUser = db.find(User.class, who.getUsername());
-		dbUser.setUsername(newPassword);
-		who.setUsername(newPassword);
+		who.setPasswd(newPassword);
 		db.persist(dbUser);
 		db.getTransaction().commit();
 
 		System.out.println(">> DataAccess: password updated");
 
 		return who;
-	}
 
+	}
 
 
 	public Event removeEvent(Event ev) {

@@ -1,16 +1,11 @@
 package uicontrollers;
 
-import java.net.URL;
-import java.time.LocalDate;
-import java.util.ResourceBundle;
-
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import ui.MainGUI;
 
 public class MyProfileController implements Controller {
@@ -41,18 +36,18 @@ public class MyProfileController implements Controller {
 
     @FXML
     void onEditProfileButton() {
-        mainGUI.showEditProfile();
+        mainGUI.showEditPassword();
     }
 
 
     @FXML
     void initialize() {
+
+
+    }
+
+    public void usersData(){
         ConfigXML config = ConfigXML.getInstance();
-
-        if (businessLogic.getCurrentUser() == null)
-            return;
-
-
         switch(config.getLocale()) {
             case "en":
                 birthDateLabel.setText("Birth Date: " + this.businessLogic.getCurrentUser().getBirthdate().toString());
@@ -80,7 +75,6 @@ public class MyProfileController implements Controller {
 
             default:
         }
-
     }
 
     @Override public void setMainApp(MainGUI mainGUI) {
@@ -88,7 +82,7 @@ public class MyProfileController implements Controller {
     }
 
     @FXML public void onMyResultsButton(){
-
+        mainGUI.showCheckMyResults();
     }
 
     public void clearAll() {
