@@ -166,6 +166,4 @@ public class User {
 		this.movements.remove(m);
 	}
 
-
-	
 }

@@ -1,16 +1,11 @@
 package uicontrollers;
 
-import java.net.URL;
-import java.time.LocalDate;
-import java.util.ResourceBundle;
-
 import businessLogic.BlFacade;
 import configuration.ConfigXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import ui.MainGUI;
 
 public class MyProfileController implements Controller{
@@ -41,7 +36,7 @@ public class MyProfileController implements Controller{
 
     @FXML
     void onEditProfileButton() {
-        mainGUI.showEditProfile();
+        mainGUI.showEditPassword();
     }
 
 

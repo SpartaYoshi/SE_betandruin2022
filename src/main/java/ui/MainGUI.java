@@ -235,10 +235,10 @@ public class MainGUI {
   }
 
 
-  public void showEditProfile(){
+  public void showEditPassword(){
     if (businessLogic.getCurrentUser() != null)
       ((EditPasswordController) editProfile.c).usersSomeData();
-    setupScene(editProfile.ui, "EditProfile", 600, 300);
+    setupScene(editProfile.ui, "EditPassword", 600, 400);
   }
 
 
