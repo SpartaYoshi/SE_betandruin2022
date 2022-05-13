@@ -67,7 +67,7 @@ public class RemoveBetController implements Controller {
     private TableColumn<Bet, Float> betc1;
 
     @FXML
-    private TableColumn<Bet, String> betc2;
+    private TableColumn<Bet, Integer> betc2;
 
 
 
@@ -130,7 +130,7 @@ public class RemoveBetController implements Controller {
             else {
                 Bet b1 = businessLogic.removeCurrentUserBet(businessLogic.getCurrentUser(), question, bet);
                 if(b1!=null){
-                    businessLogic.insertMoney(bet.getAmount(), bet, "ObtainedMoneyByBetCancelation");
+                    businessLogic.insertMoney(bet.getAmount(), bet, "ObtainedMoneyByBetCancellation");
                     lblMessage.getStyleClass().clear();
                     lblMessage.getStyleClass().setAll("lbl", "lbl-success");
                     lblMessage.setText("Bet removed, the money has been updated into your account");
@@ -290,7 +290,7 @@ public class RemoveBetController implements Controller {
         });
 
         betc1.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        betc2.setCellValueFactory(new PropertyValueFactory<>("result"));
+        betc2.setCellValueFactory(new PropertyValueFactory<>("ourPossibleResult"));
 
 
     }

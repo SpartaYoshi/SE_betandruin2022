@@ -2,9 +2,6 @@ package dataAccess;
 
 import java.text.SimpleDateFormat;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 
 import javax.persistence.*;
@@ -258,11 +255,11 @@ public class DataAccess {
 	 *
 	 * @return collection of events
 	 */
-	public Vector<Event> getAllEvents() {
+	public Vector<Event> getAllUnprocessedEvents() {
 		System.out.println(">> DataAccess: getEvents");
 
 		Vector<Event> res = new Vector<>();
-		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev",
+		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev WHERE ev.processedWithAPI = false",
 				Event.class);
 
 		List<Event> events = query.getResultList();
@@ -629,7 +626,7 @@ public class DataAccess {
 
 	public User editPassWord(User who, String newPassword){
 		db.getTransaction().begin();
-		User dbUser=db.find(User.class, who.getUsername());
+		User dbUser = db.find(User.class, who.getUsername());
 		dbUser.setUsername(newPassword);
 		who.setUsername(newPassword);
 		db.persist(dbUser);
@@ -668,7 +665,7 @@ public class DataAccess {
     }
 
 
-	public int markFinalResult(Result r, int f){
+	public int markFinalResult(Result r, int f) {
 		db.getTransaction().begin();
 		Result dbResult=db.find(Result.class,r.getId());
 		r.setFinalResult(f);
@@ -677,5 +674,11 @@ public class DataAccess {
 
 		db.getTransaction().commit();
 		return r.getFinalResult();
+	}
+
+	public void updateEvent(Event ev) {
+		db.getTransaction().begin();
+		db.persist(ev);
+		db.getTransaction().commit();
 	}
 }
