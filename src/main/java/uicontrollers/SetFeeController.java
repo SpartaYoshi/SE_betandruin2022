@@ -94,19 +94,17 @@ public class SetFeeController implements Controller {
                 int res= Integer.parseInt(resultField.getText());
                 Question q=tblQuestions.getSelectionModel().getSelectedItem();
 
-                if(q.getQuestionID().equals("qIDMatchWinner")){
-                    if(res<1 || res >3){
+                if(q.getQuestionID().equals("qIDMatchWinner") && (res<1 || res>3)){
+
                         ConfigXML config = ConfigXML.getInstance();
                         warningLbl.getStyleClass().setAll("lbl","lbl-danger");
                         switch (config.getLocale()) {
                             case "en" -> warningLbl.setText("Sorry, that is not a possible result");
                             case "es" -> warningLbl.setText("Lo sentimos. Resultado no valido");
                             case "eus" -> warningLbl.setText("Barkatu, emaitza ez da baliozkoa");
-                        }
-                    }
-                }
 
-                else if(feeAmount <= 0) {
+                    }
+                }else if(feeAmount <= 0) {
                     warningLbl.getStyleClass().setAll("lbl","lbl-danger");
                     ConfigXML config = ConfigXML.getInstance();
                     switch (config.getLocale()) {
