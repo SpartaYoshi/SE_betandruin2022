@@ -250,6 +250,20 @@ public class DataAccess {
 	}
 
 
+	public Vector<Event> getEventsWithNoDate() {
+		System.out.println(">> DataAccess: getAllEvents");
+		Vector<Event> res = new Vector<>();
+		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev",
+				Event.class);
+		List<Event> events = query.getResultList();
+		for (Event ev:events){
+			System.out.println(ev.getTeamTemplate());
+			res.add(ev);
+		}
+		return res;
+	}
+
+
 	/**
 	 * This method retrieves all currently registered events in the database
 	 *
