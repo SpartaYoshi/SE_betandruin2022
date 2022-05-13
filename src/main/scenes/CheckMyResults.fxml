@@ -33,5 +33,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Label fx:id="messageLabel" layoutX="184.0" layoutY="385.0" prefHeight="18.0" prefWidth="447.0" text="Label" />
    </children>
 </AnchorPane>

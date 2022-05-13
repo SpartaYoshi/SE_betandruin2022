@@ -27782,7 +27782,7 @@
 						"$ref": "AAAAAAFFxl38KT9O4MM="
 					},
 					"name": "Check my results",
-					"documentation": "# Event flow\n\n## Main flow\n1. *System* displays the **results** the user selected when he/she placed a **bet** that coincide with the existing the **final results**\n2. *Logged-in User* selects back button\n3. *System* goes back to the previous page, so the current window is closed.\n\n\n## Alternative flow\nA1. There is no **selected result** that matches the existing **final results** >>> empty table"
+					"documentation": "# Event flow\n\n## Main flow\n1. *System* displays the **results** the user selected when he/she placed a **bet** that coincide with the existing the **final results**\n2. *Logged-in User* selects back button\n3. *System* goes back to the previous page, so the current window is closed.\n\n\n## Alternative flow\nA1. There is no **selected result** that matches the existing **final results** >>> empty table and a message appears"
 				},
 				{
 					"_type": "UMLUseCase",

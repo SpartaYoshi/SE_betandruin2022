@@ -5,8 +5,10 @@ import java.util.ResourceBundle;
 import java.util.Vector;
 
 import businessLogic.BlFacade;
+import configuration.ConfigXML;
 import domain.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,6 +25,7 @@ public class CheckMyResultsController implements Controller {
     @FXML
     private TableView<Result> tableMyResults;
 
+    @FXML private Label messageLabel;
 
     @FXML
     private ResourceBundle resources;
@@ -45,7 +48,7 @@ public class CheckMyResultsController implements Controller {
     private TableColumn<Result, Integer> columnFinalResult;
 
 
-    public void getResults(){
+    public void getResults() {
 
         tableResults.getItems().clear();
         tableMyResults.getItems().clear();
@@ -59,28 +62,29 @@ public class CheckMyResultsController implements Controller {
 
 
         User who = businessLogic.getCurrentUser();
-        if (who!= null){
+        if (who != null) {
             Vector<Bet> usersBets = who.getBets();
             Vector<Result> allResults = businessLogic.getAllResults();
-            //for (Result res: allResults) {
-                //if (res.getQuestion().questionProcessed()){
-                    for (Bet b : usersBets) {
-                        Result usersResult = b.getResult();
-                        Question currentquestion = usersResult.getQuestion();
-                        if (currentquestion.questionProcessed()){
-                            Event usersResultEvent = currentquestion.getEvent(); // get the event
+            for (Bet b : usersBets) {
+                Result usersResult = b.getResult();
+                Question currentquestion = usersResult.getQuestion();
+                if (currentquestion.questionProcessed()) {
+                    tableResults.getItems().add(usersResult); // insert the final result
+                    tableMyResults.getItems().add(usersResult); // insert the result the user had selected
 
-                        }
-                        //Event allResultsEvent = res.getQuestion().getEvent(); // get the event
-                        //if (usersResultEvent.equals(allResultsEvent)) { // if they are the same event:
-                            tableResults.getItems().add(usersResult); // insert the final result
-                            tableMyResults.getItems().add(usersResult); // insert the result the user had selected
-
-                        }
-                    }
-
-
+                }
+            }
         }
+        if (tableMyResults.getItems().isEmpty() || tableResults.getItems().isEmpty()){
+            messageLabel.getStyleClass().setAll("lbl", "lbl-danger");
+            ConfigXML config = ConfigXML.getInstance();
+            switch (config.getLocale()) {
+                case "en" -> messageLabel.setText("You have no result respective to the processed questions");
+                case "es" -> messageLabel.setText("No tienes resultados respectivos a las preguntas procesadas");
+                case "eus" -> messageLabel.setText("Ez duzu erantzunik galdera prozesatuentzat");
+            }
+        }
+    }
 
 
     @FXML

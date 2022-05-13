@@ -261,7 +261,7 @@ public class PlaceABetController implements Controller, Initializable {
 
                 tblQuestions.getItems().clear();
                 for (Question q : tblEvents.getSelectionModel().getSelectedItem().getQuestions()) {
-                    tblQuestions.getItems().add(q);
+                    if (q.questionProcessed()==false) tblQuestions.getItems().add(q);
                 }
             }
         });
