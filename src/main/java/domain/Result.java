@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
-public class Result extends Bet implements Serializable {
+public class Result implements Serializable {
 
 	@XmlID
 	@Id

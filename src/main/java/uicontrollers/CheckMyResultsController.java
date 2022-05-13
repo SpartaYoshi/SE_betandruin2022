@@ -18,7 +18,7 @@ public class CheckMyResultsController implements Controller {
     private final BlFacade businessLogic;
 
     @FXML
-    private TableView<Bet> tableResults;
+    private TableView<Result> tableResults;
 
     @FXML
     private TableView<Result> tableMyResults;
@@ -56,29 +56,26 @@ public class CheckMyResultsController implements Controller {
         columnFinalResult.setCellValueFactory(new PropertyValueFactory<>("finalResult"));
 
         columnMyResult.setCellValueFactory(new PropertyValueFactory<>("possibleResult"));
+
+
         User who = businessLogic.getCurrentUser();
         if (who!= null){
             Vector<Bet> usersBets = who.getBets();
-            for (Bet b : usersBets) {
-                Vector<Result> allResults = businessLogic.getAllResults();
-                for (Result res: allResults) {
-                    Result usersResult = b.getResult();
-                    Event usersResultEvent = usersResult.getQuestion().getEvent(); // get the event
-                    Event allResultsEvent = res.getQuestion().getEvent(); // get the event
-                    if (usersResultEvent.equals(allResultsEvent)) { // if they are the same event:
-                        tableResults.getItems().add(res); // insert the final result
-                        tableMyResults.getItems().add(usersResult); // insert the result the user had selected
+            Vector<Result> allResults = businessLogic.getAllResults();
+            for (Result res: allResults) {
+                if (res.isFinalResult()){
+                    for (Bet b : usersBets) {
+                        Result usersResult = b.getResult();
+                        Event usersResultEvent = usersResult.getQuestion().getEvent(); // get the event
+                        Event allResultsEvent = res.getQuestion().getEvent(); // get the event
+                        if (usersResultEvent.equals(allResultsEvent)) { // if they are the same event:
+                            tableResults.getItems().add(res); // insert the final result
+                            tableMyResults.getItems().add(usersResult); // insert the result the user had selected
+                        }
                     }
                 }
             }
         }
-
-
-        who.getBets();
-
-
-
-
     }
 
     @FXML
