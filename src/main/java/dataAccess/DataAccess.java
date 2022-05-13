@@ -86,30 +86,14 @@ public class DataAccess {
 			Question q5 = ev17.addQuestion("qIDMatchWinner", 1);
 			Question q6 = ev17.addQuestion("qIDGoalsFirstHalf", 2);
 
+			q1.setEvent(ev1);
+			q2.setEvent(ev1);
+			q3.setEvent(ev11);
+			q4.setEvent(ev11);
+			q5.setEvent(ev17);
+			q6.setEvent(ev17);
 
-			/*
-			// Update properties
-			PropertiesManager propMgr = new PropertiesManager();
-			propMgr.addTagToResources("qIDMatchWinner",
-					"",
-					"¿Quién ganará el partido?",
-					"Zeinek irabaziko du partidua?");
 
-			propMgr.addTagToResources("qIDFirstScore",
-					"Who will score first?",
-					"¿Quién meterá el primer gol?",
-					"Zeinek sartuko du lehenengo gola?");
-
-			propMgr.addTagToResources("qIDTotalGoals",
-					"How many goals will be scored in the match?",
-					"¿Cuántos goles se marcarán?",
-					"Zenbat gol sartuko dira?");
-
-			propMgr.addTagToResources("qIDGoalsFirstHalf",
-					"Will there be goals in the first half?",
-					"¿Habrá goles en la primera parte?",
-					"Golak sartuko dira lehenengo zatian?");
-			*/
 
 
 
@@ -197,6 +181,7 @@ public class DataAccess {
 
 		db.getTransaction().begin();
 		Question q = ev.addQuestion(questionID, betMinimum);
+		q.setEvent(ev);
 		//db.persist(q);
 		db.persist(ev); // db.persist(q) not required when CascadeType.PERSIST is added
 		// in questions property of Event class
@@ -490,7 +475,7 @@ public class DataAccess {
 			if(ourquestion.isResultStored(possibleResult)) {// check if that fee is not used yet
 				return -1;
 			}else {
-				Result f = new Result(possibleResult, fee);
+				Result f = new Result(possibleResult, fee,ourquestion);
 				db.persist(f);
 				ourquestion.addtoResultList(f);
 				db.persist(ourquestion);

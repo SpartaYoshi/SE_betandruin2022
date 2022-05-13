@@ -59,6 +59,13 @@ public class Result implements Serializable {
 		this.finalResult = false;
 		
 	}
+	public Result(int r, float f,Question q) {
+		this.fee = f;
+		this.possibleResult = r;
+		this.finalResult = false;
+		this.question=q;
+
+	}
 
 	public boolean isFinalResult() {
 		return finalResult;
