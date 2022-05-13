@@ -51,7 +51,7 @@ public class CheckMyResultsController implements Controller {
         tableMyResults.getItems().clear();
 
         // Bind columns
-        columnEvent.setCellValueFactory(new PropertyValueFactory<>("description"));
+        columnEvent.setCellValueFactory(new PropertyValueFactory<>("event"));
         columnQuestion.setCellValueFactory(new PropertyValueFactory<>("question"));
         columnFinalResult.setCellValueFactory(new PropertyValueFactory<>("finalResult"));
 
@@ -63,7 +63,7 @@ public class CheckMyResultsController implements Controller {
             Vector<Bet> usersBets = who.getBets();
             Vector<Result> allResults = businessLogic.getAllResults();
             for (Result res: allResults) {
-                if (res.isFinalResult()){
+                if (res.getQuestion().questionProcessed()){
                     for (Bet b : usersBets) {
                         Result usersResult = b.getResult();
                         Event usersResultEvent = usersResult.getQuestion().getEvent(); // get the event
@@ -71,6 +71,7 @@ public class CheckMyResultsController implements Controller {
                         if (usersResultEvent.equals(allResultsEvent)) { // if they are the same event:
                             tableResults.getItems().add(res); // insert the final result
                             tableMyResults.getItems().add(usersResult); // insert the result the user had selected
+
                         }
                     }
                 }

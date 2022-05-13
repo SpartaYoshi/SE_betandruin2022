@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -20,6 +21,22 @@ public class Result implements Serializable {
 	@GeneratedValue
 	private Integer id;
 
+
+
+	@OneToOne
+	private Question question;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Vector<Bet> bets = new Vector<>();
+	@OneToOne
+	@XmlIDREF
+	private Event event;
+	private int possibleResult;
+	private boolean finalResult;
+	private boolean hasBeenProcessed;
+
+
+
 	public Question getQuestion() {
 		return question;
 	}
@@ -27,18 +44,6 @@ public class Result implements Serializable {
 	public void setQuestion(Question question) {
 		this.question = question;
 	}
-
-	@OneToOne
-	private Question question;
-
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Vector<Bet> bets = new Vector<>();
-	
-	private int possibleResult;
-	private boolean finalResult;
-
-
-
 	public Vector<Bet> getBets() {
 		return bets;
 	}
@@ -64,6 +69,7 @@ public class Result implements Serializable {
 		this.possibleResult = r;
 		this.finalResult = false;
 		this.question=q;
+		this.event=q.getEvent();
 
 	}
 
@@ -74,6 +80,7 @@ public class Result implements Serializable {
 	public void setFinalResult(boolean finalResult) {
 		this.finalResult = finalResult;
 	}
+
 
 	/**
 	 * @return the id
@@ -136,5 +143,20 @@ public class Result implements Serializable {
 		return Objects.equals(possibleResult, result.possibleResult);
 	}
 
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+
+	public boolean isHasBeenProcessed() {
+		return hasBeenProcessed;
+	}
+
+	public void setHasBeenProcessed(boolean hasBeenProcessed) {
+		this.hasBeenProcessed = hasBeenProcessed;
+	}
 }
 

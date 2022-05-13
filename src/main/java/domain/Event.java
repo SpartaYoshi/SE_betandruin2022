@@ -180,9 +180,7 @@ public class Event implements Serializable {
 
 	@Override
 	public String toString() {
-		return	"eventDate=" + eventDate +
-				", homeTeam='" + homeTeam + '\'' +
-				", awayTeam='" + awayTeam;
+		return	this.getTeamTemplate();
 	}
 
 	public boolean isProcessedWithAPI() {

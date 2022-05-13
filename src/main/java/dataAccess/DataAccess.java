@@ -655,6 +655,8 @@ public class DataAccess {
 		Result dbResult=db.find(Result.class,r.getId());
 		r.setFinalResult(true);
 		dbResult.setFinalResult(true);
+		r.setHasBeenProcessed(true);
+		dbResult.setHasBeenProcessed(true);
 		db.persist(dbResult);
 
 		db.getTransaction().commit();

@@ -202,5 +202,13 @@ public class Question implements Serializable {
 	}
 
 
+	public boolean questionProcessed(){
+		for(Result r:this.resultList){
+			if(r.isHasBeenProcessed()){
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
