@@ -181,11 +181,14 @@ public interface BlFacade {
 	Event removeEvent(Event ev);
 
 	@WebMethod
-	int markFinalResult(Result r,int finalR);
+	int markAsFinalResult(Result r);
 
 	@WebMethod
 	int processBets(Result r);
 
 	@WebMethod
     int updateResultsFromAPI();
+
+	@WebMethod
+	void refreshUser();
 }

@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.Vector;
 
 import javax.persistence.*;
@@ -21,10 +22,10 @@ public class User {
 	private boolean admin;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Vector<Bet> bets= new Vector<>();
+	private Vector<Bet> bets = new Vector<>();
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Vector<Movement> movements= new Vector<>();
+	private Vector<Movement> movements = new Vector<>();
 
 
 	public User() {
@@ -64,15 +65,16 @@ public class User {
 	 * @param bet to be added to the list of bets
 	 * @return Bet
 	 */
-	public Bet addBet(Bet bet)  {
+	public Bet addBet(Bet bet) {
 		bets.add(bet);
 		return bet;
 	}
 
-	public Movement addMovement(Movement mov)  {
+	public Movement addMovement(Movement mov) {
 		movements.add(mov);
 		return mov;
 	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -123,7 +125,9 @@ public class User {
 	}
 
 
-	public double getBalance() {return balance;}
+	public double getBalance() {
+		return balance;
+	}
 
 	public void setBalance(double amount) {
 		this.balance = amount;
@@ -137,7 +141,7 @@ public class User {
 	public void grantAdmin() {
 		admin = true;
 	}
-	
+
 	public void revokeAdmin() {
 		admin = false;
 	}
@@ -151,9 +155,10 @@ public class User {
 		this.bets = bets;
 	}
 
-	public void removeBet(Bet b){
+	public void removeBet(Bet b) {
 		this.bets.remove(b);
 	}
+
 	public Vector<Movement> getMovements() {
 		return movements;
 	}
@@ -162,8 +167,17 @@ public class User {
 		this.movements = movements;
 	}
 
-	public void removeMovement(Movement m){
+	public void removeMovement(Movement m) {
 		this.movements.remove(m);
+	}
+
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		User user = (User) o;
+		return Objects.equals(username, user.username);
 	}
 
 }

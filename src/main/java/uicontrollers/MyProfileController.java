@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import ui.MainGUI;
 
-public class MyProfileController implements Controller{
+public class MyProfileController implements Controller {
     public MyProfileController(BlFacade bl) {
             this.businessLogic = bl;
     }

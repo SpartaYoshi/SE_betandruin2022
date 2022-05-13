@@ -284,7 +284,7 @@ public class DataAccess {
 
 		List<Result> results = query.getResultList();
 		for (Result re:results) {
-			System.out.println(re.getFinalResult());
+			System.out.println(re.isFinalResult());
 			res.add(re);
 		}
 		return res;
@@ -651,20 +651,27 @@ public class DataAccess {
     }
 
 
-	public int markFinalResult(Result r, int f) {
+	public int markAsFinalResult(Result r) {
 		db.getTransaction().begin();
 		Result dbResult=db.find(Result.class,r.getId());
-		r.setFinalResult(f);
-		dbResult.setFinalResult(f);
+		r.setFinalResult(true);
+		dbResult.setFinalResult(true);
 		db.persist(dbResult);
 
 		db.getTransaction().commit();
-		return r.getFinalResult();
+		return r.getPossibleResult();
 	}
 
 	public void updateEvent(Event ev) {
 		db.getTransaction().begin();
 		db.persist(ev);
 		db.getTransaction().commit();
+	}
+
+	public User refreshUser(User currentUser) {
+		db.getTransaction().begin();
+		User user = db.find(User.class, currentUser);
+		db.getTransaction().commit();
+		return user;
 	}
 }

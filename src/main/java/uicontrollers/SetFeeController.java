@@ -67,7 +67,7 @@ public class SetFeeController implements Controller {
     }
 
     @FXML
-    void setFee(MouseEvent event) {
+    void setFee() {
 
         warningLbl.setText(" ");
         domain.Question quest = ((domain.Question) tblQuestions.getSelectionModel().getSelectedItem());
